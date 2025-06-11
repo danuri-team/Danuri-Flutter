@@ -1,0 +1,4 @@
+enum SexType {
+  MALE,
+  FEMALE,
+}
