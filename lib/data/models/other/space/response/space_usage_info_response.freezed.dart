@@ -18,9 +18,9 @@ mixin _$SpaceUsageInfoResponse {
   String get spaceId;
   String get usageId;
   String get spaceName;
+  List<AvailableItem> get rentalItem;
   String get startAt;
   String get endAt;
-  List get rentalItem;
 
   /// Create a copy of SpaceUsageInfoResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -42,20 +42,20 @@ mixin _$SpaceUsageInfoResponse {
             (identical(other.usageId, usageId) || other.usageId == usageId) &&
             (identical(other.spaceName, spaceName) ||
                 other.spaceName == spaceName) &&
-            (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.endAt, endAt) || other.endAt == endAt) &&
             const DeepCollectionEquality()
-                .equals(other.rentalItem, rentalItem));
+                .equals(other.rentalItem, rentalItem) &&
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
+            (identical(other.endAt, endAt) || other.endAt == endAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, spaceId, usageId, spaceName,
-      startAt, endAt, const DeepCollectionEquality().hash(rentalItem));
+      const DeepCollectionEquality().hash(rentalItem), startAt, endAt);
 
   @override
   String toString() {
-    return 'SpaceUsageInfoResponse(spaceId: $spaceId, usageId: $usageId, spaceName: $spaceName, startAt: $startAt, endAt: $endAt, rentalItem: $rentalItem)';
+    return 'SpaceUsageInfoResponse(spaceId: $spaceId, usageId: $usageId, spaceName: $spaceName, rentalItem: $rentalItem, startAt: $startAt, endAt: $endAt)';
   }
 }
 
@@ -69,9 +69,9 @@ abstract mixin class $SpaceUsageInfoResponseCopyWith<$Res> {
       {String spaceId,
       String usageId,
       String spaceName,
+      List<AvailableItem> rentalItem,
       String startAt,
-      String endAt,
-      List rentalItem});
+      String endAt});
 }
 
 /// @nodoc
@@ -90,9 +90,9 @@ class _$SpaceUsageInfoResponseCopyWithImpl<$Res>
     Object? spaceId = null,
     Object? usageId = null,
     Object? spaceName = null,
+    Object? rentalItem = null,
     Object? startAt = null,
     Object? endAt = null,
-    Object? rentalItem = null,
   }) {
     return _then(_self.copyWith(
       spaceId: null == spaceId
@@ -107,6 +107,10 @@ class _$SpaceUsageInfoResponseCopyWithImpl<$Res>
           ? _self.spaceName
           : spaceName // ignore: cast_nullable_to_non_nullable
               as String,
+      rentalItem: null == rentalItem
+          ? _self.rentalItem
+          : rentalItem // ignore: cast_nullable_to_non_nullable
+              as List<AvailableItem>,
       startAt: null == startAt
           ? _self.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
@@ -115,10 +119,6 @@ class _$SpaceUsageInfoResponseCopyWithImpl<$Res>
           ? _self.endAt
           : endAt // ignore: cast_nullable_to_non_nullable
               as String,
-      rentalItem: null == rentalItem
-          ? _self.rentalItem
-          : rentalItem // ignore: cast_nullable_to_non_nullable
-              as List,
     ));
   }
 }
@@ -130,9 +130,9 @@ class _SpaceUsageInfoResponse implements SpaceUsageInfoResponse {
       {required this.spaceId,
       required this.usageId,
       required this.spaceName,
+      required final List<AvailableItem> rentalItem,
       required this.startAt,
-      required this.endAt,
-      required final List rentalItem})
+      required this.endAt})
       : _rentalItem = rentalItem;
   factory _SpaceUsageInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$SpaceUsageInfoResponseFromJson(json);
@@ -143,17 +143,18 @@ class _SpaceUsageInfoResponse implements SpaceUsageInfoResponse {
   final String usageId;
   @override
   final String spaceName;
+  final List<AvailableItem> _rentalItem;
   @override
-  final String startAt;
-  @override
-  final String endAt;
-  final List _rentalItem;
-  @override
-  List get rentalItem {
+  List<AvailableItem> get rentalItem {
     if (_rentalItem is EqualUnmodifiableListView) return _rentalItem;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rentalItem);
   }
+
+  @override
+  final String startAt;
+  @override
+  final String endAt;
 
   /// Create a copy of SpaceUsageInfoResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -180,20 +181,20 @@ class _SpaceUsageInfoResponse implements SpaceUsageInfoResponse {
             (identical(other.usageId, usageId) || other.usageId == usageId) &&
             (identical(other.spaceName, spaceName) ||
                 other.spaceName == spaceName) &&
-            (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.endAt, endAt) || other.endAt == endAt) &&
             const DeepCollectionEquality()
-                .equals(other._rentalItem, _rentalItem));
+                .equals(other._rentalItem, _rentalItem) &&
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
+            (identical(other.endAt, endAt) || other.endAt == endAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, spaceId, usageId, spaceName,
-      startAt, endAt, const DeepCollectionEquality().hash(_rentalItem));
+      const DeepCollectionEquality().hash(_rentalItem), startAt, endAt);
 
   @override
   String toString() {
-    return 'SpaceUsageInfoResponse(spaceId: $spaceId, usageId: $usageId, spaceName: $spaceName, startAt: $startAt, endAt: $endAt, rentalItem: $rentalItem)';
+    return 'SpaceUsageInfoResponse(spaceId: $spaceId, usageId: $usageId, spaceName: $spaceName, rentalItem: $rentalItem, startAt: $startAt, endAt: $endAt)';
   }
 }
 
@@ -209,9 +210,9 @@ abstract mixin class _$SpaceUsageInfoResponseCopyWith<$Res>
       {String spaceId,
       String usageId,
       String spaceName,
+      List<AvailableItem> rentalItem,
       String startAt,
-      String endAt,
-      List rentalItem});
+      String endAt});
 }
 
 /// @nodoc
@@ -230,9 +231,9 @@ class __$SpaceUsageInfoResponseCopyWithImpl<$Res>
     Object? spaceId = null,
     Object? usageId = null,
     Object? spaceName = null,
+    Object? rentalItem = null,
     Object? startAt = null,
     Object? endAt = null,
-    Object? rentalItem = null,
   }) {
     return _then(_SpaceUsageInfoResponse(
       spaceId: null == spaceId
@@ -247,6 +248,10 @@ class __$SpaceUsageInfoResponseCopyWithImpl<$Res>
           ? _self.spaceName
           : spaceName // ignore: cast_nullable_to_non_nullable
               as String,
+      rentalItem: null == rentalItem
+          ? _self._rentalItem
+          : rentalItem // ignore: cast_nullable_to_non_nullable
+              as List<AvailableItem>,
       startAt: null == startAt
           ? _self.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
@@ -255,10 +260,6 @@ class __$SpaceUsageInfoResponseCopyWithImpl<$Res>
           ? _self.endAt
           : endAt // ignore: cast_nullable_to_non_nullable
               as String,
-      rentalItem: null == rentalItem
-          ? _self._rentalItem
-          : rentalItem // ignore: cast_nullable_to_non_nullable
-              as List,
     ));
   }
 }

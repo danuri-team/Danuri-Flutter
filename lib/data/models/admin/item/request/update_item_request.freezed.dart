@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UpdateItemRequest {
   String get name;
-  String get total_quantity;
+  String get totalQuantity;
   String get status;
 
   /// Create a copy of UpdateItemRequest
@@ -36,18 +36,18 @@ mixin _$UpdateItemRequest {
         (other.runtimeType == runtimeType &&
             other is UpdateItemRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.total_quantity, total_quantity) ||
-                other.total_quantity == total_quantity) &&
+            (identical(other.totalQuantity, totalQuantity) ||
+                other.totalQuantity == totalQuantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, total_quantity, status);
+  int get hashCode => Object.hash(runtimeType, name, totalQuantity, status);
 
   @override
   String toString() {
-    return 'UpdateItemRequest(name: $name, total_quantity: $total_quantity, status: $status)';
+    return 'UpdateItemRequest(name: $name, totalQuantity: $totalQuantity, status: $status)';
   }
 }
 
@@ -57,7 +57,7 @@ abstract mixin class $UpdateItemRequestCopyWith<$Res> {
           UpdateItemRequest value, $Res Function(UpdateItemRequest) _then) =
       _$UpdateItemRequestCopyWithImpl;
   @useResult
-  $Res call({String name, String total_quantity, String status});
+  $Res call({String name, String totalQuantity, String status});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$UpdateItemRequestCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? total_quantity = null,
+    Object? totalQuantity = null,
     Object? status = null,
   }) {
     return _then(_self.copyWith(
@@ -82,9 +82,9 @@ class _$UpdateItemRequestCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      total_quantity: null == total_quantity
-          ? _self.total_quantity
-          : total_quantity // ignore: cast_nullable_to_non_nullable
+      totalQuantity: null == totalQuantity
+          ? _self.totalQuantity
+          : totalQuantity // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _self.status
@@ -98,14 +98,14 @@ class _$UpdateItemRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _UpdateItemRequest implements UpdateItemRequest {
   _UpdateItemRequest(
-      {required this.name, required this.total_quantity, required this.status});
+      {required this.name, required this.totalQuantity, required this.status});
   factory _UpdateItemRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateItemRequestFromJson(json);
 
   @override
   final String name;
   @override
-  final String total_quantity;
+  final String totalQuantity;
   @override
   final String status;
 
@@ -130,18 +130,18 @@ class _UpdateItemRequest implements UpdateItemRequest {
         (other.runtimeType == runtimeType &&
             other is _UpdateItemRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.total_quantity, total_quantity) ||
-                other.total_quantity == total_quantity) &&
+            (identical(other.totalQuantity, totalQuantity) ||
+                other.totalQuantity == totalQuantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, total_quantity, status);
+  int get hashCode => Object.hash(runtimeType, name, totalQuantity, status);
 
   @override
   String toString() {
-    return 'UpdateItemRequest(name: $name, total_quantity: $total_quantity, status: $status)';
+    return 'UpdateItemRequest(name: $name, totalQuantity: $totalQuantity, status: $status)';
   }
 }
 
@@ -153,7 +153,7 @@ abstract mixin class _$UpdateItemRequestCopyWith<$Res>
       __$UpdateItemRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, String total_quantity, String status});
+  $Res call({String name, String totalQuantity, String status});
 }
 
 /// @nodoc
@@ -170,7 +170,7 @@ class __$UpdateItemRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? name = null,
-    Object? total_quantity = null,
+    Object? totalQuantity = null,
     Object? status = null,
   }) {
     return _then(_UpdateItemRequest(
@@ -178,9 +178,9 @@ class __$UpdateItemRequestCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      total_quantity: null == total_quantity
-          ? _self.total_quantity
-          : total_quantity // ignore: cast_nullable_to_non_nullable
+      totalQuantity: null == totalQuantity
+          ? _self.totalQuantity
+          : totalQuantity // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _self.status

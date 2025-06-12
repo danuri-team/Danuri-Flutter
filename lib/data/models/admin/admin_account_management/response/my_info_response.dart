@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/data/models/admin/enum/role_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'my_info_response.freezed.dart';
@@ -11,7 +12,7 @@ abstract class MyInfoResponse with _$MyInfoResponse{
     required String companyName,
     required String email,
     required String phone,
-    required String role,
+    required RoleType role,
     required String status,
   }) = _MyInfoResponse;
 

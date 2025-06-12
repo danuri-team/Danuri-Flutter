@@ -18,8 +18,8 @@ mixin _$SignUpRequest {
   String get companyId;
   String get name;
   String get phone;
-  String get sex;
-  String get age;
+  SexType get sex;
+  AgeType get age;
 
   /// Create a copy of SignUpRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -63,7 +63,7 @@ abstract mixin class $SignUpRequestCopyWith<$Res> {
       _$SignUpRequestCopyWithImpl;
   @useResult
   $Res call(
-      {String companyId, String name, String phone, String sex, String age});
+      {String companyId, String name, String phone, SexType sex, AgeType age});
 }
 
 /// @nodoc
@@ -101,11 +101,11 @@ class _$SignUpRequestCopyWithImpl<$Res>
       sex: null == sex
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SexType,
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
     ));
   }
 }
@@ -129,9 +129,9 @@ class _SignUpRequest implements SignUpRequest {
   @override
   final String phone;
   @override
-  final String sex;
+  final SexType sex;
   @override
-  final String age;
+  final AgeType age;
 
   /// Create a copy of SignUpRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -181,7 +181,7 @@ abstract mixin class _$SignUpRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String companyId, String name, String phone, String sex, String age});
+      {String companyId, String name, String phone, SexType sex, AgeType age});
 }
 
 /// @nodoc
@@ -219,11 +219,11 @@ class __$SignUpRequestCopyWithImpl<$Res>
       sex: null == sex
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SexType,
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
     ));
   }
 }

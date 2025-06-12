@@ -13,7 +13,7 @@ _InternalSpecificDeviceResponse _$InternalSpecificDeviceResponseFromJson(
       companyId: json['companyId'] as String,
       companyName: json['companyName'] as String,
       createdAt: json['createdAt'] as String,
-      endAt: json['endAt'] as bool,
+      endAt: json['endAt'] as String?,
     );
 
 Map<String, dynamic> _$InternalSpecificDeviceResponseToJson(

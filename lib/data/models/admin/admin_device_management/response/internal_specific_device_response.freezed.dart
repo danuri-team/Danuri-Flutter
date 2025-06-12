@@ -19,7 +19,7 @@ mixin _$InternalSpecificDeviceResponse {
   String get companyId;
   String get companyName;
   String get createdAt;
-  bool get endAt;
+  String? get endAt;
 
   /// Create a copy of InternalSpecificDeviceResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -71,7 +71,7 @@ abstract mixin class $InternalSpecificDeviceResponseCopyWith<$Res> {
       String companyId,
       String companyName,
       String createdAt,
-      bool endAt});
+      String? endAt});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class _$InternalSpecificDeviceResponseCopyWithImpl<$Res>
     Object? companyId = null,
     Object? companyName = null,
     Object? createdAt = null,
-    Object? endAt = null,
+    Object? endAt = freezed,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -110,10 +110,10 @@ class _$InternalSpecificDeviceResponseCopyWithImpl<$Res>
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      endAt: null == endAt
+      endAt: freezed == endAt
           ? _self.endAt
           : endAt // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String?,
     ));
   }
 }
@@ -127,7 +127,7 @@ class _InternalSpecificDeviceResponse
       required this.companyId,
       required this.companyName,
       required this.createdAt,
-      required this.endAt});
+      this.endAt});
   factory _InternalSpecificDeviceResponse.fromJson(Map<String, dynamic> json) =>
       _$InternalSpecificDeviceResponseFromJson(json);
 
@@ -140,7 +140,7 @@ class _InternalSpecificDeviceResponse
   @override
   final String createdAt;
   @override
-  final bool endAt;
+  final String? endAt;
 
   /// Create a copy of InternalSpecificDeviceResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -198,7 +198,7 @@ abstract mixin class _$InternalSpecificDeviceResponseCopyWith<$Res>
       String companyId,
       String companyName,
       String createdAt,
-      bool endAt});
+      String? endAt});
 }
 
 /// @nodoc
@@ -218,7 +218,7 @@ class __$InternalSpecificDeviceResponseCopyWithImpl<$Res>
     Object? companyId = null,
     Object? companyName = null,
     Object? createdAt = null,
-    Object? endAt = null,
+    Object? endAt = freezed,
   }) {
     return _then(_InternalSpecificDeviceResponse(
       id: null == id
@@ -237,10 +237,10 @@ class __$InternalSpecificDeviceResponseCopyWithImpl<$Res>
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      endAt: null == endAt
+      endAt: freezed == endAt
           ? _self.endAt
           : endAt // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String?,
     ));
   }
 }

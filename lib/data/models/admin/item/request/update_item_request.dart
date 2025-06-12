@@ -6,7 +6,7 @@ part 'update_item_request.g.dart';
 abstract class UpdateItemRequest with _$UpdateItemRequest{
   factory UpdateItemRequest({
     required String name,
-    required String total_quantity,
+    required String totalQuantity,
     required String status,
   }) = _UpdateItemRequest;
 

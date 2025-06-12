@@ -10,7 +10,7 @@ abstract class InternalSpecificDeviceResponse with _$InternalSpecificDeviceRespo
     required String companyId,
     required String companyName,
     required String createdAt,
-    required bool endAt,
+    String? endAt,
   }) = _InternalSpecificDeviceResponse;
 
   factory InternalSpecificDeviceResponse.fromJson(Map<String, dynamic> json) => _$InternalSpecificDeviceResponseFromJson(json);

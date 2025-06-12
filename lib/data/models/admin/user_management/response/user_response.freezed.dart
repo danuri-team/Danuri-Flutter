@@ -19,8 +19,8 @@ mixin _$UserResponse {
   String get companyId;
   String get companyName;
   String get name;
-  String get sex;
-  String get age;
+  SexType get sex;
+  AgeType get age;
   String get phone;
   String get createdAt;
   String get updatedAt;
@@ -81,8 +81,8 @@ abstract mixin class $UserResponseCopyWith<$Res> {
       String companyId,
       String companyName,
       String name,
-      String sex,
-      String age,
+      SexType sex,
+      AgeType age,
       String phone,
       String createdAt,
       String updatedAt,
@@ -132,11 +132,11 @@ class _$UserResponseCopyWithImpl<$Res> implements $UserResponseCopyWith<$Res> {
       sex: null == sex
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SexType,
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -183,9 +183,9 @@ class _UserResponse implements UserResponse {
   @override
   final String name;
   @override
-  final String sex;
+  final SexType sex;
   @override
-  final String age;
+  final AgeType age;
   @override
   final String phone;
   @override
@@ -256,8 +256,8 @@ abstract mixin class _$UserResponseCopyWith<$Res>
       String companyId,
       String companyName,
       String name,
-      String sex,
-      String age,
+      SexType sex,
+      AgeType age,
       String phone,
       String createdAt,
       String updatedAt,
@@ -308,11 +308,11 @@ class __$UserResponseCopyWithImpl<$Res>
       sex: null == sex
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SexType,
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
