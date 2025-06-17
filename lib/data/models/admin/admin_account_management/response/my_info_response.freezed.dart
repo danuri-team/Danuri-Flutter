@@ -20,7 +20,7 @@ mixin _$MyInfoResponse {
   String get companyName;
   String get email;
   String get phone;
-  String get role;
+  RoleType get role;
   String get status;
 
   /// Create a copy of MyInfoResponse
@@ -73,7 +73,7 @@ abstract mixin class $MyInfoResponseCopyWith<$Res> {
       String companyName,
       String email,
       String phone,
-      String role,
+      RoleType role,
       String status});
 }
 
@@ -122,7 +122,7 @@ class _$MyInfoResponseCopyWithImpl<$Res>
       role: null == role
           ? _self.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RoleType,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -156,7 +156,7 @@ class _MyInfoResponse implements MyInfoResponse {
   @override
   final String phone;
   @override
-  final String role;
+  final RoleType role;
   @override
   final String status;
 
@@ -216,7 +216,7 @@ abstract mixin class _$MyInfoResponseCopyWith<$Res>
       String companyName,
       String email,
       String phone,
-      String role,
+      RoleType role,
       String status});
 }
 
@@ -265,7 +265,7 @@ class __$MyInfoResponseCopyWithImpl<$Res>
       role: null == role
           ? _self.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RoleType,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable

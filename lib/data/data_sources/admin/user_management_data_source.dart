@@ -1,4 +1,5 @@
 import 'package:danuri_flutter/data/models/admin/user_management/request/create_user_request.dart';
+import 'package:danuri_flutter/data/models/admin/user_management/request/update_user_request.dart';
 import 'package:danuri_flutter/data/models/admin/user_management/response/user_response.dart';
 import 'package:danuri_flutter/network/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -8,10 +9,10 @@ final String baseUrl = dotenv.env['API_URL']!;
 class UserManagementDataSource {
   final dio = AppDio.getInstance();
 
-  Future<UserResponse> createUser(CreateUserRequest createUserRequest) async {
+  Future<UserResponse> createUser(CreateUserRequest request) async {
     final response = await dio.post(
       '$baseUrl/admin/users',
-      data: createUserRequest.toJson(),
+      data: request.toJson(),
     );
     return UserResponse.fromJson(response.data);
   }
@@ -28,10 +29,10 @@ class UserManagementDataSource {
   }
 
   Future<UserResponse> updateUser(
-      String userId,  updateUserRequest) async {
+      String userId, UpdateUserRequest request) async {
     final response = await dio.put(
       '$baseUrl/admin/users/$userId',
-      data: updateUserRequest.toJson(),
+      data: request.toJson(),
     );
     return UserResponse.fromJson(response.data);
   }

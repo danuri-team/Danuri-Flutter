@@ -18,7 +18,7 @@ mixin _$CreateUserRequest {
   String get companyId;
   String get name;
   SexType get sex;
-  String get age;
+  AgeType get age;
   String get phone;
 
   /// Create a copy of CreateUserRequest
@@ -63,7 +63,7 @@ abstract mixin class $CreateUserRequestCopyWith<$Res> {
       _$CreateUserRequestCopyWithImpl;
   @useResult
   $Res call(
-      {String companyId, String name, SexType sex, String age, String phone});
+      {String companyId, String name, SexType sex, AgeType age, String phone});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class _$CreateUserRequestCopyWithImpl<$Res>
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ class _CreateUserRequest implements CreateUserRequest {
   @override
   final SexType sex;
   @override
-  final String age;
+  final AgeType age;
   @override
   final String phone;
 
@@ -181,7 +181,7 @@ abstract mixin class _$CreateUserRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String companyId, String name, SexType sex, String age, String phone});
+      {String companyId, String name, SexType sex, AgeType age, String phone});
 }
 
 /// @nodoc
@@ -219,7 +219,7 @@ class __$CreateUserRequestCopyWithImpl<$Res>
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable

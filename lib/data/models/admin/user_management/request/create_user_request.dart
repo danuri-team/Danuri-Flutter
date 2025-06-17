@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,7 +11,7 @@ abstract class CreateUserRequest with _$CreateUserRequest{
     required String companyId,
     required String name,
     required SexType sex,
-    required String age,
+    required AgeType age,
     required String phone, 
   }) = _CreateUserRequest;
 

@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +10,7 @@ abstract class UpdateUserRequest with _$UpdateUserRequest{
   factory UpdateUserRequest({
     required String name,
     required SexType sex,
-    required String age,
+    required AgeType age,
     required String phone, 
   }) = _UpdateUserRequest;
 

@@ -1,3 +1,5 @@
+import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
+import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sign_up_request.freezed.dart';
@@ -9,8 +11,8 @@ abstract class SignUpRequest with _$SignUpRequest{
     required String companyId,
     required String name,
     required String phone,  
-    required String sex,
-    required String age,
+    required SexType sex,
+    required AgeType age,
   }) = _SignUpRequest;
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);

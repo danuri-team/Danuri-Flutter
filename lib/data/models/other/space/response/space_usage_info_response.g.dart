@@ -12,9 +12,11 @@ _SpaceUsageInfoResponse _$SpaceUsageInfoResponseFromJson(
       spaceId: json['spaceId'] as String,
       usageId: json['usageId'] as String,
       spaceName: json['spaceName'] as String,
+      rentalItem: (json['rentalItem'] as List<dynamic>)
+          .map((e) => AvailableItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
       startAt: json['startAt'] as String,
       endAt: json['endAt'] as String,
-      rentalItem: json['rentalItem'] as List<dynamic>,
     );
 
 Map<String, dynamic> _$SpaceUsageInfoResponseToJson(
@@ -23,7 +25,7 @@ Map<String, dynamic> _$SpaceUsageInfoResponseToJson(
       'spaceId': instance.spaceId,
       'usageId': instance.usageId,
       'spaceName': instance.spaceName,
+      'rentalItem': instance.rentalItem,
       'startAt': instance.startAt,
       'endAt': instance.endAt,
-      'rentalItem': instance.rentalItem,
     };

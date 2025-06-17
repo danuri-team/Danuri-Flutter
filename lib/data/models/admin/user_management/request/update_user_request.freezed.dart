@@ -17,7 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$UpdateUserRequest {
   String get name;
   SexType get sex;
-  String get age;
+  AgeType get age;
   String get phone;
 
   /// Create a copy of UpdateUserRequest
@@ -58,7 +58,7 @@ abstract mixin class $UpdateUserRequestCopyWith<$Res> {
           UpdateUserRequest value, $Res Function(UpdateUserRequest) _then) =
       _$UpdateUserRequestCopyWithImpl;
   @useResult
-  $Res call({String name, SexType sex, String age, String phone});
+  $Res call({String name, SexType sex, AgeType age, String phone});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class _$UpdateUserRequestCopyWithImpl<$Res>
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ class _UpdateUserRequest implements UpdateUserRequest {
   @override
   final SexType sex;
   @override
-  final String age;
+  final AgeType age;
   @override
   final String phone;
 
@@ -164,7 +164,7 @@ abstract mixin class _$UpdateUserRequestCopyWith<$Res>
       __$UpdateUserRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, SexType sex, String age, String phone});
+  $Res call({String name, SexType sex, AgeType age, String phone});
 }
 
 /// @nodoc
@@ -197,7 +197,7 @@ class __$UpdateUserRequestCopyWithImpl<$Res>
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
