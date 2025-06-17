@@ -22,11 +22,6 @@ class SpaceDataSource {
     return result.map((data) => SpaceUsageStatus.fromJson(data)).toList();
   }
 
-  // Future<SpaceUsageStatusResponse> getSpaceUsageStatus() async{
-  //   final response = await dio.get('$baseUrl/space');
-  //   return SpaceUsageStatusResponse.fromJson(response.data);
-  // }
-
   Future<void> registerUsedSpace(RegisterUsedSpaceRequest request) async {
     await dio.post(
       '$baseUrl/space',
