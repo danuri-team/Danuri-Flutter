@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              scaffoldBackgroundColor: DanuriColor.background1,
+              scaffoldBackgroundColor: DanuriColor.main2,
               fontFamily: 'Pretendard',
             ),
             routerConfig: router,
