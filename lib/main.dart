@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/config/router.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async{
    WidgetsFlutterBinding.ensureInitialized();
+   HttpOverrides.global = MyHttpOverrides();
   await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              scaffoldBackgroundColor: DanuriColor.main2,
+              scaffoldBackgroundColor: DanuriColor.background1,
               fontFamily: 'Pretendard',
             ),
             routerConfig: router,
@@ -31,5 +34,13 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){  // '?'를 추가해서 null safety 확보
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }
