@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/view/image.dart';
+import 'package:danuri_flutter/view/sign_up/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,17 +6,14 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/image',
+  initialLocation: '/sign-up',
   routes: [
-    // GoRoute(
-    //   name: '',
-    //   path: '/',
-    //   builder: (context, state) => const ,
-    // ),
     GoRoute(
-      name: 'image',
-      path: '/image',
-      builder: (context, state) => const ImageScreen(),
+      name: 'sign-up',
+      path: '/sign-up/:phoneNumber',
+      builder: (context, state) {
+        return SignUpScreen(phoneNumber: state.pathParameters['phoneNumber']!);
+      },
     ),
   ],
 );
