@@ -1,15 +1,36 @@
+import 'package:danuri_flutter/core/design_system/color.dart';
+import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CallBackButton extends StatelessWidget {
-  const CallBackButton({super.key});
+class HelpMeButton extends StatelessWidget {
+  const HelpMeButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => context.pop(),
-      icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+    return GestureDetector(
+      onTap: () {
+        //미정
+      },
+      child: Container(
+        width: 152.w,
+        height: 48.h,
+        decoration: ShapeDecoration(
+          color: DanuriColor.line1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '? 도와주세요',
+              style: DanuriText.body1Normal,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
