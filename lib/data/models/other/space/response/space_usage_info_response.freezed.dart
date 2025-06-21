@@ -18,7 +18,7 @@ mixin _$SpaceUsageInfoResponse {
   String get spaceId;
   String get usageId;
   String get spaceName;
-  List<AvailableItem> get rentalItem;
+  List<ItemAvailableRental> get rentalItem;
   String get startAt;
   String get endAt;
 
@@ -69,7 +69,7 @@ abstract mixin class $SpaceUsageInfoResponseCopyWith<$Res> {
       {String spaceId,
       String usageId,
       String spaceName,
-      List<AvailableItem> rentalItem,
+      List<ItemAvailableRental> rentalItem,
       String startAt,
       String endAt});
 }
@@ -110,7 +110,7 @@ class _$SpaceUsageInfoResponseCopyWithImpl<$Res>
       rentalItem: null == rentalItem
           ? _self.rentalItem
           : rentalItem // ignore: cast_nullable_to_non_nullable
-              as List<AvailableItem>,
+              as List<ItemAvailableRental>,
       startAt: null == startAt
           ? _self.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ class _SpaceUsageInfoResponse implements SpaceUsageInfoResponse {
       {required this.spaceId,
       required this.usageId,
       required this.spaceName,
-      required final List<AvailableItem> rentalItem,
+      required final List<ItemAvailableRental> rentalItem,
       required this.startAt,
       required this.endAt})
       : _rentalItem = rentalItem;
@@ -143,9 +143,9 @@ class _SpaceUsageInfoResponse implements SpaceUsageInfoResponse {
   final String usageId;
   @override
   final String spaceName;
-  final List<AvailableItem> _rentalItem;
+  final List<ItemAvailableRental> _rentalItem;
   @override
-  List<AvailableItem> get rentalItem {
+  List<ItemAvailableRental> get rentalItem {
     if (_rentalItem is EqualUnmodifiableListView) return _rentalItem;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rentalItem);
@@ -210,7 +210,7 @@ abstract mixin class _$SpaceUsageInfoResponseCopyWith<$Res>
       {String spaceId,
       String usageId,
       String spaceName,
-      List<AvailableItem> rentalItem,
+      List<ItemAvailableRental> rentalItem,
       String startAt,
       String endAt});
 }
@@ -251,7 +251,7 @@ class __$SpaceUsageInfoResponseCopyWithImpl<$Res>
       rentalItem: null == rentalItem
           ? _self._rentalItem
           : rentalItem // ignore: cast_nullable_to_non_nullable
-              as List<AvailableItem>,
+              as List<ItemAvailableRental>,
       startAt: null == startAt
           ? _self.startAt
           : startAt // ignore: cast_nullable_to_non_nullable

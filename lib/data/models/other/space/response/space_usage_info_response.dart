@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/data/models/other/rental_item/response/available_item.dart';
+import 'package:danuri_flutter/data/models/other/rental_item/response/available_items_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'space_usage_info_response.freezed.dart';
@@ -10,7 +10,7 @@ abstract class SpaceUsageInfoResponse with _$SpaceUsageInfoResponse{
     required String spaceId,
     required String usageId,
     required String spaceName,
-    required List<AvailableItem> rentalItem,
+    required List<ItemAvailableRental> rentalItem,
     required String startAt,
     required String endAt,
   }) = _SpaceUsageInfoResponse;
