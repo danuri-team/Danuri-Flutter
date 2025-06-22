@@ -198,7 +198,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   centerText: '완료',
                   onTap: () async{
                     await _viewModel.signUp(
-                      'companyId',
+                      '52515fd2-43e5-440b-9cc5-8630bc75954e',
                       _userNameController.text,
                       widget.phoneNumber,
                       userInfo['성별'] as SexType,
