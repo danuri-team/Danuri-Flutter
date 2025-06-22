@@ -1,8 +1,6 @@
-import 'package:danuri_flutter/data/models/other/space/reqeust/exit_request.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_response.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status.dart';
-import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
 import 'package:danuri_flutter/network/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -29,10 +27,9 @@ class SpaceDataSource {
     );
   }
 
-  Future<void> exitRoom(ExitRequest request) async {
+  Future<void> exitRoom() async {
     await dio.post(
       '$baseUrl/usage',
-      data: request.toJson(),
     );
   }
 }
