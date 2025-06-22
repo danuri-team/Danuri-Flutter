@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/config/router.dart';
+import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
    WidgetsFlutterBinding.ensureInitialized();
@@ -23,13 +25,16 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
-          child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              scaffoldBackgroundColor: DanuriColor.background1,
-              fontFamily: 'Pretendard',
+          child: ChangeNotifierProvider(
+            create: (context) => PhoneNumberProvider(),
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                scaffoldBackgroundColor: DanuriColor.background1,
+                fontFamily: 'Pretendard',
+              ),
+              routerConfig: router,
             ),
-            routerConfig: router,
           ),
         );
       },
