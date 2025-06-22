@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_request.dart';
+part of 'user_login_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) =>
-    _LoginRequest(
+_UserLoginRequest _$UserLoginRequestFromJson(Map<String, dynamic> json) =>
+    _UserLoginRequest(
       phone: json['phone'] as String,
     );
 
-Map<String, dynamic> _$LoginRequestToJson(_LoginRequest instance) =>
+Map<String, dynamic> _$UserLoginRequestToJson(_UserLoginRequest instance) =>
     <String, dynamic>{
       'phone': instance.phone,
     };

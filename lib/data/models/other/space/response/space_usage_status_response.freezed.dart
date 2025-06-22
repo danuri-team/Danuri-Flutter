@@ -15,7 +15,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SpaceUsageStatusResponse {
-  List<SpaceUsageStatus> get spaceUsageStatus;
+  String get space_id;
+  String get name;
+  List<int> get start_at;
+  List<int> get end_at;
+  bool get is_available;
 
   /// Create a copy of SpaceUsageStatusResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -33,18 +37,28 @@ mixin _$SpaceUsageStatusResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SpaceUsageStatusResponse &&
-            const DeepCollectionEquality()
-                .equals(other.spaceUsageStatus, spaceUsageStatus));
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other.start_at, start_at) &&
+            const DeepCollectionEquality().equals(other.end_at, end_at) &&
+            (identical(other.is_available, is_available) ||
+                other.is_available == is_available));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(spaceUsageStatus));
+      runtimeType,
+      space_id,
+      name,
+      const DeepCollectionEquality().hash(start_at),
+      const DeepCollectionEquality().hash(end_at),
+      is_available);
 
   @override
   String toString() {
-    return 'SpaceUsageStatusResponse(spaceUsageStatus: $spaceUsageStatus)';
+    return 'SpaceUsageStatusResponse(space_id: $space_id, name: $name, start_at: $start_at, end_at: $end_at, is_available: $is_available)';
   }
 }
 
@@ -54,7 +68,12 @@ abstract mixin class $SpaceUsageStatusResponseCopyWith<$Res> {
           $Res Function(SpaceUsageStatusResponse) _then) =
       _$SpaceUsageStatusResponseCopyWithImpl;
   @useResult
-  $Res call({List<SpaceUsageStatus> spaceUsageStatus});
+  $Res call(
+      {String space_id,
+      String name,
+      List<int> start_at,
+      List<int> end_at,
+      bool is_available});
 }
 
 /// @nodoc
@@ -70,13 +89,33 @@ class _$SpaceUsageStatusResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? spaceUsageStatus = null,
+    Object? space_id = null,
+    Object? name = null,
+    Object? start_at = null,
+    Object? end_at = null,
+    Object? is_available = null,
   }) {
     return _then(_self.copyWith(
-      spaceUsageStatus: null == spaceUsageStatus
-          ? _self.spaceUsageStatus
-          : spaceUsageStatus // ignore: cast_nullable_to_non_nullable
-              as List<SpaceUsageStatus>,
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      start_at: null == start_at
+          ? _self.start_at
+          : start_at // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      end_at: null == end_at
+          ? _self.end_at
+          : end_at // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      is_available: null == is_available
+          ? _self.is_available
+          : is_available // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -85,19 +124,38 @@ class _$SpaceUsageStatusResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _SpaceUsageStatusResponse implements SpaceUsageStatusResponse {
   _SpaceUsageStatusResponse(
-      {required final List<SpaceUsageStatus> spaceUsageStatus})
-      : _spaceUsageStatus = spaceUsageStatus;
+      {required this.space_id,
+      required this.name,
+      required final List<int> start_at,
+      required final List<int> end_at,
+      required this.is_available})
+      : _start_at = start_at,
+        _end_at = end_at;
   factory _SpaceUsageStatusResponse.fromJson(Map<String, dynamic> json) =>
       _$SpaceUsageStatusResponseFromJson(json);
 
-  final List<SpaceUsageStatus> _spaceUsageStatus;
   @override
-  List<SpaceUsageStatus> get spaceUsageStatus {
-    if (_spaceUsageStatus is EqualUnmodifiableListView)
-      return _spaceUsageStatus;
+  final String space_id;
+  @override
+  final String name;
+  final List<int> _start_at;
+  @override
+  List<int> get start_at {
+    if (_start_at is EqualUnmodifiableListView) return _start_at;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_spaceUsageStatus);
+    return EqualUnmodifiableListView(_start_at);
   }
+
+  final List<int> _end_at;
+  @override
+  List<int> get end_at {
+    if (_end_at is EqualUnmodifiableListView) return _end_at;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_end_at);
+  }
+
+  @override
+  final bool is_available;
 
   /// Create a copy of SpaceUsageStatusResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -120,18 +178,28 @@ class _SpaceUsageStatusResponse implements SpaceUsageStatusResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SpaceUsageStatusResponse &&
-            const DeepCollectionEquality()
-                .equals(other._spaceUsageStatus, _spaceUsageStatus));
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._start_at, _start_at) &&
+            const DeepCollectionEquality().equals(other._end_at, _end_at) &&
+            (identical(other.is_available, is_available) ||
+                other.is_available == is_available));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_spaceUsageStatus));
+      runtimeType,
+      space_id,
+      name,
+      const DeepCollectionEquality().hash(_start_at),
+      const DeepCollectionEquality().hash(_end_at),
+      is_available);
 
   @override
   String toString() {
-    return 'SpaceUsageStatusResponse(spaceUsageStatus: $spaceUsageStatus)';
+    return 'SpaceUsageStatusResponse(space_id: $space_id, name: $name, start_at: $start_at, end_at: $end_at, is_available: $is_available)';
   }
 }
 
@@ -143,7 +211,12 @@ abstract mixin class _$SpaceUsageStatusResponseCopyWith<$Res>
       __$SpaceUsageStatusResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({List<SpaceUsageStatus> spaceUsageStatus});
+  $Res call(
+      {String space_id,
+      String name,
+      List<int> start_at,
+      List<int> end_at,
+      bool is_available});
 }
 
 /// @nodoc
@@ -159,13 +232,33 @@ class __$SpaceUsageStatusResponseCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? spaceUsageStatus = null,
+    Object? space_id = null,
+    Object? name = null,
+    Object? start_at = null,
+    Object? end_at = null,
+    Object? is_available = null,
   }) {
     return _then(_SpaceUsageStatusResponse(
-      spaceUsageStatus: null == spaceUsageStatus
-          ? _self._spaceUsageStatus
-          : spaceUsageStatus // ignore: cast_nullable_to_non_nullable
-              as List<SpaceUsageStatus>,
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      start_at: null == start_at
+          ? _self._start_at
+          : start_at // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      end_at: null == end_at
+          ? _self._end_at
+          : end_at // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      is_available: null == is_available
+          ? _self.is_available
+          : is_available // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
