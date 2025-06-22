@@ -15,8 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SpaceUsageResponse {
-  bool get isUsingSpace;
-  SpaceUsageInfoResponse get spaceUsageInfo;
+  bool get is_using_space;
+  SpaceUsageInfoResponse get space_usage_info;
 
   /// Create a copy of SpaceUsageResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -34,19 +34,20 @@ mixin _$SpaceUsageResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SpaceUsageResponse &&
-            (identical(other.isUsingSpace, isUsingSpace) ||
-                other.isUsingSpace == isUsingSpace) &&
-            (identical(other.spaceUsageInfo, spaceUsageInfo) ||
-                other.spaceUsageInfo == spaceUsageInfo));
+            (identical(other.is_using_space, is_using_space) ||
+                other.is_using_space == is_using_space) &&
+            (identical(other.space_usage_info, space_usage_info) ||
+                other.space_usage_info == space_usage_info));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, isUsingSpace, spaceUsageInfo);
+  int get hashCode =>
+      Object.hash(runtimeType, is_using_space, space_usage_info);
 
   @override
   String toString() {
-    return 'SpaceUsageResponse(isUsingSpace: $isUsingSpace, spaceUsageInfo: $spaceUsageInfo)';
+    return 'SpaceUsageResponse(is_using_space: $is_using_space, space_usage_info: $space_usage_info)';
   }
 }
 
@@ -56,9 +57,9 @@ abstract mixin class $SpaceUsageResponseCopyWith<$Res> {
           SpaceUsageResponse value, $Res Function(SpaceUsageResponse) _then) =
       _$SpaceUsageResponseCopyWithImpl;
   @useResult
-  $Res call({bool isUsingSpace, SpaceUsageInfoResponse spaceUsageInfo});
+  $Res call({bool is_using_space, SpaceUsageInfoResponse space_usage_info});
 
-  $SpaceUsageInfoResponseCopyWith<$Res> get spaceUsageInfo;
+  $SpaceUsageInfoResponseCopyWith<$Res> get space_usage_info;
 }
 
 /// @nodoc
@@ -74,17 +75,17 @@ class _$SpaceUsageResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isUsingSpace = null,
-    Object? spaceUsageInfo = null,
+    Object? is_using_space = null,
+    Object? space_usage_info = null,
   }) {
     return _then(_self.copyWith(
-      isUsingSpace: null == isUsingSpace
-          ? _self.isUsingSpace
-          : isUsingSpace // ignore: cast_nullable_to_non_nullable
+      is_using_space: null == is_using_space
+          ? _self.is_using_space
+          : is_using_space // ignore: cast_nullable_to_non_nullable
               as bool,
-      spaceUsageInfo: null == spaceUsageInfo
-          ? _self.spaceUsageInfo
-          : spaceUsageInfo // ignore: cast_nullable_to_non_nullable
+      space_usage_info: null == space_usage_info
+          ? _self.space_usage_info
+          : space_usage_info // ignore: cast_nullable_to_non_nullable
               as SpaceUsageInfoResponse,
     ));
   }
@@ -93,9 +94,10 @@ class _$SpaceUsageResponseCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $SpaceUsageInfoResponseCopyWith<$Res> get spaceUsageInfo {
-    return $SpaceUsageInfoResponseCopyWith<$Res>(_self.spaceUsageInfo, (value) {
-      return _then(_self.copyWith(spaceUsageInfo: value));
+  $SpaceUsageInfoResponseCopyWith<$Res> get space_usage_info {
+    return $SpaceUsageInfoResponseCopyWith<$Res>(_self.space_usage_info,
+        (value) {
+      return _then(_self.copyWith(space_usage_info: value));
     });
   }
 }
@@ -104,14 +106,14 @@ class _$SpaceUsageResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _SpaceUsageResponse implements SpaceUsageResponse {
   _SpaceUsageResponse(
-      {required this.isUsingSpace, required this.spaceUsageInfo});
+      {required this.is_using_space, required this.space_usage_info});
   factory _SpaceUsageResponse.fromJson(Map<String, dynamic> json) =>
       _$SpaceUsageResponseFromJson(json);
 
   @override
-  final bool isUsingSpace;
+  final bool is_using_space;
   @override
-  final SpaceUsageInfoResponse spaceUsageInfo;
+  final SpaceUsageInfoResponse space_usage_info;
 
   /// Create a copy of SpaceUsageResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -133,19 +135,20 @@ class _SpaceUsageResponse implements SpaceUsageResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SpaceUsageResponse &&
-            (identical(other.isUsingSpace, isUsingSpace) ||
-                other.isUsingSpace == isUsingSpace) &&
-            (identical(other.spaceUsageInfo, spaceUsageInfo) ||
-                other.spaceUsageInfo == spaceUsageInfo));
+            (identical(other.is_using_space, is_using_space) ||
+                other.is_using_space == is_using_space) &&
+            (identical(other.space_usage_info, space_usage_info) ||
+                other.space_usage_info == space_usage_info));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, isUsingSpace, spaceUsageInfo);
+  int get hashCode =>
+      Object.hash(runtimeType, is_using_space, space_usage_info);
 
   @override
   String toString() {
-    return 'SpaceUsageResponse(isUsingSpace: $isUsingSpace, spaceUsageInfo: $spaceUsageInfo)';
+    return 'SpaceUsageResponse(is_using_space: $is_using_space, space_usage_info: $space_usage_info)';
   }
 }
 
@@ -157,10 +160,10 @@ abstract mixin class _$SpaceUsageResponseCopyWith<$Res>
       __$SpaceUsageResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({bool isUsingSpace, SpaceUsageInfoResponse spaceUsageInfo});
+  $Res call({bool is_using_space, SpaceUsageInfoResponse space_usage_info});
 
   @override
-  $SpaceUsageInfoResponseCopyWith<$Res> get spaceUsageInfo;
+  $SpaceUsageInfoResponseCopyWith<$Res> get space_usage_info;
 }
 
 /// @nodoc
@@ -176,17 +179,17 @@ class __$SpaceUsageResponseCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isUsingSpace = null,
-    Object? spaceUsageInfo = null,
+    Object? is_using_space = null,
+    Object? space_usage_info = null,
   }) {
     return _then(_SpaceUsageResponse(
-      isUsingSpace: null == isUsingSpace
-          ? _self.isUsingSpace
-          : isUsingSpace // ignore: cast_nullable_to_non_nullable
+      is_using_space: null == is_using_space
+          ? _self.is_using_space
+          : is_using_space // ignore: cast_nullable_to_non_nullable
               as bool,
-      spaceUsageInfo: null == spaceUsageInfo
-          ? _self.spaceUsageInfo
-          : spaceUsageInfo // ignore: cast_nullable_to_non_nullable
+      space_usage_info: null == space_usage_info
+          ? _self.space_usage_info
+          : space_usage_info // ignore: cast_nullable_to_non_nullable
               as SpaceUsageInfoResponse,
     ));
   }
@@ -195,9 +198,10 @@ class __$SpaceUsageResponseCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $SpaceUsageInfoResponseCopyWith<$Res> get spaceUsageInfo {
-    return $SpaceUsageInfoResponseCopyWith<$Res>(_self.spaceUsageInfo, (value) {
-      return _then(_self.copyWith(spaceUsageInfo: value));
+  $SpaceUsageInfoResponseCopyWith<$Res> get space_usage_info {
+    return $SpaceUsageInfoResponseCopyWith<$Res>(_self.space_usage_info,
+        (value) {
+      return _then(_self.copyWith(space_usage_info: value));
     });
   }
 }

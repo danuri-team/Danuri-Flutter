@@ -11,8 +11,8 @@ abstract class SignUpRequest with _$SignUpRequest{
     required String companyId,
     required String name,
     required String phone,  
-    required SexType sex,
-    required AgeType age,
+    required String sex,
+    required String age,
   }) = _SignUpRequest;
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);

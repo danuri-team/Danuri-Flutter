@@ -15,12 +15,12 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SpaceUsageInfoResponse {
-  String get spaceId;
-  String get usageId;
-  String get spaceName;
-  List<AvailableItem> get rentalItem;
-  String get startAt;
-  String get endAt;
+  String get space_id;
+  String get usage_id;
+  String get space_name;
+  List<ItemAvailableRental> get rental_item;
+  String get start_at;
+  String? get end_at;
 
   /// Create a copy of SpaceUsageInfoResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -38,24 +38,27 @@ mixin _$SpaceUsageInfoResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SpaceUsageInfoResponse &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId) &&
-            (identical(other.usageId, usageId) || other.usageId == usageId) &&
-            (identical(other.spaceName, spaceName) ||
-                other.spaceName == spaceName) &&
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.usage_id, usage_id) ||
+                other.usage_id == usage_id) &&
+            (identical(other.space_name, space_name) ||
+                other.space_name == space_name) &&
             const DeepCollectionEquality()
-                .equals(other.rentalItem, rentalItem) &&
-            (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.endAt, endAt) || other.endAt == endAt));
+                .equals(other.rental_item, rental_item) &&
+            (identical(other.start_at, start_at) ||
+                other.start_at == start_at) &&
+            (identical(other.end_at, end_at) || other.end_at == end_at));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, spaceId, usageId, spaceName,
-      const DeepCollectionEquality().hash(rentalItem), startAt, endAt);
+  int get hashCode => Object.hash(runtimeType, space_id, usage_id, space_name,
+      const DeepCollectionEquality().hash(rental_item), start_at, end_at);
 
   @override
   String toString() {
-    return 'SpaceUsageInfoResponse(spaceId: $spaceId, usageId: $usageId, spaceName: $spaceName, rentalItem: $rentalItem, startAt: $startAt, endAt: $endAt)';
+    return 'SpaceUsageInfoResponse(space_id: $space_id, usage_id: $usage_id, space_name: $space_name, rental_item: $rental_item, start_at: $start_at, end_at: $end_at)';
   }
 }
 
@@ -66,12 +69,12 @@ abstract mixin class $SpaceUsageInfoResponseCopyWith<$Res> {
       _$SpaceUsageInfoResponseCopyWithImpl;
   @useResult
   $Res call(
-      {String spaceId,
-      String usageId,
-      String spaceName,
-      List<AvailableItem> rentalItem,
-      String startAt,
-      String endAt});
+      {String space_id,
+      String usage_id,
+      String space_name,
+      List<ItemAvailableRental> rental_item,
+      String start_at,
+      String? end_at});
 }
 
 /// @nodoc
@@ -87,38 +90,38 @@ class _$SpaceUsageInfoResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? spaceId = null,
-    Object? usageId = null,
-    Object? spaceName = null,
-    Object? rentalItem = null,
-    Object? startAt = null,
-    Object? endAt = null,
+    Object? space_id = null,
+    Object? usage_id = null,
+    Object? space_name = null,
+    Object? rental_item = null,
+    Object? start_at = null,
+    Object? end_at = freezed,
   }) {
     return _then(_self.copyWith(
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
-      usageId: null == usageId
-          ? _self.usageId
-          : usageId // ignore: cast_nullable_to_non_nullable
+      usage_id: null == usage_id
+          ? _self.usage_id
+          : usage_id // ignore: cast_nullable_to_non_nullable
               as String,
-      spaceName: null == spaceName
-          ? _self.spaceName
-          : spaceName // ignore: cast_nullable_to_non_nullable
+      space_name: null == space_name
+          ? _self.space_name
+          : space_name // ignore: cast_nullable_to_non_nullable
               as String,
-      rentalItem: null == rentalItem
-          ? _self.rentalItem
-          : rentalItem // ignore: cast_nullable_to_non_nullable
-              as List<AvailableItem>,
-      startAt: null == startAt
-          ? _self.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
+      rental_item: null == rental_item
+          ? _self.rental_item
+          : rental_item // ignore: cast_nullable_to_non_nullable
+              as List<ItemAvailableRental>,
+      start_at: null == start_at
+          ? _self.start_at
+          : start_at // ignore: cast_nullable_to_non_nullable
               as String,
-      endAt: null == endAt
-          ? _self.endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
-              as String,
+      end_at: freezed == end_at
+          ? _self.end_at
+          : end_at // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -127,34 +130,34 @@ class _$SpaceUsageInfoResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _SpaceUsageInfoResponse implements SpaceUsageInfoResponse {
   _SpaceUsageInfoResponse(
-      {required this.spaceId,
-      required this.usageId,
-      required this.spaceName,
-      required final List<AvailableItem> rentalItem,
-      required this.startAt,
-      required this.endAt})
-      : _rentalItem = rentalItem;
+      {required this.space_id,
+      required this.usage_id,
+      required this.space_name,
+      required final List<ItemAvailableRental> rental_item,
+      required this.start_at,
+      this.end_at})
+      : _rental_item = rental_item;
   factory _SpaceUsageInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$SpaceUsageInfoResponseFromJson(json);
 
   @override
-  final String spaceId;
+  final String space_id;
   @override
-  final String usageId;
+  final String usage_id;
   @override
-  final String spaceName;
-  final List<AvailableItem> _rentalItem;
+  final String space_name;
+  final List<ItemAvailableRental> _rental_item;
   @override
-  List<AvailableItem> get rentalItem {
-    if (_rentalItem is EqualUnmodifiableListView) return _rentalItem;
+  List<ItemAvailableRental> get rental_item {
+    if (_rental_item is EqualUnmodifiableListView) return _rental_item;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_rentalItem);
+    return EqualUnmodifiableListView(_rental_item);
   }
 
   @override
-  final String startAt;
+  final String start_at;
   @override
-  final String endAt;
+  final String? end_at;
 
   /// Create a copy of SpaceUsageInfoResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -177,24 +180,27 @@ class _SpaceUsageInfoResponse implements SpaceUsageInfoResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SpaceUsageInfoResponse &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId) &&
-            (identical(other.usageId, usageId) || other.usageId == usageId) &&
-            (identical(other.spaceName, spaceName) ||
-                other.spaceName == spaceName) &&
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.usage_id, usage_id) ||
+                other.usage_id == usage_id) &&
+            (identical(other.space_name, space_name) ||
+                other.space_name == space_name) &&
             const DeepCollectionEquality()
-                .equals(other._rentalItem, _rentalItem) &&
-            (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.endAt, endAt) || other.endAt == endAt));
+                .equals(other._rental_item, _rental_item) &&
+            (identical(other.start_at, start_at) ||
+                other.start_at == start_at) &&
+            (identical(other.end_at, end_at) || other.end_at == end_at));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, spaceId, usageId, spaceName,
-      const DeepCollectionEquality().hash(_rentalItem), startAt, endAt);
+  int get hashCode => Object.hash(runtimeType, space_id, usage_id, space_name,
+      const DeepCollectionEquality().hash(_rental_item), start_at, end_at);
 
   @override
   String toString() {
-    return 'SpaceUsageInfoResponse(spaceId: $spaceId, usageId: $usageId, spaceName: $spaceName, rentalItem: $rentalItem, startAt: $startAt, endAt: $endAt)';
+    return 'SpaceUsageInfoResponse(space_id: $space_id, usage_id: $usage_id, space_name: $space_name, rental_item: $rental_item, start_at: $start_at, end_at: $end_at)';
   }
 }
 
@@ -207,12 +213,12 @@ abstract mixin class _$SpaceUsageInfoResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String spaceId,
-      String usageId,
-      String spaceName,
-      List<AvailableItem> rentalItem,
-      String startAt,
-      String endAt});
+      {String space_id,
+      String usage_id,
+      String space_name,
+      List<ItemAvailableRental> rental_item,
+      String start_at,
+      String? end_at});
 }
 
 /// @nodoc
@@ -228,38 +234,38 @@ class __$SpaceUsageInfoResponseCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? spaceId = null,
-    Object? usageId = null,
-    Object? spaceName = null,
-    Object? rentalItem = null,
-    Object? startAt = null,
-    Object? endAt = null,
+    Object? space_id = null,
+    Object? usage_id = null,
+    Object? space_name = null,
+    Object? rental_item = null,
+    Object? start_at = null,
+    Object? end_at = freezed,
   }) {
     return _then(_SpaceUsageInfoResponse(
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
-      usageId: null == usageId
-          ? _self.usageId
-          : usageId // ignore: cast_nullable_to_non_nullable
+      usage_id: null == usage_id
+          ? _self.usage_id
+          : usage_id // ignore: cast_nullable_to_non_nullable
               as String,
-      spaceName: null == spaceName
-          ? _self.spaceName
-          : spaceName // ignore: cast_nullable_to_non_nullable
+      space_name: null == space_name
+          ? _self.space_name
+          : space_name // ignore: cast_nullable_to_non_nullable
               as String,
-      rentalItem: null == rentalItem
-          ? _self._rentalItem
-          : rentalItem // ignore: cast_nullable_to_non_nullable
-              as List<AvailableItem>,
-      startAt: null == startAt
-          ? _self.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
+      rental_item: null == rental_item
+          ? _self._rental_item
+          : rental_item // ignore: cast_nullable_to_non_nullable
+              as List<ItemAvailableRental>,
+      start_at: null == start_at
+          ? _self.start_at
+          : start_at // ignore: cast_nullable_to_non_nullable
               as String,
-      endAt: null == endAt
-          ? _self.endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
-              as String,
+      end_at: freezed == end_at
+          ? _self.end_at
+          : end_at // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

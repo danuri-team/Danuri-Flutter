@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login_request.dart';
+part of 'user_login_request.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,25 +14,25 @@ part of 'login_request.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$LoginRequest {
+mixin _$UserLoginRequest {
   String get phone;
 
-  /// Create a copy of LoginRequest
+  /// Create a copy of UserLoginRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $LoginRequestCopyWith<LoginRequest> get copyWith =>
-      _$LoginRequestCopyWithImpl<LoginRequest>(
-          this as LoginRequest, _$identity);
+  $UserLoginRequestCopyWith<UserLoginRequest> get copyWith =>
+      _$UserLoginRequestCopyWithImpl<UserLoginRequest>(
+          this as UserLoginRequest, _$identity);
 
-  /// Serializes this LoginRequest to a JSON map.
+  /// Serializes this UserLoginRequest to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is LoginRequest &&
+            other is UserLoginRequest &&
             (identical(other.phone, phone) || other.phone == phone));
   }
 
@@ -42,27 +42,28 @@ mixin _$LoginRequest {
 
   @override
   String toString() {
-    return 'LoginRequest(phone: $phone)';
+    return 'UserLoginRequest(phone: $phone)';
   }
 }
 
 /// @nodoc
-abstract mixin class $LoginRequestCopyWith<$Res> {
-  factory $LoginRequestCopyWith(
-          LoginRequest value, $Res Function(LoginRequest) _then) =
-      _$LoginRequestCopyWithImpl;
+abstract mixin class $UserLoginRequestCopyWith<$Res> {
+  factory $UserLoginRequestCopyWith(
+          UserLoginRequest value, $Res Function(UserLoginRequest) _then) =
+      _$UserLoginRequestCopyWithImpl;
   @useResult
   $Res call({String phone});
 }
 
 /// @nodoc
-class _$LoginRequestCopyWithImpl<$Res> implements $LoginRequestCopyWith<$Res> {
-  _$LoginRequestCopyWithImpl(this._self, this._then);
+class _$UserLoginRequestCopyWithImpl<$Res>
+    implements $UserLoginRequestCopyWith<$Res> {
+  _$UserLoginRequestCopyWithImpl(this._self, this._then);
 
-  final LoginRequest _self;
-  final $Res Function(LoginRequest) _then;
+  final UserLoginRequest _self;
+  final $Res Function(UserLoginRequest) _then;
 
-  /// Create a copy of LoginRequest
+  /// Create a copy of UserLoginRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -80,25 +81,25 @@ class _$LoginRequestCopyWithImpl<$Res> implements $LoginRequestCopyWith<$Res> {
 
 /// @nodoc
 @JsonSerializable()
-class _LoginRequest implements LoginRequest {
-  _LoginRequest({required this.phone});
-  factory _LoginRequest.fromJson(Map<String, dynamic> json) =>
-      _$LoginRequestFromJson(json);
+class _UserLoginRequest implements UserLoginRequest {
+  _UserLoginRequest({required this.phone});
+  factory _UserLoginRequest.fromJson(Map<String, dynamic> json) =>
+      _$UserLoginRequestFromJson(json);
 
   @override
   final String phone;
 
-  /// Create a copy of LoginRequest
+  /// Create a copy of UserLoginRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$LoginRequestCopyWith<_LoginRequest> get copyWith =>
-      __$LoginRequestCopyWithImpl<_LoginRequest>(this, _$identity);
+  _$UserLoginRequestCopyWith<_UserLoginRequest> get copyWith =>
+      __$UserLoginRequestCopyWithImpl<_UserLoginRequest>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$LoginRequestToJson(
+    return _$UserLoginRequestToJson(
       this,
     );
   }
@@ -107,7 +108,7 @@ class _LoginRequest implements LoginRequest {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoginRequest &&
+            other is _UserLoginRequest &&
             (identical(other.phone, phone) || other.phone == phone));
   }
 
@@ -117,37 +118,37 @@ class _LoginRequest implements LoginRequest {
 
   @override
   String toString() {
-    return 'LoginRequest(phone: $phone)';
+    return 'UserLoginRequest(phone: $phone)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$LoginRequestCopyWith<$Res>
-    implements $LoginRequestCopyWith<$Res> {
-  factory _$LoginRequestCopyWith(
-          _LoginRequest value, $Res Function(_LoginRequest) _then) =
-      __$LoginRequestCopyWithImpl;
+abstract mixin class _$UserLoginRequestCopyWith<$Res>
+    implements $UserLoginRequestCopyWith<$Res> {
+  factory _$UserLoginRequestCopyWith(
+          _UserLoginRequest value, $Res Function(_UserLoginRequest) _then) =
+      __$UserLoginRequestCopyWithImpl;
   @override
   @useResult
   $Res call({String phone});
 }
 
 /// @nodoc
-class __$LoginRequestCopyWithImpl<$Res>
-    implements _$LoginRequestCopyWith<$Res> {
-  __$LoginRequestCopyWithImpl(this._self, this._then);
+class __$UserLoginRequestCopyWithImpl<$Res>
+    implements _$UserLoginRequestCopyWith<$Res> {
+  __$UserLoginRequestCopyWithImpl(this._self, this._then);
 
-  final _LoginRequest _self;
-  final $Res Function(_LoginRequest) _then;
+  final _UserLoginRequest _self;
+  final $Res Function(_UserLoginRequest) _then;
 
-  /// Create a copy of LoginRequest
+  /// Create a copy of UserLoginRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? phone = null,
   }) {
-    return _then(_LoginRequest(
+    return _then(_UserLoginRequest(
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
