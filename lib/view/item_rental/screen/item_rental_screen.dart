@@ -21,16 +21,22 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
 
   final ItemRentalViewModel _viewModel = ItemRentalViewModel();
 
-  Future<void> fetchItemAvailableRent() async {
-    await _viewModel.getItemAvailableRent().then(
-          (_) => setState(() {}),
-        );
+  Future<void> fetchData() async {
+    await Future.wait([
+      _viewModel.getItemAvailableRent(), // 대여 가능 아이템 조회
+      _viewModel.getUsageSpace(), // 공간 사용 조회
+    ]).then(
+      (_) => setState(
+        () {},
+      ),
+    );
   }
+
 
   @override
   void initState() {
     super.initState();
-    fetchItemAvailableRent();
+    fetchData();
   }
 
   @override
@@ -115,10 +121,14 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                 NextButton(
                   centerText: '다음',
                   onTap: () async {
-                    await _viewModel.itemRental(
-                        'usageId', selectedItem['itemId']!, 1);
-                    if (context.mounted) {
-                      context.go('/home');
+                    if (_viewModel.spaceUsage != null) {
+                      await _viewModel.itemRental(
+                          _viewModel.spaceUsage!.space_usage_info.usage_id,
+                          selectedItem['itemId']!,
+                          1);
+                      if (context.mounted) {
+                        context.go('/home');
+                      }
                     }
                   },
                 ),
