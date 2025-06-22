@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/view/auth_code_login/screen/auth_code_login_screen.dart';
 import 'package:danuri_flutter/view/sign_up/screen/sign_up_screen.dart';
 import 'package:danuri_flutter/view/screen/login_screen.dart';
 import 'package:danuri_flutter/view/organ_auth/screen/organ_auth_screen.dart';
@@ -8,8 +9,15 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/sign-up',
+  initialLocation: '/auth-code-login',
   routes: [
+    GoRoute(
+      name: 'auth-code-login',
+      path: '/auth-code-login',
+      builder: (context, state){
+        return const AuthCodeLoginScreen();
+      },
+    ),
     GoRoute(
       name: 'sign-up',
       path: '/sign-up',
