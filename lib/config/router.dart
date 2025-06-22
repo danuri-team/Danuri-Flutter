@@ -10,10 +10,8 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       name: 'sign-up',
-      path: '/sign-up/:phoneNumber',
-      builder: (context, state) {
-        return SignUpScreen(phoneNumber: state.pathParameters['phoneNumber']!);
-      },
+      path: '/sign-up',
+      builder: (context, state) => const SignUpScreen()
     ),
   ],
 );

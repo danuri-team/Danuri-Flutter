@@ -1,5 +1,6 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
 import 'package:danuri_flutter/data/view_model/sign_up_view_model.dart';
@@ -9,14 +10,10 @@ import 'package:danuri_flutter/view/sign_up/widget/rounded_rectangle_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({
-    super.key,
-    required this.phoneNumber,
-  });
-
-  final String phoneNumber;
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -194,20 +191,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                NextButton(
-                  centerText: '완료',
-                  onTap: () async{
-                    await _viewModel.signUp(
-                      '52515fd2-43e5-440b-9cc5-8630bc75954e',
-                      _userNameController.text,
-                      widget.phoneNumber,
-                      userInfo['성별'] as SexType,
-                      userInfo['학년'] as AgeType,
-                    );
-                    if(context.mounted){
-                      context.push('/input-auth-code');
-                    }
-                  },
+                ChangeNotifierProvider<PhoneNumberProvider>(
+                  create: (context) => PhoneNumberProvider(),
+                  child: NextButton(
+                    centerText: '완료',
+                    onTap: () async {
+                      await _viewModel.signUp(
+                        '52515fd2-43e5-440b-9cc5-8630bc75954e',
+                        _userNameController.text,
+                        context.watch<PhoneNumberProvider>().phoneNumber,
+                        userInfo['성별'] as SexType,
+                        userInfo['학년'] as AgeType,
+                      );
+                      if (context.mounted) {
+                        context.push('/input-auth-code');
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
