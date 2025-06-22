@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'leaving_room_request.dart';
+part of 'exit_request.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,25 +14,24 @@ part of 'leaving_room_request.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$LeavingRoomRequest {
+mixin _$ExitRequest {
   String get usageId;
 
-  /// Create a copy of LeavingRoomRequest
+  /// Create a copy of ExitRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $LeavingRoomRequestCopyWith<LeavingRoomRequest> get copyWith =>
-      _$LeavingRoomRequestCopyWithImpl<LeavingRoomRequest>(
-          this as LeavingRoomRequest, _$identity);
+  $ExitRequestCopyWith<ExitRequest> get copyWith =>
+      _$ExitRequestCopyWithImpl<ExitRequest>(this as ExitRequest, _$identity);
 
-  /// Serializes this LeavingRoomRequest to a JSON map.
+  /// Serializes this ExitRequest to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is LeavingRoomRequest &&
+            other is ExitRequest &&
             (identical(other.usageId, usageId) || other.usageId == usageId));
   }
 
@@ -42,28 +41,27 @@ mixin _$LeavingRoomRequest {
 
   @override
   String toString() {
-    return 'LeavingRoomRequest(usageId: $usageId)';
+    return 'ExitRequest(usageId: $usageId)';
   }
 }
 
 /// @nodoc
-abstract mixin class $LeavingRoomRequestCopyWith<$Res> {
-  factory $LeavingRoomRequestCopyWith(
-          LeavingRoomRequest value, $Res Function(LeavingRoomRequest) _then) =
-      _$LeavingRoomRequestCopyWithImpl;
+abstract mixin class $ExitRequestCopyWith<$Res> {
+  factory $ExitRequestCopyWith(
+          ExitRequest value, $Res Function(ExitRequest) _then) =
+      _$ExitRequestCopyWithImpl;
   @useResult
   $Res call({String usageId});
 }
 
 /// @nodoc
-class _$LeavingRoomRequestCopyWithImpl<$Res>
-    implements $LeavingRoomRequestCopyWith<$Res> {
-  _$LeavingRoomRequestCopyWithImpl(this._self, this._then);
+class _$ExitRequestCopyWithImpl<$Res> implements $ExitRequestCopyWith<$Res> {
+  _$ExitRequestCopyWithImpl(this._self, this._then);
 
-  final LeavingRoomRequest _self;
-  final $Res Function(LeavingRoomRequest) _then;
+  final ExitRequest _self;
+  final $Res Function(ExitRequest) _then;
 
-  /// Create a copy of LeavingRoomRequest
+  /// Create a copy of ExitRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -81,25 +79,25 @@ class _$LeavingRoomRequestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _LeavingRoomRequest implements LeavingRoomRequest {
-  _LeavingRoomRequest({required this.usageId});
-  factory _LeavingRoomRequest.fromJson(Map<String, dynamic> json) =>
-      _$LeavingRoomRequestFromJson(json);
+class _ExitRequest implements ExitRequest {
+  _ExitRequest({required this.usageId});
+  factory _ExitRequest.fromJson(Map<String, dynamic> json) =>
+      _$ExitRequestFromJson(json);
 
   @override
   final String usageId;
 
-  /// Create a copy of LeavingRoomRequest
+  /// Create a copy of ExitRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$LeavingRoomRequestCopyWith<_LeavingRoomRequest> get copyWith =>
-      __$LeavingRoomRequestCopyWithImpl<_LeavingRoomRequest>(this, _$identity);
+  _$ExitRequestCopyWith<_ExitRequest> get copyWith =>
+      __$ExitRequestCopyWithImpl<_ExitRequest>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$LeavingRoomRequestToJson(
+    return _$ExitRequestToJson(
       this,
     );
   }
@@ -108,7 +106,7 @@ class _LeavingRoomRequest implements LeavingRoomRequest {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LeavingRoomRequest &&
+            other is _ExitRequest &&
             (identical(other.usageId, usageId) || other.usageId == usageId));
   }
 
@@ -118,37 +116,36 @@ class _LeavingRoomRequest implements LeavingRoomRequest {
 
   @override
   String toString() {
-    return 'LeavingRoomRequest(usageId: $usageId)';
+    return 'ExitRequest(usageId: $usageId)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$LeavingRoomRequestCopyWith<$Res>
-    implements $LeavingRoomRequestCopyWith<$Res> {
-  factory _$LeavingRoomRequestCopyWith(
-          _LeavingRoomRequest value, $Res Function(_LeavingRoomRequest) _then) =
-      __$LeavingRoomRequestCopyWithImpl;
+abstract mixin class _$ExitRequestCopyWith<$Res>
+    implements $ExitRequestCopyWith<$Res> {
+  factory _$ExitRequestCopyWith(
+          _ExitRequest value, $Res Function(_ExitRequest) _then) =
+      __$ExitRequestCopyWithImpl;
   @override
   @useResult
   $Res call({String usageId});
 }
 
 /// @nodoc
-class __$LeavingRoomRequestCopyWithImpl<$Res>
-    implements _$LeavingRoomRequestCopyWith<$Res> {
-  __$LeavingRoomRequestCopyWithImpl(this._self, this._then);
+class __$ExitRequestCopyWithImpl<$Res> implements _$ExitRequestCopyWith<$Res> {
+  __$ExitRequestCopyWithImpl(this._self, this._then);
 
-  final _LeavingRoomRequest _self;
-  final $Res Function(_LeavingRoomRequest) _then;
+  final _ExitRequest _self;
+  final $Res Function(_ExitRequest) _then;
 
-  /// Create a copy of LeavingRoomRequest
+  /// Create a copy of ExitRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? usageId = null,
   }) {
-    return _then(_LeavingRoomRequest(
+    return _then(_ExitRequest(
       usageId: null == usageId
           ? _self.usageId
           : usageId // ignore: cast_nullable_to_non_nullable

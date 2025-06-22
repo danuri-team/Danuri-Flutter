@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AccessTokenResponse {
-  TokenType get token;
+  String get token;
   int get expiredAt;
 
   /// Create a copy of AccessTokenResponse
@@ -55,7 +55,7 @@ abstract mixin class $AccessTokenResponseCopyWith<$Res> {
           AccessTokenResponse value, $Res Function(AccessTokenResponse) _then) =
       _$AccessTokenResponseCopyWithImpl;
   @useResult
-  $Res call({TokenType token, int expiredAt});
+  $Res call({String token, int expiredAt});
 }
 
 /// @nodoc
@@ -78,7 +78,7 @@ class _$AccessTokenResponseCopyWithImpl<$Res>
       token: null == token
           ? _self.token
           : token // ignore: cast_nullable_to_non_nullable
-              as TokenType,
+              as String,
       expiredAt: null == expiredAt
           ? _self.expiredAt
           : expiredAt // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ class _AccessTokenResponse implements AccessTokenResponse {
       _$AccessTokenResponseFromJson(json);
 
   @override
-  final TokenType token;
+  final String token;
   @override
   final int expiredAt;
 
@@ -143,7 +143,7 @@ abstract mixin class _$AccessTokenResponseCopyWith<$Res>
       __$AccessTokenResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({TokenType token, int expiredAt});
+  $Res call({String token, int expiredAt});
 }
 
 /// @nodoc
@@ -166,7 +166,7 @@ class __$AccessTokenResponseCopyWithImpl<$Res>
       token: null == token
           ? _self.token
           : token // ignore: cast_nullable_to_non_nullable
-              as TokenType,
+              as String,
       expiredAt: null == expiredAt
           ? _self.expiredAt
           : expiredAt // ignore: cast_nullable_to_non_nullable

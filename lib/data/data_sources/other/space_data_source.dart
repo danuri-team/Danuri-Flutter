@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/data/models/other/space/reqeust/leaving_room_request.dart';
+import 'package:danuri_flutter/data/models/other/space/reqeust/exit_request.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_response.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
@@ -27,7 +27,7 @@ class SpaceDataSource {
     );
   }
 
-  Future<void> leavingRoom(LeavingRoomRequest request) async {
+  Future<void> exitRoom(ExitRequest request) async {
     await dio.post(
       '$baseUrl/usage',
       data: request.toJson(),

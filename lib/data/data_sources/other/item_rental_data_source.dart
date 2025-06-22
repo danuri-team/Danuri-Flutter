@@ -23,7 +23,7 @@ class ItemRentalDataSource {
 
   Future<void> returnItem(String rentalId, ReturnItemRequest request) async {
     await dio.post(
-      '$baseUrl/item/rentalId/return',
+      '$baseUrl/item/$rentalId/return',
       data: request.toJson(),
     );
   }
