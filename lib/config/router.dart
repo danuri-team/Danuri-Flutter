@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/view/register_used_space/screen/register_used_space.dart';
 import 'package:danuri_flutter/view/auth_code_login/screen/auth_code_login_screen.dart';
 import 'package:danuri_flutter/view/sign_up/screen/sign_up_screen.dart';
 import 'package:danuri_flutter/view/screen/login_screen.dart';
@@ -9,8 +10,13 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/auth-code-login',
+  initialLocation: '/register-used-space',
   routes: [
+    GoRoute(
+      name: 'register-used-space',
+      path: '/register-used-space',
+      builder: (context, state) => const RegisterUsedSpace(),
+    ),
     GoRoute(
       name: 'auth-code-login',
       path: '/auth-code-login',

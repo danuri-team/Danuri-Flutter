@@ -28,7 +28,7 @@ class _AppDio with DioMixin implements AppDio {
       [
         InterceptorsWrapper(
           onRequest: (options, handler) {
-            options.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIzMzM0NjIzOS02MzM2LTMyNjYtMmQ2My02MTY1NjYyZDM0NjYiLCJyb2xlIjoiUk9MRV9ERVZJQ0UiLCJpYXQiOjE3NTAxNDY4NTUsImV4cCI6MTc1MDE0ODY1NX0.hJnz1c7RZ00Mn0fpfGlQFNMHLMSbOBeEtXFzWXfBuZCwYzJPtZL3nVhLtZCJ5PXL';
+            options.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIzMzM0NjIzOS02MzM2LTMyNjYtMmQ2My02MTY1NjYyZDM0NjYiLCJyb2xlIjoiUk9MRV9ERVZJQ0UiLCJpYXQiOjE3NTAzOTQ3NDQsImV4cCI6MTc3NjY5MjIwNH0.t-O3Ewr6DUHAgRU26FQwIEG25wM2x8HvvBUiDhTbfHIe1B5eFnZsGegBfLL6ip5U';
             return handler.next(options);
           },
         ),
