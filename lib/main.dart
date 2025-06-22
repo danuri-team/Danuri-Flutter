@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
       designSize: const Size(1280, 800),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(1.0)),
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
