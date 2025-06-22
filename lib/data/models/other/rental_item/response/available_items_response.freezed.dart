@@ -14,101 +14,113 @@ part of 'available_items_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$AvailableItemsResponse {
-  List<AvailableItem> get availableItems;
+mixin _$ItemAvailableRental {
+  String get id;
+  String get name;
+  int get available_quantity;
 
-  /// Create a copy of AvailableItemsResponse
+  /// Create a copy of ItemAvailableRental
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $AvailableItemsResponseCopyWith<AvailableItemsResponse> get copyWith =>
-      _$AvailableItemsResponseCopyWithImpl<AvailableItemsResponse>(
-          this as AvailableItemsResponse, _$identity);
+  $ItemAvailableRentalCopyWith<ItemAvailableRental> get copyWith =>
+      _$ItemAvailableRentalCopyWithImpl<ItemAvailableRental>(
+          this as ItemAvailableRental, _$identity);
 
-  /// Serializes this AvailableItemsResponse to a JSON map.
+  /// Serializes this ItemAvailableRental to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is AvailableItemsResponse &&
-            const DeepCollectionEquality()
-                .equals(other.availableItems, availableItems));
+            other is ItemAvailableRental &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.available_quantity, available_quantity) ||
+                other.available_quantity == available_quantity));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(availableItems));
+  int get hashCode => Object.hash(runtimeType, id, name, available_quantity);
 
   @override
   String toString() {
-    return 'AvailableItemsResponse(availableItems: $availableItems)';
+    return 'ItemAvailableRental(id: $id, name: $name, available_quantity: $available_quantity)';
   }
 }
 
 /// @nodoc
-abstract mixin class $AvailableItemsResponseCopyWith<$Res> {
-  factory $AvailableItemsResponseCopyWith(AvailableItemsResponse value,
-          $Res Function(AvailableItemsResponse) _then) =
-      _$AvailableItemsResponseCopyWithImpl;
+abstract mixin class $ItemAvailableRentalCopyWith<$Res> {
+  factory $ItemAvailableRentalCopyWith(
+          ItemAvailableRental value, $Res Function(ItemAvailableRental) _then) =
+      _$ItemAvailableRentalCopyWithImpl;
   @useResult
-  $Res call({List<AvailableItem> availableItems});
+  $Res call({String id, String name, int available_quantity});
 }
 
 /// @nodoc
-class _$AvailableItemsResponseCopyWithImpl<$Res>
-    implements $AvailableItemsResponseCopyWith<$Res> {
-  _$AvailableItemsResponseCopyWithImpl(this._self, this._then);
+class _$ItemAvailableRentalCopyWithImpl<$Res>
+    implements $ItemAvailableRentalCopyWith<$Res> {
+  _$ItemAvailableRentalCopyWithImpl(this._self, this._then);
 
-  final AvailableItemsResponse _self;
-  final $Res Function(AvailableItemsResponse) _then;
+  final ItemAvailableRental _self;
+  final $Res Function(ItemAvailableRental) _then;
 
-  /// Create a copy of AvailableItemsResponse
+  /// Create a copy of ItemAvailableRental
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? availableItems = null,
+    Object? id = null,
+    Object? name = null,
+    Object? available_quantity = null,
   }) {
     return _then(_self.copyWith(
-      availableItems: null == availableItems
-          ? _self.availableItems
-          : availableItems // ignore: cast_nullable_to_non_nullable
-              as List<AvailableItem>,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      available_quantity: null == available_quantity
+          ? _self.available_quantity
+          : available_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _AvailableItemsResponse implements AvailableItemsResponse {
-  _AvailableItemsResponse({required final List<AvailableItem> availableItems})
-      : _availableItems = availableItems;
-  factory _AvailableItemsResponse.fromJson(Map<String, dynamic> json) =>
-      _$AvailableItemsResponseFromJson(json);
+class _ItemAvailableRental implements ItemAvailableRental {
+  _ItemAvailableRental(
+      {required this.id, required this.name, required this.available_quantity});
+  factory _ItemAvailableRental.fromJson(Map<String, dynamic> json) =>
+      _$ItemAvailableRentalFromJson(json);
 
-  final List<AvailableItem> _availableItems;
   @override
-  List<AvailableItem> get availableItems {
-    if (_availableItems is EqualUnmodifiableListView) return _availableItems;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_availableItems);
-  }
+  final String id;
+  @override
+  final String name;
+  @override
+  final int available_quantity;
 
-  /// Create a copy of AvailableItemsResponse
+  /// Create a copy of ItemAvailableRental
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$AvailableItemsResponseCopyWith<_AvailableItemsResponse> get copyWith =>
-      __$AvailableItemsResponseCopyWithImpl<_AvailableItemsResponse>(
+  _$ItemAvailableRentalCopyWith<_ItemAvailableRental> get copyWith =>
+      __$ItemAvailableRentalCopyWithImpl<_ItemAvailableRental>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$AvailableItemsResponseToJson(
+    return _$ItemAvailableRentalToJson(
       this,
     );
   }
@@ -117,53 +129,64 @@ class _AvailableItemsResponse implements AvailableItemsResponse {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AvailableItemsResponse &&
-            const DeepCollectionEquality()
-                .equals(other._availableItems, _availableItems));
+            other is _ItemAvailableRental &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.available_quantity, available_quantity) ||
+                other.available_quantity == available_quantity));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_availableItems));
+  int get hashCode => Object.hash(runtimeType, id, name, available_quantity);
 
   @override
   String toString() {
-    return 'AvailableItemsResponse(availableItems: $availableItems)';
+    return 'ItemAvailableRental(id: $id, name: $name, available_quantity: $available_quantity)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$AvailableItemsResponseCopyWith<$Res>
-    implements $AvailableItemsResponseCopyWith<$Res> {
-  factory _$AvailableItemsResponseCopyWith(_AvailableItemsResponse value,
-          $Res Function(_AvailableItemsResponse) _then) =
-      __$AvailableItemsResponseCopyWithImpl;
+abstract mixin class _$ItemAvailableRentalCopyWith<$Res>
+    implements $ItemAvailableRentalCopyWith<$Res> {
+  factory _$ItemAvailableRentalCopyWith(_ItemAvailableRental value,
+          $Res Function(_ItemAvailableRental) _then) =
+      __$ItemAvailableRentalCopyWithImpl;
   @override
   @useResult
-  $Res call({List<AvailableItem> availableItems});
+  $Res call({String id, String name, int available_quantity});
 }
 
 /// @nodoc
-class __$AvailableItemsResponseCopyWithImpl<$Res>
-    implements _$AvailableItemsResponseCopyWith<$Res> {
-  __$AvailableItemsResponseCopyWithImpl(this._self, this._then);
+class __$ItemAvailableRentalCopyWithImpl<$Res>
+    implements _$ItemAvailableRentalCopyWith<$Res> {
+  __$ItemAvailableRentalCopyWithImpl(this._self, this._then);
 
-  final _AvailableItemsResponse _self;
-  final $Res Function(_AvailableItemsResponse) _then;
+  final _ItemAvailableRental _self;
+  final $Res Function(_ItemAvailableRental) _then;
 
-  /// Create a copy of AvailableItemsResponse
+  /// Create a copy of ItemAvailableRental
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? availableItems = null,
+    Object? id = null,
+    Object? name = null,
+    Object? available_quantity = null,
   }) {
-    return _then(_AvailableItemsResponse(
-      availableItems: null == availableItems
-          ? _self._availableItems
-          : availableItems // ignore: cast_nullable_to_non_nullable
-              as List<AvailableItem>,
+    return _then(_ItemAvailableRental(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      available_quantity: null == available_quantity
+          ? _self.available_quantity
+          : available_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }

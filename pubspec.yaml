@@ -13,13 +13,20 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flutter_screenutil: ^5.9.3 # 반응형 디자인을 지원하는 패키지
-  go_router: ^15.1.2 # 화면 간 이동을 지원하는는 패키지
+  go_router: ^15.1.2 # 화면 간 이동을 지원하는 패키지
   flutter_svg: ^2.1.0 # svg이미지 사용을 지원하는 패키지
   flutter_dotenv: ^5.2.1 # 민감한 구성 변수들을 저장하는 파일을 지원하는 패키지
   timer_builder: ^2.0.0 # 현재 시각 출력을 지원하는 패키지
   
   # 데이터 클래스에 필요한 기능들을 지원하는 패키지
   freezed: ^3.0.6
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
+  dio: ^5.8.0+1
+  provider: ^6.1.5
+
+  # 데이터 클래스에 필요한 기능들을 지원하는 패키지
+  freezed: ^3.0.6 
   freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
   dio: ^5.8.0+1
