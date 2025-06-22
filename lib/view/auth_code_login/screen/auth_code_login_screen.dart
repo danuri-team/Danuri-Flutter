@@ -1,11 +1,13 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/data/view_model/auth_code_view_model.dart';
 import 'package:danuri_flutter/view/compoments/button/next_button.dart';
 import 'package:danuri_flutter/view/compoments/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class AuthCodeLoginScreen extends StatefulWidget {
   const AuthCodeLoginScreen({super.key});
@@ -77,7 +79,7 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
                 centerText: '다음',
                 onTap: () {
                   _viewModel.authCodeLogin(
-                    '',
+                    context.watch<PhoneNumberProvider>().phoneNumber,
                     _authCodeController.text,
                   );
                   if (_viewModel.error == true) {
