@@ -27,7 +27,7 @@ class SpaceDataSource {
     );
   }
 
-  Future<void> leavingRoom(ExitRequest request) async {
+  Future<void> exitRoom(ExitRequest request) async {
     await dio.post(
       '$baseUrl/usage',
       data: request.toJson(),
