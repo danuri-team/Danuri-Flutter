@@ -1,7 +1,7 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/view/components/button/call_back_button.dart';
-import 'package:danuri_flutter/view/components/button/help_me_button.dart';
+import 'package:danuri_flutter/view/compoments/button/call_back_button.dart';
+import 'package:danuri_flutter/view/compoments/button/help_me_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
