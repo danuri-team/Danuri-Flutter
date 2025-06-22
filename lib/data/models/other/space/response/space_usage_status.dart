@@ -6,10 +6,11 @@ part 'space_usage_status.g.dart';
 @freezed
 abstract class SpaceUsageStatus with _$SpaceUsageStatus{
   factory SpaceUsageStatus({
-    required String id,
+    String? id,
     required String name,
-    required List<int> startAt,
-    required List<int> endAt,
+    List<int>? startAt,
+    List<int>? endAt,
+    bool? isAvailable,
   }) = _SpaceUsageStatus;
 
   factory SpaceUsageStatus.fromJson(Map<String, dynamic> json) => _$SpaceUsageStatusFromJson(json);

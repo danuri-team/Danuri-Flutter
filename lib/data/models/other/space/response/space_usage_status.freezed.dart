@@ -15,10 +15,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SpaceUsageStatus {
-  String get id;
+  String? get id;
   String get name;
-  List<int> get startAt;
-  List<int> get endAt;
+  List<int>? get startAt;
+  List<int>? get endAt;
+  bool? get isAvailable;
 
   /// Create a copy of SpaceUsageStatus
   /// with the given fields replaced by the non-null parameter values.
@@ -39,7 +40,9 @@ mixin _$SpaceUsageStatus {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other.startAt, startAt) &&
-            const DeepCollectionEquality().equals(other.endAt, endAt));
+            const DeepCollectionEquality().equals(other.endAt, endAt) &&
+            (identical(other.isAvailable, isAvailable) ||
+                other.isAvailable == isAvailable));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +52,12 @@ mixin _$SpaceUsageStatus {
       id,
       name,
       const DeepCollectionEquality().hash(startAt),
-      const DeepCollectionEquality().hash(endAt));
+      const DeepCollectionEquality().hash(endAt),
+      isAvailable);
 
   @override
   String toString() {
-    return 'SpaceUsageStatus(id: $id, name: $name, startAt: $startAt, endAt: $endAt)';
+    return 'SpaceUsageStatus(id: $id, name: $name, startAt: $startAt, endAt: $endAt, isAvailable: $isAvailable)';
   }
 }
 
@@ -63,7 +67,12 @@ abstract mixin class $SpaceUsageStatusCopyWith<$Res> {
           SpaceUsageStatus value, $Res Function(SpaceUsageStatus) _then) =
       _$SpaceUsageStatusCopyWithImpl;
   @useResult
-  $Res call({String id, String name, List<int> startAt, List<int> endAt});
+  $Res call(
+      {String? id,
+      String name,
+      List<int>? startAt,
+      List<int>? endAt,
+      bool? isAvailable});
 }
 
 /// @nodoc
@@ -79,28 +88,33 @@ class _$SpaceUsageStatusCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
-    Object? startAt = null,
-    Object? endAt = null,
+    Object? startAt = freezed,
+    Object? endAt = freezed,
+    Object? isAvailable = freezed,
   }) {
     return _then(_self.copyWith(
-      id: null == id
+      id: freezed == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startAt: null == startAt
+      startAt: freezed == startAt
           ? _self.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      endAt: null == endAt
+              as List<int>?,
+      endAt: freezed == endAt
           ? _self.endAt
           : endAt // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
+      isAvailable: freezed == isAvailable
+          ? _self.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -109,34 +123,42 @@ class _$SpaceUsageStatusCopyWithImpl<$Res>
 @JsonSerializable()
 class _SpaceUsageStatus implements SpaceUsageStatus {
   _SpaceUsageStatus(
-      {required this.id,
+      {this.id,
       required this.name,
-      required final List<int> startAt,
-      required final List<int> endAt})
+      final List<int>? startAt,
+      final List<int>? endAt,
+      this.isAvailable})
       : _startAt = startAt,
         _endAt = endAt;
   factory _SpaceUsageStatus.fromJson(Map<String, dynamic> json) =>
       _$SpaceUsageStatusFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
   final String name;
-  final List<int> _startAt;
+  final List<int>? _startAt;
   @override
-  List<int> get startAt {
+  List<int>? get startAt {
+    final value = _startAt;
+    if (value == null) return null;
     if (_startAt is EqualUnmodifiableListView) return _startAt;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_startAt);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _endAt;
+  final List<int>? _endAt;
   @override
-  List<int> get endAt {
+  List<int>? get endAt {
+    final value = _endAt;
+    if (value == null) return null;
     if (_endAt is EqualUnmodifiableListView) return _endAt;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_endAt);
+    return EqualUnmodifiableListView(value);
   }
+
+  @override
+  final bool? isAvailable;
 
   /// Create a copy of SpaceUsageStatus
   /// with the given fields replaced by the non-null parameter values.
@@ -161,7 +183,9 @@ class _SpaceUsageStatus implements SpaceUsageStatus {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._startAt, _startAt) &&
-            const DeepCollectionEquality().equals(other._endAt, _endAt));
+            const DeepCollectionEquality().equals(other._endAt, _endAt) &&
+            (identical(other.isAvailable, isAvailable) ||
+                other.isAvailable == isAvailable));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -171,11 +195,12 @@ class _SpaceUsageStatus implements SpaceUsageStatus {
       id,
       name,
       const DeepCollectionEquality().hash(_startAt),
-      const DeepCollectionEquality().hash(_endAt));
+      const DeepCollectionEquality().hash(_endAt),
+      isAvailable);
 
   @override
   String toString() {
-    return 'SpaceUsageStatus(id: $id, name: $name, startAt: $startAt, endAt: $endAt)';
+    return 'SpaceUsageStatus(id: $id, name: $name, startAt: $startAt, endAt: $endAt, isAvailable: $isAvailable)';
   }
 }
 
@@ -187,7 +212,12 @@ abstract mixin class _$SpaceUsageStatusCopyWith<$Res>
       __$SpaceUsageStatusCopyWithImpl;
   @override
   @useResult
-  $Res call({String id, String name, List<int> startAt, List<int> endAt});
+  $Res call(
+      {String? id,
+      String name,
+      List<int>? startAt,
+      List<int>? endAt,
+      bool? isAvailable});
 }
 
 /// @nodoc
@@ -203,28 +233,33 @@ class __$SpaceUsageStatusCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
-    Object? startAt = null,
-    Object? endAt = null,
+    Object? startAt = freezed,
+    Object? endAt = freezed,
+    Object? isAvailable = freezed,
   }) {
     return _then(_SpaceUsageStatus(
-      id: null == id
+      id: freezed == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startAt: null == startAt
+      startAt: freezed == startAt
           ? _self._startAt
           : startAt // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      endAt: null == endAt
+              as List<int>?,
+      endAt: freezed == endAt
           ? _self._endAt
           : endAt // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
+      isAvailable: freezed == isAvailable
+          ? _self.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }

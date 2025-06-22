@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'check_success_response.dart';
+part of 'send_auth_code_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_CheckSuccessResponse _$CheckSuccessResponseFromJson(
+_SendAuthCodeResponse _$SendAuthCodeResponseFromJson(
         Map<String, dynamic> json) =>
-    _CheckSuccessResponse(
+    _SendAuthCodeResponse(
       isSuccess: json['isSuccess'] as bool,
       massage: json['massage'] as String,
     );
 
-Map<String, dynamic> _$CheckSuccessResponseToJson(
-        _CheckSuccessResponse instance) =>
+Map<String, dynamic> _$SendAuthCodeResponseToJson(
+        _SendAuthCodeResponse instance) =>
     <String, dynamic>{
       'isSuccess': instance.isSuccess,
       'massage': instance.massage,
