@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/view/failure/screen/failure_screen.dart';
 import 'package:danuri_flutter/view/completion/screen/completion_screen.dart';
 import 'package:danuri_flutter/view/item_rental/screen/item_rental_screen.dart';
 import 'package:danuri_flutter/view/register_used_space/screen/register_used_space.dart';
@@ -12,8 +13,13 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/completion',
+  initialLocation: '/failure',
   routes: [
+    GoRoute(
+      name: 'failure',
+      path: '/failure',
+      builder: (context, state) => const FailureScreen(),
+    ),
     GoRoute(
       name: 'completion',
       path: '/completion',
