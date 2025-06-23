@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RefreshTokenResponse {
   String get token;
-  int get expiredAt;
+  int get expired_at;
 
   /// Create a copy of RefreshTokenResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -35,17 +35,17 @@ mixin _$RefreshTokenResponse {
         (other.runtimeType == runtimeType &&
             other is RefreshTokenResponse &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.expiredAt, expiredAt) ||
-                other.expiredAt == expiredAt));
+            (identical(other.expired_at, expired_at) ||
+                other.expired_at == expired_at));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, token, expiredAt);
+  int get hashCode => Object.hash(runtimeType, token, expired_at);
 
   @override
   String toString() {
-    return 'RefreshTokenResponse(token: $token, expiredAt: $expiredAt)';
+    return 'RefreshTokenResponse(token: $token, expired_at: $expired_at)';
   }
 }
 
@@ -55,7 +55,7 @@ abstract mixin class $RefreshTokenResponseCopyWith<$Res> {
           $Res Function(RefreshTokenResponse) _then) =
       _$RefreshTokenResponseCopyWithImpl;
   @useResult
-  $Res call({String token, int expiredAt});
+  $Res call({String token, int expired_at});
 }
 
 /// @nodoc
@@ -72,16 +72,16 @@ class _$RefreshTokenResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? token = null,
-    Object? expiredAt = null,
+    Object? expired_at = null,
   }) {
     return _then(_self.copyWith(
       token: null == token
           ? _self.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      expiredAt: null == expiredAt
-          ? _self.expiredAt
-          : expiredAt // ignore: cast_nullable_to_non_nullable
+      expired_at: null == expired_at
+          ? _self.expired_at
+          : expired_at // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -90,14 +90,14 @@ class _$RefreshTokenResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _RefreshTokenResponse implements RefreshTokenResponse {
-  _RefreshTokenResponse({required this.token, required this.expiredAt});
+  _RefreshTokenResponse({required this.token, required this.expired_at});
   factory _RefreshTokenResponse.fromJson(Map<String, dynamic> json) =>
       _$RefreshTokenResponseFromJson(json);
 
   @override
   final String token;
   @override
-  final int expiredAt;
+  final int expired_at;
 
   /// Create a copy of RefreshTokenResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -121,17 +121,17 @@ class _RefreshTokenResponse implements RefreshTokenResponse {
         (other.runtimeType == runtimeType &&
             other is _RefreshTokenResponse &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.expiredAt, expiredAt) ||
-                other.expiredAt == expiredAt));
+            (identical(other.expired_at, expired_at) ||
+                other.expired_at == expired_at));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, token, expiredAt);
+  int get hashCode => Object.hash(runtimeType, token, expired_at);
 
   @override
   String toString() {
-    return 'RefreshTokenResponse(token: $token, expiredAt: $expiredAt)';
+    return 'RefreshTokenResponse(token: $token, expired_at: $expired_at)';
   }
 }
 
@@ -143,7 +143,7 @@ abstract mixin class _$RefreshTokenResponseCopyWith<$Res>
       __$RefreshTokenResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({String token, int expiredAt});
+  $Res call({String token, int expired_at});
 }
 
 /// @nodoc
@@ -160,16 +160,16 @@ class __$RefreshTokenResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? token = null,
-    Object? expiredAt = null,
+    Object? expired_at = null,
   }) {
     return _then(_RefreshTokenResponse(
       token: null == token
           ? _self.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      expiredAt: null == expiredAt
-          ? _self.expiredAt
-          : expiredAt // ignore: cast_nullable_to_non_nullable
+      expired_at: null == expired_at
+          ? _self.expired_at
+          : expired_at // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }

@@ -16,15 +16,13 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserResponse {
   String get id;
-  String get companyId;
-  String get companyName;
   String get name;
   SexType get sex;
   AgeType get age;
   String get phone;
-  String get createdAt;
-  String get updatedAt;
-  int get usageCount;
+  String get created_at;
+  String get updated_at;
+  int get usage_count;
 
   /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -43,30 +41,26 @@ mixin _$UserResponse {
         (other.runtimeType == runtimeType &&
             other is UserResponse &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.sex, sex) || other.sex == sex) &&
             (identical(other.age, age) || other.age == age) &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.usageCount, usageCount) ||
-                other.usageCount == usageCount));
+            (identical(other.created_at, created_at) ||
+                other.created_at == created_at) &&
+            (identical(other.updated_at, updated_at) ||
+                other.updated_at == updated_at) &&
+            (identical(other.usage_count, usage_count) ||
+                other.usage_count == usage_count));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, companyId, companyName, name,
-      sex, age, phone, createdAt, updatedAt, usageCount);
+  int get hashCode => Object.hash(runtimeType, id, name, sex, age, phone,
+      created_at, updated_at, usage_count);
 
   @override
   String toString() {
-    return 'UserResponse(id: $id, companyId: $companyId, companyName: $companyName, name: $name, sex: $sex, age: $age, phone: $phone, createdAt: $createdAt, updatedAt: $updatedAt, usageCount: $usageCount)';
+    return 'UserResponse(id: $id, name: $name, sex: $sex, age: $age, phone: $phone, created_at: $created_at, updated_at: $updated_at, usage_count: $usage_count)';
   }
 }
 
@@ -78,15 +72,13 @@ abstract mixin class $UserResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String companyId,
-      String companyName,
       String name,
       SexType sex,
       AgeType age,
       String phone,
-      String createdAt,
-      String updatedAt,
-      int usageCount});
+      String created_at,
+      String updated_at,
+      int usage_count});
 }
 
 /// @nodoc
@@ -102,28 +94,18 @@ class _$UserResponseCopyWithImpl<$Res> implements $UserResponseCopyWith<$Res> {
   @override
   $Res call({
     Object? id = null,
-    Object? companyId = null,
-    Object? companyName = null,
     Object? name = null,
     Object? sex = null,
     Object? age = null,
     Object? phone = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? usageCount = null,
+    Object? created_at = null,
+    Object? updated_at = null,
+    Object? usage_count = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _self.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _self.name
@@ -141,17 +123,17 @@ class _$UserResponseCopyWithImpl<$Res> implements $UserResponseCopyWith<$Res> {
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      created_at: null == created_at
+          ? _self.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: null == updatedAt
-          ? _self.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated_at: null == updated_at
+          ? _self.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
               as String,
-      usageCount: null == usageCount
-          ? _self.usageCount
-          : usageCount // ignore: cast_nullable_to_non_nullable
+      usage_count: null == usage_count
+          ? _self.usage_count
+          : usage_count // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -162,24 +144,18 @@ class _$UserResponseCopyWithImpl<$Res> implements $UserResponseCopyWith<$Res> {
 class _UserResponse implements UserResponse {
   _UserResponse(
       {required this.id,
-      required this.companyId,
-      required this.companyName,
       required this.name,
       required this.sex,
       required this.age,
       required this.phone,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.usageCount});
+      required this.created_at,
+      required this.updated_at,
+      required this.usage_count});
   factory _UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);
 
   @override
   final String id;
-  @override
-  final String companyId;
-  @override
-  final String companyName;
   @override
   final String name;
   @override
@@ -189,11 +165,11 @@ class _UserResponse implements UserResponse {
   @override
   final String phone;
   @override
-  final String createdAt;
+  final String created_at;
   @override
-  final String updatedAt;
+  final String updated_at;
   @override
-  final int usageCount;
+  final int usage_count;
 
   /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -216,30 +192,26 @@ class _UserResponse implements UserResponse {
         (other.runtimeType == runtimeType &&
             other is _UserResponse &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.sex, sex) || other.sex == sex) &&
             (identical(other.age, age) || other.age == age) &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.usageCount, usageCount) ||
-                other.usageCount == usageCount));
+            (identical(other.created_at, created_at) ||
+                other.created_at == created_at) &&
+            (identical(other.updated_at, updated_at) ||
+                other.updated_at == updated_at) &&
+            (identical(other.usage_count, usage_count) ||
+                other.usage_count == usage_count));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, companyId, companyName, name,
-      sex, age, phone, createdAt, updatedAt, usageCount);
+  int get hashCode => Object.hash(runtimeType, id, name, sex, age, phone,
+      created_at, updated_at, usage_count);
 
   @override
   String toString() {
-    return 'UserResponse(id: $id, companyId: $companyId, companyName: $companyName, name: $name, sex: $sex, age: $age, phone: $phone, createdAt: $createdAt, updatedAt: $updatedAt, usageCount: $usageCount)';
+    return 'UserResponse(id: $id, name: $name, sex: $sex, age: $age, phone: $phone, created_at: $created_at, updated_at: $updated_at, usage_count: $usage_count)';
   }
 }
 
@@ -253,15 +225,13 @@ abstract mixin class _$UserResponseCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String companyId,
-      String companyName,
       String name,
       SexType sex,
       AgeType age,
       String phone,
-      String createdAt,
-      String updatedAt,
-      int usageCount});
+      String created_at,
+      String updated_at,
+      int usage_count});
 }
 
 /// @nodoc
@@ -278,28 +248,18 @@ class __$UserResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? companyId = null,
-    Object? companyName = null,
     Object? name = null,
     Object? sex = null,
     Object? age = null,
     Object? phone = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? usageCount = null,
+    Object? created_at = null,
+    Object? updated_at = null,
+    Object? usage_count = null,
   }) {
     return _then(_UserResponse(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _self.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _self.name
@@ -317,17 +277,17 @@ class __$UserResponseCopyWithImpl<$Res>
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      created_at: null == created_at
+          ? _self.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: null == updatedAt
-          ? _self.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated_at: null == updated_at
+          ? _self.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
               as String,
-      usageCount: null == usageCount
-          ? _self.usageCount
-          : usageCount // ignore: cast_nullable_to_non_nullable
+      usage_count: null == usage_count
+          ? _self.usage_count
+          : usage_count // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }

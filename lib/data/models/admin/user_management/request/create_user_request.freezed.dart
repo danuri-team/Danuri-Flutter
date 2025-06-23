@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CreateUserRequest {
-  String get companyId;
+  String get company_id;
   String get name;
   SexType get sex;
   AgeType get age;
@@ -37,8 +37,8 @@ mixin _$CreateUserRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is CreateUserRequest &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
+            (identical(other.company_id, company_id) ||
+                other.company_id == company_id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.sex, sex) || other.sex == sex) &&
             (identical(other.age, age) || other.age == age) &&
@@ -48,11 +48,11 @@ mixin _$CreateUserRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, companyId, name, sex, age, phone);
+      Object.hash(runtimeType, company_id, name, sex, age, phone);
 
   @override
   String toString() {
-    return 'CreateUserRequest(companyId: $companyId, name: $name, sex: $sex, age: $age, phone: $phone)';
+    return 'CreateUserRequest(company_id: $company_id, name: $name, sex: $sex, age: $age, phone: $phone)';
   }
 }
 
@@ -63,7 +63,7 @@ abstract mixin class $CreateUserRequestCopyWith<$Res> {
       _$CreateUserRequestCopyWithImpl;
   @useResult
   $Res call(
-      {String companyId, String name, SexType sex, AgeType age, String phone});
+      {String company_id, String name, SexType sex, AgeType age, String phone});
 }
 
 /// @nodoc
@@ -79,16 +79,16 @@ class _$CreateUserRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? companyId = null,
+    Object? company_id = null,
     Object? name = null,
     Object? sex = null,
     Object? age = null,
     Object? phone = null,
   }) {
     return _then(_self.copyWith(
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
+      company_id: null == company_id
+          ? _self.company_id
+          : company_id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _self.name
@@ -114,7 +114,7 @@ class _$CreateUserRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _CreateUserRequest implements CreateUserRequest {
   _CreateUserRequest(
-      {required this.companyId,
+      {required this.company_id,
       required this.name,
       required this.sex,
       required this.age,
@@ -123,7 +123,7 @@ class _CreateUserRequest implements CreateUserRequest {
       _$CreateUserRequestFromJson(json);
 
   @override
-  final String companyId;
+  final String company_id;
   @override
   final String name;
   @override
@@ -153,8 +153,8 @@ class _CreateUserRequest implements CreateUserRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CreateUserRequest &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
+            (identical(other.company_id, company_id) ||
+                other.company_id == company_id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.sex, sex) || other.sex == sex) &&
             (identical(other.age, age) || other.age == age) &&
@@ -164,11 +164,11 @@ class _CreateUserRequest implements CreateUserRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, companyId, name, sex, age, phone);
+      Object.hash(runtimeType, company_id, name, sex, age, phone);
 
   @override
   String toString() {
-    return 'CreateUserRequest(companyId: $companyId, name: $name, sex: $sex, age: $age, phone: $phone)';
+    return 'CreateUserRequest(company_id: $company_id, name: $name, sex: $sex, age: $age, phone: $phone)';
   }
 }
 
@@ -181,7 +181,7 @@ abstract mixin class _$CreateUserRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String companyId, String name, SexType sex, AgeType age, String phone});
+      {String company_id, String name, SexType sex, AgeType age, String phone});
 }
 
 /// @nodoc
@@ -197,16 +197,16 @@ class __$CreateUserRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? companyId = null,
+    Object? company_id = null,
     Object? name = null,
     Object? sex = null,
     Object? age = null,
     Object? phone = null,
   }) {
     return _then(_CreateUserRequest(
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
+      company_id: null == company_id
+          ? _self.company_id
+          : company_id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _self.name

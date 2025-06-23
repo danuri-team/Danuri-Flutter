@@ -16,9 +16,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UpdateUserRequest {
   String get name;
-  SexType get sex;
-  AgeType get age;
+  String get email;
   String get phone;
+  RoleType get role;
 
   /// Create a copy of UpdateUserRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -37,18 +37,18 @@ mixin _$UpdateUserRequest {
         (other.runtimeType == runtimeType &&
             other is UpdateUserRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.sex, sex) || other.sex == sex) &&
-            (identical(other.age, age) || other.age == age) &&
-            (identical(other.phone, phone) || other.phone == phone));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, sex, age, phone);
+  int get hashCode => Object.hash(runtimeType, name, email, phone, role);
 
   @override
   String toString() {
-    return 'UpdateUserRequest(name: $name, sex: $sex, age: $age, phone: $phone)';
+    return 'UpdateUserRequest(name: $name, email: $email, phone: $phone, role: $role)';
   }
 }
 
@@ -58,7 +58,7 @@ abstract mixin class $UpdateUserRequestCopyWith<$Res> {
           UpdateUserRequest value, $Res Function(UpdateUserRequest) _then) =
       _$UpdateUserRequestCopyWithImpl;
   @useResult
-  $Res call({String name, SexType sex, AgeType age, String phone});
+  $Res call({String name, String email, String phone, RoleType role});
 }
 
 /// @nodoc
@@ -75,27 +75,27 @@ class _$UpdateUserRequestCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? sex = null,
-    Object? age = null,
+    Object? email = null,
     Object? phone = null,
+    Object? role = null,
   }) {
     return _then(_self.copyWith(
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      sex: null == sex
-          ? _self.sex
-          : sex // ignore: cast_nullable_to_non_nullable
-              as SexType,
-      age: null == age
-          ? _self.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as AgeType,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _self.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as RoleType,
     ));
   }
 }
@@ -105,20 +105,20 @@ class _$UpdateUserRequestCopyWithImpl<$Res>
 class _UpdateUserRequest implements UpdateUserRequest {
   _UpdateUserRequest(
       {required this.name,
-      required this.sex,
-      required this.age,
-      required this.phone});
+      required this.email,
+      required this.phone,
+      required this.role});
   factory _UpdateUserRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateUserRequestFromJson(json);
 
   @override
   final String name;
   @override
-  final SexType sex;
-  @override
-  final AgeType age;
+  final String email;
   @override
   final String phone;
+  @override
+  final RoleType role;
 
   /// Create a copy of UpdateUserRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -141,18 +141,18 @@ class _UpdateUserRequest implements UpdateUserRequest {
         (other.runtimeType == runtimeType &&
             other is _UpdateUserRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.sex, sex) || other.sex == sex) &&
-            (identical(other.age, age) || other.age == age) &&
-            (identical(other.phone, phone) || other.phone == phone));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, sex, age, phone);
+  int get hashCode => Object.hash(runtimeType, name, email, phone, role);
 
   @override
   String toString() {
-    return 'UpdateUserRequest(name: $name, sex: $sex, age: $age, phone: $phone)';
+    return 'UpdateUserRequest(name: $name, email: $email, phone: $phone, role: $role)';
   }
 }
 
@@ -164,7 +164,7 @@ abstract mixin class _$UpdateUserRequestCopyWith<$Res>
       __$UpdateUserRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, SexType sex, AgeType age, String phone});
+  $Res call({String name, String email, String phone, RoleType role});
 }
 
 /// @nodoc
@@ -181,27 +181,27 @@ class __$UpdateUserRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? name = null,
-    Object? sex = null,
-    Object? age = null,
+    Object? email = null,
     Object? phone = null,
+    Object? role = null,
   }) {
     return _then(_UpdateUserRequest(
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      sex: null == sex
-          ? _self.sex
-          : sex // ignore: cast_nullable_to_non_nullable
-              as SexType,
-      age: null == age
-          ? _self.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as AgeType,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _self.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as RoleType,
     ));
   }
 }

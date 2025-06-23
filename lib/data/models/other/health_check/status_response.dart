@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/data/models/other/enum/status_type.dart';
+import 'package:danuri_flutter/data/models/enum/status_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'status_response.freezed.dart';

@@ -15,8 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$UpdateInternalSpecificDeviceRequest {
-  String get spaceId;
-  bool get isActivate;
+  String get space_id;
+  bool get is_activate;
 
   /// Create a copy of UpdateInternalSpecificDeviceRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -36,18 +36,19 @@ mixin _$UpdateInternalSpecificDeviceRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is UpdateInternalSpecificDeviceRequest &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId) &&
-            (identical(other.isActivate, isActivate) ||
-                other.isActivate == isActivate));
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.is_activate, is_activate) ||
+                other.is_activate == is_activate));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, spaceId, isActivate);
+  int get hashCode => Object.hash(runtimeType, space_id, is_activate);
 
   @override
   String toString() {
-    return 'UpdateInternalSpecificDeviceRequest(spaceId: $spaceId, isActivate: $isActivate)';
+    return 'UpdateInternalSpecificDeviceRequest(space_id: $space_id, is_activate: $is_activate)';
   }
 }
 
@@ -58,7 +59,7 @@ abstract mixin class $UpdateInternalSpecificDeviceRequestCopyWith<$Res> {
           $Res Function(UpdateInternalSpecificDeviceRequest) _then) =
       _$UpdateInternalSpecificDeviceRequestCopyWithImpl;
   @useResult
-  $Res call({String spaceId, bool isActivate});
+  $Res call({String space_id, bool is_activate});
 }
 
 /// @nodoc
@@ -74,17 +75,17 @@ class _$UpdateInternalSpecificDeviceRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? spaceId = null,
-    Object? isActivate = null,
+    Object? space_id = null,
+    Object? is_activate = null,
   }) {
     return _then(_self.copyWith(
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
-      isActivate: null == isActivate
-          ? _self.isActivate
-          : isActivate // ignore: cast_nullable_to_non_nullable
+      is_activate: null == is_activate
+          ? _self.is_activate
+          : is_activate // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -95,15 +96,15 @@ class _$UpdateInternalSpecificDeviceRequestCopyWithImpl<$Res>
 class _UpdateInternalSpecificDeviceRequest
     implements UpdateInternalSpecificDeviceRequest {
   _UpdateInternalSpecificDeviceRequest(
-      {required this.spaceId, required this.isActivate});
+      {required this.space_id, required this.is_activate});
   factory _UpdateInternalSpecificDeviceRequest.fromJson(
           Map<String, dynamic> json) =>
       _$UpdateInternalSpecificDeviceRequestFromJson(json);
 
   @override
-  final String spaceId;
+  final String space_id;
   @override
-  final bool isActivate;
+  final bool is_activate;
 
   /// Create a copy of UpdateInternalSpecificDeviceRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -127,18 +128,19 @@ class _UpdateInternalSpecificDeviceRequest
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UpdateInternalSpecificDeviceRequest &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId) &&
-            (identical(other.isActivate, isActivate) ||
-                other.isActivate == isActivate));
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.is_activate, is_activate) ||
+                other.is_activate == is_activate));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, spaceId, isActivate);
+  int get hashCode => Object.hash(runtimeType, space_id, is_activate);
 
   @override
   String toString() {
-    return 'UpdateInternalSpecificDeviceRequest(spaceId: $spaceId, isActivate: $isActivate)';
+    return 'UpdateInternalSpecificDeviceRequest(space_id: $space_id, is_activate: $is_activate)';
   }
 }
 
@@ -151,7 +153,7 @@ abstract mixin class _$UpdateInternalSpecificDeviceRequestCopyWith<$Res>
       __$UpdateInternalSpecificDeviceRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String spaceId, bool isActivate});
+  $Res call({String space_id, bool is_activate});
 }
 
 /// @nodoc
@@ -167,17 +169,17 @@ class __$UpdateInternalSpecificDeviceRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? spaceId = null,
-    Object? isActivate = null,
+    Object? space_id = null,
+    Object? is_activate = null,
   }) {
     return _then(_UpdateInternalSpecificDeviceRequest(
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
-      isActivate: null == isActivate
-          ? _self.isActivate
-          : isActivate // ignore: cast_nullable_to_non_nullable
+      is_activate: null == is_activate
+          ? _self.is_activate
+          : is_activate // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }

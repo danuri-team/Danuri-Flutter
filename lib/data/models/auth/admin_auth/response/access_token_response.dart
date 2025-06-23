@@ -7,7 +7,7 @@ part 'access_token_response.g.dart';
 abstract class AccessTokenResponse with _$AccessTokenResponse{
   factory AccessTokenResponse({
     required String token,
-    required int expiredAt,
+    required int expired_at,
   }) = _AccessTokenResponse;
 
   factory AccessTokenResponse.fromJson(Map<String, dynamic> json) => _$AccessTokenResponseFromJson(json);

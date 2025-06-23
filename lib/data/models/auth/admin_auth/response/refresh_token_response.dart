@@ -7,7 +7,7 @@ part 'refresh_token_response.g.dart';
 abstract class RefreshTokenResponse with _$RefreshTokenResponse{
   factory RefreshTokenResponse({
     required String token,
-    required int expiredAt,
+    required int expired_at,
   }) = _RefreshTokenResponse;
 
   factory RefreshTokenResponse.fromJson(Map<String, dynamic> json) => _$RefreshTokenResponseFromJson(json);

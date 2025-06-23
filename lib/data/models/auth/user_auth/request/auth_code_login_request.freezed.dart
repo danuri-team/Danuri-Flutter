@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthCodeLoginRequest {
   String get phone;
-  String get authCode;
+  String get auth_code;
 
   /// Create a copy of AuthCodeLoginRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -35,17 +35,17 @@ mixin _$AuthCodeLoginRequest {
         (other.runtimeType == runtimeType &&
             other is AuthCodeLoginRequest &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.authCode, authCode) ||
-                other.authCode == authCode));
+            (identical(other.auth_code, auth_code) ||
+                other.auth_code == auth_code));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, phone, authCode);
+  int get hashCode => Object.hash(runtimeType, phone, auth_code);
 
   @override
   String toString() {
-    return 'AuthCodeLoginRequest(phone: $phone, authCode: $authCode)';
+    return 'AuthCodeLoginRequest(phone: $phone, auth_code: $auth_code)';
   }
 }
 
@@ -55,7 +55,7 @@ abstract mixin class $AuthCodeLoginRequestCopyWith<$Res> {
           $Res Function(AuthCodeLoginRequest) _then) =
       _$AuthCodeLoginRequestCopyWithImpl;
   @useResult
-  $Res call({String phone, String authCode});
+  $Res call({String phone, String auth_code});
 }
 
 /// @nodoc
@@ -72,16 +72,16 @@ class _$AuthCodeLoginRequestCopyWithImpl<$Res>
   @override
   $Res call({
     Object? phone = null,
-    Object? authCode = null,
+    Object? auth_code = null,
   }) {
     return _then(_self.copyWith(
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      authCode: null == authCode
-          ? _self.authCode
-          : authCode // ignore: cast_nullable_to_non_nullable
+      auth_code: null == auth_code
+          ? _self.auth_code
+          : auth_code // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -90,14 +90,14 @@ class _$AuthCodeLoginRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _AuthCodeLoginRequest implements AuthCodeLoginRequest {
-  _AuthCodeLoginRequest({required this.phone, required this.authCode});
+  _AuthCodeLoginRequest({required this.phone, required this.auth_code});
   factory _AuthCodeLoginRequest.fromJson(Map<String, dynamic> json) =>
       _$AuthCodeLoginRequestFromJson(json);
 
   @override
   final String phone;
   @override
-  final String authCode;
+  final String auth_code;
 
   /// Create a copy of AuthCodeLoginRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -121,17 +121,17 @@ class _AuthCodeLoginRequest implements AuthCodeLoginRequest {
         (other.runtimeType == runtimeType &&
             other is _AuthCodeLoginRequest &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.authCode, authCode) ||
-                other.authCode == authCode));
+            (identical(other.auth_code, auth_code) ||
+                other.auth_code == auth_code));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, phone, authCode);
+  int get hashCode => Object.hash(runtimeType, phone, auth_code);
 
   @override
   String toString() {
-    return 'AuthCodeLoginRequest(phone: $phone, authCode: $authCode)';
+    return 'AuthCodeLoginRequest(phone: $phone, auth_code: $auth_code)';
   }
 }
 
@@ -143,7 +143,7 @@ abstract mixin class _$AuthCodeLoginRequestCopyWith<$Res>
       __$AuthCodeLoginRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String phone, String authCode});
+  $Res call({String phone, String auth_code});
 }
 
 /// @nodoc
@@ -160,16 +160,16 @@ class __$AuthCodeLoginRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? phone = null,
-    Object? authCode = null,
+    Object? auth_code = null,
   }) {
     return _then(_AuthCodeLoginRequest(
       phone: null == phone
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      authCode: null == authCode
-          ? _self.authCode
-          : authCode // ignore: cast_nullable_to_non_nullable
+      auth_code: null == auth_code
+          ? _self.auth_code
+          : auth_code // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

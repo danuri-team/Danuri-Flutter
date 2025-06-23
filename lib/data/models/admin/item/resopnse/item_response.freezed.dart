@@ -16,12 +16,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ItemResponse {
   String get id;
-  String get companyId;
-  String get companyName;
   String get name;
-  int get totalQuantity;
-  int get availableQuantity;
-  String get status;
+  int get total_quantity;
+  int get available_quantity;
+  StatusType get status;
 
   /// Create a copy of ItemResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -40,26 +38,22 @@ mixin _$ItemResponse {
         (other.runtimeType == runtimeType &&
             other is ItemResponse &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity) &&
-            (identical(other.availableQuantity, availableQuantity) ||
-                other.availableQuantity == availableQuantity) &&
+            (identical(other.total_quantity, total_quantity) ||
+                other.total_quantity == total_quantity) &&
+            (identical(other.available_quantity, available_quantity) ||
+                other.available_quantity == available_quantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, companyId, companyName, name,
-      totalQuantity, availableQuantity, status);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, total_quantity, available_quantity, status);
 
   @override
   String toString() {
-    return 'ItemResponse(id: $id, companyId: $companyId, companyName: $companyName, name: $name, totalQuantity: $totalQuantity, availableQuantity: $availableQuantity, status: $status)';
+    return 'ItemResponse(id: $id, name: $name, total_quantity: $total_quantity, available_quantity: $available_quantity, status: $status)';
   }
 }
 
@@ -71,12 +65,10 @@ abstract mixin class $ItemResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String companyId,
-      String companyName,
       String name,
-      int totalQuantity,
-      int availableQuantity,
-      String status});
+      int total_quantity,
+      int available_quantity,
+      StatusType status});
 }
 
 /// @nodoc
@@ -92,11 +84,9 @@ class _$ItemResponseCopyWithImpl<$Res> implements $ItemResponseCopyWith<$Res> {
   @override
   $Res call({
     Object? id = null,
-    Object? companyId = null,
-    Object? companyName = null,
     Object? name = null,
-    Object? totalQuantity = null,
-    Object? availableQuantity = null,
+    Object? total_quantity = null,
+    Object? available_quantity = null,
     Object? status = null,
   }) {
     return _then(_self.copyWith(
@@ -104,30 +94,22 @@ class _$ItemResponseCopyWithImpl<$Res> implements $ItemResponseCopyWith<$Res> {
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _self.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      totalQuantity: null == totalQuantity
-          ? _self.totalQuantity
-          : totalQuantity // ignore: cast_nullable_to_non_nullable
+      total_quantity: null == total_quantity
+          ? _self.total_quantity
+          : total_quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      availableQuantity: null == availableQuantity
-          ? _self.availableQuantity
-          : availableQuantity // ignore: cast_nullable_to_non_nullable
+      available_quantity: null == available_quantity
+          ? _self.available_quantity
+          : available_quantity // ignore: cast_nullable_to_non_nullable
               as int,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
     ));
   }
 }
@@ -137,11 +119,9 @@ class _$ItemResponseCopyWithImpl<$Res> implements $ItemResponseCopyWith<$Res> {
 class _ItemResponse implements ItemResponse {
   _ItemResponse(
       {required this.id,
-      required this.companyId,
-      required this.companyName,
       required this.name,
-      required this.totalQuantity,
-      required this.availableQuantity,
+      required this.total_quantity,
+      required this.available_quantity,
       required this.status});
   factory _ItemResponse.fromJson(Map<String, dynamic> json) =>
       _$ItemResponseFromJson(json);
@@ -149,17 +129,13 @@ class _ItemResponse implements ItemResponse {
   @override
   final String id;
   @override
-  final String companyId;
-  @override
-  final String companyName;
-  @override
   final String name;
   @override
-  final int totalQuantity;
+  final int total_quantity;
   @override
-  final int availableQuantity;
+  final int available_quantity;
   @override
-  final String status;
+  final StatusType status;
 
   /// Create a copy of ItemResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -182,26 +158,22 @@ class _ItemResponse implements ItemResponse {
         (other.runtimeType == runtimeType &&
             other is _ItemResponse &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity) &&
-            (identical(other.availableQuantity, availableQuantity) ||
-                other.availableQuantity == availableQuantity) &&
+            (identical(other.total_quantity, total_quantity) ||
+                other.total_quantity == total_quantity) &&
+            (identical(other.available_quantity, available_quantity) ||
+                other.available_quantity == available_quantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, companyId, companyName, name,
-      totalQuantity, availableQuantity, status);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, total_quantity, available_quantity, status);
 
   @override
   String toString() {
-    return 'ItemResponse(id: $id, companyId: $companyId, companyName: $companyName, name: $name, totalQuantity: $totalQuantity, availableQuantity: $availableQuantity, status: $status)';
+    return 'ItemResponse(id: $id, name: $name, total_quantity: $total_quantity, available_quantity: $available_quantity, status: $status)';
   }
 }
 
@@ -215,12 +187,10 @@ abstract mixin class _$ItemResponseCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String companyId,
-      String companyName,
       String name,
-      int totalQuantity,
-      int availableQuantity,
-      String status});
+      int total_quantity,
+      int available_quantity,
+      StatusType status});
 }
 
 /// @nodoc
@@ -237,11 +207,9 @@ class __$ItemResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? companyId = null,
-    Object? companyName = null,
     Object? name = null,
-    Object? totalQuantity = null,
-    Object? availableQuantity = null,
+    Object? total_quantity = null,
+    Object? available_quantity = null,
     Object? status = null,
   }) {
     return _then(_ItemResponse(
@@ -249,30 +217,22 @@ class __$ItemResponseCopyWithImpl<$Res>
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _self.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      totalQuantity: null == totalQuantity
-          ? _self.totalQuantity
-          : totalQuantity // ignore: cast_nullable_to_non_nullable
+      total_quantity: null == total_quantity
+          ? _self.total_quantity
+          : total_quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      availableQuantity: null == availableQuantity
-          ? _self.availableQuantity
-          : availableQuantity // ignore: cast_nullable_to_non_nullable
+      available_quantity: null == available_quantity
+          ? _self.available_quantity
+          : available_quantity // ignore: cast_nullable_to_non_nullable
               as int,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
     ));
   }
 }

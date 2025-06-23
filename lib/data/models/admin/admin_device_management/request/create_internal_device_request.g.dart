@@ -9,13 +9,13 @@ part of 'create_internal_device_request.dart';
 _CreateInternalDeviceRequest _$CreateInternalDeviceRequestFromJson(
         Map<String, dynamic> json) =>
     _CreateInternalDeviceRequest(
-      deviceId: json['deviceId'] as String,
-      spaceId: json['spaceId'] as String,
+      device_id: json['device_id'] as String,
+      space_id: json['space_id'] as String,
     );
 
 Map<String, dynamic> _$CreateInternalDeviceRequestToJson(
         _CreateInternalDeviceRequest instance) =>
     <String, dynamic>{
-      'deviceId': instance.deviceId,
-      'spaceId': instance.spaceId,
+      'device_id': instance.device_id,
+      'space_id': instance.space_id,
     };

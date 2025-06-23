@@ -8,8 +8,8 @@ part 'tokens_response.g.dart';
 @freezed
 abstract class TokensResponse with _$TokensResponse{
   factory TokensResponse({
-    required AccessTokenResponse accessToken,
-    required RefreshTokenResponse refreshToken,
+    required AccessTokenResponse access_token,
+    required RefreshTokenResponse refresh_token,
   }) = _TokensResponse;
 
   factory TokensResponse.fromJson(Map<String, dynamic> json) => _$TokensResponseFromJson(json);

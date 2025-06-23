@@ -8,12 +8,12 @@ part of 'rental_item_request.dart';
 
 _RentalItemRequest _$RentalItemRequestFromJson(Map<String, dynamic> json) =>
     _RentalItemRequest(
-      itemId: json['itemId'] as String,
+      item_id: json['item_id'] as String,
       quantity: (json['quantity'] as num).toInt(),
     );
 
 Map<String, dynamic> _$RentalItemRequestToJson(_RentalItemRequest instance) =>
     <String, dynamic>{
-      'itemId': instance.itemId,
+      'item_id': instance.item_id,
       'quantity': instance.quantity,
     };

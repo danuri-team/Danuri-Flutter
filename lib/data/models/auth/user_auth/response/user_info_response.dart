@@ -1,5 +1,5 @@
-import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
+import 'package:danuri_flutter/data/models/enum/age_type.dart';
+import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_info_response.freezed.dart';

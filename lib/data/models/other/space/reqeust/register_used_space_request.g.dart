@@ -9,11 +9,11 @@ part of 'register_used_space_request.dart';
 _RegisterUsedSpaceRequest _$RegisterUsedSpaceRequestFromJson(
         Map<String, dynamic> json) =>
     _RegisterUsedSpaceRequest(
-      spaceId: json['spaceId'] as String,
+      space_id: json['space_id'] as String,
     );
 
 Map<String, dynamic> _$RegisterUsedSpaceRequestToJson(
         _RegisterUsedSpaceRequest instance) =>
     <String, dynamic>{
-      'spaceId': instance.spaceId,
+      'space_id': instance.space_id,
     };

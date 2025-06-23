@@ -6,7 +6,7 @@ part 'register_used_space_request.g.dart';
 @freezed
 abstract class RegisterUsedSpaceRequest with _$RegisterUsedSpaceRequest{
   factory RegisterUsedSpaceRequest({
-    required String spaceId,
+    required String space_id,
   }) = _RegisterUsedSpaceRequest;
 
   factory RegisterUsedSpaceRequest.fromJson(Map<String, dynamic> json) => _$RegisterUsedSpaceRequestFromJson(json);

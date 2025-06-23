@@ -6,7 +6,7 @@ part 'device_auth_request.g.dart';
 @freezed
 abstract class DeviceAuthRequest with _$DeviceAuthRequest{
   factory DeviceAuthRequest({
-    required String deviceId,
+    required String device_id,
   }) = _DeviceAuthRequest;
 
   factory DeviceAuthRequest.fromJson(Map<String, dynamic> json) => _$DeviceAuthRequestFromJson(json);

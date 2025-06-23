@@ -7,7 +7,7 @@ part 'auth_code_login_request.g.dart';
 abstract class AuthCodeLoginRequest with _$AuthCodeLoginRequest{
   factory AuthCodeLoginRequest({
     required String phone,
-    required String authCode,
+    required String auth_code,
   }) = _AuthCodeLoginRequest;
 
   factory AuthCodeLoginRequest.fromJson(Map<String, dynamic> json) => _$AuthCodeLoginRequestFromJson(json);

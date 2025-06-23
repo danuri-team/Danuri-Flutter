@@ -15,10 +15,10 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$UsageHistoryRequest {
-  String get startDate;
-  String get endDate;
-  String? get spaceId;
-  String? get userId;
+  String get start_date;
+  String get end_date;
+  String? get space_id;
+  String? get user_id;
 
   /// Create a copy of UsageHistoryRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -36,21 +36,23 @@ mixin _$UsageHistoryRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is UsageHistoryRequest &&
-            (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.start_date, start_date) ||
+                other.start_date == start_date) &&
+            (identical(other.end_date, end_date) ||
+                other.end_date == end_date) &&
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.user_id, user_id) || other.user_id == user_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, startDate, endDate, spaceId, userId);
+      Object.hash(runtimeType, start_date, end_date, space_id, user_id);
 
   @override
   String toString() {
-    return 'UsageHistoryRequest(startDate: $startDate, endDate: $endDate, spaceId: $spaceId, userId: $userId)';
+    return 'UsageHistoryRequest(start_date: $start_date, end_date: $end_date, space_id: $space_id, user_id: $user_id)';
   }
 }
 
@@ -61,7 +63,7 @@ abstract mixin class $UsageHistoryRequestCopyWith<$Res> {
       _$UsageHistoryRequestCopyWithImpl;
   @useResult
   $Res call(
-      {String startDate, String endDate, String? spaceId, String? userId});
+      {String start_date, String end_date, String? space_id, String? user_id});
 }
 
 /// @nodoc
@@ -77,27 +79,27 @@ class _$UsageHistoryRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startDate = null,
-    Object? endDate = null,
-    Object? spaceId = freezed,
-    Object? userId = freezed,
+    Object? start_date = null,
+    Object? end_date = null,
+    Object? space_id = freezed,
+    Object? user_id = freezed,
   }) {
     return _then(_self.copyWith(
-      startDate: null == startDate
-          ? _self.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
+      start_date: null == start_date
+          ? _self.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
               as String,
-      endDate: null == endDate
-          ? _self.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
+      end_date: null == end_date
+          ? _self.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
               as String,
-      spaceId: freezed == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: freezed == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String?,
-      userId: freezed == userId
-          ? _self.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      user_id: freezed == user_id
+          ? _self.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -107,21 +109,21 @@ class _$UsageHistoryRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _UsageHistoryRequest implements UsageHistoryRequest {
   _UsageHistoryRequest(
-      {required this.startDate,
-      required this.endDate,
-      this.spaceId,
-      this.userId});
+      {required this.start_date,
+      required this.end_date,
+      this.space_id,
+      this.user_id});
   factory _UsageHistoryRequest.fromJson(Map<String, dynamic> json) =>
       _$UsageHistoryRequestFromJson(json);
 
   @override
-  final String startDate;
+  final String start_date;
   @override
-  final String endDate;
+  final String end_date;
   @override
-  final String? spaceId;
+  final String? space_id;
   @override
-  final String? userId;
+  final String? user_id;
 
   /// Create a copy of UsageHistoryRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -144,21 +146,23 @@ class _UsageHistoryRequest implements UsageHistoryRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UsageHistoryRequest &&
-            (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.start_date, start_date) ||
+                other.start_date == start_date) &&
+            (identical(other.end_date, end_date) ||
+                other.end_date == end_date) &&
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id) &&
+            (identical(other.user_id, user_id) || other.user_id == user_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, startDate, endDate, spaceId, userId);
+      Object.hash(runtimeType, start_date, end_date, space_id, user_id);
 
   @override
   String toString() {
-    return 'UsageHistoryRequest(startDate: $startDate, endDate: $endDate, spaceId: $spaceId, userId: $userId)';
+    return 'UsageHistoryRequest(start_date: $start_date, end_date: $end_date, space_id: $space_id, user_id: $user_id)';
   }
 }
 
@@ -171,7 +175,7 @@ abstract mixin class _$UsageHistoryRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String startDate, String endDate, String? spaceId, String? userId});
+      {String start_date, String end_date, String? space_id, String? user_id});
 }
 
 /// @nodoc
@@ -187,27 +191,27 @@ class __$UsageHistoryRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? startDate = null,
-    Object? endDate = null,
-    Object? spaceId = freezed,
-    Object? userId = freezed,
+    Object? start_date = null,
+    Object? end_date = null,
+    Object? space_id = freezed,
+    Object? user_id = freezed,
   }) {
     return _then(_UsageHistoryRequest(
-      startDate: null == startDate
-          ? _self.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
+      start_date: null == start_date
+          ? _self.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
               as String,
-      endDate: null == endDate
-          ? _self.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
+      end_date: null == end_date
+          ? _self.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
               as String,
-      spaceId: freezed == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: freezed == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String?,
-      userId: freezed == userId
-          ? _self.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      user_id: freezed == user_id
+          ? _self.user_id
+          : user_id // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }

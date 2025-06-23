@@ -15,8 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CreateInternalDeviceRequest {
-  String get deviceId;
-  String get spaceId;
+  String get device_id;
+  String get space_id;
 
   /// Create a copy of CreateInternalDeviceRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -35,18 +35,19 @@ mixin _$CreateInternalDeviceRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is CreateInternalDeviceRequest &&
-            (identical(other.deviceId, deviceId) ||
-                other.deviceId == deviceId) &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId));
+            (identical(other.device_id, device_id) ||
+                other.device_id == device_id) &&
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, deviceId, spaceId);
+  int get hashCode => Object.hash(runtimeType, device_id, space_id);
 
   @override
   String toString() {
-    return 'CreateInternalDeviceRequest(deviceId: $deviceId, spaceId: $spaceId)';
+    return 'CreateInternalDeviceRequest(device_id: $device_id, space_id: $space_id)';
   }
 }
 
@@ -57,7 +58,7 @@ abstract mixin class $CreateInternalDeviceRequestCopyWith<$Res> {
           $Res Function(CreateInternalDeviceRequest) _then) =
       _$CreateInternalDeviceRequestCopyWithImpl;
   @useResult
-  $Res call({String deviceId, String spaceId});
+  $Res call({String device_id, String space_id});
 }
 
 /// @nodoc
@@ -73,17 +74,17 @@ class _$CreateInternalDeviceRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? deviceId = null,
-    Object? spaceId = null,
+    Object? device_id = null,
+    Object? space_id = null,
   }) {
     return _then(_self.copyWith(
-      deviceId: null == deviceId
-          ? _self.deviceId
-          : deviceId // ignore: cast_nullable_to_non_nullable
+      device_id: null == device_id
+          ? _self.device_id
+          : device_id // ignore: cast_nullable_to_non_nullable
               as String,
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -92,14 +93,15 @@ class _$CreateInternalDeviceRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _CreateInternalDeviceRequest implements CreateInternalDeviceRequest {
-  _CreateInternalDeviceRequest({required this.deviceId, required this.spaceId});
+  _CreateInternalDeviceRequest(
+      {required this.device_id, required this.space_id});
   factory _CreateInternalDeviceRequest.fromJson(Map<String, dynamic> json) =>
       _$CreateInternalDeviceRequestFromJson(json);
 
   @override
-  final String deviceId;
+  final String device_id;
   @override
-  final String spaceId;
+  final String space_id;
 
   /// Create a copy of CreateInternalDeviceRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -122,18 +124,19 @@ class _CreateInternalDeviceRequest implements CreateInternalDeviceRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CreateInternalDeviceRequest &&
-            (identical(other.deviceId, deviceId) ||
-                other.deviceId == deviceId) &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId));
+            (identical(other.device_id, device_id) ||
+                other.device_id == device_id) &&
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, deviceId, spaceId);
+  int get hashCode => Object.hash(runtimeType, device_id, space_id);
 
   @override
   String toString() {
-    return 'CreateInternalDeviceRequest(deviceId: $deviceId, spaceId: $spaceId)';
+    return 'CreateInternalDeviceRequest(device_id: $device_id, space_id: $space_id)';
   }
 }
 
@@ -146,7 +149,7 @@ abstract mixin class _$CreateInternalDeviceRequestCopyWith<$Res>
       __$CreateInternalDeviceRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String deviceId, String spaceId});
+  $Res call({String device_id, String space_id});
 }
 
 /// @nodoc
@@ -162,17 +165,17 @@ class __$CreateInternalDeviceRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? deviceId = null,
-    Object? spaceId = null,
+    Object? device_id = null,
+    Object? space_id = null,
   }) {
     return _then(_CreateInternalDeviceRequest(
-      deviceId: null == deviceId
-          ? _self.deviceId
-          : deviceId // ignore: cast_nullable_to_non_nullable
+      device_id: null == device_id
+          ? _self.device_id
+          : device_id // ignore: cast_nullable_to_non_nullable
               as String,
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

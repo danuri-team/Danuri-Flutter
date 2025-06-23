@@ -9,15 +9,15 @@ part of 'change_password_request.dart';
 _ChangePasswordRequest _$ChangePasswordRequestFromJson(
         Map<String, dynamic> json) =>
     _ChangePasswordRequest(
-      currentPassword: json['currentPassword'] as String,
-      newPassword: json['newPassword'] as String,
-      confirmPassword: json['confirmPassword'] as String,
+      current_password: json['current_password'] as String,
+      new_password: json['new_password'] as String,
+      confirm_password: json['confirm_password'] as String,
     );
 
 Map<String, dynamic> _$ChangePasswordRequestToJson(
         _ChangePasswordRequest instance) =>
     <String, dynamic>{
-      'currentPassword': instance.currentPassword,
-      'newPassword': instance.newPassword,
-      'confirmPassword': instance.confirmPassword,
+      'current_password': instance.current_password,
+      'new_password': instance.new_password,
+      'confirm_password': instance.confirm_password,
     };

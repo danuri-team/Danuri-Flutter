@@ -15,9 +15,9 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ChangePasswordRequest {
-  String get currentPassword;
-  String get newPassword;
-  String get confirmPassword;
+  String get current_password;
+  String get new_password;
+  String get confirm_password;
 
   /// Create a copy of ChangePasswordRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -35,22 +35,22 @@ mixin _$ChangePasswordRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ChangePasswordRequest &&
-            (identical(other.currentPassword, currentPassword) ||
-                other.currentPassword == currentPassword) &&
-            (identical(other.newPassword, newPassword) ||
-                other.newPassword == newPassword) &&
-            (identical(other.confirmPassword, confirmPassword) ||
-                other.confirmPassword == confirmPassword));
+            (identical(other.current_password, current_password) ||
+                other.current_password == current_password) &&
+            (identical(other.new_password, new_password) ||
+                other.new_password == new_password) &&
+            (identical(other.confirm_password, confirm_password) ||
+                other.confirm_password == confirm_password));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, currentPassword, newPassword, confirmPassword);
+  int get hashCode => Object.hash(
+      runtimeType, current_password, new_password, confirm_password);
 
   @override
   String toString() {
-    return 'ChangePasswordRequest(currentPassword: $currentPassword, newPassword: $newPassword, confirmPassword: $confirmPassword)';
+    return 'ChangePasswordRequest(current_password: $current_password, new_password: $new_password, confirm_password: $confirm_password)';
   }
 }
 
@@ -61,7 +61,7 @@ abstract mixin class $ChangePasswordRequestCopyWith<$Res> {
       _$ChangePasswordRequestCopyWithImpl;
   @useResult
   $Res call(
-      {String currentPassword, String newPassword, String confirmPassword});
+      {String current_password, String new_password, String confirm_password});
 }
 
 /// @nodoc
@@ -77,22 +77,22 @@ class _$ChangePasswordRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPassword = null,
-    Object? newPassword = null,
-    Object? confirmPassword = null,
+    Object? current_password = null,
+    Object? new_password = null,
+    Object? confirm_password = null,
   }) {
     return _then(_self.copyWith(
-      currentPassword: null == currentPassword
-          ? _self.currentPassword
-          : currentPassword // ignore: cast_nullable_to_non_nullable
+      current_password: null == current_password
+          ? _self.current_password
+          : current_password // ignore: cast_nullable_to_non_nullable
               as String,
-      newPassword: null == newPassword
-          ? _self.newPassword
-          : newPassword // ignore: cast_nullable_to_non_nullable
+      new_password: null == new_password
+          ? _self.new_password
+          : new_password // ignore: cast_nullable_to_non_nullable
               as String,
-      confirmPassword: null == confirmPassword
-          ? _self.confirmPassword
-          : confirmPassword // ignore: cast_nullable_to_non_nullable
+      confirm_password: null == confirm_password
+          ? _self.confirm_password
+          : confirm_password // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -102,18 +102,18 @@ class _$ChangePasswordRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _ChangePasswordRequest implements ChangePasswordRequest {
   _ChangePasswordRequest(
-      {required this.currentPassword,
-      required this.newPassword,
-      required this.confirmPassword});
+      {required this.current_password,
+      required this.new_password,
+      required this.confirm_password});
   factory _ChangePasswordRequest.fromJson(Map<String, dynamic> json) =>
       _$ChangePasswordRequestFromJson(json);
 
   @override
-  final String currentPassword;
+  final String current_password;
   @override
-  final String newPassword;
+  final String new_password;
   @override
-  final String confirmPassword;
+  final String confirm_password;
 
   /// Create a copy of ChangePasswordRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -136,22 +136,22 @@ class _ChangePasswordRequest implements ChangePasswordRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ChangePasswordRequest &&
-            (identical(other.currentPassword, currentPassword) ||
-                other.currentPassword == currentPassword) &&
-            (identical(other.newPassword, newPassword) ||
-                other.newPassword == newPassword) &&
-            (identical(other.confirmPassword, confirmPassword) ||
-                other.confirmPassword == confirmPassword));
+            (identical(other.current_password, current_password) ||
+                other.current_password == current_password) &&
+            (identical(other.new_password, new_password) ||
+                other.new_password == new_password) &&
+            (identical(other.confirm_password, confirm_password) ||
+                other.confirm_password == confirm_password));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, currentPassword, newPassword, confirmPassword);
+  int get hashCode => Object.hash(
+      runtimeType, current_password, new_password, confirm_password);
 
   @override
   String toString() {
-    return 'ChangePasswordRequest(currentPassword: $currentPassword, newPassword: $newPassword, confirmPassword: $confirmPassword)';
+    return 'ChangePasswordRequest(current_password: $current_password, new_password: $new_password, confirm_password: $confirm_password)';
   }
 }
 
@@ -164,7 +164,7 @@ abstract mixin class _$ChangePasswordRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String currentPassword, String newPassword, String confirmPassword});
+      {String current_password, String new_password, String confirm_password});
 }
 
 /// @nodoc
@@ -180,22 +180,22 @@ class __$ChangePasswordRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? currentPassword = null,
-    Object? newPassword = null,
-    Object? confirmPassword = null,
+    Object? current_password = null,
+    Object? new_password = null,
+    Object? confirm_password = null,
   }) {
     return _then(_ChangePasswordRequest(
-      currentPassword: null == currentPassword
-          ? _self.currentPassword
-          : currentPassword // ignore: cast_nullable_to_non_nullable
+      current_password: null == current_password
+          ? _self.current_password
+          : current_password // ignore: cast_nullable_to_non_nullable
               as String,
-      newPassword: null == newPassword
-          ? _self.newPassword
-          : newPassword // ignore: cast_nullable_to_non_nullable
+      new_password: null == new_password
+          ? _self.new_password
+          : new_password // ignore: cast_nullable_to_non_nullable
               as String,
-      confirmPassword: null == confirmPassword
-          ? _self.confirmPassword
-          : confirmPassword // ignore: cast_nullable_to_non_nullable
+      confirm_password: null == confirm_password
+          ? _self.confirm_password
+          : confirm_password // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

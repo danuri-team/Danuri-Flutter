@@ -16,12 +16,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SpaceResponse {
   String get id;
-  String get companyId;
-  String get companyName;
   String get name;
-  List<int> get startAt;
-  List<int> get endAt;
-  int get usageCount;
+  List<int> get start_at;
+  List<int> get end_at;
+  int get usage_count;
 
   /// Create a copy of SpaceResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -40,15 +38,11 @@ mixin _$SpaceResponse {
         (other.runtimeType == runtimeType &&
             other is SpaceResponse &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other.startAt, startAt) &&
-            const DeepCollectionEquality().equals(other.endAt, endAt) &&
-            (identical(other.usageCount, usageCount) ||
-                other.usageCount == usageCount));
+            const DeepCollectionEquality().equals(other.start_at, start_at) &&
+            const DeepCollectionEquality().equals(other.end_at, end_at) &&
+            (identical(other.usage_count, usage_count) ||
+                other.usage_count == usage_count));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -56,16 +50,14 @@ mixin _$SpaceResponse {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      companyId,
-      companyName,
       name,
-      const DeepCollectionEquality().hash(startAt),
-      const DeepCollectionEquality().hash(endAt),
-      usageCount);
+      const DeepCollectionEquality().hash(start_at),
+      const DeepCollectionEquality().hash(end_at),
+      usage_count);
 
   @override
   String toString() {
-    return 'SpaceResponse(id: $id, companyId: $companyId, companyName: $companyName, name: $name, startAt: $startAt, endAt: $endAt, usageCount: $usageCount)';
+    return 'SpaceResponse(id: $id, name: $name, start_at: $start_at, end_at: $end_at, usage_count: $usage_count)';
   }
 }
 
@@ -77,12 +69,10 @@ abstract mixin class $SpaceResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String companyId,
-      String companyName,
       String name,
-      List<int> startAt,
-      List<int> endAt,
-      int usageCount});
+      List<int> start_at,
+      List<int> end_at,
+      int usage_count});
 }
 
 /// @nodoc
@@ -99,41 +89,31 @@ class _$SpaceResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? companyId = null,
-    Object? companyName = null,
     Object? name = null,
-    Object? startAt = null,
-    Object? endAt = null,
-    Object? usageCount = null,
+    Object? start_at = null,
+    Object? end_at = null,
+    Object? usage_count = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _self.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startAt: null == startAt
-          ? _self.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
+      start_at: null == start_at
+          ? _self.start_at
+          : start_at // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      endAt: null == endAt
-          ? _self.endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
+      end_at: null == end_at
+          ? _self.end_at
+          : end_at // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      usageCount: null == usageCount
-          ? _self.usageCount
-          : usageCount // ignore: cast_nullable_to_non_nullable
+      usage_count: null == usage_count
+          ? _self.usage_count
+          : usage_count // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -144,43 +124,37 @@ class _$SpaceResponseCopyWithImpl<$Res>
 class _SpaceResponse implements SpaceResponse {
   _SpaceResponse(
       {required this.id,
-      required this.companyId,
-      required this.companyName,
       required this.name,
-      required final List<int> startAt,
-      required final List<int> endAt,
-      required this.usageCount})
-      : _startAt = startAt,
-        _endAt = endAt;
+      required final List<int> start_at,
+      required final List<int> end_at,
+      required this.usage_count})
+      : _start_at = start_at,
+        _end_at = end_at;
   factory _SpaceResponse.fromJson(Map<String, dynamic> json) =>
       _$SpaceResponseFromJson(json);
 
   @override
   final String id;
   @override
-  final String companyId;
-  @override
-  final String companyName;
-  @override
   final String name;
-  final List<int> _startAt;
+  final List<int> _start_at;
   @override
-  List<int> get startAt {
-    if (_startAt is EqualUnmodifiableListView) return _startAt;
+  List<int> get start_at {
+    if (_start_at is EqualUnmodifiableListView) return _start_at;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_startAt);
+    return EqualUnmodifiableListView(_start_at);
   }
 
-  final List<int> _endAt;
+  final List<int> _end_at;
   @override
-  List<int> get endAt {
-    if (_endAt is EqualUnmodifiableListView) return _endAt;
+  List<int> get end_at {
+    if (_end_at is EqualUnmodifiableListView) return _end_at;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_endAt);
+    return EqualUnmodifiableListView(_end_at);
   }
 
   @override
-  final int usageCount;
+  final int usage_count;
 
   /// Create a copy of SpaceResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -203,15 +177,11 @@ class _SpaceResponse implements SpaceResponse {
         (other.runtimeType == runtimeType &&
             other is _SpaceResponse &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._startAt, _startAt) &&
-            const DeepCollectionEquality().equals(other._endAt, _endAt) &&
-            (identical(other.usageCount, usageCount) ||
-                other.usageCount == usageCount));
+            const DeepCollectionEquality().equals(other._start_at, _start_at) &&
+            const DeepCollectionEquality().equals(other._end_at, _end_at) &&
+            (identical(other.usage_count, usage_count) ||
+                other.usage_count == usage_count));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -219,16 +189,14 @@ class _SpaceResponse implements SpaceResponse {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      companyId,
-      companyName,
       name,
-      const DeepCollectionEquality().hash(_startAt),
-      const DeepCollectionEquality().hash(_endAt),
-      usageCount);
+      const DeepCollectionEquality().hash(_start_at),
+      const DeepCollectionEquality().hash(_end_at),
+      usage_count);
 
   @override
   String toString() {
-    return 'SpaceResponse(id: $id, companyId: $companyId, companyName: $companyName, name: $name, startAt: $startAt, endAt: $endAt, usageCount: $usageCount)';
+    return 'SpaceResponse(id: $id, name: $name, start_at: $start_at, end_at: $end_at, usage_count: $usage_count)';
   }
 }
 
@@ -242,12 +210,10 @@ abstract mixin class _$SpaceResponseCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String companyId,
-      String companyName,
       String name,
-      List<int> startAt,
-      List<int> endAt,
-      int usageCount});
+      List<int> start_at,
+      List<int> end_at,
+      int usage_count});
 }
 
 /// @nodoc
@@ -264,41 +230,31 @@ class __$SpaceResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? companyId = null,
-    Object? companyName = null,
     Object? name = null,
-    Object? startAt = null,
-    Object? endAt = null,
-    Object? usageCount = null,
+    Object? start_at = null,
+    Object? end_at = null,
+    Object? usage_count = null,
   }) {
     return _then(_SpaceResponse(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _self.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startAt: null == startAt
-          ? _self._startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
+      start_at: null == start_at
+          ? _self._start_at
+          : start_at // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      endAt: null == endAt
-          ? _self._endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
+      end_at: null == end_at
+          ? _self._end_at
+          : end_at // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      usageCount: null == usageCount
-          ? _self.usageCount
-          : usageCount // ignore: cast_nullable_to_non_nullable
+      usage_count: null == usage_count
+          ? _self.usage_count
+          : usage_count // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }

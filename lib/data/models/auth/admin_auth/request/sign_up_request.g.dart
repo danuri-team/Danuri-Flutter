@@ -8,7 +8,7 @@ part of 'sign_up_request.dart';
 
 _SignUpRequest _$SignUpRequestFromJson(Map<String, dynamic> json) =>
     _SignUpRequest(
-      companyId: json['companyId'] as String,
+      company_id: json['company_id'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
       phone: json['phone'] as String,
@@ -16,7 +16,7 @@ _SignUpRequest _$SignUpRequestFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$SignUpRequestToJson(_SignUpRequest instance) =>
     <String, dynamic>{
-      'companyId': instance.companyId,
+      'company_id': instance.company_id,
       'email': instance.email,
       'password': instance.password,
       'phone': instance.phone,

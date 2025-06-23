@@ -6,7 +6,7 @@ part 'sign_up_request.g.dart';
 @freezed
 abstract class SignUpRequest with _$SignUpRequest{
   factory SignUpRequest({
-    required String companyId,
+    required String company_id,
     required String email,
     required String password,
     required String phone,

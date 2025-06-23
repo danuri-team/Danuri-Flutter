@@ -1,0 +1,3 @@
+enum StatusType {
+  AVAILABLE
+}

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RegisterUsedSpaceRequest {
-  String get spaceId;
+  String get space_id;
 
   /// Create a copy of RegisterUsedSpaceRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -33,16 +33,17 @@ mixin _$RegisterUsedSpaceRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is RegisterUsedSpaceRequest &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId));
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, spaceId);
+  int get hashCode => Object.hash(runtimeType, space_id);
 
   @override
   String toString() {
-    return 'RegisterUsedSpaceRequest(spaceId: $spaceId)';
+    return 'RegisterUsedSpaceRequest(space_id: $space_id)';
   }
 }
 
@@ -52,7 +53,7 @@ abstract mixin class $RegisterUsedSpaceRequestCopyWith<$Res> {
           $Res Function(RegisterUsedSpaceRequest) _then) =
       _$RegisterUsedSpaceRequestCopyWithImpl;
   @useResult
-  $Res call({String spaceId});
+  $Res call({String space_id});
 }
 
 /// @nodoc
@@ -68,12 +69,12 @@ class _$RegisterUsedSpaceRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? spaceId = null,
+    Object? space_id = null,
   }) {
     return _then(_self.copyWith(
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -82,12 +83,12 @@ class _$RegisterUsedSpaceRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _RegisterUsedSpaceRequest implements RegisterUsedSpaceRequest {
-  _RegisterUsedSpaceRequest({required this.spaceId});
+  _RegisterUsedSpaceRequest({required this.space_id});
   factory _RegisterUsedSpaceRequest.fromJson(Map<String, dynamic> json) =>
       _$RegisterUsedSpaceRequestFromJson(json);
 
   @override
-  final String spaceId;
+  final String space_id;
 
   /// Create a copy of RegisterUsedSpaceRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -110,16 +111,17 @@ class _RegisterUsedSpaceRequest implements RegisterUsedSpaceRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RegisterUsedSpaceRequest &&
-            (identical(other.spaceId, spaceId) || other.spaceId == spaceId));
+            (identical(other.space_id, space_id) ||
+                other.space_id == space_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, spaceId);
+  int get hashCode => Object.hash(runtimeType, space_id);
 
   @override
   String toString() {
-    return 'RegisterUsedSpaceRequest(spaceId: $spaceId)';
+    return 'RegisterUsedSpaceRequest(space_id: $space_id)';
   }
 }
 
@@ -131,7 +133,7 @@ abstract mixin class _$RegisterUsedSpaceRequestCopyWith<$Res>
       __$RegisterUsedSpaceRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String spaceId});
+  $Res call({String space_id});
 }
 
 /// @nodoc
@@ -147,12 +149,12 @@ class __$RegisterUsedSpaceRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? spaceId = null,
+    Object? space_id = null,
   }) {
     return _then(_RegisterUsedSpaceRequest(
-      spaceId: null == spaceId
-          ? _self.spaceId
-          : spaceId // ignore: cast_nullable_to_non_nullable
+      space_id: null == space_id
+          ? _self.space_id
+          : space_id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

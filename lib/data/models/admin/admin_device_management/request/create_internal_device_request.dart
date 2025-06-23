@@ -6,8 +6,8 @@ part 'create_internal_device_request.g.dart';
 @freezed
 abstract class CreateInternalDeviceRequest with _$CreateInternalDeviceRequest{
   factory CreateInternalDeviceRequest({
-    required String deviceId,
-    required String spaceId,
+    required String device_id,
+    required String space_id,
   }) = _CreateInternalDeviceRequest;
 
   factory CreateInternalDeviceRequest.fromJson(Map<String, dynamic> json) => _$CreateInternalDeviceRequestFromJson(json);

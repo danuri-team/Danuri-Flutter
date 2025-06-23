@@ -16,8 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CreateItemRequest {
   String get name;
-  String get totalQuantity;
-  String get status;
+  int get total_quantity;
+  StatusType get status;
 
   /// Create a copy of CreateItemRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -36,18 +36,18 @@ mixin _$CreateItemRequest {
         (other.runtimeType == runtimeType &&
             other is CreateItemRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity) &&
+            (identical(other.total_quantity, total_quantity) ||
+                other.total_quantity == total_quantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, totalQuantity, status);
+  int get hashCode => Object.hash(runtimeType, name, total_quantity, status);
 
   @override
   String toString() {
-    return 'CreateItemRequest(name: $name, totalQuantity: $totalQuantity, status: $status)';
+    return 'CreateItemRequest(name: $name, total_quantity: $total_quantity, status: $status)';
   }
 }
 
@@ -57,7 +57,7 @@ abstract mixin class $CreateItemRequestCopyWith<$Res> {
           CreateItemRequest value, $Res Function(CreateItemRequest) _then) =
       _$CreateItemRequestCopyWithImpl;
   @useResult
-  $Res call({String name, String totalQuantity, String status});
+  $Res call({String name, int total_quantity, StatusType status});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$CreateItemRequestCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? totalQuantity = null,
+    Object? total_quantity = null,
     Object? status = null,
   }) {
     return _then(_self.copyWith(
@@ -82,14 +82,14 @@ class _$CreateItemRequestCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      totalQuantity: null == totalQuantity
-          ? _self.totalQuantity
-          : totalQuantity // ignore: cast_nullable_to_non_nullable
-              as String,
+      total_quantity: null == total_quantity
+          ? _self.total_quantity
+          : total_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
     ));
   }
 }
@@ -98,16 +98,16 @@ class _$CreateItemRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _CreateItemRequest implements CreateItemRequest {
   _CreateItemRequest(
-      {required this.name, required this.totalQuantity, required this.status});
+      {required this.name, required this.total_quantity, required this.status});
   factory _CreateItemRequest.fromJson(Map<String, dynamic> json) =>
       _$CreateItemRequestFromJson(json);
 
   @override
   final String name;
   @override
-  final String totalQuantity;
+  final int total_quantity;
   @override
-  final String status;
+  final StatusType status;
 
   /// Create a copy of CreateItemRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -130,18 +130,18 @@ class _CreateItemRequest implements CreateItemRequest {
         (other.runtimeType == runtimeType &&
             other is _CreateItemRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity) &&
+            (identical(other.total_quantity, total_quantity) ||
+                other.total_quantity == total_quantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, totalQuantity, status);
+  int get hashCode => Object.hash(runtimeType, name, total_quantity, status);
 
   @override
   String toString() {
-    return 'CreateItemRequest(name: $name, totalQuantity: $totalQuantity, status: $status)';
+    return 'CreateItemRequest(name: $name, total_quantity: $total_quantity, status: $status)';
   }
 }
 
@@ -153,7 +153,7 @@ abstract mixin class _$CreateItemRequestCopyWith<$Res>
       __$CreateItemRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, String totalQuantity, String status});
+  $Res call({String name, int total_quantity, StatusType status});
 }
 
 /// @nodoc
@@ -170,7 +170,7 @@ class __$CreateItemRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? name = null,
-    Object? totalQuantity = null,
+    Object? total_quantity = null,
     Object? status = null,
   }) {
     return _then(_CreateItemRequest(
@@ -178,14 +178,14 @@ class __$CreateItemRequestCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      totalQuantity: null == totalQuantity
-          ? _self.totalQuantity
-          : totalQuantity // ignore: cast_nullable_to_non_nullable
-              as String,
+      total_quantity: null == total_quantity
+          ? _self.total_quantity
+          : total_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
     ));
   }
 }

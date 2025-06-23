@@ -8,14 +8,14 @@ part of 'tokens_response.dart';
 
 _TokensResponse _$TokensResponseFromJson(Map<String, dynamic> json) =>
     _TokensResponse(
-      accessToken: AccessTokenResponse.fromJson(
-          json['accessToken'] as Map<String, dynamic>),
-      refreshToken: RefreshTokenResponse.fromJson(
-          json['refreshToken'] as Map<String, dynamic>),
+      access_token: AccessTokenResponse.fromJson(
+          json['access_token'] as Map<String, dynamic>),
+      refresh_token: RefreshTokenResponse.fromJson(
+          json['refresh_token'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TokensResponseToJson(_TokensResponse instance) =>
     <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
+      'access_token': instance.access_token,
+      'refresh_token': instance.refresh_token,
     };

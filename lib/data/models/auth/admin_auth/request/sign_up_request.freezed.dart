@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SignUpRequest {
-  String get companyId;
+  String get company_id;
   String get email;
   String get password;
   String get phone;
@@ -36,8 +36,8 @@ mixin _$SignUpRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SignUpRequest &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
+            (identical(other.company_id, company_id) ||
+                other.company_id == company_id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
@@ -47,11 +47,11 @@ mixin _$SignUpRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, companyId, email, password, phone);
+      Object.hash(runtimeType, company_id, email, password, phone);
 
   @override
   String toString() {
-    return 'SignUpRequest(companyId: $companyId, email: $email, password: $password, phone: $phone)';
+    return 'SignUpRequest(company_id: $company_id, email: $email, password: $password, phone: $phone)';
   }
 }
 
@@ -61,7 +61,7 @@ abstract mixin class $SignUpRequestCopyWith<$Res> {
           SignUpRequest value, $Res Function(SignUpRequest) _then) =
       _$SignUpRequestCopyWithImpl;
   @useResult
-  $Res call({String companyId, String email, String password, String phone});
+  $Res call({String company_id, String email, String password, String phone});
 }
 
 /// @nodoc
@@ -77,15 +77,15 @@ class _$SignUpRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? companyId = null,
+    Object? company_id = null,
     Object? email = null,
     Object? password = null,
     Object? phone = null,
   }) {
     return _then(_self.copyWith(
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
+      company_id: null == company_id
+          ? _self.company_id
+          : company_id // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _self.email
@@ -107,7 +107,7 @@ class _$SignUpRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _SignUpRequest implements SignUpRequest {
   _SignUpRequest(
-      {required this.companyId,
+      {required this.company_id,
       required this.email,
       required this.password,
       required this.phone});
@@ -115,7 +115,7 @@ class _SignUpRequest implements SignUpRequest {
       _$SignUpRequestFromJson(json);
 
   @override
-  final String companyId;
+  final String company_id;
   @override
   final String email;
   @override
@@ -143,8 +143,8 @@ class _SignUpRequest implements SignUpRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SignUpRequest &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
+            (identical(other.company_id, company_id) ||
+                other.company_id == company_id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
@@ -154,11 +154,11 @@ class _SignUpRequest implements SignUpRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, companyId, email, password, phone);
+      Object.hash(runtimeType, company_id, email, password, phone);
 
   @override
   String toString() {
-    return 'SignUpRequest(companyId: $companyId, email: $email, password: $password, phone: $phone)';
+    return 'SignUpRequest(company_id: $company_id, email: $email, password: $password, phone: $phone)';
   }
 }
 
@@ -170,7 +170,7 @@ abstract mixin class _$SignUpRequestCopyWith<$Res>
       __$SignUpRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String companyId, String email, String password, String phone});
+  $Res call({String company_id, String email, String password, String phone});
 }
 
 /// @nodoc
@@ -186,15 +186,15 @@ class __$SignUpRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? companyId = null,
+    Object? company_id = null,
     Object? email = null,
     Object? password = null,
     Object? phone = null,
   }) {
     return _then(_SignUpRequest(
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
+      company_id: null == company_id
+          ? _self.company_id
+          : company_id // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _self.email

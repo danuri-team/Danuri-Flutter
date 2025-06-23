@@ -10,12 +10,12 @@ _RefreshTokenResponse _$RefreshTokenResponseFromJson(
         Map<String, dynamic> json) =>
     _RefreshTokenResponse(
       token: json['token'] as String,
-      expiredAt: (json['expiredAt'] as num).toInt(),
+      expired_at: (json['expired_at'] as num).toInt(),
     );
 
 Map<String, dynamic> _$RefreshTokenResponseToJson(
         _RefreshTokenResponse instance) =>
     <String, dynamic>{
       'token': instance.token,
-      'expiredAt': instance.expiredAt,
+      'expired_at': instance.expired_at,
     };

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$DeviceAuthRequest {
-  String get deviceId;
+  String get device_id;
 
   /// Create a copy of DeviceAuthRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -33,17 +33,17 @@ mixin _$DeviceAuthRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is DeviceAuthRequest &&
-            (identical(other.deviceId, deviceId) ||
-                other.deviceId == deviceId));
+            (identical(other.device_id, device_id) ||
+                other.device_id == device_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, deviceId);
+  int get hashCode => Object.hash(runtimeType, device_id);
 
   @override
   String toString() {
-    return 'DeviceAuthRequest(deviceId: $deviceId)';
+    return 'DeviceAuthRequest(device_id: $device_id)';
   }
 }
 
@@ -53,7 +53,7 @@ abstract mixin class $DeviceAuthRequestCopyWith<$Res> {
           DeviceAuthRequest value, $Res Function(DeviceAuthRequest) _then) =
       _$DeviceAuthRequestCopyWithImpl;
   @useResult
-  $Res call({String deviceId});
+  $Res call({String device_id});
 }
 
 /// @nodoc
@@ -69,12 +69,12 @@ class _$DeviceAuthRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? deviceId = null,
+    Object? device_id = null,
   }) {
     return _then(_self.copyWith(
-      deviceId: null == deviceId
-          ? _self.deviceId
-          : deviceId // ignore: cast_nullable_to_non_nullable
+      device_id: null == device_id
+          ? _self.device_id
+          : device_id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -83,12 +83,12 @@ class _$DeviceAuthRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _DeviceAuthRequest implements DeviceAuthRequest {
-  _DeviceAuthRequest({required this.deviceId});
+  _DeviceAuthRequest({required this.device_id});
   factory _DeviceAuthRequest.fromJson(Map<String, dynamic> json) =>
       _$DeviceAuthRequestFromJson(json);
 
   @override
-  final String deviceId;
+  final String device_id;
 
   /// Create a copy of DeviceAuthRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -110,17 +110,17 @@ class _DeviceAuthRequest implements DeviceAuthRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _DeviceAuthRequest &&
-            (identical(other.deviceId, deviceId) ||
-                other.deviceId == deviceId));
+            (identical(other.device_id, device_id) ||
+                other.device_id == device_id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, deviceId);
+  int get hashCode => Object.hash(runtimeType, device_id);
 
   @override
   String toString() {
-    return 'DeviceAuthRequest(deviceId: $deviceId)';
+    return 'DeviceAuthRequest(device_id: $device_id)';
   }
 }
 
@@ -132,7 +132,7 @@ abstract mixin class _$DeviceAuthRequestCopyWith<$Res>
       __$DeviceAuthRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String deviceId});
+  $Res call({String device_id});
 }
 
 /// @nodoc
@@ -148,12 +148,12 @@ class __$DeviceAuthRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? deviceId = null,
+    Object? device_id = null,
   }) {
     return _then(_DeviceAuthRequest(
-      deviceId: null == deviceId
-          ? _self.deviceId
-          : deviceId // ignore: cast_nullable_to_non_nullable
+      device_id: null == device_id
+          ? _self.device_id
+          : device_id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

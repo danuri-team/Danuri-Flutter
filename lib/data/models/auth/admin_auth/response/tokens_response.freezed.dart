@@ -15,8 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$TokensResponse {
-  AccessTokenResponse get accessToken;
-  RefreshTokenResponse get refreshToken;
+  AccessTokenResponse get access_token;
+  RefreshTokenResponse get refresh_token;
 
   /// Create a copy of TokensResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -34,19 +34,19 @@ mixin _$TokensResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is TokensResponse &&
-            (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken) &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken));
+            (identical(other.access_token, access_token) ||
+                other.access_token == access_token) &&
+            (identical(other.refresh_token, refresh_token) ||
+                other.refresh_token == refresh_token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken);
+  int get hashCode => Object.hash(runtimeType, access_token, refresh_token);
 
   @override
   String toString() {
-    return 'TokensResponse(accessToken: $accessToken, refreshToken: $refreshToken)';
+    return 'TokensResponse(access_token: $access_token, refresh_token: $refresh_token)';
   }
 }
 
@@ -57,10 +57,10 @@ abstract mixin class $TokensResponseCopyWith<$Res> {
       _$TokensResponseCopyWithImpl;
   @useResult
   $Res call(
-      {AccessTokenResponse accessToken, RefreshTokenResponse refreshToken});
+      {AccessTokenResponse access_token, RefreshTokenResponse refresh_token});
 
-  $AccessTokenResponseCopyWith<$Res> get accessToken;
-  $RefreshTokenResponseCopyWith<$Res> get refreshToken;
+  $AccessTokenResponseCopyWith<$Res> get access_token;
+  $RefreshTokenResponseCopyWith<$Res> get refresh_token;
 }
 
 /// @nodoc
@@ -76,17 +76,17 @@ class _$TokensResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accessToken = null,
-    Object? refreshToken = null,
+    Object? access_token = null,
+    Object? refresh_token = null,
   }) {
     return _then(_self.copyWith(
-      accessToken: null == accessToken
-          ? _self.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
+      access_token: null == access_token
+          ? _self.access_token
+          : access_token // ignore: cast_nullable_to_non_nullable
               as AccessTokenResponse,
-      refreshToken: null == refreshToken
-          ? _self.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _self.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as RefreshTokenResponse,
     ));
   }
@@ -95,9 +95,9 @@ class _$TokensResponseCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $AccessTokenResponseCopyWith<$Res> get accessToken {
-    return $AccessTokenResponseCopyWith<$Res>(_self.accessToken, (value) {
-      return _then(_self.copyWith(accessToken: value));
+  $AccessTokenResponseCopyWith<$Res> get access_token {
+    return $AccessTokenResponseCopyWith<$Res>(_self.access_token, (value) {
+      return _then(_self.copyWith(access_token: value));
     });
   }
 
@@ -105,9 +105,9 @@ class _$TokensResponseCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $RefreshTokenResponseCopyWith<$Res> get refreshToken {
-    return $RefreshTokenResponseCopyWith<$Res>(_self.refreshToken, (value) {
-      return _then(_self.copyWith(refreshToken: value));
+  $RefreshTokenResponseCopyWith<$Res> get refresh_token {
+    return $RefreshTokenResponseCopyWith<$Res>(_self.refresh_token, (value) {
+      return _then(_self.copyWith(refresh_token: value));
     });
   }
 }
@@ -115,14 +115,14 @@ class _$TokensResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _TokensResponse implements TokensResponse {
-  _TokensResponse({required this.accessToken, required this.refreshToken});
+  _TokensResponse({required this.access_token, required this.refresh_token});
   factory _TokensResponse.fromJson(Map<String, dynamic> json) =>
       _$TokensResponseFromJson(json);
 
   @override
-  final AccessTokenResponse accessToken;
+  final AccessTokenResponse access_token;
   @override
-  final RefreshTokenResponse refreshToken;
+  final RefreshTokenResponse refresh_token;
 
   /// Create a copy of TokensResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -144,19 +144,19 @@ class _TokensResponse implements TokensResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _TokensResponse &&
-            (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken) &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken));
+            (identical(other.access_token, access_token) ||
+                other.access_token == access_token) &&
+            (identical(other.refresh_token, refresh_token) ||
+                other.refresh_token == refresh_token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken);
+  int get hashCode => Object.hash(runtimeType, access_token, refresh_token);
 
   @override
   String toString() {
-    return 'TokensResponse(accessToken: $accessToken, refreshToken: $refreshToken)';
+    return 'TokensResponse(access_token: $access_token, refresh_token: $refresh_token)';
   }
 }
 
@@ -169,12 +169,12 @@ abstract mixin class _$TokensResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AccessTokenResponse accessToken, RefreshTokenResponse refreshToken});
+      {AccessTokenResponse access_token, RefreshTokenResponse refresh_token});
 
   @override
-  $AccessTokenResponseCopyWith<$Res> get accessToken;
+  $AccessTokenResponseCopyWith<$Res> get access_token;
   @override
-  $RefreshTokenResponseCopyWith<$Res> get refreshToken;
+  $RefreshTokenResponseCopyWith<$Res> get refresh_token;
 }
 
 /// @nodoc
@@ -190,17 +190,17 @@ class __$TokensResponseCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? accessToken = null,
-    Object? refreshToken = null,
+    Object? access_token = null,
+    Object? refresh_token = null,
   }) {
     return _then(_TokensResponse(
-      accessToken: null == accessToken
-          ? _self.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
+      access_token: null == access_token
+          ? _self.access_token
+          : access_token // ignore: cast_nullable_to_non_nullable
               as AccessTokenResponse,
-      refreshToken: null == refreshToken
-          ? _self.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _self.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as RefreshTokenResponse,
     ));
   }
@@ -209,9 +209,9 @@ class __$TokensResponseCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $AccessTokenResponseCopyWith<$Res> get accessToken {
-    return $AccessTokenResponseCopyWith<$Res>(_self.accessToken, (value) {
-      return _then(_self.copyWith(accessToken: value));
+  $AccessTokenResponseCopyWith<$Res> get access_token {
+    return $AccessTokenResponseCopyWith<$Res>(_self.access_token, (value) {
+      return _then(_self.copyWith(access_token: value));
     });
   }
 
@@ -219,9 +219,9 @@ class __$TokensResponseCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $RefreshTokenResponseCopyWith<$Res> get refreshToken {
-    return $RefreshTokenResponseCopyWith<$Res>(_self.refreshToken, (value) {
-      return _then(_self.copyWith(refreshToken: value));
+  $RefreshTokenResponseCopyWith<$Res> get refresh_token {
+    return $RefreshTokenResponseCopyWith<$Res>(_self.refresh_token, (value) {
+      return _then(_self.copyWith(refresh_token: value));
     });
   }
 }

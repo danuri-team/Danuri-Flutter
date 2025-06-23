@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RefreshTokenRequest {
-  String get refreshToken;
+  String get refresh_token;
 
   /// Create a copy of RefreshTokenRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -33,17 +33,17 @@ mixin _$RefreshTokenRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is RefreshTokenRequest &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken));
+            (identical(other.refresh_token, refresh_token) ||
+                other.refresh_token == refresh_token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, refreshToken);
+  int get hashCode => Object.hash(runtimeType, refresh_token);
 
   @override
   String toString() {
-    return 'RefreshTokenRequest(refreshToken: $refreshToken)';
+    return 'RefreshTokenRequest(refresh_token: $refresh_token)';
   }
 }
 
@@ -53,7 +53,7 @@ abstract mixin class $RefreshTokenRequestCopyWith<$Res> {
           RefreshTokenRequest value, $Res Function(RefreshTokenRequest) _then) =
       _$RefreshTokenRequestCopyWithImpl;
   @useResult
-  $Res call({String refreshToken});
+  $Res call({String refresh_token});
 }
 
 /// @nodoc
@@ -69,12 +69,12 @@ class _$RefreshTokenRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? refreshToken = null,
+    Object? refresh_token = null,
   }) {
     return _then(_self.copyWith(
-      refreshToken: null == refreshToken
-          ? _self.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _self.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -83,12 +83,12 @@ class _$RefreshTokenRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _RefreshTokenRequest implements RefreshTokenRequest {
-  _RefreshTokenRequest({required this.refreshToken});
+  _RefreshTokenRequest({required this.refresh_token});
   factory _RefreshTokenRequest.fromJson(Map<String, dynamic> json) =>
       _$RefreshTokenRequestFromJson(json);
 
   @override
-  final String refreshToken;
+  final String refresh_token;
 
   /// Create a copy of RefreshTokenRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -111,17 +111,17 @@ class _RefreshTokenRequest implements RefreshTokenRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RefreshTokenRequest &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken));
+            (identical(other.refresh_token, refresh_token) ||
+                other.refresh_token == refresh_token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, refreshToken);
+  int get hashCode => Object.hash(runtimeType, refresh_token);
 
   @override
   String toString() {
-    return 'RefreshTokenRequest(refreshToken: $refreshToken)';
+    return 'RefreshTokenRequest(refresh_token: $refresh_token)';
   }
 }
 
@@ -133,7 +133,7 @@ abstract mixin class _$RefreshTokenRequestCopyWith<$Res>
       __$RefreshTokenRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String refreshToken});
+  $Res call({String refresh_token});
 }
 
 /// @nodoc
@@ -149,12 +149,12 @@ class __$RefreshTokenRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? refreshToken = null,
+    Object? refresh_token = null,
   }) {
     return _then(_RefreshTokenRequest(
-      refreshToken: null == refreshToken
-          ? _self.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _self.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

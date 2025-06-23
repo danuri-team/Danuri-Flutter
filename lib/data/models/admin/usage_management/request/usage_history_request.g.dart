@@ -8,17 +8,17 @@ part of 'usage_history_request.dart';
 
 _UsageHistoryRequest _$UsageHistoryRequestFromJson(Map<String, dynamic> json) =>
     _UsageHistoryRequest(
-      startDate: json['startDate'] as String,
-      endDate: json['endDate'] as String,
-      spaceId: json['spaceId'] as String?,
-      userId: json['userId'] as String?,
+      start_date: json['start_date'] as String,
+      end_date: json['end_date'] as String,
+      space_id: json['space_id'] as String?,
+      user_id: json['user_id'] as String?,
     );
 
 Map<String, dynamic> _$UsageHistoryRequestToJson(
         _UsageHistoryRequest instance) =>
     <String, dynamic>{
-      'startDate': instance.startDate,
-      'endDate': instance.endDate,
-      'spaceId': instance.spaceId,
-      'userId': instance.userId,
+      'start_date': instance.start_date,
+      'end_date': instance.end_date,
+      'space_id': instance.space_id,
+      'user_id': instance.user_id,
     };

@@ -8,7 +8,7 @@ part of 'create_user_request.dart';
 
 _CreateUserRequest _$CreateUserRequestFromJson(Map<String, dynamic> json) =>
     _CreateUserRequest(
-      companyId: json['companyId'] as String,
+      company_id: json['company_id'] as String,
       name: json['name'] as String,
       sex: $enumDecode(_$SexTypeEnumMap, json['sex']),
       age: $enumDecode(_$AgeTypeEnumMap, json['age']),
@@ -17,7 +17,7 @@ _CreateUserRequest _$CreateUserRequestFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$CreateUserRequestToJson(_CreateUserRequest instance) =>
     <String, dynamic>{
-      'companyId': instance.companyId,
+      'company_id': instance.company_id,
       'name': instance.name,
       'sex': _$SexTypeEnumMap[instance.sex]!,
       'age': _$AgeTypeEnumMap[instance.age]!,

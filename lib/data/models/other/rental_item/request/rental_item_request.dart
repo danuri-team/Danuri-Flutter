@@ -6,7 +6,7 @@ part 'rental_item_request.g.dart';
 @freezed
 abstract class RentalItemRequest with _$RentalItemRequest{
   factory RentalItemRequest({
-    required String itemId,
+    required String item_id,
     required int quantity,
   }) = _RentalItemRequest;
 

@@ -17,7 +17,5 @@ Map<String, dynamic> _$StatusResponseToJson(_StatusResponse instance) =>
     };
 
 const _$StatusTypeEnumMap = {
-  StatusType.UP: 'UP',
   StatusType.AVAILABLE: 'AVAILABLE',
-  StatusType.NEED_COMPANY_APPROVE: 'NEED_COMPANY_APPROVE',
 };

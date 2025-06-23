@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RentalItemRequest {
-  String get itemId;
+  String get item_id;
   int get quantity;
 
   /// Create a copy of RentalItemRequest
@@ -34,18 +34,18 @@ mixin _$RentalItemRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is RentalItemRequest &&
-            (identical(other.itemId, itemId) || other.itemId == itemId) &&
+            (identical(other.item_id, item_id) || other.item_id == item_id) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, itemId, quantity);
+  int get hashCode => Object.hash(runtimeType, item_id, quantity);
 
   @override
   String toString() {
-    return 'RentalItemRequest(itemId: $itemId, quantity: $quantity)';
+    return 'RentalItemRequest(item_id: $item_id, quantity: $quantity)';
   }
 }
 
@@ -55,7 +55,7 @@ abstract mixin class $RentalItemRequestCopyWith<$Res> {
           RentalItemRequest value, $Res Function(RentalItemRequest) _then) =
       _$RentalItemRequestCopyWithImpl;
   @useResult
-  $Res call({String itemId, int quantity});
+  $Res call({String item_id, int quantity});
 }
 
 /// @nodoc
@@ -71,13 +71,13 @@ class _$RentalItemRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? itemId = null,
+    Object? item_id = null,
     Object? quantity = null,
   }) {
     return _then(_self.copyWith(
-      itemId: null == itemId
-          ? _self.itemId
-          : itemId // ignore: cast_nullable_to_non_nullable
+      item_id: null == item_id
+          ? _self.item_id
+          : item_id // ignore: cast_nullable_to_non_nullable
               as String,
       quantity: null == quantity
           ? _self.quantity
@@ -90,12 +90,12 @@ class _$RentalItemRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _RentalItemRequest implements RentalItemRequest {
-  _RentalItemRequest({required this.itemId, required this.quantity});
+  _RentalItemRequest({required this.item_id, required this.quantity});
   factory _RentalItemRequest.fromJson(Map<String, dynamic> json) =>
       _$RentalItemRequestFromJson(json);
 
   @override
-  final String itemId;
+  final String item_id;
   @override
   final int quantity;
 
@@ -119,18 +119,18 @@ class _RentalItemRequest implements RentalItemRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RentalItemRequest &&
-            (identical(other.itemId, itemId) || other.itemId == itemId) &&
+            (identical(other.item_id, item_id) || other.item_id == item_id) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, itemId, quantity);
+  int get hashCode => Object.hash(runtimeType, item_id, quantity);
 
   @override
   String toString() {
-    return 'RentalItemRequest(itemId: $itemId, quantity: $quantity)';
+    return 'RentalItemRequest(item_id: $item_id, quantity: $quantity)';
   }
 }
 
@@ -142,7 +142,7 @@ abstract mixin class _$RentalItemRequestCopyWith<$Res>
       __$RentalItemRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String itemId, int quantity});
+  $Res call({String item_id, int quantity});
 }
 
 /// @nodoc
@@ -158,13 +158,13 @@ class __$RentalItemRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? itemId = null,
+    Object? item_id = null,
     Object? quantity = null,
   }) {
     return _then(_RentalItemRequest(
-      itemId: null == itemId
-          ? _self.itemId
-          : itemId // ignore: cast_nullable_to_non_nullable
+      item_id: null == item_id
+          ? _self.item_id
+          : item_id // ignore: cast_nullable_to_non_nullable
               as String,
       quantity: null == quantity
           ? _self.quantity

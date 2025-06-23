@@ -15,11 +15,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$SignUpRequest {
-  String get companyId;
+  String get company_id;
   String get name;
   String get phone;
-  String get sex;
-  String get age;
+  SexType get sex;
+  AgeType get age;
 
   /// Create a copy of SignUpRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -37,8 +37,8 @@ mixin _$SignUpRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SignUpRequest &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
+            (identical(other.company_id, company_id) ||
+                other.company_id == company_id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.sex, sex) || other.sex == sex) &&
@@ -48,11 +48,11 @@ mixin _$SignUpRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, companyId, name, phone, sex, age);
+      Object.hash(runtimeType, company_id, name, phone, sex, age);
 
   @override
   String toString() {
-    return 'SignUpRequest(companyId: $companyId, name: $name, phone: $phone, sex: $sex, age: $age)';
+    return 'SignUpRequest(company_id: $company_id, name: $name, phone: $phone, sex: $sex, age: $age)';
   }
 }
 
@@ -63,7 +63,7 @@ abstract mixin class $SignUpRequestCopyWith<$Res> {
       _$SignUpRequestCopyWithImpl;
   @useResult
   $Res call(
-      {String companyId, String name, String phone, String sex, String age});
+      {String company_id, String name, String phone, SexType sex, AgeType age});
 }
 
 /// @nodoc
@@ -79,16 +79,16 @@ class _$SignUpRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? companyId = null,
+    Object? company_id = null,
     Object? name = null,
     Object? phone = null,
     Object? sex = null,
     Object? age = null,
   }) {
     return _then(_self.copyWith(
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
+      company_id: null == company_id
+          ? _self.company_id
+          : company_id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _self.name
@@ -101,11 +101,11 @@ class _$SignUpRequestCopyWithImpl<$Res>
       sex: null == sex
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SexType,
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
     ));
   }
 }
@@ -114,7 +114,7 @@ class _$SignUpRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _SignUpRequest implements SignUpRequest {
   _SignUpRequest(
-      {required this.companyId,
+      {required this.company_id,
       required this.name,
       required this.phone,
       required this.sex,
@@ -123,15 +123,15 @@ class _SignUpRequest implements SignUpRequest {
       _$SignUpRequestFromJson(json);
 
   @override
-  final String companyId;
+  final String company_id;
   @override
   final String name;
   @override
   final String phone;
   @override
-  final String sex;
+  final SexType sex;
   @override
-  final String age;
+  final AgeType age;
 
   /// Create a copy of SignUpRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -153,8 +153,8 @@ class _SignUpRequest implements SignUpRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SignUpRequest &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
+            (identical(other.company_id, company_id) ||
+                other.company_id == company_id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.sex, sex) || other.sex == sex) &&
@@ -164,11 +164,11 @@ class _SignUpRequest implements SignUpRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, companyId, name, phone, sex, age);
+      Object.hash(runtimeType, company_id, name, phone, sex, age);
 
   @override
   String toString() {
-    return 'SignUpRequest(companyId: $companyId, name: $name, phone: $phone, sex: $sex, age: $age)';
+    return 'SignUpRequest(company_id: $company_id, name: $name, phone: $phone, sex: $sex, age: $age)';
   }
 }
 
@@ -181,7 +181,7 @@ abstract mixin class _$SignUpRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String companyId, String name, String phone, String sex, String age});
+      {String company_id, String name, String phone, SexType sex, AgeType age});
 }
 
 /// @nodoc
@@ -197,16 +197,16 @@ class __$SignUpRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? companyId = null,
+    Object? company_id = null,
     Object? name = null,
     Object? phone = null,
     Object? sex = null,
     Object? age = null,
   }) {
     return _then(_SignUpRequest(
-      companyId: null == companyId
-          ? _self.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
+      company_id: null == company_id
+          ? _self.company_id
+          : company_id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _self.name
@@ -219,11 +219,11 @@ class __$SignUpRequestCopyWithImpl<$Res>
       sex: null == sex
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SexType,
       age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as String,
+              as AgeType,
     ));
   }
 }

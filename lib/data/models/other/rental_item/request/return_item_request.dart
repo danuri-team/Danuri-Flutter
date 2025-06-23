@@ -6,7 +6,7 @@ part 'return_item_request.g.dart';
 @freezed
 abstract class ReturnItemRequest with _$ReturnItemRequest{
   factory ReturnItemRequest({
-    required int returnedQuantity,
+    required int returned_quantity,
     required String comment,
   }) = _ReturnItemRequest;
 

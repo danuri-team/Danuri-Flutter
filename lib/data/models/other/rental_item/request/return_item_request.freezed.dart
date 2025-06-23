@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ReturnItemRequest {
-  int get returnedQuantity;
+  int get returned_quantity;
   String get comment;
 
   /// Create a copy of ReturnItemRequest
@@ -34,18 +34,18 @@ mixin _$ReturnItemRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ReturnItemRequest &&
-            (identical(other.returnedQuantity, returnedQuantity) ||
-                other.returnedQuantity == returnedQuantity) &&
+            (identical(other.returned_quantity, returned_quantity) ||
+                other.returned_quantity == returned_quantity) &&
             (identical(other.comment, comment) || other.comment == comment));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, returnedQuantity, comment);
+  int get hashCode => Object.hash(runtimeType, returned_quantity, comment);
 
   @override
   String toString() {
-    return 'ReturnItemRequest(returnedQuantity: $returnedQuantity, comment: $comment)';
+    return 'ReturnItemRequest(returned_quantity: $returned_quantity, comment: $comment)';
   }
 }
 
@@ -55,7 +55,7 @@ abstract mixin class $ReturnItemRequestCopyWith<$Res> {
           ReturnItemRequest value, $Res Function(ReturnItemRequest) _then) =
       _$ReturnItemRequestCopyWithImpl;
   @useResult
-  $Res call({int returnedQuantity, String comment});
+  $Res call({int returned_quantity, String comment});
 }
 
 /// @nodoc
@@ -71,13 +71,13 @@ class _$ReturnItemRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? returnedQuantity = null,
+    Object? returned_quantity = null,
     Object? comment = null,
   }) {
     return _then(_self.copyWith(
-      returnedQuantity: null == returnedQuantity
-          ? _self.returnedQuantity
-          : returnedQuantity // ignore: cast_nullable_to_non_nullable
+      returned_quantity: null == returned_quantity
+          ? _self.returned_quantity
+          : returned_quantity // ignore: cast_nullable_to_non_nullable
               as int,
       comment: null == comment
           ? _self.comment
@@ -90,12 +90,12 @@ class _$ReturnItemRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _ReturnItemRequest implements ReturnItemRequest {
-  _ReturnItemRequest({required this.returnedQuantity, required this.comment});
+  _ReturnItemRequest({required this.returned_quantity, required this.comment});
   factory _ReturnItemRequest.fromJson(Map<String, dynamic> json) =>
       _$ReturnItemRequestFromJson(json);
 
   @override
-  final int returnedQuantity;
+  final int returned_quantity;
   @override
   final String comment;
 
@@ -119,18 +119,18 @@ class _ReturnItemRequest implements ReturnItemRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ReturnItemRequest &&
-            (identical(other.returnedQuantity, returnedQuantity) ||
-                other.returnedQuantity == returnedQuantity) &&
+            (identical(other.returned_quantity, returned_quantity) ||
+                other.returned_quantity == returned_quantity) &&
             (identical(other.comment, comment) || other.comment == comment));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, returnedQuantity, comment);
+  int get hashCode => Object.hash(runtimeType, returned_quantity, comment);
 
   @override
   String toString() {
-    return 'ReturnItemRequest(returnedQuantity: $returnedQuantity, comment: $comment)';
+    return 'ReturnItemRequest(returned_quantity: $returned_quantity, comment: $comment)';
   }
 }
 
@@ -142,7 +142,7 @@ abstract mixin class _$ReturnItemRequestCopyWith<$Res>
       __$ReturnItemRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({int returnedQuantity, String comment});
+  $Res call({int returned_quantity, String comment});
 }
 
 /// @nodoc
@@ -158,13 +158,13 @@ class __$ReturnItemRequestCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? returnedQuantity = null,
+    Object? returned_quantity = null,
     Object? comment = null,
   }) {
     return _then(_ReturnItemRequest(
-      returnedQuantity: null == returnedQuantity
-          ? _self.returnedQuantity
-          : returnedQuantity // ignore: cast_nullable_to_non_nullable
+      returned_quantity: null == returned_quantity
+          ? _self.returned_quantity
+          : returned_quantity // ignore: cast_nullable_to_non_nullable
               as int,
       comment: null == comment
           ? _self.comment

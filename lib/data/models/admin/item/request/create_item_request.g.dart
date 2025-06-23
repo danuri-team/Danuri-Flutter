@@ -9,13 +9,17 @@ part of 'create_item_request.dart';
 _CreateItemRequest _$CreateItemRequestFromJson(Map<String, dynamic> json) =>
     _CreateItemRequest(
       name: json['name'] as String,
-      totalQuantity: json['totalQuantity'] as String,
-      status: json['status'] as String,
+      total_quantity: (json['total_quantity'] as num).toInt(),
+      status: $enumDecode(_$StatusTypeEnumMap, json['status']),
     );
 
 Map<String, dynamic> _$CreateItemRequestToJson(_CreateItemRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'totalQuantity': instance.totalQuantity,
-      'status': instance.status,
+      'total_quantity': instance.total_quantity,
+      'status': _$StatusTypeEnumMap[instance.status]!,
     };
+
+const _$StatusTypeEnumMap = {
+  StatusType.AVAILABLE: 'AVAILABLE',
+};

@@ -16,8 +16,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UpdateItemRequest {
   String get name;
-  String get totalQuantity;
-  String get status;
+  int get total_quantity;
+  int get available_quantity;
+  StatusType get status;
 
   /// Create a copy of UpdateItemRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -36,18 +37,21 @@ mixin _$UpdateItemRequest {
         (other.runtimeType == runtimeType &&
             other is UpdateItemRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity) &&
+            (identical(other.total_quantity, total_quantity) ||
+                other.total_quantity == total_quantity) &&
+            (identical(other.available_quantity, available_quantity) ||
+                other.available_quantity == available_quantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, totalQuantity, status);
+  int get hashCode => Object.hash(
+      runtimeType, name, total_quantity, available_quantity, status);
 
   @override
   String toString() {
-    return 'UpdateItemRequest(name: $name, totalQuantity: $totalQuantity, status: $status)';
+    return 'UpdateItemRequest(name: $name, total_quantity: $total_quantity, available_quantity: $available_quantity, status: $status)';
   }
 }
 
@@ -57,7 +61,11 @@ abstract mixin class $UpdateItemRequestCopyWith<$Res> {
           UpdateItemRequest value, $Res Function(UpdateItemRequest) _then) =
       _$UpdateItemRequestCopyWithImpl;
   @useResult
-  $Res call({String name, String totalQuantity, String status});
+  $Res call(
+      {String name,
+      int total_quantity,
+      int available_quantity,
+      StatusType status});
 }
 
 /// @nodoc
@@ -74,7 +82,8 @@ class _$UpdateItemRequestCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? totalQuantity = null,
+    Object? total_quantity = null,
+    Object? available_quantity = null,
     Object? status = null,
   }) {
     return _then(_self.copyWith(
@@ -82,14 +91,18 @@ class _$UpdateItemRequestCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      totalQuantity: null == totalQuantity
-          ? _self.totalQuantity
-          : totalQuantity // ignore: cast_nullable_to_non_nullable
-              as String,
+      total_quantity: null == total_quantity
+          ? _self.total_quantity
+          : total_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      available_quantity: null == available_quantity
+          ? _self.available_quantity
+          : available_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
     ));
   }
 }
@@ -98,16 +111,21 @@ class _$UpdateItemRequestCopyWithImpl<$Res>
 @JsonSerializable()
 class _UpdateItemRequest implements UpdateItemRequest {
   _UpdateItemRequest(
-      {required this.name, required this.totalQuantity, required this.status});
+      {required this.name,
+      required this.total_quantity,
+      required this.available_quantity,
+      required this.status});
   factory _UpdateItemRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateItemRequestFromJson(json);
 
   @override
   final String name;
   @override
-  final String totalQuantity;
+  final int total_quantity;
   @override
-  final String status;
+  final int available_quantity;
+  @override
+  final StatusType status;
 
   /// Create a copy of UpdateItemRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -130,18 +148,21 @@ class _UpdateItemRequest implements UpdateItemRequest {
         (other.runtimeType == runtimeType &&
             other is _UpdateItemRequest &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity) &&
+            (identical(other.total_quantity, total_quantity) ||
+                other.total_quantity == total_quantity) &&
+            (identical(other.available_quantity, available_quantity) ||
+                other.available_quantity == available_quantity) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, totalQuantity, status);
+  int get hashCode => Object.hash(
+      runtimeType, name, total_quantity, available_quantity, status);
 
   @override
   String toString() {
-    return 'UpdateItemRequest(name: $name, totalQuantity: $totalQuantity, status: $status)';
+    return 'UpdateItemRequest(name: $name, total_quantity: $total_quantity, available_quantity: $available_quantity, status: $status)';
   }
 }
 
@@ -153,7 +174,11 @@ abstract mixin class _$UpdateItemRequestCopyWith<$Res>
       __$UpdateItemRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, String totalQuantity, String status});
+  $Res call(
+      {String name,
+      int total_quantity,
+      int available_quantity,
+      StatusType status});
 }
 
 /// @nodoc
@@ -170,7 +195,8 @@ class __$UpdateItemRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? name = null,
-    Object? totalQuantity = null,
+    Object? total_quantity = null,
+    Object? available_quantity = null,
     Object? status = null,
   }) {
     return _then(_UpdateItemRequest(
@@ -178,14 +204,18 @@ class __$UpdateItemRequestCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      totalQuantity: null == totalQuantity
-          ? _self.totalQuantity
-          : totalQuantity // ignore: cast_nullable_to_non_nullable
-              as String,
+      total_quantity: null == total_quantity
+          ? _self.total_quantity
+          : total_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
+      available_quantity: null == available_quantity
+          ? _self.available_quantity
+          : available_quantity // ignore: cast_nullable_to_non_nullable
+              as int,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
     ));
   }
 }
