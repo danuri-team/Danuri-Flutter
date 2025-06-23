@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/data/data_sources/auth/user_auth_data_source.dart';
-import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
+import 'package:danuri_flutter/data/models/enum/age_type.dart';
+import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/response/user_info_response.dart';
 import 'package:dio/dio.dart';
@@ -19,11 +19,11 @@ class SignUpViewModel {
     try {
       _userInfo = await _dataSource.signUp(
         SignUpRequest(
-          companyId: companyId,
+          company_id: companyId,
           name: userName,
           phone: phoneNumber,
-          sex: sex.name,
-          age: age.name,
+          sex: sex.name as SexType,
+          age: age.name as AgeType,
         ),
       );
       _error = false;

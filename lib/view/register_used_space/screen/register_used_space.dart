@@ -1,8 +1,8 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/data/view_model/register_used_space_view_model.dart';
-import 'package:danuri_flutter/view/compoments/button/next_button.dart';
-import 'package:danuri_flutter/view/compoments/custom_top_bar.dart';
+import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
+import 'package:danuri_flutter/view/components/button/next_button.dart';
+import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:danuri_flutter/view/register_used_space/widgets/show_available_space.dart';
 import 'package:danuri_flutter/view/register_used_space/widgets/space_box.dart';
 import 'package:flutter/material.dart';

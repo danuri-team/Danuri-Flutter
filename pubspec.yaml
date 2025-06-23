@@ -23,13 +23,10 @@ dependencies:
   freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
   dio: ^5.8.0+1
+
+  # 상태관리 지원 패키지
   provider: ^6.1.5
 
-  # 데이터 클래스에 필요한 기능들을 지원하는 패키지
-  freezed: ^3.0.6 
-  freezed_annotation: ^3.0.0
-  json_annotation: ^4.9.0
-  dio: ^5.8.0+1
 
 dev_dependencies:
   flutter_test:

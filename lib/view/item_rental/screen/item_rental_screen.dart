@@ -1,10 +1,10 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
-import 'package:danuri_flutter/view/compoments/availability_sign.dart';
-import 'package:danuri_flutter/view/compoments/button/next_button.dart';
-import 'package:danuri_flutter/view/compoments/custom_top_bar.dart';
-import 'package:danuri_flutter/view/compoments/selection_box.dart';
+import 'package:danuri_flutter/view/components/availability_sign.dart';
+import 'package:danuri_flutter/view/components/button/next_button.dart';
+import 'package:danuri_flutter/view/components/custom_top_bar.dart';
+import 'package:danuri_flutter/view/components/selection_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

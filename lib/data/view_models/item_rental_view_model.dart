@@ -26,7 +26,7 @@ class ItemRentalViewModel {
     try {
       _rentedItem = await _itemDataSource.itemRental(
         usageId,
-        RentalItemRequest(itemId: itemId, quantity: quantity),
+        RentalItemRequest(item_id: itemId, quantity: quantity),
       );
       _error = false;
     } on DioException catch (_) {

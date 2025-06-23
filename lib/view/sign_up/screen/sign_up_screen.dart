@@ -1,9 +1,9 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
-import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
-import 'package:danuri_flutter/data/view_model/sign_up_view_model.dart';
+import 'package:danuri_flutter/data/models/enum/age_type.dart';
+import 'package:danuri_flutter/data/models/enum/sex_type.dart';
+import 'package:danuri_flutter/data/view_models/sign_up_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:danuri_flutter/view/sign_up/widget/rounded_rectangle_box.dart';

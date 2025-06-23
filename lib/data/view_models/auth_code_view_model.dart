@@ -17,7 +17,7 @@ class AuthCodeViewModel {
       _token = await _dataSource.authCodeLogin(
         AuthCodeLoginRequest(
           phone: phoneNumber,
-          authCode: authCode,
+          auth_code: authCode,
         ),
       );
       _error = false;

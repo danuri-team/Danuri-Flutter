@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:danuri_flutter/view/compoments/button/next_button.dart';
-import 'package:danuri_flutter/view/compoments/custom_top_bar.dart';
+import 'package:danuri_flutter/view/components/button/next_button.dart';
+import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
-import 'package:danuri_flutter/data/view_model/login_view_model.dart';
-import 'package:danuri_flutter/view/componenets/button/next_button.dart';
-import 'package:danuri_flutter/view/componenets/custom_top_bar.dart';
+import 'package:danuri_flutter/data/view_models/login_view_model.dart';
+import 'package:danuri_flutter/view/components/button/next_button.dart';
+import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
