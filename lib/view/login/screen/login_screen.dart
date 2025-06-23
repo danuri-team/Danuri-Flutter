@@ -28,9 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PhoneNumberProvider>(
-      create: (context) => PhoneNumberProvider(),
-      child: Scaffold(
+    return Scaffold(
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(60.w, 85.h, 61.w, 58.h),
@@ -89,7 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 }

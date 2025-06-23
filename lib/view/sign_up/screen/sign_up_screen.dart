@@ -191,9 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ChangeNotifierProvider<PhoneNumberProvider>(
-                  create: (context) => PhoneNumberProvider(),
-                  child: NextButton(
+                NextButton(
                     centerText: '완료',
                     onTap: () async {
                       await _viewModel.signUp(
@@ -208,7 +206,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                     },
                   ),
-                ),
               ],
             ),
           ],
