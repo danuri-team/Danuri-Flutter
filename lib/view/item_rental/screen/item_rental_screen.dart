@@ -1,6 +1,8 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
+import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
 import 'package:danuri_flutter/view/components/availability_sign.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
@@ -8,6 +10,7 @@ import 'package:danuri_flutter/view/components/selection_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class ItemRentalScreen extends StatefulWidget {
   const ItemRentalScreen({super.key});
@@ -19,12 +22,13 @@ class ItemRentalScreen extends StatefulWidget {
 class _ItemRentalScreenState extends State<ItemRentalScreen> {
   Map<String, String?> selectedItem = {'itemId': null};
 
-  final ItemRentalViewModel _viewModel = ItemRentalViewModel();
+  final ItemRentalViewModel _itemViewModel = ItemRentalViewModel();
+  final RegisterUsedSpaceViewModel _spaceViewModel = RegisterUsedSpaceViewModel();
 
   Future<void> fetchData() async {
     await Future.wait([
-      _viewModel.getItemAvailableRent(), // 대여 가능 아이템 조회
-      _viewModel.getUsageSpace(), // 공간 사용 조회
+      _itemViewModel.getItemAvailableRent(), // 대여 가능 아이템 조회
+      _itemViewModel.getUsageSpace(), // 공간 사용 조회
     ]).then(
       (_) => setState(
         () {},
@@ -76,7 +80,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
               style: DanuriText.body1Normal.copyWith(color: DanuriColor.label5),
             ),
             SizedBox(height: 14.h),
-            if (_viewModel.itemAvailableRental == null)
+            if (_itemViewModel.itemAvailableRental == null)
               SizedBox.shrink()
             else
               SizedBox(
@@ -84,30 +88,30 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                 height: 48.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _viewModel.itemAvailableRental?.length,
+                  itemCount: _itemViewModel.itemAvailableRental?.length,
                   itemBuilder: (context, index) {
                     return Row(
                       children: [
                         SelectionBox(
-                          available: _viewModel.itemAvailableRental![index]
+                          available: _itemViewModel.itemAvailableRental![index]
                                   .available_quantity !=
                               0,
                           isSelected: selectedItem['itemId'] ==
-                              _viewModel.itemAvailableRental![index].id,
+                              _itemViewModel.itemAvailableRental![index].id,
                           spaceName:
-                              _viewModel.itemAvailableRental![index].name,
+                              _itemViewModel.itemAvailableRental![index].name,
                           onTap: () {
-                            if (_viewModel.itemAvailableRental![index]
+                            if (_itemViewModel.itemAvailableRental![index]
                                     .available_quantity !=
                                 0) {
                               setState(() {
                                 selectedItem['itemId'] =
-                                    _viewModel.itemAvailableRental![index].id;
+                                    _itemViewModel.itemAvailableRental![index].id;
                               });
                             }
                           },
                         ),
-                        if (_viewModel.itemAvailableRental!.length != index + 1)
+                        if (_itemViewModel.itemAvailableRental!.length != index + 1)
                           SizedBox(width: 12.w),
                       ],
                     );
@@ -121,15 +125,14 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                 NextButton(
                   centerText: '다음',
                   onTap: () async {
-                    if (_viewModel.spaceUsage != null) {
-                      await _viewModel.itemRental(
-                          _viewModel.spaceUsage!.space_usage_info.usage_id,
+                    if (_itemViewModel.spaceUsage != null) {
+                      await _itemViewModel.itemRental(
+                          _itemViewModel.spaceUsage!.space_usage_info.usage_id,
                           selectedItem['itemId']!,
                           1);
-                      if (context.mounted) {
-                        context.go('/home');
-                      }
                     }
+                      await _spaceViewModel.registerUsedSpace(context.watch<SpaceIdProvider>().spaceId);
+                        context.go('/home');
                   },
                 ),
               ],

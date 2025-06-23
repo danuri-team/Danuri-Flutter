@@ -1,5 +1,6 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
@@ -7,6 +8,8 @@ import 'package:danuri_flutter/view/register_used_space/widgets/show_available_s
 import 'package:danuri_flutter/view/register_used_space/widgets/space_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class RegisterUsedSpace extends StatefulWidget {
   const RegisterUsedSpace({super.key});
@@ -112,8 +115,9 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
               children: [
                 NextButton(
                   centerText: '다음',
-                  onTap: () async {
-                    await _viewModel.registerUsedSpace(selectedSpace['spaceId']!);
+                  onTap: () {
+                    context.read<SpaceIdProvider>().setSpaceId(selectedSpace['spaceId']!);
+                    context.push('/item-rental');
                   },
                 ),
               ],
