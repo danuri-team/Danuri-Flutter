@@ -7,12 +7,11 @@ import 'package:danuri_flutter/data/models/auth/user_auth/response/user_info_res
 import 'package:danuri_flutter/network/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final String baseUrl = dotenv.env['API_URL']!;
-
 class UserAuthDataSource {
   final dio = AppDio.getInstance();
+  final String baseUrl = dotenv.env['API_URL']!;
 
-  Future<SendAuthCodeResponse> login(LoginRequest request) async {
+  Future<SendAuthCodeResponse> login(UserLoginRequest request) async {
     final response = await dio.post(
       '$baseUrl/auth/user/phone',
       data: request.toJson(),

@@ -4,10 +4,9 @@ import 'package:danuri_flutter/data/models/admin/user_management/response/user_r
 import 'package:danuri_flutter/network/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final String baseUrl = dotenv.env['API_URL']!;
-
 class UserManagementDataSource {
   final dio = AppDio.getInstance();
+  final String baseUrl = dotenv.env['API_URL']!;
 
   Future<UserResponse> createUser(CreateUserRequest request) async {
     final response = await dio.post(

@@ -1,47 +1,45 @@
 import 'package:danuri_flutter/data/models/admin/admin_account_management/request/change_password_request.dart';
 import 'package:danuri_flutter/data/models/admin/admin_account_management/request/update_admin_info_request.dart';
-import 'package:danuri_flutter/data/models/admin/admin_account_management/response/all_admin_account_response.dart';
-import 'package:danuri_flutter/data/models/admin/admin_account_management/response/my_info_response.dart';
-import 'package:danuri_flutter/data/models/admin/admin_account_management/response/specific_admin_info_response.dart';
+import 'package:danuri_flutter/data/models/admin/admin_account_management/response/admin_info_response.dart';
 import 'package:danuri_flutter/network/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final String baseUrl = dotenv.env['API_URL']!;
-
 class AdminAccountManagementDataSource {
   final dio = AppDio.getInstance();
+  final String baseUrl = dotenv.env['API_URL']!;
 
-  Future<MyInfoResponse> getMyInfo() async {
+  Future<AdminInfoResponse> getMyInfo() async {
     final response = await dio.get('$baseUrl/admin/management/me');
-    return MyInfoResponse.fromJson(response.data);
+    return AdminInfoResponse.fromJson(response.data);
   }
 
-  Future<SpecificAdminInfoResponse> getSpecificAdminAccountInfo(
+  Future<AdminInfoResponse> getSpecificAdminAccountInfo(
       String adminId) async {
     final response = await dio.get('$baseUrl/admin/management/$adminId');
-    return SpecificAdminInfoResponse.fromJson(response.data);
+    return AdminInfoResponse.fromJson(response.data);
   }
 
-  Future<AllAdminAccountResponse> getAllAdminAccount() async {
+  Future<List<AdminInfoResponse>> getAllAdminAccount() async {
     final response = await dio.get('$baseUrl/admin/management');
-    return AllAdminAccountResponse.fromJson(response.data);
+    final result = response.data as List;
+    return result.map((data) => AdminInfoResponse.fromJson(data)).toList();
   }
 
-  Future<MyInfoResponse> updateAdminInfo(
+  Future<AdminInfoResponse> updateAdminInfo(
       String adminId, UpdateAdminInfoRequest request) async {
     final response = await dio.put(
       '$baseUrl/admin/management/$adminId',
       data: request.toJson(),
     );
-    return MyInfoResponse.fromJson(response.data);
+    return AdminInfoResponse.fromJson(response.data);
   }
 
-  Future<MyInfoResponse> changePassword(ChangePasswordRequest request) async {
+  Future<AdminInfoResponse> changePassword(ChangePasswordRequest request) async {
     final response = await dio.put(
       '$baseUrl/admin/management/password',
       data: request.toJson(),
     );
-    return MyInfoResponse.fromJson(response.data);
+    return AdminInfoResponse.fromJson(response.data);
   }
 
   Future<void> deleteAdmin(String adminId) async {

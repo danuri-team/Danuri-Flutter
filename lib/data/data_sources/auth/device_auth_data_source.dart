@@ -3,9 +3,8 @@ import 'package:danuri_flutter/data/models/auth/device_auth/device_auth_request.
 import 'package:danuri_flutter/network/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final String baseUrl = dotenv.env['API_URL']!;
-
 class DeviceAuthDataSource {
+  final String baseUrl = dotenv.env['API_URL']!;
   final dio = AppDio.getInstance();
 
   Future<TokensResponse> login(DeviceAuthRequest request) async {
