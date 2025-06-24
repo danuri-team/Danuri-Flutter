@@ -6,12 +6,12 @@ part of 'status_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_StatusResponse _$StatusResponseFromJson(Map<String, dynamic> json) =>
-    _StatusResponse(
+StatusResponse _$StatusResponseFromJson(Map<String, dynamic> json) =>
+    StatusResponse(
       status: $enumDecode(_$StatusTypeEnumMap, json['status']),
     );
 
-Map<String, dynamic> _$StatusResponseToJson(_StatusResponse instance) =>
+Map<String, dynamic> _$StatusResponseToJson(StatusResponse instance) =>
     <String, dynamic>{
       'status': _$StatusTypeEnumMap[instance.status]!,
     };

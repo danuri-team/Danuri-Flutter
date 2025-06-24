@@ -6,26 +6,26 @@ part of 'space_usage_status_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SpaceUsageStatusResponse _$SpaceUsageStatusResponseFromJson(
+SpaceUsageStatusResponse _$SpaceUsageStatusResponseFromJson(
         Map<String, dynamic> json) =>
-    _SpaceUsageStatusResponse(
-      space_id: json['space_id'] as String,
+    SpaceUsageStatusResponse(
+      spaceId: json['space_id'] as String,
       name: json['name'] as String,
-      start_at: (json['start_at'] as List<dynamic>)
+      startAt: (json['start_at'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
-      end_at: (json['end_at'] as List<dynamic>)
+      endAt: (json['end_at'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
-      is_available: json['is_available'] as bool,
+      isAvailable: json['is_available'] as bool,
     );
 
 Map<String, dynamic> _$SpaceUsageStatusResponseToJson(
-        _SpaceUsageStatusResponse instance) =>
+        SpaceUsageStatusResponse instance) =>
     <String, dynamic>{
-      'space_id': instance.space_id,
+      'space_id': instance.spaceId,
       'name': instance.name,
-      'start_at': instance.start_at,
-      'end_at': instance.end_at,
-      'is_available': instance.is_available,
+      'start_at': instance.startAt,
+      'end_at': instance.endAt,
+      'is_available': instance.isAvailable,
     };

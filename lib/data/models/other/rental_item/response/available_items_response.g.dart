@@ -6,17 +6,17 @@ part of 'available_items_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ItemAvailableRental _$ItemAvailableRentalFromJson(Map<String, dynamic> json) =>
-    _ItemAvailableRental(
+ItemAvailableRental _$ItemAvailableRentalFromJson(Map<String, dynamic> json) =>
+    ItemAvailableRental(
       id: json['id'] as String,
       name: json['name'] as String,
-      available_quantity: (json['available_quantity'] as num).toInt(),
+      availableQuantity: (json['available_quantity'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ItemAvailableRentalToJson(
-        _ItemAvailableRental instance) =>
+        ItemAvailableRental instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'available_quantity': instance.available_quantity,
+      'available_quantity': instance.availableQuantity,
     };

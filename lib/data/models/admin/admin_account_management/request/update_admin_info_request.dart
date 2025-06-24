@@ -1,15 +1,21 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'update_admin_info_request.freezed.dart';
 part 'update_admin_info_request.g.dart';
 
-@freezed
-abstract class UpdateAdminInfoRequest with _$UpdateAdminInfoRequest{
-  factory UpdateAdminInfoRequest({
-    required String name,
-    required String email,
-    required String phone,
-  }) = _UpdateAdminInfoRequest;
+@JsonSerializable()
+class UpdateAdminInfoRequest{
+  final String name;
+  final String email;
+  final String phone;
 
-  factory UpdateAdminInfoRequest.fromJson(Map<String, dynamic> json) => _$UpdateAdminInfoRequestFromJson(json);
+  UpdateAdminInfoRequest({
+    required this.name,
+    required this.email,
+    required this.phone,
+  });
+
+  factory UpdateAdminInfoRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpdateAdminInfoRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateAdminInfoRequestToJson(this);
 }

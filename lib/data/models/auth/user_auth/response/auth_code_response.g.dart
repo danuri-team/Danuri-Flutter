@@ -6,12 +6,12 @@ part of 'auth_code_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AuthCodeResponse _$AuthCodeResponseFromJson(Map<String, dynamic> json) =>
-    _AuthCodeResponse(
-      authCode: json['authCode'] as String,
+AuthCodeResponse _$AuthCodeResponseFromJson(Map<String, dynamic> json) =>
+    AuthCodeResponse(
+      authCode: json['auth_code'] as String,
     );
 
-Map<String, dynamic> _$AuthCodeResponseToJson(_AuthCodeResponse instance) =>
+Map<String, dynamic> _$AuthCodeResponseToJson(AuthCodeResponse instance) =>
     <String, dynamic>{
-      'authCode': instance.authCode,
+      'auth_code': instance.authCode,
     };

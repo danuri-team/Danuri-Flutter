@@ -6,24 +6,24 @@ part of 'space_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SpaceResponse _$SpaceResponseFromJson(Map<String, dynamic> json) =>
-    _SpaceResponse(
+SpaceResponse _$SpaceResponseFromJson(Map<String, dynamic> json) =>
+    SpaceResponse(
       id: json['id'] as String,
       name: json['name'] as String,
-      start_at: (json['start_at'] as List<dynamic>)
+      startAt: (json['start_at'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
-      end_at: (json['end_at'] as List<dynamic>)
+      endAt: (json['end_at'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
-      usage_count: (json['usage_count'] as num).toInt(),
+      usageCount: (json['usageCount'] as num).toInt(),
     );
 
-Map<String, dynamic> _$SpaceResponseToJson(_SpaceResponse instance) =>
+Map<String, dynamic> _$SpaceResponseToJson(SpaceResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'start_at': instance.start_at,
-      'end_at': instance.end_at,
-      'usage_count': instance.usage_count,
+      'start_at': instance.startAt,
+      'end_at': instance.endAt,
+      'usageCount': instance.usageCount,
     };

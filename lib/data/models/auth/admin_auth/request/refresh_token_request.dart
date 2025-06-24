@@ -1,13 +1,18 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'refresh_token_request.freezed.dart';
 part 'refresh_token_request.g.dart';
 
-@freezed
-abstract class RefreshTokenRequest with _$RefreshTokenRequest{
-  factory RefreshTokenRequest({
-    required String refresh_token,
-  }) = _RefreshTokenRequest;
+@JsonSerializable()
+class RefreshTokenRequest {
+  @JsonKey(name: 'refresh_token')
+  final String refreshToken;
 
-  factory RefreshTokenRequest.fromJson(Map<String, dynamic> json) => _$RefreshTokenRequestFromJson(json);
+  RefreshTokenRequest({
+    required this.refreshToken,
+  });
+
+  factory RefreshTokenRequest.fromJson(Map<String, dynamic> json) =>
+      _$RefreshTokenRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RefreshTokenRequestToJson(this);
 }

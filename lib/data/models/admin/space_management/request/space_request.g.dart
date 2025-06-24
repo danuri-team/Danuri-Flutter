@@ -6,17 +6,15 @@ part of 'space_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SpaceRequestRequest _$SpaceRequestRequestFromJson(Map<String, dynamic> json) =>
-    _SpaceRequestRequest(
+SpaceRequest _$SpaceRequestFromJson(Map<String, dynamic> json) => SpaceRequest(
       name: json['name'] as String,
-      start_at: json['start_at'] as String,
-      end_at: json['end_at'] as String?,
+      startAt: json['start_at'] as String,
+      endAt: json['end_at'] as String?,
     );
 
-Map<String, dynamic> _$SpaceRequestRequestToJson(
-        _SpaceRequestRequest instance) =>
+Map<String, dynamic> _$SpaceRequestToJson(SpaceRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'start_at': instance.start_at,
-      'end_at': instance.end_at,
+      'start_at': instance.startAt,
+      'end_at': instance.endAt,
     };

@@ -6,16 +6,16 @@ part of 'refresh_token_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_RefreshTokenResponse _$RefreshTokenResponseFromJson(
+RefreshTokenResponse _$RefreshTokenResponseFromJson(
         Map<String, dynamic> json) =>
-    _RefreshTokenResponse(
+    RefreshTokenResponse(
       token: json['token'] as String,
-      expired_at: (json['expired_at'] as num).toInt(),
+      expiredAt: (json['expired_at'] as num).toInt(),
     );
 
 Map<String, dynamic> _$RefreshTokenResponseToJson(
-        _RefreshTokenResponse instance) =>
+        RefreshTokenResponse instance) =>
     <String, dynamic>{
       'token': instance.token,
-      'expired_at': instance.expired_at,
+      'expired_at': instance.expiredAt,
     };

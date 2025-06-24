@@ -6,15 +6,15 @@ part of 'update_user_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UpdateUserRequest _$UpdateUserRequestFromJson(Map<String, dynamic> json) =>
-    _UpdateUserRequest(
+UpdateUserRequest _$UpdateUserRequestFromJson(Map<String, dynamic> json) =>
+    UpdateUserRequest(
       name: json['name'] as String,
       email: json['email'] as String,
       phone: json['phone'] as String,
       role: $enumDecode(_$RoleTypeEnumMap, json['role']),
     );
 
-Map<String, dynamic> _$UpdateUserRequestToJson(_UpdateUserRequest instance) =>
+Map<String, dynamic> _$UpdateUserRequestToJson(UpdateUserRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
       'email': instance.email,

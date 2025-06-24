@@ -1,15 +1,23 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'space_request.freezed.dart';
 part 'space_request.g.dart';
 
-@freezed
-abstract class SpaceRequest with _$SpaceRequest{
-  factory SpaceRequest({
-    required String name,
-    required String start_at,
-    String? end_at,
-  }) = _SpaceRequestRequest;
+@JsonSerializable()
+class SpaceRequest {
+  final String name;
+  @JsonKey(name: 'start_at')
+  final String startAt;
+  @JsonKey(name: 'end_at')
+  String? endAt;
 
-  factory SpaceRequest.fromJson(Map<String, dynamic> json) => _$SpaceRequestFromJson(json);
+  SpaceRequest({
+    required this.name,
+    required this.startAt,
+    this.endAt,
+  });
+
+  factory SpaceRequest.fromJson(Map<String, dynamic> json) =>
+      _$SpaceRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SpaceRequestToJson(this);
 }

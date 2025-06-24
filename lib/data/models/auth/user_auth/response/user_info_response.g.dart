@@ -6,24 +6,24 @@ part of 'user_info_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UserInfoResponse _$UserInfoResponseFromJson(Map<String, dynamic> json) =>
-    _UserInfoResponse(
+UserInfoResponse _$UserInfoResponseFromJson(Map<String, dynamic> json) =>
+    UserInfoResponse(
       id: json['id'] as String,
       name: json['name'] as String,
       phone: json['phone'] as String,
       sex: $enumDecode(_$SexTypeEnumMap, json['sex']),
       age: $enumDecode(_$AgeTypeEnumMap, json['age']),
-      companyId: json['companyId'] as String,
+      companyId: json['company_id'] as String,
     );
 
-Map<String, dynamic> _$UserInfoResponseToJson(_UserInfoResponse instance) =>
+Map<String, dynamic> _$UserInfoResponseToJson(UserInfoResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'phone': instance.phone,
       'sex': _$SexTypeEnumMap[instance.sex]!,
       'age': _$AgeTypeEnumMap[instance.age]!,
-      'companyId': instance.companyId,
+      'company_id': instance.companyId,
     };
 
 const _$SexTypeEnumMap = {

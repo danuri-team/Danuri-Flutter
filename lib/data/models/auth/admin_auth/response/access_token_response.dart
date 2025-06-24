@@ -1,14 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'access_token_response.freezed.dart';
 part 'access_token_response.g.dart';
 
-@freezed
-abstract class AccessTokenResponse with _$AccessTokenResponse{
-  factory AccessTokenResponse({
-    required String token,
-    required int expired_at,
-  }) = _AccessTokenResponse;
+@JsonSerializable()
+class AccessTokenResponse {
+  final String token;
+  @JsonKey(name: 'expired_at')
+  final int expiredAt;
 
-  factory AccessTokenResponse.fromJson(Map<String, dynamic> json) => _$AccessTokenResponseFromJson(json);
+  AccessTokenResponse({
+    required this.token,
+    required this.expiredAt,
+  });
+
+  factory AccessTokenResponse.fromJson(Map<String, dynamic> json) =>
+      _$AccessTokenResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AccessTokenResponseToJson(this);
 }

@@ -1,14 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'admin_login_request.freezed.dart';
 part 'admin_login_request.g.dart';
 
-@freezed
-abstract class AdminLoginRequest with _$AdminLoginRequest{
-  factory AdminLoginRequest({
-    required String email,
-    required String password,
-  }) = _AdminLoginRequest;
+@JsonSerializable()
+class AdminLoginRequest {
+  final String email;
+  final String password;
 
-  factory AdminLoginRequest.fromJson(Map<String, dynamic> json) => _$AdminLoginRequestFromJson(json);
+  AdminLoginRequest({
+    required this.email,
+    required this.password,
+  });
+
+  factory AdminLoginRequest.fromJson(Map<String, dynamic> json) =>
+      _$AdminLoginRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AdminLoginRequestToJson(this);
 }

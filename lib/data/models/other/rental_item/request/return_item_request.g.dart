@@ -6,14 +6,14 @@ part of 'return_item_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ReturnItemRequest _$ReturnItemRequestFromJson(Map<String, dynamic> json) =>
-    _ReturnItemRequest(
-      returned_quantity: (json['returned_quantity'] as num).toInt(),
+ReturnItemRequest _$ReturnItemRequestFromJson(Map<String, dynamic> json) =>
+    ReturnItemRequest(
+      returnedQuantity: (json['returned_quantity'] as num).toInt(),
       comment: json['comment'] as String,
     );
 
-Map<String, dynamic> _$ReturnItemRequestToJson(_ReturnItemRequest instance) =>
+Map<String, dynamic> _$ReturnItemRequestToJson(ReturnItemRequest instance) =>
     <String, dynamic>{
-      'returned_quantity': instance.returned_quantity,
+      'returned_quantity': instance.returnedQuantity,
       'comment': instance.comment,
     };
