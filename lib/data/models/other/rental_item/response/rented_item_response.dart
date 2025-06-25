@@ -1,19 +1,31 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'rented_item_response.freezed.dart';
 part 'rented_item_response.g.dart';
 
-@freezed
-abstract class RentedItemResponse with _$RentedItemResponse {
-  factory RentedItemResponse({
-    required String id, //rentalId
-    required String item_id,
-    required String item_name,
-    required int quantity,
-    required String borrowed_at,
-    required int returned_quantity,
-  }) = _RentedItemResponse;
+@JsonSerializable()
+class RentedItemResponse {
+  final String id; //rentalId
+  @JsonKey(name: 'item_id')
+  final String itemId;
+  @JsonKey(name: 'item_name')
+  final String itemName;
+  final int quantity;
+  @JsonKey(name: 'borrowed_at')
+  final String borrowedAt;
+  @JsonKey(name: 'returned_quantity')
+  final int returnedQuantity;
+
+  RentedItemResponse({
+    required this.id, //rentalId
+    required this.itemId,
+    required this.itemName,
+    required this.quantity,
+    required this.borrowedAt,
+    required this.returnedQuantity,
+  });
 
   factory RentedItemResponse.fromJson(Map<String, dynamic> json) =>
       _$RentedItemResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RentedItemResponseToJson(this);
 }

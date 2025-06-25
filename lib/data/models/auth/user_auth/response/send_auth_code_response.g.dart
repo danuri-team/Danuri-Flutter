@@ -6,16 +6,16 @@ part of 'send_auth_code_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SendAuthCodeResponse _$SendAuthCodeResponseFromJson(
+SendAuthCodeResponse _$SendAuthCodeResponseFromJson(
         Map<String, dynamic> json) =>
-    _SendAuthCodeResponse(
-      isSuccess: json['isSuccess'] as bool,
+    SendAuthCodeResponse(
+      isSuccess: json['is_success'] as bool,
       massage: json['massage'] as String,
     );
 
 Map<String, dynamic> _$SendAuthCodeResponseToJson(
-        _SendAuthCodeResponse instance) =>
+        SendAuthCodeResponse instance) =>
     <String, dynamic>{
-      'isSuccess': instance.isSuccess,
+      'is_success': instance.isSuccess,
       'massage': instance.massage,
     };

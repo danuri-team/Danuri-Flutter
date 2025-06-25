@@ -6,13 +6,13 @@ part of 'refresh_token_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_RefreshTokenRequest _$RefreshTokenRequestFromJson(Map<String, dynamic> json) =>
-    _RefreshTokenRequest(
-      refresh_token: json['refresh_token'] as String,
+RefreshTokenRequest _$RefreshTokenRequestFromJson(Map<String, dynamic> json) =>
+    RefreshTokenRequest(
+      refreshToken: json['refresh_token'] as String,
     );
 
 Map<String, dynamic> _$RefreshTokenRequestToJson(
-        _RefreshTokenRequest instance) =>
+        RefreshTokenRequest instance) =>
     <String, dynamic>{
-      'refresh_token': instance.refresh_token,
+      'refresh_token': instance.refreshToken,
     };

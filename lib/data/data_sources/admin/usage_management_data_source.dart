@@ -1,11 +1,8 @@
+import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/admin/usage_management/request/usage_history_request.dart';
 import 'package:danuri_flutter/data/models/admin/usage_management/response/usage_history_response.dart';
-import 'package:danuri_flutter/network/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class UsageManagementDataSource {
-  final String baseUrl = dotenv.env['API_URL']!;
-  final dio = AppDio.getInstance();
+class UsageManagementDataSource extends DataSource{
 
   Future<List<UsageHistoryResponse>> searchUsageHistory(
       UsageHistoryRequest request) async {

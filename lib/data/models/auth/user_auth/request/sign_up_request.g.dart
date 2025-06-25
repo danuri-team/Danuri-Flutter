@@ -6,18 +6,18 @@ part of 'sign_up_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SignUpRequest _$SignUpRequestFromJson(Map<String, dynamic> json) =>
-    _SignUpRequest(
-      company_id: json['company_id'] as String,
+SignUpRequest _$SignUpRequestFromJson(Map<String, dynamic> json) =>
+    SignUpRequest(
+      companyId: json['company_id'] as String,
       name: json['name'] as String,
       phone: json['phone'] as String,
       sex: $enumDecode(_$SexTypeEnumMap, json['sex']),
       age: $enumDecode(_$AgeTypeEnumMap, json['age']),
     );
 
-Map<String, dynamic> _$SignUpRequestToJson(_SignUpRequest instance) =>
+Map<String, dynamic> _$SignUpRequestToJson(SignUpRequest instance) =>
     <String, dynamic>{
-      'company_id': instance.company_id,
+      'company_id': instance.companyId,
       'name': instance.name,
       'phone': instance.phone,
       'sex': _$SexTypeEnumMap[instance.sex]!,

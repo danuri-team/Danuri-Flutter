@@ -1,20 +1,23 @@
+import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_response.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
-import 'package:danuri_flutter/network/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:dio/dio.dart';
 
-class SpaceDataSource {
-  final String baseUrl = dotenv.env['API_URL']!;
-  final dio = AppDio.getInstance();
-
+class SpaceDataSource extends DataSource{
   Future<SpaceUsageResponse> getUsageSpace() async {
-    final response = await dio.get('$baseUrl/usage');
+    final response = await dio.get(
+      '$baseUrl/usage',
+      options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),
+    );
     return SpaceUsageResponse.fromJson(response.data);
   }
 
   Future<List<SpaceUsageStatusResponse>> getSpaceUsageStatus() async {
-    final response = await dio.get('$baseUrl/space');
+    final response = await dio.get(
+      '$baseUrl/space',
+      options: Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
+    );
     final result = response.data as List;
     return result
         .map((data) => SpaceUsageStatusResponse.fromJson(data))
@@ -25,12 +28,14 @@ class SpaceDataSource {
     await dio.post(
       '$baseUrl/space',
       data: request.toJson(),
+      options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),
     );
   }
 
   Future<void> exitRoom() async {
     await dio.post(
       '$baseUrl/usage',
+      options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),
     );
   }
 }

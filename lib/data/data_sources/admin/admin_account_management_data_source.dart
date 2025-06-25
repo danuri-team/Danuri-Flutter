@@ -1,12 +1,9 @@
+import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/admin/admin_account_management/request/change_password_request.dart';
 import 'package:danuri_flutter/data/models/admin/admin_account_management/request/update_admin_info_request.dart';
 import 'package:danuri_flutter/data/models/admin/admin_account_management/response/admin_info_response.dart';
-import 'package:danuri_flutter/network/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class AdminAccountManagementDataSource {
-  final dio = AppDio.getInstance();
-  final String baseUrl = dotenv.env['API_URL']!;
+class AdminAccountManagementDataSource extends DataSource{
 
   Future<AdminInfoResponse> getMyInfo() async {
     final response = await dio.get('$baseUrl/admin/management/me');

@@ -1,14 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'send_auth_code_response.freezed.dart';
 part 'send_auth_code_response.g.dart';
 
-@freezed
-abstract class SendAuthCodeResponse with _$SendAuthCodeResponse{
-  factory SendAuthCodeResponse({
-    required bool isSuccess,
-    required String massage,
-  }) = _SendAuthCodeResponse;
+@JsonSerializable()
+class SendAuthCodeResponse{
+  @JsonKey(name: 'is_success')
+  final bool isSuccess;
+  final String massage;
+
+  SendAuthCodeResponse({
+    required this.isSuccess,
+    required this.massage,
+  });
 
   factory SendAuthCodeResponse.fromJson(Map<String, dynamic> json) => _$SendAuthCodeResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SendAuthCodeResponseToJson(this);
 }

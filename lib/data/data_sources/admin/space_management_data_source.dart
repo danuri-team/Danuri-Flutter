@@ -1,11 +1,8 @@
+import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/admin/space_management/request/space_request.dart';
 import 'package:danuri_flutter/data/models/admin/space_management/response/space_response.dart';
-import 'package:danuri_flutter/network/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class SpaceManagementDataSource {
-  final dio = AppDio.getInstance();
-  final String baseUrl = dotenv.env['API_URL']!;
+class SpaceManagementDataSource extends DataSource{
 
   Future<SpaceResponse> createSpace(SpaceRequest request) async {
     final response = await dio.post(

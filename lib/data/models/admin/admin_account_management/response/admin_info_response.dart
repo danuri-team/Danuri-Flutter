@@ -1,21 +1,33 @@
 import 'package:danuri_flutter/data/models/enum/role_type.dart';
 import 'package:danuri_flutter/data/models/enum/status_type.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'admin_info_response.freezed.dart';
 part 'admin_info_response.g.dart';
 
-@freezed
-abstract class AdminInfoResponse with _$AdminInfoResponse{
-  factory AdminInfoResponse({
-    required String id,
-    required String company_id,
-    required String company_name,
-    required String email,
-    required String phone,
-    required RoleType role,
-    required StatusType status,
-  }) = _AdminInfoResponseResponse;
+@JsonSerializable()
+class AdminInfoResponse {
+  final String id;
+  @JsonKey(name: 'company_id')
+  final String companyId;
+  @JsonKey(name: 'company_name')
+  final String companyName;
+  final String email;
+  final String phone;
+  final RoleType role;
+  final StatusType status;
 
-  factory AdminInfoResponse.fromJson(Map<String, dynamic> json) => _$AdminInfoResponseFromJson(json);
+  AdminInfoResponse({
+    required this.id,
+    required this.companyId,
+    required this.companyName,
+    required this.email,
+    required this.phone,
+    required this.role,
+    required this.status,
+  });
+
+  factory AdminInfoResponse.fromJson(Map<String, dynamic> json) =>
+      _$AdminInfoResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AdminInfoResponseToJson(this);
 }

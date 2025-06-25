@@ -6,30 +6,30 @@ part of 'usage_history_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UsageHistoryResponse _$UsageHistoryResponseFromJson(
+UsageHistoryResponse _$UsageHistoryResponseFromJson(
         Map<String, dynamic> json) =>
-    _UsageHistoryResponse(
+    UsageHistoryResponse(
       id: json['id'] as String,
-      user_id: json['user_id'] as String,
-      user_name: json['user_name'] as String,
-      user_phone: json['user_phone'] as String,
-      space_id: json['space_id'] as String,
-      space_name: json['space_name'] as String,
-      start_at: json['start_at'] as String,
-      end_at: json['end_at'] as String,
-      rental_count: (json['rental_count'] as num).toInt(),
+      userId: json['user_id'] as String,
+      userName: json['user_name'] as String,
+      userPhone: json['user_phone'] as String,
+      spaceId: json['space_id'] as String,
+      spaceName: json['space_name'] as String,
+      startAt: json['start_at'] as String,
+      endAt: json['end_at'] as String,
+      rentalCount: (json['rental_count'] as num).toInt(),
     );
 
 Map<String, dynamic> _$UsageHistoryResponseToJson(
-        _UsageHistoryResponse instance) =>
+        UsageHistoryResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'user_id': instance.user_id,
-      'user_name': instance.user_name,
-      'user_phone': instance.user_phone,
-      'space_id': instance.space_id,
-      'space_name': instance.space_name,
-      'start_at': instance.start_at,
-      'end_at': instance.end_at,
-      'rental_count': instance.rental_count,
+      'user_id': instance.userId,
+      'user_name': instance.userName,
+      'user_phone': instance.userPhone,
+      'space_id': instance.spaceId,
+      'space_name': instance.spaceName,
+      'start_at': instance.startAt,
+      'end_at': instance.endAt,
+      'rental_count': instance.rentalCount,
     };

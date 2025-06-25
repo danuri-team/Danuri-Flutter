@@ -1,14 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'update_internal_specific_device_request.freezed.dart';
 part 'update_internal_specific_device_request.g.dart';
 
-@freezed
-abstract class UpdateInternalSpecificDeviceRequest with _$UpdateInternalSpecificDeviceRequest{
-  factory UpdateInternalSpecificDeviceRequest({
-    required String space_id,
-    required bool is_activate,
-  }) = _UpdateInternalSpecificDeviceRequest;
+@JsonSerializable()
+class UpdateInternalSpecificDeviceRequest{
+  @JsonKey(name: 'space_id')
+final String spaceId;
+@JsonKey(name: 'is_activate')
+    final bool isActivate;
+
+  UpdateInternalSpecificDeviceRequest({
+    required this.spaceId,
+    required this.isActivate,
+  });
 
   factory UpdateInternalSpecificDeviceRequest.fromJson(Map<String, dynamic> json) => _$UpdateInternalSpecificDeviceRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateInternalSpecificDeviceRequestToJson(this);
 }

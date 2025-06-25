@@ -1,16 +1,23 @@
 import 'package:danuri_flutter/data/models/auth/admin_auth/response/access_token_response.dart';
 import 'package:danuri_flutter/data/models/auth/admin_auth/response/refresh_token_response.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'tokens_response.freezed.dart';
 part 'tokens_response.g.dart';
 
-@freezed
-abstract class TokensResponse with _$TokensResponse{
-  factory TokensResponse({
-    required AccessTokenResponse access_token,
-    required RefreshTokenResponse refresh_token,
-  }) = _TokensResponse;
+@JsonSerializable()
+class TokensResponse {
+  @JsonKey(name: 'access_token')
+  final AccessTokenResponse accessToken;
+  @JsonKey(name: 'refresh_token')
+  final RefreshTokenResponse refreshToken;
 
-  factory TokensResponse.fromJson(Map<String, dynamic> json) => _$TokensResponseFromJson(json);
+  TokensResponse({
+    required this.accessToken,
+    required this.refreshToken,
+  });
+
+  factory TokensResponse.fromJson(Map<String, dynamic> json) =>
+      _$TokensResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TokensResponseToJson(this);
 }

@@ -19,7 +19,7 @@ class SignUpViewModel {
     try {
       _userInfo = await _dataSource.signUp(
         SignUpRequest(
-          company_id: companyId,
+          companyId: companyId,
           name: userName,
           phone: phoneNumber,
           sex: sex.name as SexType,

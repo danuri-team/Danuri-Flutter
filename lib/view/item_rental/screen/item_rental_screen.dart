@@ -94,7 +94,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                       children: [
                         SelectionBox(
                           available: _itemViewModel.itemAvailableRental![index]
-                                  .available_quantity !=
+                                  .availableQuantity !=
                               0,
                           isSelected: selectedItem['itemId'] ==
                               _itemViewModel.itemAvailableRental![index].id,
@@ -102,7 +102,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                               _itemViewModel.itemAvailableRental![index].name,
                           onTap: () {
                             if (_itemViewModel.itemAvailableRental![index]
-                                    .available_quantity !=
+                                    .availableQuantity !=
                                 0) {
                               setState(() {
                                 selectedItem['itemId'] =
@@ -127,7 +127,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                   onTap: () async {
                     if (_itemViewModel.spaceUsage != null) {
                       await _itemViewModel.itemRental(
-                          _itemViewModel.spaceUsage!.space_usage_info.usage_id,
+                          _itemViewModel.spaceUsage!.spaceUsageInfo.usageId,
                           selectedItem['itemId']!,
                           1);
                     }

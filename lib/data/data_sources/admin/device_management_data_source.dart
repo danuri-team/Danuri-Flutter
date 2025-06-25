@@ -1,11 +1,8 @@
+import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/admin/admin_device_management/request/create_internal_device_request.dart';
 import 'package:danuri_flutter/data/models/admin/admin_device_management/response/internal_device_response.dart';
-import 'package:danuri_flutter/network/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class  DeviceManagementDataSource {
-  final String baseUrl = dotenv.env['API_URL']!;
-  final dio = AppDio.getInstance();
+class  DeviceManagementDataSource extends DataSource{
 
   Future<void> createInternalDevice(CreateInternalDeviceRequest request) async {
     await dio.post(
