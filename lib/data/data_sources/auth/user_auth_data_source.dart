@@ -17,6 +17,7 @@ class UserAuthDataSource {
       '$baseUrl/auth/user/phone',
       data: request.toJson(),
     );
+    await TokenStorage().setUserToken(response.data['access_token']['token']);
     return SendAuthCodeResponse.fromJson(response.data);
   }
 

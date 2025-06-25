@@ -15,7 +15,7 @@ class RegisterUsedSpaceViewModel {
   Future<void> registerUsedSpace(String spaceId) async {
     try {
       await _dataSource.registerUsedSpace(
-        RegisterUsedSpaceRequest(space_id: spaceId),
+        RegisterUsedSpaceRequest(spaceId: spaceId),
       );
       _error = false;
     } on DioException catch (_) {

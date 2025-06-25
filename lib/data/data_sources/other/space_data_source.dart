@@ -1,22 +1,14 @@
-import 'package:danuri_flutter/core/storage/token_storage.dart';
+import 'package:danuri_flutter/data/data_sources/other/other_data_source.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_response.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
-import 'package:danuri_flutter/network/dio.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class SpaceDataSource {
-  final String baseUrl = dotenv.env['API_URL']!;
-  final dio = AppDio.getInstance();
-  
-  final deviceToken = TokenStorage().getDeviceToken();
-  final userToken = TokenStorage().getUserToken();
-
+class SpaceDataSource extends OtherDataSource{
   Future<SpaceUsageResponse> getUsageSpace() async {
     final response = await dio.get(
       '$baseUrl/usage',
-      options: Options(headers: {'Authorization': 'Bearer $userToken'}),
+      options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),
     );
     return SpaceUsageResponse.fromJson(response.data);
   }
@@ -24,7 +16,7 @@ class SpaceDataSource {
   Future<List<SpaceUsageStatusResponse>> getSpaceUsageStatus() async {
     final response = await dio.get(
       '$baseUrl/space',
-      options: Options(headers: {'Authorization': 'Bearer $deviceToken'}),
+      options: Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
     );
     final result = response.data as List;
     return result
@@ -36,14 +28,14 @@ class SpaceDataSource {
     await dio.post(
       '$baseUrl/space',
       data: request.toJson(),
-      options: Options(headers: {'Authorization': 'Bearer $userToken'}),
+      options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),
     );
   }
 
   Future<void> exitRoom() async {
     await dio.post(
       '$baseUrl/usage',
-      options: Options(headers: {'Authorization': 'Bearer $userToken'}),
+      options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),
     );
   }
 }

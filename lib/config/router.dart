@@ -14,7 +14,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/failure',
+  initialLocation: '/organ-auth',
   routes: [
     GoRoute(
       name: 'organ-auth',
@@ -59,7 +59,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: 'failure',
       path: '/failure',
-      builder: (context, state) => const FailureScreen(),
+      builder: (context, state) => FailureScreen(),
     ),
   ],
 );

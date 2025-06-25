@@ -87,17 +87,17 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
                       children: [
                         SpaceBox(
                           available:
-                              _viewModel.spaceUsageStatus![index].is_available,
+                              _viewModel.spaceUsageStatus![index].isAvailable,
                           isSelected: selectedSpace['spaceId'] ==
-                              _viewModel.spaceUsageStatus![index].space_id,
+                              _viewModel.spaceUsageStatus![index].spaceId,
                           spaceName: _viewModel.spaceUsageStatus![index].name,
                           onTap: () {
                             if (_viewModel
-                                    .spaceUsageStatus![index].is_available ==
+                                    .spaceUsageStatus![index].isAvailable ==
                                 true) {
                               setState(() {
                                 selectedSpace['spaceId'] = _viewModel
-                                    .spaceUsageStatus![index].space_id;
+                                    .spaceUsageStatus![index].spaceId;
                               });
                             }
                           },

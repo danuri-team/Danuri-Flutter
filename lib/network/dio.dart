@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -27,9 +28,31 @@ class _AppDio with DioMixin implements AppDio {
     interceptors.addAll(
       [
         InterceptorsWrapper(
-          onRequest: (options, handler) {
-            
-            options.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIzMzM0NjIzOS02MzM2LTMyNjYtMmQ2My02MTY1NjYyZDM0NjYiLCJyb2xlIjoiUk9MRV9ERVZJQ0UiLCJpYXQiOjE3NTA0OTU0NzAsImV4cCI6MTc3Njc5MjkzMH0.rDgGNySvSPpFlm0YrT5QLIMPgEPFPFFDdDrpfdlO4et3bQQ2I4JVZnLNmPzQtAY7';
+          // onError: (error, handler) async{
+          //   if(error.response?.statusCode == 403){
+          //     final adminRefreshToken = await TokenStorage().getAdminRefreshToken();
+          //     final TokensResponse tokens = await AdminAuthDataSource().refreshToken(RefreshTokenRequest(refresh_token: adminRefreshToken!));
+          //     TokenStorage().setAdminAccessToken(tokens['access_token']['token']);
+          //   }
+          // },
+
+          onRequest: (options, handler) async {
+            final String path = options.path;
+            final storage = TokenStorage();
+            String? token;
+
+            if (path.contains('/auth/admin')) {
+              token = await storage.getAdminAccessToken();
+            } else if (path.contains('/auth/admin')) {
+              token = await storage.getDeviceToken();
+            } else if (path.contains('auth/user')) {
+              token = await storage.getUserToken();
+            }
+
+            if (token != null) {
+              options.headers['Authorization'] = 'Bearer $token';
+            }
+
             return handler.next(options);
           },
         ),
