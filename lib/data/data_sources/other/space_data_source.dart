@@ -1,10 +1,10 @@
-import 'package:danuri_flutter/data/data_sources/other/other_data_source.dart';
+import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_response.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
 import 'package:dio/dio.dart';
 
-class SpaceDataSource extends OtherDataSource{
+class SpaceDataSource extends DataSource{
   Future<SpaceUsageResponse> getUsageSpace() async {
     final response = await dio.get(
       '$baseUrl/usage',

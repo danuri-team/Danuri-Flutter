@@ -1,4 +1,3 @@
-import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -37,22 +36,6 @@ class _AppDio with DioMixin implements AppDio {
           // },
 
           onRequest: (options, handler) async {
-            final String path = options.path;
-            final storage = TokenStorage();
-            String? token;
-
-            if (path.contains('/auth/admin')) {
-              token = await storage.getAdminAccessToken();
-            } else if (path.contains('/auth/admin')) {
-              token = await storage.getDeviceToken();
-            } else if (path.contains('auth/user')) {
-              token = await storage.getUserToken();
-            }
-
-            if (token != null) {
-              options.headers['Authorization'] = 'Bearer $token';
-            }
-
             return handler.next(options);
           },
         ),
