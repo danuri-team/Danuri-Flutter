@@ -8,7 +8,7 @@ class DeviceAuthDataSource extends DataSource{
 
   final storage = TokenStorage();
 
-  Future<TokensResponse> login(DeviceAuthRequest request) async {
+  Future<TokensResponse> deviceAuth(DeviceAuthRequest request) async {
     final response = await dio.post(
       '$baseUrl/auth/device/token',
       data: request.toJson(),
