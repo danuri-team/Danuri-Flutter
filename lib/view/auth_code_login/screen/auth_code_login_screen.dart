@@ -1,5 +1,6 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/data/view_models/auth_code_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
@@ -84,12 +85,19 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
                     context.read<PhoneNumberProvider>().phoneNumber,
                     _authCodeController.text,
                   )
-                      .then((_) {
+                      .then((_) async {
                     if (_viewModel.error == true) {
                       if (context.mounted) {
                         context.push('/failure'); // 인증 실패
                       }
                     } else {
+                      final bool exitRoonFlow =
+                          context.read<ExitRoomFlowProvider>().exitRoomFlow;
+
+                      if (exitRoonFlow) {
+                        await _viewModel.exitRoom();
+                      }
+
                       if (context.mounted) {
                         context.push('/completion'); // 인증 성공
                       }
