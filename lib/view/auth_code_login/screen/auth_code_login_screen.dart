@@ -50,6 +50,7 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
                   maxLength: 6,
                   onTapOutside: (event) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     counterText: '',
                     hintText: '000000',
