@@ -23,7 +23,8 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
   Map<String, String?> selectedItem = {'itemId': null};
 
   final ItemRentalViewModel _itemViewModel = ItemRentalViewModel();
-  final RegisterUsedSpaceViewModel _spaceViewModel = RegisterUsedSpaceViewModel();
+  final RegisterUsedSpaceViewModel _spaceViewModel =
+      RegisterUsedSpaceViewModel();
 
   Future<void> fetchData() async {
     await Future.wait([
@@ -35,7 +36,6 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
       ),
     );
   }
-
 
   @override
   void initState() {
@@ -84,7 +84,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
               SizedBox.shrink()
             else
               SizedBox(
-                width: 538.w,
+                width: double.infinity,
                 height: 48.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -98,20 +98,20 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                               0,
                           isSelected: selectedItem['itemId'] ==
                               _itemViewModel.itemAvailableRental![index].id,
-                          spaceName:
-                              _itemViewModel.itemAvailableRental![index].name,
+                          name: _itemViewModel.itemAvailableRental![index].name,
                           onTap: () {
                             if (_itemViewModel.itemAvailableRental![index]
                                     .availableQuantity !=
                                 0) {
                               setState(() {
-                                selectedItem['itemId'] =
-                                    _itemViewModel.itemAvailableRental![index].id;
+                                selectedItem['itemId'] = _itemViewModel
+                                    .itemAvailableRental![index].id;
                               });
                             }
                           },
                         ),
-                        if (_itemViewModel.itemAvailableRental!.length != index + 1)
+                        if (_itemViewModel.itemAvailableRental!.length !=
+                            index + 1)
                           SizedBox(width: 12.w),
                       ],
                     );
@@ -131,8 +131,9 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                           selectedItem['itemId']!,
                           1);
                     }
-                      await _spaceViewModel.registerUsedSpace(context.watch<SpaceIdProvider>().spaceId);
-                        context.go('/home');
+                    await _spaceViewModel.registerUsedSpace(
+                        context.watch<SpaceIdProvider>().spaceId);
+                    context.go('/home');
                   },
                 ),
               ],
