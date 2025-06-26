@@ -7,8 +7,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
-   WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   //  HttpOverrides.global = MyHttpOverrides();
   await dotenv.load(fileName: '.env');
   runApp(const MyApp());
@@ -23,12 +23,14 @@ class MyApp extends StatelessWidget {
       designSize: const Size(1280, 800),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
-          child: ChangeNotifierProvider(
-            create: (context) {
-              PhoneNumberProvider();
-              SpaceIdProvider();
-            },
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(1.0)),
+          child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                  create: (context) => PhoneNumberProvider()),
+              ChangeNotifierProvider(create: (context) => SpaceIdProvider())
+            ],
             child: MaterialApp.router(
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
