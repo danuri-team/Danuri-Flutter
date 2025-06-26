@@ -6,7 +6,7 @@ part 'send_auth_code_response.g.dart';
 class SendAuthCodeResponse{
   @JsonKey(name: 'is_success')
   final bool isSuccess;
-  final String massage;
+  String? massage;
 
   SendAuthCodeResponse({
     required this.isSuccess,
