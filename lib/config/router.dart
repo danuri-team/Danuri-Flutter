@@ -14,7 +14,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/auth-code-login',
+  initialLocation: '/login',
   routes: [
     GoRoute(
       name: 'organ-auth',

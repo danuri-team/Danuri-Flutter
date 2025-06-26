@@ -78,16 +78,23 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
               SizedBox(height: 220.h),
               NextButton(
                 centerText: '다음',
-                onTap: () {
-                  _viewModel.authCodeLogin(
-                    context.watch<PhoneNumberProvider>().phoneNumber,
+                onTap: () async {
+                  await _viewModel
+                      .authCodeLogin(
+                    context.read<PhoneNumberProvider>().phoneNumber,
                     _authCodeController.text,
-                  );
-                  if (_viewModel.error == true) {
-                    context.push('/auth-fail'); // 인증 실패
-                  } else {
-                    context.push('/auth-success'); // 인증 성공
-                  }
+                  )
+                      .then((_) {
+                    if (_viewModel.error == true) {
+                      if (context.mounted) {
+                        context.push('/failure'); // 인증 실패
+                      }
+                    } else {
+                      if (context.mounted) {
+                        context.push('/completion'); // 인증 성공
+                      }
+                    }
+                  });
                 },
               ),
             ],

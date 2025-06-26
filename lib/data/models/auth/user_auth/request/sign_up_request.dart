@@ -1,5 +1,3 @@
-import 'package:danuri_flutter/data/models/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'sign_up_request.g.dart';
@@ -10,8 +8,8 @@ class SignUpRequest {
   final String companyId;
   final String name;
   final String phone;
-  final SexType sex;
-  final AgeType age;
+  final String sex;
+  final String age;
 
   SignUpRequest({
     required this.companyId,
