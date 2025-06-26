@@ -13,7 +13,7 @@ class DeviceAuthDataSource extends DataSource{
       '$baseUrl/auth/device/token',
       data: request.toJson(),
       options: Options(headers: {
-        'Authorization': 'Bearer ${await storage.getAdminAccessToken()}'
+        'Authorization': 'Bearer ${await adminToken}'
       }),
     );
     Future.wait([
