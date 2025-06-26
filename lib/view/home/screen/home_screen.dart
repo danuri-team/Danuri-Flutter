@@ -1,6 +1,5 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/data/view_models/home_view_model.dart';
 import 'package:danuri_flutter/view/home/widget/select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,9 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-
-  final HomeViewModel _viewModel = HomeViewModel();
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +46,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () async {
-                    await _viewModel.exitRoom();
+                  onTap: () {
+                    context.push('/login');
                   },
                   child: Container(
                     width: 138.w,
