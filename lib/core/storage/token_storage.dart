@@ -55,7 +55,7 @@ class TokenStorage {
 
   Future<String?> getDeviceRefreshToken() => storage.read(key: 'deviceAccessToken');
 
-  Future<String?> getUserAccessToken() => storage.read(key: 'userAcessToken');
+  Future<String?> getUserAccessToken() => storage.read(key: 'userAccessToken');
 
   Future<String?> getUserRefreshToken() => storage.read(key: 'userRefreshToken');
 }
