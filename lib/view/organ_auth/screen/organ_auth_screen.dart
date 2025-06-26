@@ -4,6 +4,7 @@ import 'package:danuri_flutter/data/view_models/organ_auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class OrganAuthScreen extends StatefulWidget {
   const OrganAuthScreen({super.key});
@@ -76,8 +77,12 @@ class _OrganAuthScreenState extends State<OrganAuthScreen> {
                           height: 48.h,
                           child: TextFormField(
                             controller: _deviceIdController,
-                            onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+                            onTapOutside: (event) =>
+                                FocusManager.instance.primaryFocus?.unfocus(),
                             decoration: InputDecoration(
+                              hintText: '8e04a571-4956-444b-9845-8a923a47c495',
+                              hintStyle: DanuriText.body1Normal
+                                  .copyWith(color: DanuriColor.label6),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
@@ -97,8 +102,12 @@ class _OrganAuthScreenState extends State<OrganAuthScreen> {
                         ),
                         SizedBox(height: 13.h),
                         GestureDetector(
-                          onTap:() async{
-                            await _viewModel.deviceAuth(_deviceIdController.text);
+                          onTap: () async {
+                            await _viewModel
+                                .deviceAuth(_deviceIdController.text);
+                            if (context.mounted) {
+                              context.go('/home');
+                            }
                           },
                           child: Container(
                             width: 400.w,
