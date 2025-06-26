@@ -114,11 +114,20 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
               children: [
                 NextButton(
                   centerText: '다음',
-                  onTap: () {
+                  onTap: () async {
                     context
                         .read<SpaceIdProvider>()
                         .setSpaceId(selectedSpace['spaceId']!);
-                    context.push('/item-rental');
+                    await _viewModel
+                        .registerUsedSpace(
+                            context.read<SpaceIdProvider>().spaceId)
+                        .then(
+                      (_) {
+                        if (_viewModel.error == false) {
+                          if (context.mounted) context.push('/login');
+                        }
+                      },
+                    );
                   },
                 ),
               ],
