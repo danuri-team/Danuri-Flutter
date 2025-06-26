@@ -7,22 +7,23 @@ class SelectionBox extends StatelessWidget {
   const SelectionBox({
     super.key,
     required this.isSelected,
-    required this.spaceName,
+    required this.name,
     required this.onTap,
     required this.available,
   });
 
   final bool isSelected;
-  final String spaceName;
+  final String name;
   final GestureTapCallback onTap;
   final bool available;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(12),
       onTap: onTap,
       child: Container(
-        width: spaceName.length > 2 ? 98.w : 84.w,
+        width: name.length > 2 ? 98.w : 84.w,
         height: 48.h,
         decoration: ShapeDecoration(
           color: available
@@ -36,7 +37,7 @@ class SelectionBox extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Text(
-          spaceName,
+          name,
           style: DanuriText.body1Normal.copyWith(
             color: available
                 ? isSelected
