@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     } else {
                       if (context.mounted) {
-                        context.go('/home');
+                        context.go('/auth-code-login');
                       }
                     }
                   });

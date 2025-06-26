@@ -192,20 +192,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 NextButton(
-                    centerText: '완료',
-                    onTap: () async {
-                      await _viewModel.signUp(
-                        '52515fd2-43e5-440b-9cc5-8630bc75954e',
-                        _userNameController.text,
-                        context.watch<PhoneNumberProvider>().phoneNumber,
-                        userInfo['성별'] as SexType,
-                        userInfo['학년'] as AgeType,
-                      );
-                      if (context.mounted) {
-                        context.push('/input-auth-code');
+                  centerText: '완료',
+                  onTap: () async {
+                    await _viewModel
+                        .signUp(
+                      '52515fd2-43e5-440b-9cc5-8630bc75954e',
+                      _userNameController.text,
+                      context.read<PhoneNumberProvider>().phoneNumber,
+                      userInfo['성별'] as SexType,
+                      userInfo['학년'] as AgeType,
+                    )
+                        .then((_) async {
+                      if (_viewModel.error == false) {
+                        await _viewModel.login(
+                            context.read<PhoneNumberProvider>().phoneNumber);
+                        if (context.mounted) {
+                          context.push('/auth-code-login');
+                        }
                       }
-                    },
-                  ),
+                    });
+                  },
+                ),
               ],
             ),
           ],
