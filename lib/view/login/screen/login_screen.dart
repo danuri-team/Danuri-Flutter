@@ -1,11 +1,11 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/data/view_models/login_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
     _phoneNumberController.dispose();
   }
 
+  Future<void> userLogin() async {
+    final String phoneNumber =
+        "${_phoneNumberController.text.substring(0, 3)}-${_phoneNumberController.text.substring(3, 7)}-${_phoneNumberController.text.substring(7, 11)}";
+    context.read<PhoneNumberProvider>().setPhoneNumber(phoneNumber);
+    await _viewModel.userLogin(phoneNumber);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               CustomTopBar(
+                onTap: () => context.read<ExitRoomFlowProvider>().cancleFlow(),
                 title: '번호를 입력해주세요',
                 subTitle: '인증을 통해 공간을 이용할 수 있어요',
                 needCallBackButton: true,
@@ -79,23 +87,20 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 220.h),
               NextButton(
                 centerText: '다음',
-                onTap: () async {
-                  final String phoneNumber =
-                      "${_phoneNumberController.text.substring(0, 3)}-${_phoneNumberController.text.substring(3, 7)}-${_phoneNumberController.text.substring(7, 11)}";
-                  context
-                      .read<PhoneNumberProvider>()
-                      .setPhoneNumber(phoneNumber);
-                  await _viewModel.userLogin(phoneNumber).then((_) {
-                    if (_viewModel.error == true) {
-                      if (context.mounted) {
-                        context.go('/sign-up');
+                onTap: () {
+                  userLogin().then(
+                    (_) {
+                      if (_viewModel.error == true) {
+                        if (context.mounted) {
+                          context.push('/sign-up');
+                        }
+                      } else {
+                        if (context.mounted) {
+                          context.push('/auth-code-login');
+                        }
                       }
-                    } else {
-                      if (context.mounted) {
-                        context.go('/auth-code-login');
-                      }
-                    }
-                  });
+                    },
+                  );
                 },
               ),
             ],

@@ -28,6 +28,33 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
     _authCodeController.dispose();
   }
 
+  Future<void> _authCodeLogin() async {
+    await _viewModel.authCodeLogin(
+      context.read<PhoneNumberProvider>().phoneNumber,
+      _authCodeController.text,
+    );
+  }
+
+  void _authFailed() {
+    context.push('/failure');
+  }
+
+  Future<void> _authCompleted() async {
+    final bool exitRoomFlow = context.read<ExitRoomFlowProvider>().exitRoomFlow;
+    if (exitRoomFlow == true) {
+      await _viewModel.exitRoom().then(
+        (_) {
+          if (_viewModel.error == true) {
+            _viewModel.error == false;
+            context.push('/failure');
+          } else {
+            context.push('/completion');
+          }
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,29 +107,16 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
               NextButton(
                 centerText: '다음',
                 onTap: () async {
-                  await _viewModel
-                      .authCodeLogin(
-                    context.read<PhoneNumberProvider>().phoneNumber,
-                    _authCodeController.text,
-                  )
-                      .then((_) async {
-                    if (_viewModel.error == true) {
-                      if (context.mounted) {
-                        context.push('/failure'); // 인증 실패
+                  _authCodeLogin().then(
+                    (_) async {
+                      if (_viewModel.error == true) {
+                        _authFailed();
+                        _viewModel.error == false;
+                      } else {
+                        _authCompleted();
                       }
-                    } else {
-                      final bool exitRoonFlow =
-                          context.read<ExitRoomFlowProvider>().exitRoomFlow;
-
-                      if (exitRoonFlow) {
-                        await _viewModel.exitRoom();
-                      }
-
-                      if (context.mounted) {
-                        context.push('/completion'); // 인증 성공
-                      }
-                    }
-                  });
+                    },
+                  );
                 },
               ),
             ],

@@ -59,7 +59,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: 'failure',
       path: '/failure',
-      builder: (context, state) => FailureScreen(),
+      builder: (context, state) => const FailureScreen(),
     ),
   ],
 );

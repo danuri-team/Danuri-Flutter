@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:danuri_flutter/data/data_sources/auth/user_auth_data_source.dart';
 import 'package:danuri_flutter/data/data_sources/other/space_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/admin_auth/response/tokens_response.dart';
@@ -5,7 +7,7 @@ import 'package:danuri_flutter/data/models/auth/user_auth/request/auth_code_logi
 import 'package:dio/dio.dart';
 
 class AuthCodeViewModel {
-  final UserAuthDataSource _dataSource = UserAuthDataSource();
+  final UserAuthDataSource _userAuthdataSource = UserAuthDataSource();
   final SpaceDataSource _spaceDataSource = SpaceDataSource();
 
   TokensResponse? _token;
@@ -16,7 +18,7 @@ class AuthCodeViewModel {
 
   Future<void> authCodeLogin(String phoneNumber, String authCode) async {
     try {
-      _token = await _dataSource.authCodeLogin(
+      _token = await _userAuthdataSource.authCodeLogin(
         AuthCodeLoginRequest(
           phone: phoneNumber,
           authCode: authCode,
@@ -32,8 +34,10 @@ class AuthCodeViewModel {
     try {
       await _spaceDataSource.exitRoom();
       _error = false;
-    } on DioException catch (_) {
-      _error = true;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        _error = true;
+      }
     }
   }
 }
