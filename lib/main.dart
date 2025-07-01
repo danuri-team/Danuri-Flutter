@@ -1,5 +1,6 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/config/router.dart';
+import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,9 @@ class MyApp extends StatelessWidget {
             providers: [
               ChangeNotifierProvider(
                   create: (context) => PhoneNumberProvider()),
-              ChangeNotifierProvider(create: (context) => SpaceIdProvider())
+              ChangeNotifierProvider(create: (context) => SpaceIdProvider()),
+              ChangeNotifierProvider(
+                  create: (context) => ExitRoomFlowProvider()),
             ],
             child: MaterialApp.router(
               debugShowCheckedModeBanner: false,

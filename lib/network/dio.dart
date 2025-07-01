@@ -21,20 +21,12 @@ class _AppDio with DioMixin implements AppDio {
       sendTimeout: const Duration(seconds: 30),
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
-      receiveDataWhenStatusError: true,
+      // receiveDataWhenStatusError: true,
     );
 
     interceptors.addAll(
       [
         InterceptorsWrapper(
-          // onError: (error, handler) async{
-          //   if(error.response?.statusCode == 403){
-          //     final adminRefreshToken = await TokenStorage().getAdminRefreshToken();
-          //     final TokensResponse tokens = await AdminAuthDataSource().refreshToken(RefreshTokenRequest(refresh_token: adminRefreshToken!));
-          //     TokenStorage().setAdminAccessToken(tokens['access_token']['token']);
-          //   }
-          // },
-
           onRequest: (options, handler) async {
             return handler.next(options);
           },

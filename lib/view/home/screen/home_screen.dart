@@ -1,18 +1,22 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/data/view_models/home_view_model.dart';
+import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/view/home/widget/select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:timer_builder/timer_builder.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
-  final HomeViewModel _viewModel = HomeViewModel();
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +54,8 @@ class HomeScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await _viewModel.exitRoom();
+                    context.read<ExitRoomFlowProvider>().startFlow();
+                    context.push('/login');
                   },
                   child: Container(
                     width: 138.w,
@@ -65,9 +70,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SvgPicture.asset('assets/icons/leading.svg'),
-                        SizedBox(
-                          width: 6.w,
-                        ),
+                        SizedBox(width: 6.w),
                         Text(
                           '퇴실하기',
                           style: DanuriText.body1Normal
@@ -79,7 +82,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 82.h),
+            SizedBox(height: 80.h),
+            // SizedBox(height: 82.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

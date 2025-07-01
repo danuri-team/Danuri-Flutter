@@ -1,5 +1,6 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/data/view_models/auth_code_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
@@ -25,6 +26,33 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
   void dispose() {
     super.dispose();
     _authCodeController.dispose();
+  }
+
+  Future<void> _authCodeLogin() async {
+    await _viewModel.authCodeLogin(
+      context.read<PhoneNumberProvider>().phoneNumber,
+      _authCodeController.text,
+    );
+  }
+
+  void _authFailed() {
+    context.push('/failure');
+  }
+
+  Future<void> _authCompleted() async {
+    final bool exitRoomFlow = context.read<ExitRoomFlowProvider>().exitRoomFlow;
+    if (exitRoomFlow == true) {
+      await _viewModel.exitRoom().then(
+        (_) {
+          if (_viewModel.error == true) {
+            _viewModel.error == false;
+            context.push('/failure');
+          } else {
+            context.push('/completion');
+          }
+        },
+      );
+    }
   }
 
   @override
@@ -79,22 +107,16 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
               NextButton(
                 centerText: '다음',
                 onTap: () async {
-                  await _viewModel
-                      .authCodeLogin(
-                    context.read<PhoneNumberProvider>().phoneNumber,
-                    _authCodeController.text,
-                  )
-                      .then((_) {
-                    if (_viewModel.error == true) {
-                      if (context.mounted) {
-                        context.push('/failure'); // 인증 실패
+                  _authCodeLogin().then(
+                    (_) async {
+                      if (_viewModel.error == true) {
+                        _authFailed();
+                        _viewModel.error == false;
+                      } else {
+                        _authCompleted();
                       }
-                    } else {
-                      if (context.mounted) {
-                        context.push('/completion'); // 인증 성공
-                      }
-                    }
-                  });
+                    },
+                  );
                 },
               ),
             ],
