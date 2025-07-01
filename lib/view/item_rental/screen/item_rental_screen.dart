@@ -1,7 +1,7 @@
-import 'dart:developer';
-
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/view/components/availability_sign.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
@@ -10,6 +10,7 @@ import 'package:danuri_flutter/view/components/selection_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class ItemRentalScreen extends StatefulWidget {
   const ItemRentalScreen({super.key});
@@ -26,12 +27,8 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
   Future<void> fetchData() async {
     await Future.wait([
       _itemViewModel.getItemAvailableRent(), // 대여 가능 아이템 조회
-      _itemViewModel.getUsageSpace(), // 공간 사용 조회
     ]).then(
-      (_) => setState(
-        () {
-        },
-      ),
+      (_) => setState(() {}),
     );
   }
 
@@ -122,19 +119,12 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
               children: [
                 NextButton(
                   centerText: '다음',
-                  onTap: () async {
-                    if (_itemViewModel.spaceUsage != null) {
-                      await _itemViewModel
-                          .itemRental(
-                              _itemViewModel.spaceUsage!.spaceUsageInfo.usageId,
-                              selectedItem['itemId']!,
-                              1)
-                          .then(
-                        (value) {
-                          if (context.mounted) context.go('/home');
-                        },
-                      );
-                    }
+                  onTap: () {
+                    context
+                        .read<ItemIdProvider>()
+                        .setSpaceId(selectedItem['itemId']!);
+                    context.read<ItemRentalFlowProvider>().startFlow();
+                    context.push('/login');
                   },
                 ),
               ],

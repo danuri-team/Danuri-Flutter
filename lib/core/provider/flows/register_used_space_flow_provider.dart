@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/core/provider/flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/flow_provider.dart';
 
 class RegisterUsedSpaceFlowProvider extends FlowProvider{
   bool _registerUsedSpaceFlow = false;

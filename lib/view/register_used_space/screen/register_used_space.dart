@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/core/provider/register_used_space_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
