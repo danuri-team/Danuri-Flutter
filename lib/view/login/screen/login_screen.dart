@@ -2,6 +2,7 @@ import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
+import 'package:danuri_flutter/core/provider/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/data/view_models/login_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
@@ -44,7 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               CustomTopBar(
-                onTap: () => context.read<ExitRoomFlowProvider>().cancleFlow(),
+                onTap: () {
+                  context.read<ExitRoomFlowProvider>().cancleFlow();
+                  context.read<RegisterUsedSpaceFlowProvider>().cancleFlow();
+                },
                 title: '번호를 입력해주세요',
                 subTitle: '인증을 통해 공간을 이용할 수 있어요',
                 needCallBackButton: true,

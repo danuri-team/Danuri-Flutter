@@ -2,6 +2,7 @@ import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
+import 'package:danuri_flutter/core/provider/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/data/view_models/auth_code_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
@@ -41,13 +42,26 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
 
   Future<void> _authCompleted() async {
     final bool exitRoomFlow = context.read<ExitRoomFlowProvider>().exitRoomFlow;
+    final bool registerUsedSpaceFlow =
+        context.read<RegisterUsedSpaceFlowProvider>().registerUsedSpaceFlow;
     if (exitRoomFlow == true) {
       await _viewModel.exitRoom().then(
         (_) {
           if (_viewModel.error == true) {
-            _viewModel.error == false;
+            _viewModel.reset();
             context.push('/failure');
           } else {
+            context.push('/completion');
+          }
+        },
+      );
+    } else if (registerUsedSpaceFlow == true) {
+      await _viewModel.registerUsedSpace(context).then(
+        (_) {
+          if (_viewModel.error == true) {
+            _viewModel.reset();
+            context.push('/failure');
+          }else{
             context.push('/completion');
           }
         },

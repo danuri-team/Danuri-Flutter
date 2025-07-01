@@ -1,10 +1,12 @@
-import 'dart:developer';
-
+import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/data_sources/auth/user_auth_data_source.dart';
 import 'package:danuri_flutter/data/data_sources/other/space_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/admin_auth/response/tokens_response.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/auth_code_login_request.dart';
+import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthCodeViewModel {
   final UserAuthDataSource _userAuthdataSource = UserAuthDataSource();
@@ -15,6 +17,10 @@ class AuthCodeViewModel {
 
   bool? _error;
   bool? get error => _error;
+
+  void reset() {
+    _error = false;
+  }
 
   Future<void> authCodeLogin(String phoneNumber, String authCode) async {
     try {
@@ -34,10 +40,26 @@ class AuthCodeViewModel {
     try {
       await _spaceDataSource.exitRoom();
       _error = false;
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        _error = true;
-      }
+    } on DioException catch (_) {
+      _error = true;
+
+      // if (e.response?.statusCode == 404) {
+      // 사용중인 공간이 없습니다
+      // }
+    }
+  }
+
+  Future<void> registerUsedSpace(BuildContext context) async {
+    try {
+      final String spaceId = context.read<SpaceIdProvider>().spaceId;
+      await _spaceDataSource
+          .registerUsedSpace(RegisterUsedSpaceRequest(spaceId: spaceId));
+      _error = false;
+    } on DioException catch (_) {
+      _error = true;
+      // if (e.response?.statusCode == 409) {
+      //   //이미 다른 공간을 사용 중입니다
+      // }
     }
   }
 }
