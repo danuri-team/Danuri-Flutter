@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/core/provider/exit_room_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/view/home/widget/select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/core/provider/flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/flow_provider.dart';
 
 class ExitRoomFlowProvider extends FlowProvider {
   bool _exitRoomFlow = false;
