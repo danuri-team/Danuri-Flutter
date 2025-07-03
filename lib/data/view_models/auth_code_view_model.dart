@@ -1,5 +1,5 @@
 import 'package:danuri_flutter/data/data_sources/auth/user_auth_data_source.dart';
-import 'package:danuri_flutter/data/models/auth/admin_auth/response/tokens_response.dart';
+import 'package:danuri_flutter/data/models/auth/token/response/tokens_response.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/auth_code_login_request.dart';
 import 'package:dio/dio.dart';
 

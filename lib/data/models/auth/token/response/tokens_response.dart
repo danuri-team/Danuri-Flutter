@@ -1,5 +1,4 @@
-import 'package:danuri_flutter/data/models/auth/admin_auth/response/access_token_response.dart';
-import 'package:danuri_flutter/data/models/auth/admin_auth/response/refresh_token_response.dart';
+import 'package:danuri_flutter/data/models/auth/token/response/token_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tokens_response.g.dart';
@@ -7,9 +6,9 @@ part 'tokens_response.g.dart';
 @JsonSerializable()
 class TokensResponse {
   @JsonKey(name: 'access_token')
-  final AccessTokenResponse accessToken;
+  final TokenResponse accessToken;
   @JsonKey(name: 'refresh_token')
-  final RefreshTokenResponse refreshToken;
+  final TokenResponse refreshToken;
 
   TokensResponse({
     required this.accessToken,
