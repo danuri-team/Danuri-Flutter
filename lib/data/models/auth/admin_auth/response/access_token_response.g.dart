@@ -1,18 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'token_response.dart';
+part of 'access_token_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TokenResponse _$TokenResponseFromJson(Map<String, dynamic> json) =>
-    TokenResponse(
+AccessTokenResponse _$AccessTokenResponseFromJson(Map<String, dynamic> json) =>
+    AccessTokenResponse(
       token: json['token'] as String,
       expiredAt: (json['expired_at'] as num).toInt(),
     );
 
-Map<String, dynamic> _$TokenResponseToJson(TokenResponse instance) =>
+Map<String, dynamic> _$AccessTokenResponseToJson(
+        AccessTokenResponse instance) =>
     <String, dynamic>{
       'token': instance.token,
       'expired_at': instance.expiredAt,
