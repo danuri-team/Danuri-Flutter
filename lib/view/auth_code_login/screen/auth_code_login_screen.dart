@@ -1,6 +1,9 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/data/view_models/auth_code_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
@@ -27,6 +30,62 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
     _authCodeController.dispose();
   }
 
+  Future<void> _authCodeLogin() async {
+    await _viewModel.authCodeLogin(
+      context.read<PhoneNumberProvider>().phoneNumber,
+      _authCodeController.text,
+    );
+  }
+
+  void _authFailed() {
+    context.push('/failure');
+  }
+
+  Future<void> _authCompleted() async {
+    final bool exitRoomFlow = context.read<ExitRoomFlowProvider>().exitRoomFlow;
+    final bool registerUsedSpaceFlow =
+        context.read<RegisterUsedSpaceFlowProvider>().registerUsedSpaceFlow;
+    final bool itemRentalFlow =
+        context.read<ItemRentalFlowProvider>().itemRentalFlow;
+    if (exitRoomFlow == true) {
+      await _viewModel.exitRoom().then(
+        (_) {
+          if (_viewModel.error == true) {
+            _viewModel.reset();
+            context.push('/failure');
+          } else {
+            context.read<ExitRoomFlowProvider>().resetFlow();
+            context.push('/completion');
+          }
+        },
+      );
+    } else if (registerUsedSpaceFlow == true) {
+      await _viewModel.registerUsedSpace(context).then(
+        (_) {
+          if (_viewModel.error == true) {
+            _viewModel.reset();
+            context.push('/failure');
+          } else {
+            context.read<RegisterUsedSpaceFlowProvider>().resetFlow();
+            context.push('/completion');
+          }
+        },
+      );
+    } else if (itemRentalFlow == true) {
+      await _viewModel.itemRental(context).then(
+        (_) {
+          if (_viewModel.error == true) {
+            _viewModel.reset();
+            context.push('/failure');
+          } else {
+            context.read<ItemRentalFlowProvider>().resetFlow();
+            context.push('/completion');
+          }
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +109,7 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
                   maxLength: 6,
                   onTapOutside: (event) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     counterText: '',
                     hintText: '000000',
@@ -77,16 +137,17 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
               SizedBox(height: 220.h),
               NextButton(
                 centerText: '다음',
-                onTap: () {
-                  _viewModel.authCodeLogin(
-                    context.watch<PhoneNumberProvider>().phoneNumber,
-                    _authCodeController.text,
+                onTap: () async {
+                  _authCodeLogin().then(
+                    (_) async {
+                      if (_viewModel.error == true) {
+                        _authFailed();
+                        _viewModel.error == false;
+                      } else {
+                        _authCompleted();
+                      }
+                    },
                   );
-                  if (_viewModel.error == true) {
-                    context.push('/auth-fail'); // 인증 실패
-                  } else {
-                    context.push('/auth-success'); // 인증 성공
-                  }
                 },
               ),
             ],

@@ -8,12 +8,12 @@ import 'package:dio/dio.dart';
 class DeviceAuthDataSource extends DataSource {
   final storage = TokenStorage();
 
-  Future<TokensResponse> login(DeviceAuthRequest request) async {
+  Future<TokensResponse> deviceAuth(DeviceAuthRequest request) async {
     final response = await dio.post(
       '$baseUrl/auth/device/token',
       data: request.toJson(),
       options: Options(headers: {
-        'Authorization': 'Bearer ${await storage.getAdminAccessToken()}'
+        'Authorization': 'Bearer ${await adminToken}'
       }),
     );
     await TokenStorage().setDeviceToken(response.data);

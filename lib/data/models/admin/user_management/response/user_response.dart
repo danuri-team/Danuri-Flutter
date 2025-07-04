@@ -1,5 +1,3 @@
-import 'package:danuri_flutter/data/models/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_response.g.dart';
@@ -8,8 +6,8 @@ part 'user_response.g.dart';
 class UserResponse {
   final String id;
   final String name;
-  final SexType sex;
-  final AgeType age;
+  final String sex;
+  final String age;
   final String phone;
   @JsonKey(name: 'created_at')
   final String createdAt;

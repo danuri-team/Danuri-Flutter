@@ -23,7 +23,7 @@ class FailureScreen extends StatelessWidget {
             SizedBox(height: 415.h),
             NextButton(
               centerText: '다음',
-              onTap: () => context.go('/login'),
+              onTap: () => context.push('/login'),
             ),
           ],
         ),

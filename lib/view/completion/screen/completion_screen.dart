@@ -63,7 +63,7 @@ class _CompletionScreenState extends State<CompletionScreen> {
             SizedBox(height: 415.h),
             NextButton(
               centerText: '다음',
-              onTap: () => context.go('/home'),
+              onTap: () => context.push('/home'),
             ),
           ],
         ),

@@ -1,11 +1,12 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
+import 'package:danuri_flutter/view/components/selection_box.dart';
 import 'package:danuri_flutter/view/register_used_space/widgets/show_available_space.dart';
-import 'package:danuri_flutter/view/register_used_space/widgets/space_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -76,8 +77,7 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
               SizedBox.shrink()
             else
               SizedBox(
-                width: 538.w,
-                // width: double.infinity,
+                width: double.infinity,
                 height: 48.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -85,19 +85,19 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
                   itemBuilder: (context, index) {
                     return Row(
                       children: [
-                        SpaceBox(
+                        SelectionBox(
                           available:
                               _viewModel.spaceUsageStatus![index].isAvailable,
                           isSelected: selectedSpace['spaceId'] ==
                               _viewModel.spaceUsageStatus![index].spaceId,
-                          spaceName: _viewModel.spaceUsageStatus![index].name,
+                          name: _viewModel.spaceUsageStatus![index].name,
                           onTap: () {
                             if (_viewModel
                                     .spaceUsageStatus![index].isAvailable ==
                                 true) {
                               setState(() {
-                                selectedSpace['spaceId'] = _viewModel
-                                    .spaceUsageStatus![index].spaceId;
+                                selectedSpace['spaceId'] =
+                                    _viewModel.spaceUsageStatus![index].spaceId;
                               });
                             }
                           },
@@ -115,9 +115,12 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
               children: [
                 NextButton(
                   centerText: '다음',
-                  onTap: () {
-                    context.read<SpaceIdProvider>().setSpaceId(selectedSpace['spaceId']!);
-                    context.push('/item-rental');
+                  onTap: () async {
+                    context
+                        .read<SpaceIdProvider>()
+                        .setSpaceId(selectedSpace['spaceId']!);
+                    context.read<RegisterUsedSpaceFlowProvider>().startFlow();
+                    context.push('/login');
                   },
                 ),
               ],

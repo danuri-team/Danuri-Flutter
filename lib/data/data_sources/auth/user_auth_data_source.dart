@@ -12,22 +12,30 @@ class UserAuthDataSource extends DataSource {
     final response = await dio.post(
       '$baseUrl/auth/user/phone',
       data: request.toJson(),
+      options: Options(
+        headers: {'Authorization': 'Bearer ${await deviceToken}'},
+      ),
     );
     return SendAuthCodeResponse.fromJson(response.data);
   }
 
-  Future<UserInfoResponse> signUp(SignUpRequest request) async {
-    final response = await dio.post(
+  Future<void> signUp(SignUpRequest request) async {
+    await dio.post(
       '$baseUrl/auth/user/register',
       data: request.toJson(),
+      options: Options(
+        headers: {'Authorization': 'Bearer ${await deviceToken}'},
+      ),
     );
-    return UserInfoResponse.fromJson(response.data);
   }
 
   Future<TokensResponse> authCodeLogin(AuthCodeLoginRequest request) async {
     final response = await dio.post(
       '$baseUrl/auth/user/verify',
       data: request.toJson(),
+      options: Options(
+        headers: {'Authorization': 'Bearer ${await deviceToken}'},
+      ),
     );
     await TokenStorage().setUserToken(response.data);
     return TokensResponse.fromJson(response.data);
