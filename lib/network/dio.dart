@@ -25,7 +25,7 @@ class _AppDio with DioMixin implements AppDio {
       sendTimeout: const Duration(seconds: 30),
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
-      receiveDataWhenStatusError: true,
+      // receiveDataWhenStatusError: true,
     );
 
     interceptors.addAll(

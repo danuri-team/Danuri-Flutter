@@ -1,8 +1,8 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/core/provider/space_id_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
-import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
 import 'package:danuri_flutter/view/components/availability_sign.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
@@ -23,19 +23,14 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
   Map<String, String?> selectedItem = {'itemId': null};
 
   final ItemRentalViewModel _itemViewModel = ItemRentalViewModel();
-  final RegisterUsedSpaceViewModel _spaceViewModel = RegisterUsedSpaceViewModel();
 
   Future<void> fetchData() async {
     await Future.wait([
       _itemViewModel.getItemAvailableRent(), // 대여 가능 아이템 조회
-      _itemViewModel.getUsageSpace(), // 공간 사용 조회
     ]).then(
-      (_) => setState(
-        () {},
-      ),
+      (_) => setState(() {}),
     );
   }
-
 
   @override
   void initState() {
@@ -84,7 +79,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
               SizedBox.shrink()
             else
               SizedBox(
-                width: 538.w,
+                width: double.infinity,
                 height: 48.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -98,20 +93,20 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                               0,
                           isSelected: selectedItem['itemId'] ==
                               _itemViewModel.itemAvailableRental![index].id,
-                          spaceName:
-                              _itemViewModel.itemAvailableRental![index].name,
+                          name: _itemViewModel.itemAvailableRental![index].name,
                           onTap: () {
                             if (_itemViewModel.itemAvailableRental![index]
                                     .availableQuantity !=
                                 0) {
                               setState(() {
-                                selectedItem['itemId'] =
-                                    _itemViewModel.itemAvailableRental![index].id;
+                                selectedItem['itemId'] = _itemViewModel
+                                    .itemAvailableRental![index].id;
                               });
                             }
                           },
                         ),
-                        if (_itemViewModel.itemAvailableRental!.length != index + 1)
+                        if (_itemViewModel.itemAvailableRental!.length !=
+                            index + 1)
                           SizedBox(width: 12.w),
                       ],
                     );
@@ -124,15 +119,12 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
               children: [
                 NextButton(
                   centerText: '다음',
-                  onTap: () async {
-                    if (_itemViewModel.spaceUsage != null) {
-                      await _itemViewModel.itemRental(
-                          _itemViewModel.spaceUsage!.spaceUsageInfo.usageId,
-                          selectedItem['itemId']!,
-                          1);
-                    }
-                      await _spaceViewModel.registerUsedSpace(context.watch<SpaceIdProvider>().spaceId);
-                        context.go('/home');
+                  onTap: () {
+                    context
+                        .read<ItemIdProvider>()
+                        .setSpaceId(selectedItem['itemId']!);
+                    context.read<ItemRentalFlowProvider>().startFlow();
+                    context.push('/login');
                   },
                 ),
               ],

@@ -4,7 +4,7 @@ import 'package:danuri_flutter/data/models/other/space/response/space_usage_resp
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
 import 'package:dio/dio.dart';
 
-class SpaceDataSource extends DataSource{
+class SpaceDataSource extends DataSource {
   Future<SpaceUsageResponse> getUsageSpace() async {
     final response = await dio.get(
       '$baseUrl/usage',
@@ -16,7 +16,8 @@ class SpaceDataSource extends DataSource{
   Future<List<SpaceUsageStatusResponse>> getSpaceUsageStatus() async {
     final response = await dio.get(
       '$baseUrl/space',
-      options: Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
+      options:
+          Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
     );
     final result = response.data as List;
     return result
@@ -32,7 +33,7 @@ class SpaceDataSource extends DataSource{
     );
   }
 
-  Future<void> exitRoom() async {
+  Future exitRoom() async {
     await dio.post(
       '$baseUrl/usage',
       options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),

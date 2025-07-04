@@ -10,7 +10,7 @@ SendAuthCodeResponse _$SendAuthCodeResponseFromJson(
         Map<String, dynamic> json) =>
     SendAuthCodeResponse(
       isSuccess: json['is_success'] as bool,
-      massage: json['massage'] as String,
+      massage: json['massage'] as String?,
     );
 
 Map<String, dynamic> _$SendAuthCodeResponseToJson(
