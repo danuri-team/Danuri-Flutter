@@ -5,7 +5,7 @@ import 'package:danuri_flutter/data/models/auth/user_auth/request/auth_code_logi
 import 'package:danuri_flutter/data/models/auth/user_auth/request/user_login_request.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/response/send_auth_code_response.dart';
-import 'package:danuri_flutter/data/models/auth/user_auth/response/user_info_response.dart';
+import 'package:dio/dio.dart';
 
 class UserAuthDataSource extends DataSource {
   Future<SendAuthCodeResponse> login(UserLoginRequest request) async {
