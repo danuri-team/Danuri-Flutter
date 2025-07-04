@@ -8,10 +8,10 @@ part of 'tokens_response.dart';
 
 TokensResponse _$TokensResponseFromJson(Map<String, dynamic> json) =>
     TokensResponse(
-      accessToken:
-          TokenResponse.fromJson(json['access_token'] as Map<String, dynamic>),
-      refreshToken:
-          TokenResponse.fromJson(json['refresh_token'] as Map<String, dynamic>),
+      accessToken: AccessTokenResponse.fromJson(
+          json['access_token'] as Map<String, dynamic>),
+      refreshToken: RefreshTokenResponse.fromJson(
+          json['refresh_token'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TokensResponseToJson(TokensResponse instance) =>
