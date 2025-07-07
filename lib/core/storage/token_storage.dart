@@ -11,7 +11,7 @@ class TokenStorage {
     );
     await storage.write(
       key: 'adminAccessTokenExpiredAt',
-      value: adminToken['access_token']['expired_at'],
+      value: adminToken['access_token']['expired_at'].toString(),
     );
     await storage.write(
       key: 'adminRefreshToken',
@@ -19,7 +19,7 @@ class TokenStorage {
     );
     await storage.write(
       key: 'adminRefreshTokenExpiredAt',
-      value: adminToken['refresh_token']['expired_at'],
+      value: adminToken['refresh_token']['expired_at'].toString(),
     );
   }
 
@@ -31,7 +31,7 @@ class TokenStorage {
     );
     await storage.write(
       key: 'deviceAccessTokenExpiredAt',
-      value: deviceToken['access_token']['expired_at'],
+      value: deviceToken['access_token']['expired_at'].toString(),
     );
     await storage.write(
       key: 'deviceRefreshToken',
@@ -39,7 +39,7 @@ class TokenStorage {
     );
     await storage.write(
       key: 'deviceRefreshTokenExpiredAt',
-      value: deviceToken['refresh_token']['expired_at'],
+      value: deviceToken['refresh_token']['expired_at'].toString(),
     );
   }
 
@@ -51,7 +51,7 @@ class TokenStorage {
     );
     await storage.write(
       key: 'userAccessTokenExpiredAt',
-      value: userToken['access_token']['expired_at'],
+      value: userToken['access_token']['expired_at'].toString(),
     );
     await storage.write(
       key: 'userRefreshToken',
@@ -59,7 +59,7 @@ class TokenStorage {
     );
     await storage.write(
       key: 'userRefreshTokenExpiredAt',
-      value: userToken['refersh_token']['expired_at'],
+      value: userToken['refersh_token']['expired_at'].toString(),
     );
   }
 

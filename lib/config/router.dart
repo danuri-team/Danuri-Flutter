@@ -14,7 +14,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: [
     GoRoute(
       name: 'organ-auth',
@@ -22,8 +22,7 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const OrganAuthScreen(),
     ),
     GoRoute(
-      name: 'home',
-      path: '/home',
+      path: '/',
       builder: (context, state) => HomeScreen(),
     ),
     GoRoute(
