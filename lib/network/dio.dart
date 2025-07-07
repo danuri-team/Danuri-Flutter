@@ -25,7 +25,7 @@ class _AppDio with DioMixin implements AppDio {
       sendTimeout: const Duration(seconds: 30),
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
-      // receiveDataWhenStatusError: true,
+      receiveDataWhenStatusError: true,
     );
 
     interceptors.addAll(
@@ -34,30 +34,25 @@ class _AppDio with DioMixin implements AppDio {
           onError: (error, handler) async {
             //토큰이 만료되었을 때 DioException발생
             if (error.response?.statusCode == 403) {
-              int adminAccessTokenExpiredAt;
-              int deviceAccessTokenExpiredAt;
+              final tokenStorage = TokenStorage();
+
               int nowTime = DateTime.now().millisecondsSinceEpoch;
 
               //토큰들의 만료시간 가져오기
               Future.wait([
-                TokenStorage().getAdminAccessTokenExpiredAt(),
-                TokenStorage().getDeviceAccessTokenExpiredAt(),
-                TokenStorage().getUserAccessTokenExpiredAt(),
+                tokenStorage.getAdminAccessTokenExpiredAt(),
+                tokenStorage.getDeviceAccessTokenExpiredAt(),
               ]).then(
                 (value) async {
-                  adminAccessTokenExpiredAt = int.parse(value[0]!);
-                  deviceAccessTokenExpiredAt = int.parse(value[1]!);
-                  final TokenStorage storage = TokenStorage();
-
                   //현재시간과 만료시간 대조
-                  if (nowTime > adminAccessTokenExpiredAt) {
-                    await storage.getAdminRefreshToken().then(
+                  if (nowTime > int.parse(value[0]!)) {
+                    await tokenStorage.getAdminRefreshToken().then(
                           (refreshToken) => AdminAuthDataSource().refreshToken(
                             RefreshTokenRequest(refreshToken: refreshToken!),
                           ),
                         );
-                  } else if (nowTime > deviceAccessTokenExpiredAt) {
-                    await storage.getDeviceRefreshToken().then(
+                  } else if (nowTime > int.parse(value[1]!)) {
+                    await tokenStorage.getDeviceRefreshToken().then(
                           (refreshToken) => DeviceAuthDataSource().refreshToken(
                             RefreshTokenRequest(refreshToken: refreshToken!),
                           ),

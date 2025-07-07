@@ -6,6 +6,9 @@ import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
+import 'package:danuri_flutter/core/storage/token_storage.dart';
+import 'package:danuri_flutter/data/data_sources/auth/admin_auth_data_source.dart';
+import 'package:danuri_flutter/data/models/auth/admin_auth/request/admin_login_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +18,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //  HttpOverrides.global = MyHttpOverrides();
   await dotenv.load(fileName: '.env');
+  await TokenStorage().getAdminAccessToken().then(
+    (adminToken) async {
+      if (adminToken == null) {
+        await AdminAuthDataSource().login(
+          AdminLoginRequest(
+            email: 'admin@example.com',
+            password: dotenv.env['ADMIN_PASSWORD']!,
+          ),
+        );
+      }
+    },
+  );
   runApp(const MyApp());
 }
 
