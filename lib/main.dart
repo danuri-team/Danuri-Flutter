@@ -18,23 +18,30 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //  HttpOverrides.global = MyHttpOverrides();
   await dotenv.load(fileName: '.env');
-  await TokenStorage().getAdminAccessToken().then(
-    (adminToken) async {
-      if (adminToken == null) {
+  bool firstRun = false;
+  await TokenStorage().getDeviceAccessToken().then(
+    (deviceToken) async {
+      if (deviceToken == null) {
         await AdminAuthDataSource().login(
           AdminLoginRequest(
             email: 'admin@example.com',
             password: dotenv.env['ADMIN_PASSWORD']!,
           ),
         );
+        firstRun = true;
       }
     },
   );
-  runApp(const MyApp());
+  runApp(MyApp(firstRun: firstRun));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    required this.firstRun,
+  });
+
+  final bool firstRun;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +70,9 @@ class MyApp extends StatelessWidget {
                 scaffoldBackgroundColor: DanuriColor.background1,
                 fontFamily: 'Pretendard',
               ),
-              routerConfig: router,
+              routerConfig: router(
+                firstRun ? '/organ-auth' : '/',
+              ),
             ),
           ),
         );

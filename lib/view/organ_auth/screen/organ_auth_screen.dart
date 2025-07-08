@@ -106,7 +106,7 @@ class _OrganAuthScreenState extends State<OrganAuthScreen> {
                             await _viewModel
                                 .deviceAuth(_deviceIdController.text);
                             if (context.mounted) {
-                              context.go('/home');
+                              context.go('/');
                             }
                           },
                           child: Container(

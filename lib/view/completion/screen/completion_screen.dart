@@ -30,7 +30,7 @@ class _CompletionScreenState extends State<CompletionScreen> {
         _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
           if (_count == 1) {
             timer.cancel();
-            context.go('/home');
+            context.go('/');
           } else {
             setState(() {
               --_count;
@@ -63,7 +63,7 @@ class _CompletionScreenState extends State<CompletionScreen> {
             SizedBox(height: 415.h),
             NextButton(
               centerText: '다음',
-              onTap: () => context.push('/home'),
+              onTap: () => context.push('/'),
             ),
           ],
         ),
