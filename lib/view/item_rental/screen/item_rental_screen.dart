@@ -76,7 +76,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
             ),
             SizedBox(height: 14.h),
             if (_itemViewModel.itemAvailableRental == null)
-              SizedBox.shrink()
+              SizedBox(height: 48.h)
             else
               SizedBox(
                 width: double.infinity,
@@ -113,7 +113,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                   },
                 ),
               ),
-            SizedBox(height: 226.h),
+            SizedBox(height: 211.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

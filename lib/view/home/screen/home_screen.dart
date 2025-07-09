@@ -82,8 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 80.h),
-            // SizedBox(height: 82.h),
+            SizedBox(height: 74.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

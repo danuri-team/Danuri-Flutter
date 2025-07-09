@@ -74,7 +74,7 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
             ),
             SizedBox(height: 14.h),
             if (_viewModel.spaceUsageStatus == null)
-              SizedBox.shrink()
+              SizedBox(height: 48.h)
             else
               SizedBox(
                 width: double.infinity,
@@ -109,7 +109,7 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
                   },
                 ),
               ),
-            SizedBox(height: 226.h),
+            SizedBox(height: 211.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

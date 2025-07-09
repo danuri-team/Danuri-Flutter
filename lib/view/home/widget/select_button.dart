@@ -21,10 +21,6 @@ class SelectButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 100.w,
-          vertical: 80.h,
-        ),
         width: 400.w,
         height: 408.h,
         decoration: ShapeDecoration(
@@ -34,6 +30,7 @@ class SelectButton extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset('assets/icons/$svgName'),
             SizedBox(height: 10.h),

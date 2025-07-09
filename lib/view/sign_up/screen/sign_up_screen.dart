@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
-import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/models/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:danuri_flutter/data/view_models/sign_up_view_model.dart';
@@ -79,6 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 needCallBackButton: true,
                 needHelpMeButton: true,
               ),
+              SizedBox(height: 44.h),
               Padding(
                 padding: EdgeInsets.only(left: 10.w),
                 child: Column(
