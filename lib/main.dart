@@ -5,6 +5,7 @@ import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dar
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/rental_id_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/data_sources/auth/admin_auth_data_source.dart';
@@ -19,19 +20,17 @@ void main() async {
   //  HttpOverrides.global = MyHttpOverrides();
   await dotenv.load(fileName: '.env');
   bool firstRun = false;
-  await TokenStorage().getDeviceAccessToken().then(
-    (deviceToken) async {
-      if (deviceToken == null) {
-        await AdminAuthDataSource().login(
-          AdminLoginRequest(
-            email: 'admin@example.com',
-            password: dotenv.env['ADMIN_PASSWORD']!,
-          ),
-        );
-        firstRun = true;
-      }
-    },
-  );
+  final deviceToken = await TokenStorage().getDeviceAccessToken();
+
+  if (deviceToken == null) {
+    await AdminAuthDataSource().login(
+      AdminLoginRequest(
+        email: 'admin@example.com',
+        password: dotenv.env['ADMIN_PASSWORD']!,
+      ),
+    );
+    firstRun = true;
+  }
   runApp(MyApp(firstRun: firstRun));
 }
 
@@ -54,15 +53,26 @@ class MyApp extends StatelessWidget {
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(
-                  create: (context) => PhoneNumberProvider()),
-              ChangeNotifierProvider(create: (context) => SpaceIdProvider()),
-              ChangeNotifierProvider(create: (context) => ItemIdProvider()),
+                create: (context) => PhoneNumberProvider(),
+              ),
               ChangeNotifierProvider(
-                  create: (context) => ExitRoomFlowProvider()),
+                create: (context) => SpaceIdProvider(),
+              ),
               ChangeNotifierProvider(
-                  create: (context) => RegisterUsedSpaceFlowProvider()),
+                create: (context) => ItemIdProvider(),
+              ),
               ChangeNotifierProvider(
-                  create: (context) => ItemRentalFlowProvider()),
+                create: (context) => ExitRoomFlowProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => RegisterUsedSpaceFlowProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => ItemRentalFlowProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => RentalIdProvider(),
+              ),
             ],
             child: MaterialApp.router(
               debugShowCheckedModeBanner: false,
