@@ -4,6 +4,7 @@ import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart'
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/rental_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/auth_code_view_model.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
@@ -47,7 +48,11 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
         context.read<RegisterUsedSpaceFlowProvider>().registerUsedSpaceFlow;
     final bool itemRentalFlow =
         context.read<ItemRentalFlowProvider>().itemRentalFlow;
+    final List<String> rentalIds = context.read<RentalIdProvider>().rentalIds;
     if (exitRoomFlow == true) {
+      for (var rentalId in rentalIds) {
+        await _viewModel.returnItem(rentalId);
+      }
       await _viewModel.exitRoom().then(
         (_) {
           if (_viewModel.error == true) {

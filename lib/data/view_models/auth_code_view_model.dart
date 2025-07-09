@@ -1,4 +1,5 @@
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
+import 'package:danuri_flutter/core/provider/rental_id_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/data_sources/auth/user_auth_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/token/response/tokens_response.dart';
@@ -6,6 +7,7 @@ import 'package:danuri_flutter/data/data_sources/other/item_rental_data_source.d
 import 'package:danuri_flutter/data/data_sources/other/space_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/auth_code_login_request.dart';
 import 'package:danuri_flutter/data/models/other/rental_item/request/rental_item_request.dart';
+import 'package:danuri_flutter/data/models/other/rental_item/request/return_item_request.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -46,10 +48,21 @@ class AuthCodeViewModel {
       _error = false;
     } on DioException catch (_) {
       _error = true;
+    }
+  }
 
-      // if (e.response?.statusCode == 404) {
-      // 사용중인 공간이 없습니다
-      // }
+  Future<void> returnItem(String rentalId) async {
+    try {
+      await _itemDataSource.returnItem(
+        rentalId,
+        ReturnItemRequest(
+          returnedQuantity: 1,
+          comment: '정상 반납',
+        ),
+      );
+      _error = false;
+    } on DioException catch (_) {
+      _error = true;
     }
   }
 
@@ -72,19 +85,21 @@ class AuthCodeViewModel {
       final String itemId = context.read<ItemIdProvider>().itemId;
       await _spaceDataSource.getUsageSpace().then(
         (usageSpace) async {
-          await _itemDataSource.itemRental(
+          await _itemDataSource
+              .itemRental(
             usageSpace.spaceUsageInfo.usageId,
             RentalItemRequest(itemId: itemId, quantity: 1),
+          )
+              .then(
+            (rentedItem) {
+              context.read<RentalIdProvider>().addRentalId(rentedItem.id);
+            },
           );
         },
       );
-
       _error = false;
     } on DioException catch (_) {
       _error = true;
-      // if (e.response?.statusCode == 502) {
-      //   //현재 사용 중인 공간이 없습니다.
-      // }
     }
   }
 }
