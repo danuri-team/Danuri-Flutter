@@ -47,42 +47,38 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(1280, 800),
       builder: (context, child) {
-        return MediaQuery(
-          data: MediaQuery.of(context)
-              .copyWith(textScaler: TextScaler.linear(1.0)),
-          child: MultiProvider(
-            providers: [
-              ChangeNotifierProvider(
-                create: (context) => PhoneNumberProvider(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) => SpaceIdProvider(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) => ItemIdProvider(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) => ExitRoomFlowProvider(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) => RegisterUsedSpaceFlowProvider(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) => ItemRentalFlowProvider(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) => RentalIdProvider(),
-              ),
-            ],
-            child: MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                scaffoldBackgroundColor: DanuriColor.background1,
-                fontFamily: 'Pretendard',
-              ),
-              routerConfig: router(
-                firstRun ? '/organ-auth' : '/',
-              ),
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => PhoneNumberProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => SpaceIdProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => ItemIdProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => ExitRoomFlowProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => RegisterUsedSpaceFlowProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => ItemRentalFlowProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => RentalIdProvider(),
+            ),
+          ],
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: DanuriColor.background1,
+              fontFamily: 'Pretendard',
+            ),
+            routerConfig: router(
+              firstRun ? '/organ-auth' : '/',
             ),
           ),
         );
