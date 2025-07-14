@@ -1,4 +1,3 @@
-import 'package:danuri_flutter/data/models/other/rental_item/response/available_items_response.dart';
 import 'package:danuri_flutter/data/models/other/rental_item/response/rental_item_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'space_usage_info_response.g.dart';

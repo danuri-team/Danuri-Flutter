@@ -19,11 +19,15 @@ class SelectionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = 84;
+    for (int i = 2; i < name.length; i++) {
+      width += 14;
+    }
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: onTap,
       child: Container(
-        width: name.length > 2 ? 98.w : 84.w,
+        width: width,
         height: 48.h,
         decoration: ShapeDecoration(
           color: available
