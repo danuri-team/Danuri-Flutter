@@ -9,8 +9,10 @@ part of 'space_usage_response.dart';
 SpaceUsageResponse _$SpaceUsageResponseFromJson(Map<String, dynamic> json) =>
     SpaceUsageResponse(
       isUsingSpace: json['is_using_space'] as bool,
-      spaceUsageInfo: SpaceUsageInfoResponse.fromJson(
-          json['space_usage_info'] as Map<String, dynamic>),
+      spaceUsageInfo: json['space_usage_info'] == null
+          ? null
+          : SpaceUsageInfoResponse.fromJson(
+              json['space_usage_info'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SpaceUsageResponseToJson(SpaceUsageResponse instance) =>

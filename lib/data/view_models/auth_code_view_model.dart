@@ -87,7 +87,7 @@ class AuthCodeViewModel {
         (usageSpace) async {
           await _itemDataSource
               .itemRental(
-            usageSpace.spaceUsageInfo.usageId,
+            usageSpace.spaceUsageInfo!.usageId,
             RentalItemRequest(itemId: itemId, quantity: 1),
           )
               .then(
