@@ -4,6 +4,7 @@ import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/data/models/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:danuri_flutter/data/view_models/sign_up_view_model.dart';
+import 'package:danuri_flutter/view/components/button/help_me_button.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:danuri_flutter/view/sign_up/widget/rounded_rectangle_box.dart';
@@ -74,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 title: '처음 이용하면 정보 기입이 필요해요',
                 subTitle: '간단하게 입력해볼까요?',
                 needCallBackButton: true,
-                needHelpMeButton: true,
+                rightWidget: HelpMeButton(),
               ),
               SizedBox(height: 44.h),
               Padding(

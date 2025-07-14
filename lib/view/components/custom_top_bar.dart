@@ -1,6 +1,5 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
-import 'package:danuri_flutter/view/components/button/help_me_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,15 +11,15 @@ class CustomTopBar extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.needCallBackButton,
-    required this.needHelpMeButton,
-    this.onTap,
+    required this.rightWidget,
+    this.callBackButtonOnTap,
   });
 
   final String title;
   final String subTitle;
   final bool needCallBackButton;
-  final bool needHelpMeButton;
-  final void Function()? onTap;
+  final Widget rightWidget;
+  final void Function()? callBackButtonOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class CustomTopBar extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           context.pop();
-                          onTap?.call();
+                          callBackButtonOnTap?.call();
                         },
                         icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
                       ),
@@ -57,15 +56,17 @@ class CustomTopBar extends StatelessWidget {
                   SizedBox(height: 6.h),
                   Text(
                     subTitle,
-                    style:
-                        DanuriText.heading1.copyWith(color: DanuriColor.label3),
+                    style: DanuriText.heading1.copyWith(
+                      color: DanuriColor.label3,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ],
               ),
             ),
           ],
         ),
-        needHelpMeButton ? HelpMeButton() : SizedBox.shrink(),
+        rightWidget
       ],
     );
   }
