@@ -58,9 +58,9 @@ class _CompletionScreenState extends State<CompletionScreen> {
               title: '처리가 완료되었습니다.',
               subTitle: '$_count초 뒤에 자동으로 이동합니다.',
               needCallBackButton: true,
-              needHelpMeButton: false,
+              rightWidget: SizedBox.shrink(),
             ),
-            SizedBox(height: 415.h),
+            SizedBox(height: 405.h),
             NextButton(
               centerText: '다음',
               onTap: () => context.push('/'),

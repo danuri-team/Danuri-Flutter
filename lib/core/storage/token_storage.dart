@@ -59,7 +59,7 @@ class TokenStorage {
     );
     await storage.write(
       key: 'userRefreshTokenExpiredAt',
-      value: userToken['refersh_token']['expired_at'].toString(),
+      value: userToken['refresh_token']['expired_at'].toString(),
     );
   }
 

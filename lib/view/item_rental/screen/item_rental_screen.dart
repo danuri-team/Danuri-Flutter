@@ -3,10 +3,10 @@ import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
-import 'package:danuri_flutter/view/components/availability_sign.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:danuri_flutter/view/components/selection_box.dart';
+import 'package:danuri_flutter/view/register_used_space/widgets/available_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -52,27 +52,22 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                   title: '이용할 물품을 선택해주세요',
                   subTitle: '물품 대여 시, 공간 이용 중에만 가능하며 이용 종료 전 반납하여야 합니다.',
                   needCallBackButton: true,
-                  needHelpMeButton: false,
-                ),
-                Column(
-                  children: [
-                    SizedBox(height: 148.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        AvailabilitySign(available: true),
-                        SizedBox(width: 34.w),
-                        AvailabilitySign(available: false),
-                      ],
-                    ),
-                  ],
+                  rightWidget: Column(
+                    children: [
+                      SizedBox(height: 160.sp),
+                      AvailableCategory(),
+                    ],
+                  ),
                 ),
               ],
             ),
             SizedBox(height: 103.h),
             Text(
               '물품',
-              style: DanuriText.body1Normal.copyWith(color: DanuriColor.label5),
+              style: DanuriText.body1Normal.copyWith(
+                color: DanuriColor.label5,
+                height: 0,
+              ),
             ),
             SizedBox(height: 14.h),
             if (_itemViewModel.itemAvailableRental == null)
@@ -113,7 +108,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                   },
                 ),
               ),
-            SizedBox(height: 211.h),
+            SizedBox(height: 207.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

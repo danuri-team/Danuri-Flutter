@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/data/models/other/rental_item/response/available_items_response.dart';
+import 'package:danuri_flutter/data/models/other/rental_item/response/rental_item_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'space_usage_info_response.g.dart';
 
@@ -11,7 +11,7 @@ class SpaceUsageInfoResponse {
   @JsonKey(name: 'space_name')
   final String spaceName;
   @JsonKey(name: 'rental_item')
-  final List<ItemAvailableRental> rentalItem;
+  final List<RentalItemResponse> rentalItem;
   @JsonKey(name: 'start_at')
   final String startAt;
   @JsonKey(name: 'end_at')

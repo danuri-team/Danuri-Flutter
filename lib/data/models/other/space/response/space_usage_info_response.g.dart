@@ -13,7 +13,7 @@ SpaceUsageInfoResponse _$SpaceUsageInfoResponseFromJson(
       usageId: json['usage_id'] as String,
       spaceName: json['space_name'] as String,
       rentalItem: (json['rental_item'] as List<dynamic>)
-          .map((e) => ItemAvailableRental.fromJson(e as Map<String, dynamic>))
+          .map((e) => RentalItemResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       startAt: json['start_at'] as String,
       endAt: json['end_at'] as String?,

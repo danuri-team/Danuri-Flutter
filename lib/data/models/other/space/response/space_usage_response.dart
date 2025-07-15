@@ -7,7 +7,7 @@ class SpaceUsageResponse {
   @JsonKey(name: 'is_using_space')
   final bool isUsingSpace;
   @JsonKey(name: 'space_usage_info')
-  final SpaceUsageInfoResponse spaceUsageInfo;
+  SpaceUsageInfoResponse? spaceUsageInfo;
 
   SpaceUsageResponse({
     required this.isUsingSpace,
