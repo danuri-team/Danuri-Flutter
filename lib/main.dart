@@ -11,14 +11,15 @@ import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/data_sources/auth/admin_auth_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/admin_auth/request/admin_login_request.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //  HttpOverrides.global = MyHttpOverrides();
   await dotenv.load(fileName: '.env');
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   bool firstRun = false;
   final deviceToken = await TokenStorage().getDeviceAccessToken();
 
@@ -86,12 +87,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//요청한 서버의 인증서(CA)가 공인된 인증서가 아닐 경우 우회
-// class MyHttpOverrides extends HttpOverrides{
-//   @override
-//   HttpClient createHttpClient(SecurityContext? context){  // '?'를 추가해서 null safety 확보
-//     return super.createHttpClient(context)
-//       ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
-//   }
-// }
