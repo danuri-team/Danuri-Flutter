@@ -26,6 +26,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final LoginViewModel _viewModel = LoginViewModel();
 
   @override
+  void initState() {
+    super.initState();
+    _phoneNumberController.addListener(
+      () => setState(() {}),
+    );
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _phoneNumberController.dispose();
@@ -95,20 +103,23 @@ class _LoginScreenState extends State<LoginScreen> {
               NextButton(
                 centerText: '다음',
                 onTap: () {
-                  userLogin().then(
-                    (_) {
-                      if (_viewModel.error == true) {
-                        if (context.mounted) {
-                          context.push('/sign-up');
+                  if (_phoneNumberController.text.length == 11) {
+                    userLogin().then(
+                      (_) {
+                        if (_viewModel.error == true) {
+                          if (context.mounted) {
+                            context.push('/sign-up');
+                          }
+                        } else {
+                          if (context.mounted) {
+                            context.push('/auth-code-login');
+                          }
                         }
-                      } else {
-                        if (context.mounted) {
-                          context.push('/auth-code-login');
-                        }
-                      }
-                    },
-                  );
+                      },
+                    );
+                  }
                 },
+                isActivate: _phoneNumberController.text.length == 11,
               ),
             ],
           ),

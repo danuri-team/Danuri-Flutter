@@ -64,6 +64,7 @@ class _CompletionScreenState extends State<CompletionScreen> {
             NextButton(
               centerText: '다음',
               onTap: () => context.push('/'),
+              isActivate: true,
             ),
           ],
         ),

@@ -115,12 +115,15 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                 NextButton(
                   centerText: '다음',
                   onTap: () {
-                    context
-                        .read<ItemIdProvider>()
-                        .setSpaceId(selectedItem['itemId']!);
-                    context.read<ItemRentalFlowProvider>().startFlow();
-                    context.push('/login');
+                    if (selectedItem['itemId'] != null) {
+                      context
+                          .read<ItemIdProvider>()
+                          .setSpaceId(selectedItem['itemId']!);
+                      context.read<ItemRentalFlowProvider>().startFlow();
+                      context.push('/login');
+                    }
                   },
+                  isActivate: selectedItem['itemId'] != null,
                 ),
               ],
             ),

@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SelectButton(
                   svgName: 'space.svg',
                   text: '공간 사용하기',
-                  onTap: () async {
+                  onTap: () {
                     context.push('/register-used-space');
                   },
                 ),
