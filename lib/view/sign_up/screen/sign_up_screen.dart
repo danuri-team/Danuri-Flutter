@@ -25,14 +25,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final SignUpViewModel _viewModel = SignUpViewModel();
 
-  Map<String, Enum?> userInfo = {'성별': null, '학년': null};
+  Map<String, Enum?> userInfo = {'sex': null, 'grade': null};
 
   final Map<String, List<Enum>> options = {
-    '성별': [
+    'sex': [
       SexType.MALE,
       SexType.FEMALE,
     ],
-    '학년': [
+    'grade': [
       AgeType.ELEMENTARY,
       AgeType.MIDDLE,
       AgeType.HIGH,
@@ -42,11 +42,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   };
 
   final Map<String, List<String>> exampleOptions = {
-    '성별': [
+    'sex': [
       '남성',
       '여성',
     ],
-    '학년': [
+    'grade': [
       '초등학교',
       '중학교',
       '고등학교',
@@ -54,6 +54,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       '일반',
     ]
   };
+
+  @override
+  void initState() {
+    super.initState();
+    _userNameController.addListener(
+      () => setState(() {}),
+    );
+  }
 
   @override
   void dispose() {
@@ -131,24 +139,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 48.h,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: exampleOptions['성별']!.length,
+                        itemCount: exampleOptions['sex']!.length,
                         itemBuilder: (context, index) {
                           return Row(
                             children: [
                               RoundedRectangleBox(
                                 width: 84.w,
-                                text: exampleOptions['성별']![index],
+                                text: exampleOptions['sex']![index],
                                 selected:
-                                    userInfo['성별'] == options['성별']![index],
+                                    userInfo['sex'] == options['sex']![index],
                                 onTap: () {
                                   setState(
                                     () {
-                                      userInfo['성별'] = options['성별']![index];
+                                      userInfo['sex'] = options['sex']![index];
                                     },
                                   );
                                 },
                               ),
-                              if (options['성별']!.length != index + 1)
+                              if (options['sex']!.length != index + 1)
                                 SizedBox(width: 12.w),
                             ],
                           );
@@ -168,22 +176,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 48.h,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: options['학년']!.length,
+                        itemCount: options['grade']!.length,
                         itemBuilder: (context, index) {
                           return Row(
                             children: [
                               RoundedRectangleBox(
                                 width: 112.w,
-                                text: exampleOptions['학년']![index],
-                                selected:
-                                    userInfo['학년'] == options['학년']![index],
+                                text: exampleOptions['grade']![index],
+                                selected: userInfo['grade'] ==
+                                    options['grade']![index],
                                 onTap: () {
                                   setState(() {
-                                    userInfo['학년'] = options['학년']![index];
+                                    userInfo['grade'] =
+                                        options['grade']![index];
                                   });
                                 },
                               ),
-                              if (options['학년']!.length != index + 1)
+                              if (options['grade']!.length != index + 1)
                                 SizedBox(width: 12.w),
                             ],
                           );
@@ -200,27 +209,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   NextButton(
                     centerText: '완료',
                     onTap: () async {
-                      await _viewModel
-                          .signUp(
-                        '52515fd2-43e5-440b-9cc5-8630bc75954e',
-                        _userNameController.text,
-                        context.read<PhoneNumberProvider>().phoneNumber,
-                        userInfo['성별'] as SexType,
-                        userInfo['학년'] as AgeType,
-                      )
-                          .then(
-                        (_) async {
-                          if (_viewModel.error == false) {
-                            await _viewModel.login(context
-                                .read<PhoneNumberProvider>()
-                                .phoneNumber);
-                            if (context.mounted) {
-                              context.push('/auth-code-login');
+                      if (_userNameController.text.isNotEmpty &&
+                          userInfo['sex'] != null &&
+                          userInfo['grade'] != null) {
+                        await _viewModel
+                            .signUp(
+                          '52515fd2-43e5-440b-9cc5-8630bc75954e',
+                          _userNameController.text,
+                          context.read<PhoneNumberProvider>().phoneNumber,
+                          userInfo['sex'] as SexType,
+                          userInfo['grade'] as AgeType,
+                        )
+                            .then(
+                          (_) async {
+                            if (_viewModel.error == false) {
+                              await _viewModel.login(context
+                                  .read<PhoneNumberProvider>()
+                                  .phoneNumber);
+                              if (context.mounted) {
+                                context.push('/auth-code-login');
+                              }
                             }
-                          }
-                        },
-                      );
+                          },
+                        );
+                      }
                     },
+                    isActivate: _userNameController.text.isNotEmpty &&
+                        userInfo['sex'] != null &&
+                        userInfo['grade'] != null,
                   ),
                 ],
               ),

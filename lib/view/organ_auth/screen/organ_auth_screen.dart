@@ -1,6 +1,7 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/data/view_models/organ_auth_view_model.dart';
+import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +17,14 @@ class OrganAuthScreen extends StatefulWidget {
 class _OrganAuthScreenState extends State<OrganAuthScreen> {
   final TextEditingController _deviceIdController = TextEditingController();
   final OrganAuthViewModel _viewModel = OrganAuthViewModel();
+
+  @override
+  void initState() {
+    super.initState();
+    _deviceIdController.addListener(
+      () => setState(() {}),
+    );
+  }
 
   @override
   void dispose() {
@@ -101,30 +110,19 @@ class _OrganAuthScreenState extends State<OrganAuthScreen> {
                           ),
                         ),
                         SizedBox(height: 13.h),
-                        GestureDetector(
+                        NextButton(
+                          centerText: '연결하기',
                           onTap: () async {
-                            await _viewModel
-                                .deviceAuth(_deviceIdController.text);
-                            if (context.mounted) {
-                              context.go('/');
+                            if (_deviceIdController.text.isNotEmpty) {
+                              await _viewModel
+                                  .deviceAuth(_deviceIdController.text);
+                              if (context.mounted) {
+                                context.go('/');
+                              }
                             }
                           },
-                          child: Container(
-                            width: 400.w,
-                            height: 48.h,
-                            decoration: ShapeDecoration(
-                              color: DanuriColor.primary1,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              '연결하기',
-                              style: DanuriText.body1Normal
-                                  .copyWith(color: DanuriColor.static1),
-                            ),
-                          ),
+                          isActivate: _deviceIdController.text.isNotEmpty,
+                          organAuthVersion: true,
                         ),
                       ],
                     ),

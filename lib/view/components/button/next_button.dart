@@ -8,28 +8,34 @@ class NextButton extends StatelessWidget {
     super.key,
     required this.centerText,
     required this.onTap,
+    required this.isActivate,
+    this.organAuthVersion = false,
   });
 
   final String centerText;
   final GestureTapCallback onTap;
+  final bool isActivate;
+  final bool organAuthVersion;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 500.w,
-        height: 54.h,
+        width: organAuthVersion ? 400.w : 500.w,
+        height: organAuthVersion ? 48.h : 54.h,
         decoration: ShapeDecoration(
-          color: DanuriColor.primary1,
+          color: isActivate ? DanuriColor.primary1 : DanuriColor.interaction1,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(organAuthVersion ? 12 : 8),
           ),
         ),
         alignment: Alignment.center,
         child: Text(
           centerText,
-          style: DanuriText.body1Normal.copyWith(color: DanuriColor.static1),
+          style: DanuriText.body1Normal.copyWith(
+            color: isActivate ? DanuriColor.static1 : DanuriColor.label2,
+          ),
         ),
       ),
     );

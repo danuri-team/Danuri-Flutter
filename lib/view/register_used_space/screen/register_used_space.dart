@@ -107,12 +107,15 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
                 NextButton(
                   centerText: '다음',
                   onTap: () async {
-                    context
-                        .read<SpaceIdProvider>()
-                        .setSpaceId(selectedSpace['spaceId']!);
-                    context.read<RegisterUsedSpaceFlowProvider>().startFlow();
-                    context.push('/login');
+                    if (selectedSpace['spaceId'] != null) {
+                      context
+                          .read<SpaceIdProvider>()
+                          .setSpaceId(selectedSpace['spaceId']!);
+                      context.read<RegisterUsedSpaceFlowProvider>().startFlow();
+                      context.push('/login');
+                    }
                   },
+                  isActivate: selectedSpace['spaceId'] != null,
                 ),
               ],
             ),

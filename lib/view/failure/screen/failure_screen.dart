@@ -24,6 +24,7 @@ class FailureScreen extends StatelessWidget {
             NextButton(
               centerText: '다음',
               onTap: () => context.push('/'),
+              isActivate: true,
             ),
           ],
         ),

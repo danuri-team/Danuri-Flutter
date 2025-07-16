@@ -27,6 +27,14 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
   final AuthCodeViewModel _viewModel = AuthCodeViewModel();
 
   @override
+  void initState() {
+    super.initState();
+    _authCodeController.addListener(
+      () => setState(() {}),
+    );
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _authCodeController.dispose();
@@ -144,17 +152,20 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
               NextButton(
                 centerText: '다음',
                 onTap: () async {
-                  _authCodeLogin().then(
-                    (_) async {
-                      if (_viewModel.error == true) {
-                        _authFailed();
-                        _viewModel.error == false;
-                      } else {
-                        _authCompleted();
-                      }
-                    },
-                  );
+                  if (_authCodeController.text.length == 6) {
+                    _authCodeLogin().then(
+                      (_) async {
+                        if (_viewModel.error == true) {
+                          _authFailed();
+                          _viewModel.error == false;
+                        } else {
+                          _authCompleted();
+                        }
+                      },
+                    );
+                  }
                 },
+                isActivate: _authCodeController.text.length == 6,
               ),
             ],
           ),
