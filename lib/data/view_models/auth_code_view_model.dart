@@ -85,19 +85,23 @@ class AuthCodeViewModel {
       final String itemId = context.read<ItemIdProvider>().itemId;
       await _spaceDataSource.getUsageSpace().then(
         (usageSpace) async {
-          await _itemDataSource
-              .itemRental(
-            usageSpace.spaceUsageInfo!.usageId,
-            RentalItemRequest(itemId: itemId, quantity: 1),
-          )
-              .then(
-            (rentedItem) {
-              context.read<RentalIdProvider>().addRentalId(rentedItem.id);
-            },
-          );
+          if (usageSpace.spaceUsageInfo == null) {
+            _error = true;
+          } else {
+            await _itemDataSource
+                .itemRental(
+              usageSpace.spaceUsageInfo!.usageId,
+              RentalItemRequest(itemId: itemId, quantity: 1),
+            )
+                .then(
+              (rentedItem) {
+                context.read<RentalIdProvider>().addRentalId(rentedItem.id);
+              },
+            );
+            _error = false;
+          }
         },
       );
-      _error = false;
     } on DioException catch (_) {
       _error = true;
     }
