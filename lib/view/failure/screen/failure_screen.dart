@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,11 @@ class FailureScreen extends StatelessWidget {
             SizedBox(height: 405.h),
             NextButton(
               centerText: '다음',
-              onTap: () => context.push('/'),
+              onTap: () {
+                Throttle.run(
+                  () => context.push('/'),
+                );
+              },
               isActivate: true,
             ),
           ],

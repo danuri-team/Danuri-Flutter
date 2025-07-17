@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:danuri_flutter/view/home/widget/exit_room_button.dart';
 import 'package:danuri_flutter/view/home/widget/select_button.dart';
@@ -43,7 +44,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   svgName: 'space.svg',
                   text: '공간 사용하기',
                   onTap: () {
-                    context.push('/register-used-space');
+                    Throttle.run(
+                      () {
+                        if (mounted) {
+                          context.push('/register-used-space');
+                        }
+                      },
+                    );
                   },
                 ),
                 SizedBox(width: 70.w),
@@ -51,7 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   svgName: 'item.svg',
                   text: '물품 대여하기',
                   onTap: () {
-                    context.push('/item-rental');
+                    Throttle.run(
+                      () {
+                        if (mounted) {
+                          context.push('/item-rental');
+                        }
+                      },
+                    );
                   },
                 ),
               ],

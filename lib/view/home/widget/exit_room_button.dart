@@ -1,6 +1,7 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,7 +16,13 @@ class ExitRoomButton extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         context.read<ExitRoomFlowProvider>().startFlow();
-        context.push('/login');
+        Throttle.run(
+          () {
+            if (context.mounted) {
+              context.push('/login');
+            }
+          },
+        );
       },
       child: Container(
         width: 138.w,

@@ -4,6 +4,7 @@ import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart'
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/view_models/login_view_model.dart';
 import 'package:danuri_flutter/view/components/button/help_me_button.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
@@ -104,17 +105,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 centerText: '다음',
                 onTap: () {
                   if (_phoneNumberController.text.length == 11) {
-                    userLogin().then(
-                      (_) {
-                        if (_viewModel.error == true) {
-                          if (context.mounted) {
-                            context.push('/sign-up');
-                          }
-                        } else {
-                          if (context.mounted) {
-                            context.push('/auth-code-login');
-                          }
-                        }
+                    Throttle.run(
+                      () {
+                        userLogin().then(
+                          (_) {
+                            if (_viewModel.error == true) {
+                              if (context.mounted) {
+                                context.push('/sign-up');
+                              }
+                            } else {
+                              if (context.mounted) {
+                                context.push('/auth-code-login');
+                              }
+                            }
+                          },
+                        );
                       },
                     );
                   }
