@@ -1,16 +1,19 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
+import 'package:danuri_flutter/data/view_models/help_request_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HelpMeButton extends StatelessWidget {
-  const HelpMeButton({super.key});
+  HelpMeButton({super.key});
+
+  final HelpRequestViewModel _viewModel = HelpRequestViewModel();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //미정
+      onTap: () async{
+        await _viewModel.helpRequest();
       },
       child: Container(
         width: 152.w,
