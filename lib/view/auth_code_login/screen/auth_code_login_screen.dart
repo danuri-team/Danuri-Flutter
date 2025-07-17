@@ -5,6 +5,7 @@ import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dar
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/rental_id_provider.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/view_models/auth_code_view_model.dart';
 import 'package:danuri_flutter/view/components/button/help_me_button.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
@@ -47,57 +48,50 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
     );
   }
 
-  void _authFailed() {
-    context.push('/failure');
+  Future<void> exitRoom() async {
+    final List<String> rentalIds = context.read<RentalIdProvider>().rentalIds;
+    for (var rentalId in rentalIds) {
+      await _viewModel.returnItem(rentalId);
+    }
+    await _viewModel.exitRoom().then(
+      (_) {
+        if (_viewModel.error == true) {
+          _viewModel.reset();
+          context.push('/failure');
+        } else {
+          context.read<ExitRoomFlowProvider>().resetFlow();
+          context.push('/completion');
+        }
+      },
+    );
   }
 
-  Future<void> _authCompleted() async {
-    final bool exitRoomFlow = context.read<ExitRoomFlowProvider>().exitRoomFlow;
-    final bool registerUsedSpaceFlow =
-        context.read<RegisterUsedSpaceFlowProvider>().registerUsedSpaceFlow;
-    final bool itemRentalFlow =
-        context.read<ItemRentalFlowProvider>().itemRentalFlow;
-    final List<String> rentalIds = context.read<RentalIdProvider>().rentalIds;
-    if (exitRoomFlow == true) {
-      for (var rentalId in rentalIds) {
-        await _viewModel.returnItem(rentalId);
-      }
-      await _viewModel.exitRoom().then(
-        (_) {
-          if (_viewModel.error == true) {
-            _viewModel.reset();
-            context.push('/failure');
-          } else {
-            context.read<ExitRoomFlowProvider>().resetFlow();
-            context.push('/completion');
-          }
-        },
-      );
-    } else if (registerUsedSpaceFlow == true) {
-      await _viewModel.registerUsedSpace(context).then(
-        (_) {
-          if (_viewModel.error == true) {
-            _viewModel.reset();
-            context.push('/failure');
-          } else {
-            context.read<RegisterUsedSpaceFlowProvider>().resetFlow();
-            context.push('/completion');
-          }
-        },
-      );
-    } else if (itemRentalFlow == true) {
-      await _viewModel.itemRental(context).then(
-        (_) {
-          if (_viewModel.error == true) {
-            _viewModel.reset();
-            context.push('/failure');
-          } else {
-            context.read<ItemRentalFlowProvider>().resetFlow();
-            context.push('/completion');
-          }
-        },
-      );
-    }
+  Future<void> registerUsedSpace() async {
+    await _viewModel.registerUsedSpace(context).then(
+      (_) {
+        if (_viewModel.error == true) {
+          _viewModel.reset();
+          context.push('/failure');
+        } else {
+          context.read<RegisterUsedSpaceFlowProvider>().resetFlow();
+          context.push('/completion');
+        }
+      },
+    );
+  }
+
+  Future<void> itemRental() async {
+    await _viewModel.itemRental(context).then(
+      (_) {
+        if (_viewModel.error == true) {
+          _viewModel.reset();
+          context.push('/failure');
+        } else {
+          context.read<ItemRentalFlowProvider>().resetFlow();
+          context.push('/completion');
+        }
+      },
+    );
   }
 
   @override
@@ -151,16 +145,35 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
               SizedBox(height: 220.h),
               NextButton(
                 centerText: '다음',
-                onTap: () async {
+                onTap: () {
                   if (_authCodeController.text.length == 6) {
-                    _authCodeLogin().then(
-                      (_) async {
-                        if (_viewModel.error == true) {
-                          _authFailed();
-                          _viewModel.error == false;
-                        } else {
-                          _authCompleted();
-                        }
+                    Throttle.run(
+                      () {
+                        _authCodeLogin().then(
+                          (_) async {
+                            if (_viewModel.error == true) {
+                              context.push('/failure');
+                              _viewModel.reset();
+                            } else {
+                              final bool exitRoomFlow = context
+                                  .read<ExitRoomFlowProvider>()
+                                  .exitRoomFlow;
+                              final bool registerUsedSpaceFlow = context
+                                  .read<RegisterUsedSpaceFlowProvider>()
+                                  .registerUsedSpaceFlow;
+                              final bool itemRentalFlow = context
+                                  .read<ItemRentalFlowProvider>()
+                                  .itemRentalFlow;
+
+                              if (exitRoomFlow == true)
+                                await exitRoom();
+                              else if (registerUsedSpaceFlow == true)
+                                await registerUsedSpace();
+                              else if (itemRentalFlow == true)
+                                await itemRental();
+                            }
+                          },
+                        );
                       },
                     );
                   }

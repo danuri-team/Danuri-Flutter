@@ -1,6 +1,7 @@
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:danuri_flutter/data/view_models/sign_up_view_model.dart';
@@ -67,6 +68,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     super.dispose();
     _userNameController.dispose();
+  }
+
+  Future<void> _signUp() async {
+    await _viewModel.signUp(
+      '52515fd2-43e5-440b-9cc5-8630bc75954e',
+      _userNameController.text,
+      context.read<PhoneNumberProvider>().phoneNumber,
+      userInfo['sex'] as SexType,
+      userInfo['grade'] as AgeType,
+    );
   }
 
   @override
@@ -208,28 +219,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   NextButton(
                     centerText: '완료',
-                    onTap: () async {
+                    onTap: () {
                       if (_userNameController.text.isNotEmpty &&
                           userInfo['sex'] != null &&
                           userInfo['grade'] != null) {
-                        await _viewModel
-                            .signUp(
-                          '52515fd2-43e5-440b-9cc5-8630bc75954e',
-                          _userNameController.text,
-                          context.read<PhoneNumberProvider>().phoneNumber,
-                          userInfo['sex'] as SexType,
-                          userInfo['grade'] as AgeType,
-                        )
-                            .then(
-                          (_) async {
-                            if (_viewModel.error == false) {
-                              await _viewModel.login(context
-                                  .read<PhoneNumberProvider>()
-                                  .phoneNumber);
-                              if (context.mounted) {
-                                context.push('/auth-code-login');
-                              }
-                            }
+                        Throttle.run(
+                          () async {
+                            await _signUp().then(
+                              (_) async {
+                                if (_viewModel.error == false) {
+                                  await _viewModel.login(context
+                                      .read<PhoneNumberProvider>()
+                                      .phoneNumber);
+                                  if (context.mounted) {
+                                    context.push('/auth-code-login');
+                                  }
+                                }
+                              },
+                            );
                           },
                         );
                       }
