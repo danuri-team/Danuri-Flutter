@@ -1,15 +1,19 @@
+import 'dart:developer';
+
 import 'package:danuri_flutter/core/design_system/color.dart';
 import 'package:danuri_flutter/core/design_system/text.dart';
 import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
+import 'package:danuri_flutter/core/util/phone_number_formatter.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/view_models/login_view_model.dart';
 import 'package:danuri_flutter/view/components/button/help_me_button.dart';
 import 'package:danuri_flutter/view/components/button/next_button.dart';
 import 'package:danuri_flutter/view/components/custom_top_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> userLogin() async {
-    final String phoneNumber =
-        "${_phoneNumberController.text.substring(0, 3)}-${_phoneNumberController.text.substring(3, 7)}-${_phoneNumberController.text.substring(7, 11)}";
-    context.read<PhoneNumberProvider>().setPhoneNumber(phoneNumber);
-    await _viewModel.userLogin(phoneNumber);
+    log(_phoneNumberController.text);
+    context
+        .read<PhoneNumberProvider>()
+        .setPhoneNumber(_phoneNumberController.text);
+    await _viewModel.userLogin(_phoneNumberController.text);
   }
 
   @override
@@ -71,8 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 500.w,
                 height: 64.h,
                 child: TextFormField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    PhoneNumberFormatter(),
+                  ],
                   controller: _phoneNumberController,
-                  maxLength: 11,
+                  maxLength: 13,
                   keyboardType: TextInputType.phone,
                   onTapOutside: (event) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
@@ -104,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
               NextButton(
                 centerText: '다음',
                 onTap: () {
-                  if (_phoneNumberController.text.length == 11) {
+                  if (_phoneNumberController.text.length == 13) {
                     Throttle.run(
                       () {
                         userLogin().then(
@@ -124,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   }
                 },
-                isActivate: _phoneNumberController.text.length == 11,
+                isActivate: _phoneNumberController.text.length == 13,
               ),
             ],
           ),
