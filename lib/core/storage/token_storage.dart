@@ -3,63 +3,22 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class TokenStorage {
   static const storage = FlutterSecureStorage();
 
-  // Set Admin
-  Future<void> setAdminToken(Map<String, dynamic> adminToken) async {
+  Future<void> setToken(Map<String, dynamic> token, String tokenType) async{
     await storage.write(
-      key: 'adminAccessToken',
-      value: adminToken['access_token']['token'],
+      key: '${tokenType}AccessToken',
+      value: token['access_token']['token'],
     );
     await storage.write(
-      key: 'adminAccessTokenExpiredAt',
-      value: adminToken['access_token']['expired_at'].toString(),
+      key: '${tokenType}AccessTokenExpiredAt',
+      value: token['access_token']['expired_at'].toString(),
     );
     await storage.write(
-      key: 'adminRefreshToken',
-      value: adminToken['refresh_token']['token'],
+      key: '${tokenType}RefreshToken',
+      value: token['refresh_token']['token'],
     );
     await storage.write(
-      key: 'adminRefreshTokenExpiredAt',
-      value: adminToken['refresh_token']['expired_at'].toString(),
-    );
-  }
-
-  // Set Device
-  Future<void> setDeviceToken(Map<String, dynamic> deviceToken) async {
-    await storage.write(
-      key: 'deviceAccessToken',
-      value: deviceToken['access_token']['token'],
-    );
-    await storage.write(
-      key: 'deviceAccessTokenExpiredAt',
-      value: deviceToken['access_token']['expired_at'].toString(),
-    );
-    await storage.write(
-      key: 'deviceRefreshToken',
-      value: deviceToken['refresh_token']['token'],
-    );
-    await storage.write(
-      key: 'deviceRefreshTokenExpiredAt',
-      value: deviceToken['refresh_token']['expired_at'].toString(),
-    );
-  }
-
-  // Set User
-  Future<void> setUserToken(Map<String, dynamic> userToken) async {
-    await storage.write(
-      key: 'userAccessToken',
-      value: userToken['access_token']['token'],
-    );
-    await storage.write(
-      key: 'userAccessTokenExpiredAt',
-      value: userToken['access_token']['expired_at'].toString(),
-    );
-    await storage.write(
-      key: 'userRefreshToken',
-      value: userToken['refresh_token']['token'],
-    );
-    await storage.write(
-      key: 'userRefreshTokenExpiredAt',
-      value: userToken['refresh_token']['expired_at'].toString(),
+      key: '${tokenType}RefreshTokenExpiredAt',
+      value: token['refresh_token']['expired_at'].toString(),
     );
   }
 

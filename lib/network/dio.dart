@@ -1,7 +1,6 @@
 import 'package:danuri_flutter/core/storage/token_storage.dart';
-import 'package:danuri_flutter/data/data_sources/auth/admin_auth_data_source.dart';
-import 'package:danuri_flutter/data/data_sources/auth/device_auth_data_source.dart';
-import 'package:danuri_flutter/data/models/auth/token/request/refresh_token_request.dart';
+import 'package:danuri_flutter/data/data_sources/auth/common_data_source.dart';
+import 'package:danuri_flutter/data/models/auth/common/request/refresh_token_request.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -32,13 +31,11 @@ class _AppDio with DioMixin implements AppDio {
       [
         InterceptorsWrapper(
           onError: (error, handler) async {
-              //토큰이 만료되었을 때 DioException발생
               if (error.response?.statusCode == 403) {
                 final tokenStorage = TokenStorage();
 
                 int nowTime = DateTime.now().millisecondsSinceEpoch;
 
-                //토큰들의 만료시간 가져오기
                 Future.wait([
                   tokenStorage.getAdminAccessTokenExpiredAt(),
                   tokenStorage.getDeviceAccessTokenExpiredAt(),
@@ -47,14 +44,16 @@ class _AppDio with DioMixin implements AppDio {
                     //현재시간과 만료시간 대조
                     if (nowTime > int.parse(value[0]!)) {
                       await tokenStorage.getAdminRefreshToken().then(
-                            (refreshToken) => AdminAuthDataSource().refreshToken(
+                            (refreshToken) => CommonDataSource().refreshToken(
                               RefreshTokenRequest(refreshToken: refreshToken!),
+                              'admin'
                             ),
                           );
                     } else if (nowTime > int.parse(value[1]!)) {
                       await tokenStorage.getDeviceRefreshToken().then(
-                            (refreshToken) => DeviceAuthDataSource().refreshToken(
+                            (refreshToken) => CommonDataSource().refreshToken(
                               RefreshTokenRequest(refreshToken: refreshToken!),
+                              'device'
                             ),
                           );
                     }

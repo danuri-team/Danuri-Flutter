@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/data/models/auth/token/response/token_response.dart';
+import 'package:danuri_flutter/data/models/auth/common/response/token_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tokens_response.g.dart';
