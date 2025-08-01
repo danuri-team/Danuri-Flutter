@@ -1,16 +1,27 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'usage_history_request.freezed.dart';
 part 'usage_history_request.g.dart';
 
-@freezed
-abstract class UsageHistoryRequest with _$UsageHistoryRequest{
-  factory UsageHistoryRequest({
-    required String startDate,
-    required String endDate,
-    String? spaceId,
-    String? userId,
-  }) = _UsageHistoryRequest;
+@JsonSerializable()
+class UsageHistoryRequest {
+  @JsonKey(name: 'start_date')
+  final String startDate;
+  @JsonKey(name: 'end_date')
+  final String endDate;
+  @JsonKey(name: 'space_id')
+  String? spaceId;
+  @JsonKey(name: 'user_id')
+  String? userId;
 
-  factory UsageHistoryRequest.fromJson(Map<String, dynamic> json) => _$UsageHistoryRequestFromJson(json);
+  UsageHistoryRequest({
+    required this.startDate,
+    required this.endDate,
+    this.spaceId,
+    this.userId,
+  });
+
+  factory UsageHistoryRequest.fromJson(Map<String, dynamic> json) =>
+      _$UsageHistoryRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UsageHistoryRequestToJson(this);
 }

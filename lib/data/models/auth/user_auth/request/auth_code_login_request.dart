@@ -1,14 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'auth_code_login_request.freezed.dart';
 part 'auth_code_login_request.g.dart';
 
-@freezed
-abstract class AuthCodeLoginRequest with _$AuthCodeLoginRequest{
-  factory AuthCodeLoginRequest({
-    required String phone,
-    required String authCode,
-  }) = _AuthCodeLoginRequest;
+@JsonSerializable()
+class AuthCodeLoginRequest {
+  final String phone;
+  @JsonKey(name: 'auth_code')
+  final String authCode;
 
-  factory AuthCodeLoginRequest.fromJson(Map<String, dynamic> json) => _$AuthCodeLoginRequestFromJson(json);
+  AuthCodeLoginRequest({
+    required this.phone,
+    required this.authCode,
+  });
+
+  factory AuthCodeLoginRequest.fromJson(Map<String, dynamic> json) =>
+      _$AuthCodeLoginRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AuthCodeLoginRequestToJson(this);
 }

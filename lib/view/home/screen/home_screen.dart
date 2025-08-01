@@ -1,63 +1,77 @@
-import 'package:danuri_flutter/core/design_system/color.dart';
-import 'package:danuri_flutter/view/componets/custom_dialog.dart';
-import 'package:danuri_flutter/view/componets/layout/separated_layout.dart';
-import 'package:danuri_flutter/view/home/screen/usage_status_area.dart';
-import 'package:danuri_flutter/view/home/screen/use_area.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
+import 'package:danuri_flutter/view/components/custom_top_bar.dart';
+import 'package:danuri_flutter/view/home/widget/exit_room_button.dart';
+import 'package:danuri_flutter/view/home/widget/select_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:timer_builder/timer_builder.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
-    return SeparatedLayout(
-      leftWidget: UseArea(
-        acctionButtonText: '공간 선택하기',
-        onTap: () {
-          showGeneralDialog(
-            context: context,
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                CustomDialog(
-              title: '공간 선택하기',
-              subject: '이용 가능 공간',
-              buttonColor: DanuriColor.main7,
-              pressButtonText: '다음으로',
-              addRule: false,
-              pressButtonTapAcction: () {
-                context.pop();
-                showGeneralDialog(
-                  context: context,
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      CustomDialog(
-                    title: '상세 선택하기',
-                    subject: '이용 형태 선택',
-                    buttonColor: DanuriColor.main7,
-                    pressButtonText: '대여 시작하기',
-                    addRule: true,
-                    pressButtonTapAcction: () {
-                      context.pop();
-                      showGeneralDialog(
-                        context: context,
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            CustomDialog(
-                          title: '대여하기',
-                          subject: '대여할 물품',
-                          buttonColor: DanuriColor.main7,
-                          pressButtonText: '대여하기',
-                          addRule: true,
-                          pressButtonTapAcction: () {},
-                        ),
-                      );
-                    },
-                  ),
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(60.w, 103.h, 61.w, 133.h),
+        child: Column(
+          children: [
+            TimerBuilder.periodic(
+              const Duration(seconds: 1),
+              builder: (context) {
+                DateTime time = DateTime.now();
+                String period = time.hour < 12 ? '오전' : '오후';
+                return CustomTopBar(
+                  title: '반가워요, 공간을 이용 해볼까요?',
+                  subTitle:
+                      '송정다누리청소년센터 - $period ${time.hour > 13 ? time.hour - 12 : time.hour}시 ${time.minute}분',
+                  needCallBackButton: false,
+                  rightWidget: ExitRoomButton(),
                 );
               },
             ),
-          );
-        },
+            SizedBox(height: 72.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SelectButton(
+                  svgName: 'space.svg',
+                  text: '공간 사용하기',
+                  onTap: () {
+                    Throttle.run(
+                      () {
+                        if (mounted) {
+                          context.push('/register-used-space');
+                        }
+                      },
+                    );
+                  },
+                ),
+                SizedBox(width: 70.w),
+                SelectButton(
+                  svgName: 'item.svg',
+                  text: '물품 대여하기',
+                  onTap: () {
+                    Throttle.run(
+                      () {
+                        if (mounted) {
+                          context.push('/item-rental');
+                        }
+                      },
+                    );
+                  },
+                ),
+              ],
+            )
+          ],
+        ),
       ),
-      rightWidget: UsageStatusArea(),
     );
   }
 }

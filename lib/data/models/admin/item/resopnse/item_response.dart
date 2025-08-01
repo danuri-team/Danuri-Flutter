@@ -1,19 +1,28 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:danuri_flutter/data/models/enum/status_type.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'item_response.freezed.dart';
 part 'item_response.g.dart';
 
-@freezed
-abstract class ItemResponse with _$ItemResponse{
-  factory ItemResponse({
-    required String id,
-    required String companyId,
-    required String companyName,
-    required String name,
-    required int totalQuantity,
-    required int availableQuantity,
-    required String status
-  }) = _ItemResponse;
+@JsonSerializable()
+class ItemResponse {
+  final String id;
+  final String name;
+  @JsonKey(name: 'total_quantity')
+  final int totalQuantity;
+  @JsonKey(name: 'available_quantity')
+  final int availableQuantity;
+  final StatusType status;
 
-  factory ItemResponse.fromJson(Map<String, dynamic> json) => _$ItemResponseFromJson(json);
+  ItemResponse({
+    required this.id,
+    required this.name,
+    required this.totalQuantity,
+    required this.availableQuantity,
+    required this.status,
+  });
+
+  factory ItemResponse.fromJson(Map<String, dynamic> json) =>
+      _$ItemResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ItemResponseToJson(this);
 }

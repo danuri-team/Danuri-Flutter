@@ -6,16 +6,16 @@ part of 'create_internal_device_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_CreateInternalDeviceRequest _$CreateInternalDeviceRequestFromJson(
+CreateInternalDeviceRequest _$CreateInternalDeviceRequestFromJson(
         Map<String, dynamic> json) =>
-    _CreateInternalDeviceRequest(
-      deviceId: json['deviceId'] as String,
-      spaceId: json['spaceId'] as String,
+    CreateInternalDeviceRequest(
+      deviceId: json['device_id'] as String,
+      spaceId: json['space_id'] as String,
     );
 
 Map<String, dynamic> _$CreateInternalDeviceRequestToJson(
-        _CreateInternalDeviceRequest instance) =>
+        CreateInternalDeviceRequest instance) =>
     <String, dynamic>{
-      'deviceId': instance.deviceId,
-      'spaceId': instance.spaceId,
+      'device_id': instance.deviceId,
+      'space_id': instance.spaceId,
     };

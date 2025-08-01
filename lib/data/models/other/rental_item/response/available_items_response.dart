@@ -1,15 +1,22 @@
-import 'package:danuri_flutter/data/models/other/rental_item/response/available_item.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'available_items_response.freezed.dart';
 part 'available_items_response.g.dart';
 
-@freezed
-abstract class AvailableItemsResponse with _$AvailableItemsResponse {
-  factory AvailableItemsResponse({
-    required List<AvailableItem> availableItems,
-  }) = _AvailableItemsResponse;
+@JsonSerializable()
+class ItemAvailableRental {
+  final String id;
+  final String name;
+  @JsonKey(name: 'available_quantity')
+  final int availableQuantity;
 
-  factory AvailableItemsResponse.fromJson(Map<String, dynamic> json) =>
-      _$AvailableItemsResponseFromJson(json);
+  ItemAvailableRental({
+    required this.id,
+    required this.name,
+    required this.availableQuantity,
+  });
+
+  factory ItemAvailableRental.fromJson(Map<String, dynamic> json) =>
+      _$ItemAvailableRentalFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ItemAvailableRentalToJson(this);
 }

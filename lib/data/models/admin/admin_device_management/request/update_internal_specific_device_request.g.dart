@@ -6,16 +6,16 @@ part of 'update_internal_specific_device_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UpdateInternalSpecificDeviceRequest
+UpdateInternalSpecificDeviceRequest
     _$UpdateInternalSpecificDeviceRequestFromJson(Map<String, dynamic> json) =>
-        _UpdateInternalSpecificDeviceRequest(
-          spaceId: json['spaceId'] as String,
-          isActivate: json['isActivate'] as bool,
+        UpdateInternalSpecificDeviceRequest(
+          spaceId: json['space_id'] as String,
+          isActivate: json['is_activate'] as bool,
         );
 
 Map<String, dynamic> _$UpdateInternalSpecificDeviceRequestToJson(
-        _UpdateInternalSpecificDeviceRequest instance) =>
+        UpdateInternalSpecificDeviceRequest instance) =>
     <String, dynamic>{
-      'spaceId': instance.spaceId,
-      'isActivate': instance.isActivate,
+      'space_id': instance.spaceId,
+      'is_activate': instance.isActivate,
     };

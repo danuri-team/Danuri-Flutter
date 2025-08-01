@@ -6,16 +6,16 @@ part of 'auth_code_login_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AuthCodeLoginRequest _$AuthCodeLoginRequestFromJson(
+AuthCodeLoginRequest _$AuthCodeLoginRequestFromJson(
         Map<String, dynamic> json) =>
-    _AuthCodeLoginRequest(
+    AuthCodeLoginRequest(
       phone: json['phone'] as String,
-      authCode: json['authCode'] as String,
+      authCode: json['auth_code'] as String,
     );
 
 Map<String, dynamic> _$AuthCodeLoginRequestToJson(
-        _AuthCodeLoginRequest instance) =>
+        AuthCodeLoginRequest instance) =>
     <String, dynamic>{
       'phone': instance.phone,
-      'authCode': instance.authCode,
+      'auth_code': instance.authCode,
     };

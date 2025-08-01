@@ -1,18 +1,24 @@
-import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:danuri_flutter/data/models/enum/role_type.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'update_user_request.freezed.dart';
 part 'update_user_request.g.dart';
 
-@freezed
-abstract class UpdateUserRequest with _$UpdateUserRequest{
-  factory UpdateUserRequest({
-    required String name,
-    required SexType sex,
-    required AgeType age,
-    required String phone, 
-  }) = _UpdateUserRequest;
+@JsonSerializable()
+class UpdateUserRequest {
+  final String name;
+  final String email;
+  final String phone;
+  final RoleType role;
 
-  factory UpdateUserRequest.fromJson(Map<String, dynamic> json) => _$UpdateUserRequestFromJson(json);
+  UpdateUserRequest({
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.role,
+  });
+
+  factory UpdateUserRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateUserRequestToJson(this);
 }

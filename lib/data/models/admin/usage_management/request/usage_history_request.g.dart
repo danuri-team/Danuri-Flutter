@@ -6,19 +6,19 @@ part of 'usage_history_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UsageHistoryRequest _$UsageHistoryRequestFromJson(Map<String, dynamic> json) =>
-    _UsageHistoryRequest(
-      startDate: json['startDate'] as String,
-      endDate: json['endDate'] as String,
-      spaceId: json['spaceId'] as String?,
-      userId: json['userId'] as String?,
+UsageHistoryRequest _$UsageHistoryRequestFromJson(Map<String, dynamic> json) =>
+    UsageHistoryRequest(
+      startDate: json['start_date'] as String,
+      endDate: json['end_date'] as String,
+      spaceId: json['space_id'] as String?,
+      userId: json['user_id'] as String?,
     );
 
 Map<String, dynamic> _$UsageHistoryRequestToJson(
-        _UsageHistoryRequest instance) =>
+        UsageHistoryRequest instance) =>
     <String, dynamic>{
-      'startDate': instance.startDate,
-      'endDate': instance.endDate,
-      'spaceId': instance.spaceId,
-      'userId': instance.userId,
+      'start_date': instance.startDate,
+      'end_date': instance.endDate,
+      'space_id': instance.spaceId,
+      'user_id': instance.userId,
     };

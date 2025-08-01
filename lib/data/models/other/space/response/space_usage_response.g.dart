@@ -6,15 +6,17 @@ part of 'space_usage_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SpaceUsageResponse _$SpaceUsageResponseFromJson(Map<String, dynamic> json) =>
-    _SpaceUsageResponse(
-      isUsingSpace: json['isUsingSpace'] as bool,
-      spaceUsageInfo: SpaceUsageInfoResponse.fromJson(
-          json['spaceUsageInfo'] as Map<String, dynamic>),
+SpaceUsageResponse _$SpaceUsageResponseFromJson(Map<String, dynamic> json) =>
+    SpaceUsageResponse(
+      isUsingSpace: json['is_using_space'] as bool,
+      spaceUsageInfo: json['space_usage_info'] == null
+          ? null
+          : SpaceUsageInfoResponse.fromJson(
+              json['space_usage_info'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SpaceUsageResponseToJson(_SpaceUsageResponse instance) =>
+Map<String, dynamic> _$SpaceUsageResponseToJson(SpaceUsageResponse instance) =>
     <String, dynamic>{
-      'isUsingSpace': instance.isUsingSpace,
-      'spaceUsageInfo': instance.spaceUsageInfo,
+      'is_using_space': instance.isUsingSpace,
+      'space_usage_info': instance.spaceUsageInfo,
     };

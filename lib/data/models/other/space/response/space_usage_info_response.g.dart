@@ -6,26 +6,26 @@ part of 'space_usage_info_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SpaceUsageInfoResponse _$SpaceUsageInfoResponseFromJson(
+SpaceUsageInfoResponse _$SpaceUsageInfoResponseFromJson(
         Map<String, dynamic> json) =>
-    _SpaceUsageInfoResponse(
-      spaceId: json['spaceId'] as String,
-      usageId: json['usageId'] as String,
-      spaceName: json['spaceName'] as String,
-      rentalItem: (json['rentalItem'] as List<dynamic>)
-          .map((e) => AvailableItem.fromJson(e as Map<String, dynamic>))
+    SpaceUsageInfoResponse(
+      spaceId: json['space_id'] as String,
+      usageId: json['usage_id'] as String,
+      spaceName: json['space_name'] as String,
+      rentalItem: (json['rental_item'] as List<dynamic>)
+          .map((e) => RentalItemResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      startAt: json['startAt'] as String,
-      endAt: json['endAt'] as String,
+      startAt: json['start_at'] as String,
+      endAt: json['end_at'] as String?,
     );
 
 Map<String, dynamic> _$SpaceUsageInfoResponseToJson(
-        _SpaceUsageInfoResponse instance) =>
+        SpaceUsageInfoResponse instance) =>
     <String, dynamic>{
-      'spaceId': instance.spaceId,
-      'usageId': instance.usageId,
-      'spaceName': instance.spaceName,
-      'rentalItem': instance.rentalItem,
-      'startAt': instance.startAt,
-      'endAt': instance.endAt,
+      'space_id': instance.spaceId,
+      'usage_id': instance.usageId,
+      'space_name': instance.spaceName,
+      'rental_item': instance.rentalItem,
+      'start_at': instance.startAt,
+      'end_at': instance.endAt,
     };

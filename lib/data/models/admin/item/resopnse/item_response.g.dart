@@ -6,24 +6,23 @@ part of 'item_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ItemResponse _$ItemResponseFromJson(Map<String, dynamic> json) =>
-    _ItemResponse(
+ItemResponse _$ItemResponseFromJson(Map<String, dynamic> json) => ItemResponse(
       id: json['id'] as String,
-      companyId: json['companyId'] as String,
-      companyName: json['companyName'] as String,
       name: json['name'] as String,
-      totalQuantity: (json['totalQuantity'] as num).toInt(),
-      availableQuantity: (json['availableQuantity'] as num).toInt(),
-      status: json['status'] as String,
+      totalQuantity: (json['total_quantity'] as num).toInt(),
+      availableQuantity: (json['available_quantity'] as num).toInt(),
+      status: $enumDecode(_$StatusTypeEnumMap, json['status']),
     );
 
-Map<String, dynamic> _$ItemResponseToJson(_ItemResponse instance) =>
+Map<String, dynamic> _$ItemResponseToJson(ItemResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'companyId': instance.companyId,
-      'companyName': instance.companyName,
       'name': instance.name,
-      'totalQuantity': instance.totalQuantity,
-      'availableQuantity': instance.availableQuantity,
-      'status': instance.status,
+      'total_quantity': instance.totalQuantity,
+      'available_quantity': instance.availableQuantity,
+      'status': _$StatusTypeEnumMap[instance.status]!,
     };
+
+const _$StatusTypeEnumMap = {
+  StatusType.AVAILABLE: 'AVAILABLE',
+};

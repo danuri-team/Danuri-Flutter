@@ -1,5 +1,0 @@
-enum StatusType {
-  UP,
-  AVAILABLE,
-  NEED_COMPANY_APPROVE
-}

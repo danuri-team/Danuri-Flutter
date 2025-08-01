@@ -6,12 +6,12 @@ part of 'device_auth_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_DeviceAuthRequest _$DeviceAuthRequestFromJson(Map<String, dynamic> json) =>
-    _DeviceAuthRequest(
-      deviceId: json['deviceId'] as String,
+DeviceAuthRequest _$DeviceAuthRequestFromJson(Map<String, dynamic> json) =>
+    DeviceAuthRequest(
+      deviceId: json['device_id'] as String,
     );
 
-Map<String, dynamic> _$DeviceAuthRequestToJson(_DeviceAuthRequest instance) =>
+Map<String, dynamic> _$DeviceAuthRequestToJson(DeviceAuthRequest instance) =>
     <String, dynamic>{
-      'deviceId': instance.deviceId,
+      'device_id': instance.deviceId,
     };

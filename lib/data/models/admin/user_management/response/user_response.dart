@@ -1,24 +1,34 @@
-import 'package:danuri_flutter/data/models/admin/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/admin/enum/sex_type.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'user_response.freezed.dart';
 part 'user_response.g.dart';
 
-@freezed
-abstract class UserResponse with _$UserResponse{
-  factory UserResponse({
-    required String id,
-    required String companyId,
-    required String companyName,
-    required String name,
-    required SexType sex,
-    required AgeType age,
-    required String phone,
-    required String createdAt,
-    required String updatedAt,
-    required int usageCount,
-  }) = _UserResponse;
+@JsonSerializable()
+class UserResponse {
+  final String id;
+  final String name;
+  final String sex;
+  final String age;
+  final String phone;
+  @JsonKey(name: 'created_at')
+  final String createdAt;
+  @JsonKey(name: 'updated_at')
+  final String updatedAt;
+  @JsonKey(name: 'usage_count')
+  final int usageCount;
 
-  factory UserResponse.fromJson(Map<String, dynamic> json) => _$UserResponseFromJson(json);
+  UserResponse({
+    required this.id,
+    required this.name,
+    required this.sex,
+    required this.age,
+    required this.phone,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.usageCount,
+  });
+
+  factory UserResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserResponseToJson(this);
 }

@@ -6,14 +6,14 @@ part of 'rental_item_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_RentalItemRequest _$RentalItemRequestFromJson(Map<String, dynamic> json) =>
-    _RentalItemRequest(
-      itemId: json['itemId'] as String,
+RentalItemRequest _$RentalItemRequestFromJson(Map<String, dynamic> json) =>
+    RentalItemRequest(
+      itemId: json['item_id'] as String,
       quantity: (json['quantity'] as num).toInt(),
     );
 
-Map<String, dynamic> _$RentalItemRequestToJson(_RentalItemRequest instance) =>
+Map<String, dynamic> _$RentalItemRequestToJson(RentalItemRequest instance) =>
     <String, dynamic>{
-      'itemId': instance.itemId,
+      'item_id': instance.itemId,
       'quantity': instance.quantity,
     };

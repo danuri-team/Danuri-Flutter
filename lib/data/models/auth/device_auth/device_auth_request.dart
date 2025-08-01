@@ -1,13 +1,18 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'device_auth_request.freezed.dart';
 part 'device_auth_request.g.dart';
 
-@freezed
-abstract class DeviceAuthRequest with _$DeviceAuthRequest{
-  factory DeviceAuthRequest({
-    required String deviceId,
-  }) = _DeviceAuthRequest;
+@JsonSerializable()
+class DeviceAuthRequest {
+  @JsonKey(name: 'device_id')
+  final String deviceId;
 
-  factory DeviceAuthRequest.fromJson(Map<String, dynamic> json) => _$DeviceAuthRequestFromJson(json);
+  DeviceAuthRequest({
+    required this.deviceId,
+  });
+
+  factory DeviceAuthRequest.fromJson(Map<String, dynamic> json) =>
+      _$DeviceAuthRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DeviceAuthRequestToJson(this);
 }

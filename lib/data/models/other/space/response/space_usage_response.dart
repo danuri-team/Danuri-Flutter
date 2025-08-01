@@ -1,15 +1,21 @@
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_info_response.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'space_usage_response.freezed.dart';
+import 'package:json_annotation/json_annotation.dart';
 part 'space_usage_response.g.dart';
 
-@freezed
-abstract class SpaceUsageResponse with _$SpaceUsageResponse{
-  factory SpaceUsageResponse({
-    required bool isUsingSpace,
-    required SpaceUsageInfoResponse spaceUsageInfo,
-  }) = _SpaceUsageResponse;
+@JsonSerializable()
+class SpaceUsageResponse {
+  @JsonKey(name: 'is_using_space')
+  final bool isUsingSpace;
+  @JsonKey(name: 'space_usage_info')
+  SpaceUsageInfoResponse? spaceUsageInfo;
 
-  factory SpaceUsageResponse.fromJson(Map<String, dynamic> json) => _$SpaceUsageResponseFromJson(json);
+  SpaceUsageResponse({
+    required this.isUsingSpace,
+    required this.spaceUsageInfo,
+  });
+
+  factory SpaceUsageResponse.fromJson(Map<String, dynamic> json) =>
+      _$SpaceUsageResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SpaceUsageResponseToJson(this);
 }

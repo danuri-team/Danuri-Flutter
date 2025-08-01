@@ -1,14 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'return_item_request.freezed.dart';
 part 'return_item_request.g.dart';
 
-@freezed
-abstract class ReturnItemRequest with _$ReturnItemRequest{
-  factory ReturnItemRequest({
-    required int returnedQuantity,
-    required String comment,
-  }) = _ReturnItemRequest;
+@JsonSerializable()
+class ReturnItemRequest {
+  @JsonKey(name: 'returned_quantity')
+  final int returnedQuantity;
+  final String comment;
 
-  factory ReturnItemRequest.fromJson(Map<String, dynamic> json) => _$ReturnItemRequestFromJson(json);
+  ReturnItemRequest({
+    required this.returnedQuantity,
+    required this.comment,
+  });
+
+  factory ReturnItemRequest.fromJson(Map<String, dynamic> json) =>
+      _$ReturnItemRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ReturnItemRequestToJson(this);
 }

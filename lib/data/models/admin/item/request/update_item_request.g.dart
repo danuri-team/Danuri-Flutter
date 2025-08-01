@@ -6,16 +6,22 @@ part of 'update_item_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UpdateItemRequest _$UpdateItemRequestFromJson(Map<String, dynamic> json) =>
-    _UpdateItemRequest(
+UpdateItemRequest _$UpdateItemRequestFromJson(Map<String, dynamic> json) =>
+    UpdateItemRequest(
       name: json['name'] as String,
-      totalQuantity: json['totalQuantity'] as String,
-      status: json['status'] as String,
+      totalQuantity: (json['total_quantity'] as num).toInt(),
+      availableQuantity: (json['available_quantity'] as num).toInt(),
+      status: $enumDecode(_$StatusTypeEnumMap, json['status']),
     );
 
-Map<String, dynamic> _$UpdateItemRequestToJson(_UpdateItemRequest instance) =>
+Map<String, dynamic> _$UpdateItemRequestToJson(UpdateItemRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'totalQuantity': instance.totalQuantity,
-      'status': instance.status,
+      'total_quantity': instance.totalQuantity,
+      'available_quantity': instance.availableQuantity,
+      'status': _$StatusTypeEnumMap[instance.status]!,
     };
+
+const _$StatusTypeEnumMap = {
+  StatusType.AVAILABLE: 'AVAILABLE',
+};
