@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/core/design_system/color.dart';
+import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/config/router.dart';
 import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
