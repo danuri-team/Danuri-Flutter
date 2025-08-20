@@ -1,7 +1,6 @@
 import 'package:danuri_flutter/data/data_sources/auth/user_auth_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/common/request/auth_code_login_request.dart';
 import 'package:danuri_flutter/data/models/auth/common/request/phone_request.dart';
-import 'package:danuri_flutter/data/models/auth/common/response/tokens_response.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
 import 'package:danuri_flutter/data/models/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/enum/sex_type.dart';
@@ -9,9 +8,6 @@ import 'package:dio/dio.dart';
 
 class UserAuthViewModel {
   final _dataSource = UserAuthDataSource();
-
-  // TokensResponse? _token;
-  // TokensResponse? get token => _token;
 
   bool? _error;
   bool? get error => _error;

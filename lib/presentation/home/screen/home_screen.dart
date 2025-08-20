@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
-import 'package:danuri_flutter/presentation/home/widget/exit_room_button.dart';
+import 'package:danuri_flutter/presentation/home/widget/leaving_space_button.dart';
 import 'package:danuri_flutter/presentation/home/widget/select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   subTitle:
                       '송정다누리청소년센터 - $period ${time.hour > 13 ? time.hour - 12 : time.hour}시 ${time.minute}분',
                   needCallBackButton: false,
-                  rightWidget: ExitRoomButton(),
+                  rightWidget: LeavingSpaceButton(),
                 );
               },
             ),
