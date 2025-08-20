@@ -1,12 +1,14 @@
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/leaving_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/rental_id_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/view_models/auth_code_view_model.dart';
+import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
+import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
+import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
@@ -25,7 +27,10 @@ class AuthCodeLoginScreen extends StatefulWidget {
 class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
   final TextEditingController _authCodeController = TextEditingController();
 
-  final AuthCodeViewModel _viewModel = AuthCodeViewModel();
+  final UserAuthViewModel _userAuthViewModel = UserAuthViewModel();
+  final RegisterUsedSpaceViewModel _spaceViewModel =
+      RegisterUsedSpaceViewModel();
+  final ItemRentalViewModel _itemViewModel = ItemRentalViewModel();
 
   @override
   void initState() {
@@ -42,24 +47,46 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
   }
 
   Future<void> _authCodeLogin() async {
-    await _viewModel.authCodeLogin(
+    await _userAuthViewModel.authCodeLogin(
       context.read<PhoneNumberProvider>().phoneNumber,
       _authCodeController.text,
     );
   }
 
-  Future<void> exitRoom() async {
-    final List<String> rentalIds = context.read<RentalIdProvider>().rentalIds;
-    for (var rentalId in rentalIds) {
-      await _viewModel.returnItem(rentalId);
-    }
-    await _viewModel.exitRoom().then(
+  Future<void> itemRental() async {
+    await _itemViewModel.itemRental(context, 1, '').then(
       (_) {
-        if (_viewModel.error == true) {
-          _viewModel.reset();
+        if (!mounted) {
+          return;
+        }
+
+        if (_itemViewModel.error == true) {
+          _itemViewModel.reset();
           context.push('/failure');
         } else {
-          context.read<ExitRoomFlowProvider>().resetFlow();
+          context.read<ItemRentalFlowProvider>().resetFlow();
+          context.push('/completion');
+        }
+      },
+    );
+  }
+
+  Future<void> leavingSpace() async {
+    final List<String> rentalIds = context.read<RentalIdProvider>().rentalIds;
+    for (var rentalId in rentalIds) {
+      await _itemViewModel.returnItem(rentalId);
+    }
+    await _spaceViewModel.leavingSpace('').then(
+      (_) {
+        if (!mounted) {
+          return;
+        }
+
+        if (_spaceViewModel.error == true) {
+          _spaceViewModel.reset();
+          context.push('/failure');
+        } else {
+          context.read<LeavingSpaceFlowProvider>().resetFlow();
           context.push('/completion');
         }
       },
@@ -67,27 +94,16 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
   }
 
   Future<void> registerUsedSpace() async {
-    await _viewModel.registerUsedSpace(context).then(
+    await _spaceViewModel.registerUsedSpace(context).then(
       (_) {
-        if (_viewModel.error == true) {
-          _viewModel.reset();
+        if (!mounted) {
+          return;
+        }
+        if (_spaceViewModel.error == true) {
+          _spaceViewModel.reset();
           context.push('/failure');
         } else {
           context.read<RegisterUsedSpaceFlowProvider>().resetFlow();
-          context.push('/completion');
-        }
-      },
-    );
-  }
-
-  Future<void> itemRental() async {
-    await _viewModel.itemRental(context).then(
-      (_) {
-        if (_viewModel.error == true) {
-          _viewModel.reset();
-          context.push('/failure');
-        } else {
-          context.read<ItemRentalFlowProvider>().resetFlow();
           context.push('/completion');
         }
       },
@@ -151,13 +167,16 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
                       () {
                         _authCodeLogin().then(
                           (_) async {
-                            if (_viewModel.error == true) {
+                            if (!context.mounted) {
+                              return;
+                            }
+                            if (_userAuthViewModel.error == true) {
                               context.push('/failure');
-                              _viewModel.reset();
+                              _userAuthViewModel.reset();
                             } else {
-                              final bool exitRoomFlow = context
-                                  .read<ExitRoomFlowProvider>()
-                                  .exitRoomFlow;
+                              final bool leavingSpaceFlow = context
+                                  .read<LeavingSpaceFlowProvider>()
+                                  .leavingSpaceFlow;
                               final bool registerUsedSpaceFlow = context
                                   .read<RegisterUsedSpaceFlowProvider>()
                                   .registerUsedSpaceFlow;
@@ -165,12 +184,13 @@ class _AuthCodeLoginScreenState extends State<AuthCodeLoginScreen> {
                                   .read<ItemRentalFlowProvider>()
                                   .itemRentalFlow;
 
-                              if (exitRoomFlow == true)
-                                await exitRoom();
-                              else if (registerUsedSpaceFlow == true)
+                              if (leavingSpaceFlow == true) {
+                                await leavingSpace();
+                              } else if (registerUsedSpaceFlow == true) {
                                 await registerUsedSpace();
-                              else if (itemRentalFlow == true)
+                              } else if (itemRentalFlow == true) {
                                 await itemRental();
+                              }
                             }
                           },
                         );
