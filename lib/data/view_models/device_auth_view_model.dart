@@ -2,11 +2,15 @@ import 'package:danuri_flutter/data/data_sources/auth/device_auth_data_source.da
 import 'package:danuri_flutter/data/models/auth/device_auth/device_auth_request.dart';
 import 'package:dio/dio.dart';
 
-class OrganAuthViewModel {
-  final DeviceAuthDataSource _dataSource = DeviceAuthDataSource();
+class DeviceAuthViewModel {
+  final _dataSource = DeviceAuthDataSource();
 
   bool? _error;
   bool? get error => _error;
+
+  void reset() {
+    _error = false;
+  }
 
   Future<void> deviceAuth(String deviceId) async {
     try {
