@@ -1,12 +1,12 @@
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/leaving_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/util/phone_number_formatter.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/view_models/login_view_model.dart';
+import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
@@ -26,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
 
-  final LoginViewModel _viewModel = LoginViewModel();
+  final UserAuthViewModel _viewModel = UserAuthViewModel();
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               CustomTopBar(
                 callBackButtonOnTap: () {
-                  context.read<ExitRoomFlowProvider>().cancleFlow();
+                  context.read<LeavingSpaceFlowProvider>().cancleFlow();
                   context.read<RegisterUsedSpaceFlowProvider>().cancleFlow();
                   context.read<ItemRentalFlowProvider>().cancleFlow();
                 },

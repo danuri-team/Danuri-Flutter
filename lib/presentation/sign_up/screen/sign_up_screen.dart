@@ -4,7 +4,7 @@ import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/age_type.dart';
 import 'package:danuri_flutter/data/models/enum/sex_type.dart';
-import 'package:danuri_flutter/data/view_models/sign_up_view_model.dart';
+import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
@@ -24,7 +24,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _userNameController = TextEditingController();
 
-  final SignUpViewModel _viewModel = SignUpViewModel();
+  final UserAuthViewModel _viewModel = UserAuthViewModel();
 
   Map<String, Enum?> userInfo = {'sex': null, 'grade': null};
 
@@ -228,7 +228,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             await _signUp().then(
                               (_) async {
                                 if (_viewModel.error == false) {
-                                  await _viewModel.login(context
+                                  await _viewModel.userLogin(context
                                       .read<PhoneNumberProvider>()
                                       .phoneNumber);
                                   if (context.mounted) {

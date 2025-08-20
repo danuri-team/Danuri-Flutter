@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/data/view_models/organ_auth_view_model.dart';
+import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +16,7 @@ class OrganAuthScreen extends StatefulWidget {
 
 class _OrganAuthScreenState extends State<OrganAuthScreen> {
   final TextEditingController _deviceIdController = TextEditingController();
-  final OrganAuthViewModel _viewModel = OrganAuthViewModel();
+  final DeviceAuthViewModel _viewModel = DeviceAuthViewModel();
 
   @override
   void initState() {

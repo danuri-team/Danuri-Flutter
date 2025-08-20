@@ -8,11 +8,11 @@ class TokensResponse {
   @JsonKey(name: 'access_token')
   final TokenResponse accessToken;
   @JsonKey(name: 'refresh_token')
-  final TokenResponse refreshToken;
+  TokenResponse? refreshToken;
 
   TokensResponse({
     required this.accessToken,
-    required this.refreshToken,
+    this.refreshToken,
   });
 
   factory TokensResponse.fromJson(Map<String, dynamic> json) =>

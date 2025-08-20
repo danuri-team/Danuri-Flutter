@@ -1,31 +1,35 @@
+import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/data_sources/other/space_data_source.dart';
+import 'package:danuri_flutter/data/models/other/common/request/usage_id_request.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
-import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterUsedSpaceViewModel {
-  final SpaceDataSource _dataSource = SpaceDataSource();
-
-  List<SpaceUsageStatusResponse>? _spaceUsageStatus;
-  List<SpaceUsageStatusResponse>? get spaceUsageStatus => _spaceUsageStatus;
+  final SpaceDataSource _spaceDataSource = SpaceDataSource();
 
   bool? _error;
   bool? get error => _error;
 
-  Future<void> registerUsedSpace(String spaceId) async {
+  void reset() {
+    _error = false;
+  }
+
+  Future<void> leavingSpace(String usageId) async {
     try {
-      await _dataSource.registerUsedSpace(
-        RegisterUsedSpaceRequest(spaceId: spaceId),
-      );
+      await _spaceDataSource.leavingSpace(UsageIdRequest(usageId: usageId));
       _error = false;
     } on DioException catch (_) {
       _error = true;
     }
   }
 
-  Future<void> getSpaceUsageStatus() async {
+  Future<void> registerUsedSpace(BuildContext context) async {
     try {
-      _spaceUsageStatus = await _dataSource.getSpaceUsageStatus();
+      final String spaceId = context.read<SpaceIdProvider>().spaceId;
+      await _spaceDataSource
+          .registerUsedSpace(RegisterUsedSpaceRequest(spaceId: spaceId));
       _error = false;
     } on DioException catch (_) {
       _error = true;

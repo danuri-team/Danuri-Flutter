@@ -2,7 +2,7 @@ import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
-import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
+import 'package:danuri_flutter/data/view_models/item_available_rental_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
@@ -22,11 +22,11 @@ class ItemRentalScreen extends StatefulWidget {
 class _ItemRentalScreenState extends State<ItemRentalScreen> {
   Map<String, String?> selectedItem = {'itemId': null};
 
-  final ItemRentalViewModel _itemViewModel = ItemRentalViewModel();
+  final ItemAvailableRentalViewModel _viewModel = ItemAvailableRentalViewModel();
 
   Future<void> fetchData() async {
     await Future.wait([
-      _itemViewModel.getItemAvailableRent(), // 대여 가능 아이템 조회
+      _viewModel.getItemAvailableRental(), // 대여 가능 아이템 조회
     ]).then(
       (_) => setState(() {}),
     );
@@ -70,7 +70,7 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
               ),
             ),
             SizedBox(height: 14.h),
-            if (_itemViewModel.itemAvailableRental == null)
+            if (_viewModel.itemAvailableRentalList == null)
               SizedBox(height: 48.h)
             else
               SizedBox(
@@ -78,29 +78,29 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                 height: 48.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _itemViewModel.itemAvailableRental?.length,
+                  itemCount: _viewModel.itemAvailableRentalList?.length,
                   itemBuilder: (context, index) {
                     return Row(
                       children: [
                         SelectionBox(
-                          available: _itemViewModel.itemAvailableRental![index]
+                          available: _viewModel.itemAvailableRentalList![index]
                                   .availableQuantity !=
                               0,
                           isSelected: selectedItem['itemId'] ==
-                              _itemViewModel.itemAvailableRental![index].id,
-                          name: _itemViewModel.itemAvailableRental![index].name,
+                              _viewModel.itemAvailableRentalList![index].id,
+                          name: _viewModel.itemAvailableRentalList![index].name,
                           onTap: () {
-                            if (_itemViewModel.itemAvailableRental![index]
+                            if (_viewModel.itemAvailableRentalList![index]
                                     .availableQuantity !=
                                 0) {
                               setState(() {
-                                selectedItem['itemId'] = _itemViewModel
-                                    .itemAvailableRental![index].id;
+                                selectedItem['itemId'] = _viewModel
+                                    .itemAvailableRentalList![index].id;
                               });
                             }
                           },
                         ),
-                        if (_itemViewModel.itemAvailableRental!.length !=
+                        if (_viewModel.itemAvailableRentalList!.length !=
                             index + 1)
                           SizedBox(width: 12.w),
                       ],

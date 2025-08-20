@@ -1,24 +1,24 @@
 import 'package:danuri_flutter/core/provider/flows/flow_provider.dart';
 
-class ExitRoomFlowProvider extends FlowProvider {
-  bool _exitRoomFlow = false;
-  bool get exitRoomFlow => _exitRoomFlow;
+class LeavingSpaceFlowProvider extends FlowProvider {
+  bool _leavingSpaceFlow = false;
+  bool get leavingSpaceFlow => _leavingSpaceFlow;
 
   @override
   void startFlow(){
-    _exitRoomFlow = true;
+    _leavingSpaceFlow = true;
     notifyListeners();
   }
 
   @override
   void cancleFlow(){
-    _exitRoomFlow = false;
+    _leavingSpaceFlow = false;
     notifyListeners();
   }
 
   @override
   void resetFlow(){
-    _exitRoomFlow = false;
+    _leavingSpaceFlow = false;
     notifyListeners();
   }
 }

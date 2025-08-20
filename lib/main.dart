@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/config/router.dart';
-import 'package:danuri_flutter/core/provider/flows/exit_room_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flows/leaving_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
@@ -24,7 +24,7 @@ void main() async {
   final deviceToken = await TokenStorage().getDeviceAccessToken();
 
   if (deviceToken == null) {
-    await AdminAuthDataSource().login(
+    await AdminAuthDataSource().adminLogin(
       AdminLoginRequest(
         email: 'admin@example.com',
         password: dotenv.env['ADMIN_PASSWORD']!,
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
               create: (context) => ItemIdProvider(),
             ),
             ChangeNotifierProvider(
-              create: (context) => ExitRoomFlowProvider(),
+              create: (context) => LeavingSpaceFlowProvider(),
             ),
             ChangeNotifierProvider(
               create: (context) => RegisterUsedSpaceFlowProvider(),
