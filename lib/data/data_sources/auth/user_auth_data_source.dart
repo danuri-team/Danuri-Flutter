@@ -1,13 +1,13 @@
 import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/auth/common/response/tokens_response.dart';
-import 'package:danuri_flutter/data/models/auth/user_auth/request/auth_code_login_request.dart';
-import 'package:danuri_flutter/data/models/auth/user_auth/request/user_login_request.dart';
+import 'package:danuri_flutter/data/models/auth/common/request/auth_code_login_request.dart';
+import 'package:danuri_flutter/data/models/auth/common/request/phone_request.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
 import 'package:dio/dio.dart';
 
 class UserAuthDataSource extends DataSource {
-  Future<void> login(UserLoginRequest request) async {
+  Future<void> login(PhoneRequest request) async {
     await dio.post(
       '$baseUrl/auth/user/phone',
       data: request.toJson(),
