@@ -1,11 +1,3 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PhoneNumberProvider extends ChangeNotifier{
-  String _phoneNumber = '';
-  String get phoneNumber => _phoneNumber;
-
-  void setPhoneNumber(String number){
-    _phoneNumber = number;
-    notifyListeners();
-  }
-}
+final phoneNumberProvider = StateProvider<String>((ref) => '',);

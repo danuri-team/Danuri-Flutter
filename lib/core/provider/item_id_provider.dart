@@ -1,11 +1,3 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ItemIdProvider extends ChangeNotifier {
-  String _itemId = '';
-  String get itemId => _itemId;
-
-  void setSpaceId(String id) {
-    _itemId = id;
-    notifyListeners();
-  }
-}
+final itemIdProvider = StateProvider<String>((ref) => '',);
