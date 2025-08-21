@@ -1,28 +1,30 @@
+import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
+import 'package:danuri_flutter/data/models/enum/flow_type.dart';
 import 'package:danuri_flutter/data/view_models/item_available_rental_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
 import 'package:danuri_flutter/presentation/register_used_space/widgets/available_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-class ItemRentalScreen extends StatefulWidget {
+class ItemRentalScreen extends ConsumerStatefulWidget {
   const ItemRentalScreen({super.key});
 
   @override
-  State<ItemRentalScreen> createState() => _ItemRentalScreenState();
+  ConsumerState<ItemRentalScreen> createState() => _ItemRentalScreenState();
 }
 
-class _ItemRentalScreenState extends State<ItemRentalScreen> {
+class _ItemRentalScreenState extends ConsumerState<ItemRentalScreen> {
   Map<String, String?> selectedItem = {'itemId': null};
 
-  final ItemAvailableRentalViewModel _viewModel = ItemAvailableRentalViewModel();
+  final ItemAvailableRentalViewModel _viewModel =
+      ItemAvailableRentalViewModel();
 
   Future<void> fetchData() async {
     await Future.wait([
@@ -116,10 +118,12 @@ class _ItemRentalScreenState extends State<ItemRentalScreen> {
                   centerText: '다음',
                   onTap: () {
                     if (selectedItem['itemId'] != null) {
-                      context
-                          .read<ItemIdProvider>()
-                          .setSpaceId(selectedItem['itemId']!);
-                      context.read<ItemRentalFlowProvider>().startFlow();
+                      ref.read(itemIdProvider.notifier).update(
+                            (state) => selectedItem['itemId']!,
+                          );
+                      ref.read(flowProvider.notifier).update(
+                            (state) => FlowType.ITEM_RENTAL_FLOW,
+                          );
                       context.push('/login');
                     }
                   },

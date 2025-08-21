@@ -1,9 +1,7 @@
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/core/provider/flows/leaving_space_flow_provider.dart';
-import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
+import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
-import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/util/phone_number_formatter.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
@@ -12,18 +10,18 @@ import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
 
   final UserAuthViewModel _viewModel = UserAuthViewModel();
@@ -43,10 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> userLogin() async {
-    context
-        .read<PhoneNumberProvider>()
-        .setPhoneNumber(_phoneNumberController.text);
-    await _viewModel.userLogin(_phoneNumberController.text);
+    ref.read(phoneNumberProvider.notifier).update((state) => _phoneNumberController.text,);
+    await _viewModel.userLogin(phoneNumber: _phoneNumberController.text);
   }
 
   @override
@@ -59,9 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               CustomTopBar(
                 callBackButtonOnTap: () {
-                  context.read<LeavingSpaceFlowProvider>().cancleFlow();
-                  context.read<RegisterUsedSpaceFlowProvider>().cancleFlow();
-                  context.read<ItemRentalFlowProvider>().cancleFlow();
+                  ref.read(flowProvider.notifier).update((state) => null,);
                 },
                 title: '번호를 입력해주세요',
                 subTitle: '인증을 통해 공간을 이용할 수 있어요',
