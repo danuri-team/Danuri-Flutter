@@ -1,20 +1,13 @@
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/config/router.dart';
-import 'package:danuri_flutter/core/provider/flows/leaving_space_flow_provider.dart';
-import 'package:danuri_flutter/core/provider/flows/item_rental_flow_provider.dart';
-import 'package:danuri_flutter/core/provider/item_id_provider.dart';
-import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
-import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
-import 'package:danuri_flutter/core/provider/rental_id_provider.dart';
-import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/data_sources/auth/admin_auth_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/admin_auth/request/admin_login_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,45 +38,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(1280, 800),
-      builder: (context, child) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (context) => PhoneNumberProvider(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => SpaceIdProvider(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => ItemIdProvider(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => LeavingSpaceFlowProvider(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => RegisterUsedSpaceFlowProvider(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => ItemRentalFlowProvider(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => RentalIdProvider(),
-            ),
-          ],
-          child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              scaffoldBackgroundColor: DanuriColor.background1,
-              fontFamily: 'Pretendard',
-            ),
-            routerConfig: router(
-              firstRun ? '/organ-auth' : '/',
-            ),
-          ),
-        );
-      },
+    return ProviderScope(
+      child: ScreenUtilInit(
+        designSize: const Size(1280, 800),
+        builder: (context, child) {
+          return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                scaffoldBackgroundColor: DanuriColor.background1,
+                fontFamily: 'Pretendard',
+              ),
+              routerConfig: router(
+                firstRun ? '/organ-auth' : '/',
+              ),
+          );
+        },
+      ),
     );
   }
 }

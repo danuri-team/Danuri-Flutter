@@ -9,7 +9,7 @@ class DeviceAuthDataSource extends DataSource {
 
   Future<TokensResponse> deviceAuth(DeviceAuthRequest request) async {
     final response = await dio.post(
-      '$baseUrl/auth/device/token',
+      '/auth/device/token',
       data: request.toJson(),
       options: Options(headers: {
         'Authorization': 'Bearer ${await adminToken}'

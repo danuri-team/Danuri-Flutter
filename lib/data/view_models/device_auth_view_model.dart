@@ -12,7 +12,7 @@ class DeviceAuthViewModel {
     _error = false;
   }
 
-  Future<void> deviceAuth(String deviceId) async {
+  Future<void> deviceAuth({required String deviceId}) async {
     try {
       await _dataSource.deviceAuth(
         DeviceAuthRequest(deviceId: deviceId),

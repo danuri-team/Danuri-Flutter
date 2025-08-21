@@ -9,7 +9,7 @@ import 'package:danuri_flutter/data/models/auth/admin_auth/request/sign_up_reque
 class AdminAuthDataSource extends DataSource {
   Future<TokensResponse> adminLogin(AdminLoginRequest request) async {
     final response = await dio.post(
-      '$baseUrl/auth/admin/sign-in',
+      '/auth/admin/sign-in',
       data: request.toJson(),
     );
     await TokenStorage().setToken(response.data, 'admin');
@@ -18,21 +18,21 @@ class AdminAuthDataSource extends DataSource {
 
   Future<void> signUp(SignUpRequest request) async {
     await dio.post(
-      '$baseUrl/auth/admin/sign-up',
+      '/auth/admin/sign-up',
       data: request.toJson(),
     );
   }
 
   Future<void> findPassword(PhoneRequest request) async {
     await dio.post(
-      '$baseUrl/auth/admin/find-password',
+      '/auth/admin/find-password',
       data: request.toJson(),
     );
   }
 
   Future<TokensResponse> resetToken(AuthCodeLoginRequest request) async {
     final response = await dio.post(
-      '$baseUrl/auth/admin/reset-token',
+      '/auth/admin/reset-token',
       data: request.toJson(),
     );
     return TokensResponse.fromJson(response.data);

@@ -1,25 +1,26 @@
+import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/core/provider/flows/register_used_space_flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
+import 'package:danuri_flutter/data/models/enum/flow_type.dart';
 import 'package:danuri_flutter/data/view_models/space_usage_status_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
 import 'package:danuri_flutter/presentation/register_used_space/widgets/available_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-class RegisterUsedSpace extends StatefulWidget {
+class RegisterUsedSpace extends ConsumerStatefulWidget {
   const RegisterUsedSpace({super.key});
 
   @override
-  State<RegisterUsedSpace> createState() => _RegisterUsedSpaceState();
+  ConsumerState<RegisterUsedSpace> createState() => _RegisterUsedSpaceState();
 }
 
-class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
+class _RegisterUsedSpaceState extends ConsumerState<RegisterUsedSpace> {
   Map<String, String?> selectedSpace = {'spaceId': null};
 
   final SpaceUsageStatusViewModel _viewModel = SpaceUsageStatusViewModel();
@@ -108,10 +109,8 @@ class _RegisterUsedSpaceState extends State<RegisterUsedSpace> {
                   centerText: '다음',
                   onTap: () async {
                     if (selectedSpace['spaceId'] != null) {
-                      context
-                          .read<SpaceIdProvider>()
-                          .setSpaceId(selectedSpace['spaceId']!);
-                      context.read<RegisterUsedSpaceFlowProvider>().startFlow();
+                      ref.read(spaceIdProvider.notifier).update((state) => selectedSpace['spaceId']!,);
+                      ref.read(flowProvider.notifier).update((state) => FlowType.REGISTER_USED_SPACE_FLOW,);
                       context.push('/login');
                     }
                   },

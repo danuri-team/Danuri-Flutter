@@ -10,18 +10,18 @@ import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/sign_up/widget/rounded_rectangle_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController _userNameController = TextEditingController();
 
   final UserAuthViewModel _viewModel = UserAuthViewModel();
@@ -71,12 +71,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> _signUp() async {
+    final phoneNumber = ref.read(phoneNumberProvider.notifier).state;
     await _viewModel.signUp(
-      '52515fd2-43e5-440b-9cc5-8630bc75954e',
-      _userNameController.text,
-      context.read<PhoneNumberProvider>().phoneNumber,
-      userInfo['sex'] as SexType,
-      userInfo['grade'] as AgeType,
+      companyId: '52515fd2-43e5-440b-9cc5-8630bc75954e',
+      userName: _userNameController.text,
+      phoneNumber: phoneNumber,
+      sex: userInfo['sex'] as SexType,
+      age: userInfo['grade'] as AgeType,
     );
   }
 
@@ -228,9 +229,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             await _signUp().then(
                               (_) async {
                                 if (_viewModel.error == false) {
-                                  await _viewModel.userLogin(context
-                                      .read<PhoneNumberProvider>()
-                                      .phoneNumber);
+                                  final phoneNumber = ref.read(phoneNumberProvider.notifier).state;
+                                  await _viewModel.userLogin(phoneNumber: phoneNumber);
                                   if (context.mounted) {
                                     context.push('/auth-code-login');
                                   }

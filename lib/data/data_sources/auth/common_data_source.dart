@@ -7,7 +7,7 @@ class CommonDataSource extends DataSource{
   // tokenType = 'admin', 'device', 'user'
   Future<TokensResponse> refreshToken(RefreshTokenRequest request, String tokenType) async{
     final response = await dio.post(
-      '$baseUrl/auth/common/refresh',
+      '/auth/common/refresh',
       data: request.toJson(),
     );
     await TokenStorage().setToken(response.data, tokenType);
