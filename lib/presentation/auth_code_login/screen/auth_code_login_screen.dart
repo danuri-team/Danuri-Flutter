@@ -57,7 +57,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
   Future<void> itemRental() async {
     final itemId = ref.read(itemIdProvider.notifier).state;
-    await _itemViewModel.itemRental(context, itemId, 1, '').then(
+    await _itemViewModel.itemRental(context: context, itemId: itemId, quantity: 1, usageId: '').then(
       (_) {
         if (!mounted) {
           return;
@@ -74,7 +74,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   }
 
   Future<void> leavingSpace() async {
-    await _spaceViewModel.leavingSpace('').then(
+    await _spaceViewModel.leavingSpace(usageId: '').then(
       (_) {
         if (!mounted) {
           return;
@@ -92,7 +92,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
   Future<void> registerUsedSpace() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
-    await _spaceViewModel.registerUsedSpace(context, spaceId).then(
+    await _spaceViewModel.registerUsedSpace(context: context, spaceId: spaceId).then(
       (_) {
         if (!mounted) {
           return;

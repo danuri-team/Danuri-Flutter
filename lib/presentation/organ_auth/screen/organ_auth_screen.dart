@@ -115,7 +115,7 @@ class _OrganAuthScreenState extends State<OrganAuthScreen> {
                           onTap: () async {
                             if (_deviceIdController.text.isNotEmpty) {
                               await _viewModel
-                                  .deviceAuth(_deviceIdController.text);
+                                  .deviceAuth(deviceId: _deviceIdController.text);
                               if (context.mounted) {
                                 context.go('/');
                               }
