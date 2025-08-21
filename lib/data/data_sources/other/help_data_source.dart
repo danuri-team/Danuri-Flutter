@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 class HelpDataSource extends DataSource {
   Future<void> help() async {
     await dio.get(
-      '$baseUrl/help',
+      '/help',
       options: Options(
         headers: {'Authorization': 'Bearer ${await userToken}'},
       ),

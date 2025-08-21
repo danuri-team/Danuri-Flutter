@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 class ItemRentalDataSource extends DataSource {
   Future<List<ItemAvailableRental>> getItemAvailableRental() async {
     final response = await dio.get(
-      '$baseUrl/item',
+      '/item',
       options:
           Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
     );
@@ -18,7 +18,7 @@ class ItemRentalDataSource extends DataSource {
 
   Future<RentedItemResponse> itemRental(RentalItemRequest request) async {
     final response = await dio.post(
-      '$baseUrl/item',
+      '/item',
       data: request.toJson(),
       options: Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
     );
@@ -27,7 +27,7 @@ class ItemRentalDataSource extends DataSource {
 
   Future<void> returnItem(UsageIdRequest request) async {
     await dio.delete(
-      '$baseUrl/item',
+      '/item',
       data: request.toJson(),
       options: Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
     );
