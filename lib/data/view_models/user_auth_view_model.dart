@@ -16,8 +16,13 @@ class UserAuthViewModel {
     _error = false;
   }
 
-  Future<void> signUp(String companyId, String userName, String phoneNumber,
-      SexType sex, AgeType age) async {
+  Future<void> signUp({
+    required String companyId,
+    required String userName,
+    required String phoneNumber,
+    required SexType sex,
+    required AgeType age,
+  }) async {
     try {
       await _dataSource.signUp(
         SignUpRequest(
@@ -34,7 +39,7 @@ class UserAuthViewModel {
     }
   }
 
-  Future<void> userLogin(String phoneNumber) async {
+  Future<void> userLogin({required String phoneNumber}) async {
     try {
       await _dataSource.login(
         PhoneRequest(phone: phoneNumber),
@@ -45,7 +50,8 @@ class UserAuthViewModel {
     }
   }
 
-  Future<void> authCodeLogin(String phoneNumber, String authCode) async {
+  Future<void> authCodeLogin(
+      {required String phoneNumber, required String authCode}) async {
     try {
       await _dataSource.authCodeLogin(
         AuthCodeLoginRequest(
