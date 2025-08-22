@@ -3,7 +3,7 @@ import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
-import 'package:danuri_flutter/data/view_models/item_available_rental_view_model.dart';
+import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
@@ -23,15 +23,11 @@ class ItemRentalScreen extends ConsumerStatefulWidget {
 class _ItemRentalScreenState extends ConsumerState<ItemRentalScreen> {
   Map<String, String?> selectedItem = {'itemId': null};
 
-  final ItemAvailableRentalViewModel _viewModel =
-      ItemAvailableRentalViewModel();
+  final ItemViewModel _viewModel =
+      ItemViewModel();
 
   Future<void> fetchData() async {
-    await Future.wait([
-      _viewModel.getItemAvailableRental(), // 대여 가능 아이템 조회
-    ]).then(
-      (_) => setState(() {}),
-    );
+    await _viewModel.getItemAvailableRental().then((_) => setState(() {}));
   }
 
   @override
