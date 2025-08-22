@@ -3,7 +3,7 @@ import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
-import 'package:danuri_flutter/data/view_models/space_usage_status_view_model.dart';
+import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
@@ -23,7 +23,7 @@ class RegisterUsedSpace extends ConsumerStatefulWidget {
 class _RegisterUsedSpaceState extends ConsumerState<RegisterUsedSpace> {
   Map<String, String?> selectedSpace = {'spaceId': null};
 
-  final SpaceUsageStatusViewModel _viewModel = SpaceUsageStatusViewModel();
+  final SpaceViewModel _viewModel = SpaceViewModel();
 
   Future<void> fetchSpaceUsageStatus() async {
     await _viewModel.getSpaceUsageStatus().then(
