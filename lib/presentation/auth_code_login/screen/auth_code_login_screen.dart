@@ -7,7 +7,7 @@ import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
-import 'package:danuri_flutter/data/view_models/register_used_space_view_model.dart';
+import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
@@ -29,9 +29,11 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   final TextEditingController _authCodeController = TextEditingController();
 
   final UserAuthViewModel _userAuthViewModel = UserAuthViewModel();
-  final RegisterUsedSpaceViewModel _spaceViewModel =
-      RegisterUsedSpaceViewModel();
-  final ItemRentalViewModel _itemViewModel = ItemRentalViewModel();
+  final SpaceViewModel _spaceViewModel =
+      SpaceViewModel();
+  final ItemViewModel _itemViewModel = ItemViewModel();
+
+  late final String usgaeId; 
 
   @override
   void initState() {
@@ -39,6 +41,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     _authCodeController.addListener(
       () => setState(() {}),
     );
+    _spaceViewModel.getUsageSpace();
   }
 
   @override
@@ -55,9 +58,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> itemRental() async {
+  Future<void> _itemRental() async {
     final itemId = ref.read(itemIdProvider.notifier).state;
-    await _itemViewModel.itemRental(context: context, itemId: itemId, quantity: 1, usageId: '').then(
+    await _itemViewModel.itemRental(context: context, itemId: itemId, quantity: 1, usageId: _spaceViewModel.usageId!).then(
       (_) {
         if (!mounted) {
           return;
@@ -73,8 +76,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> leavingSpace() async {
-    await _spaceViewModel.leavingSpace(usageId: '').then(
+  Future<void> _leavingSpace() async {
+    await _itemViewModel.returnItem(usageId: _spaceViewModel.usageId!);
+    await _spaceViewModel.leavingSpace(usageId: _spaceViewModel.usageId!).then(
       (_) {
         if (!mounted) {
           return;
@@ -90,7 +94,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> registerUsedSpace() async {
+  Future<void> _registerUsedSpace() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
     await _spaceViewModel.registerUsedSpace(context: context, spaceId: spaceId).then(
       (_) {
@@ -177,13 +181,13 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                               if (flow != null) {
                                 switch (flow) {
                                   case FlowType.LEAVING_SPACE_FLOW:
-                                    await leavingSpace();
+                                    await _leavingSpace();
                                     break;
                                   case FlowType.ITEM_RENTAL_FLOW:
-                                    await itemRental();
+                                    await _itemRental();
                                     break;
                                   case FlowType.REGISTER_USED_SPACE_FLOW:
-                                    await registerUsedSpace();
+                                    await _registerUsedSpace();
                                     break;
                                 }
                                 ref.read(flowProvider.notifier).update((state) => null,);
