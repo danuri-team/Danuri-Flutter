@@ -48,7 +48,7 @@ class SelectionBox extends StatelessWidget {
                     ? DanuriColor.static1
                     : DanuriColor.label4
                 : DanuriColor.static1,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

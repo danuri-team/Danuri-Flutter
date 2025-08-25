@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
@@ -29,19 +31,19 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   final TextEditingController _authCodeController = TextEditingController();
 
   final UserAuthViewModel _userAuthViewModel = UserAuthViewModel();
-  final SpaceViewModel _spaceViewModel =
-      SpaceViewModel();
+  final SpaceViewModel _spaceViewModel = SpaceViewModel();
   final ItemViewModel _itemViewModel = ItemViewModel();
-
-  late final String usgaeId; 
 
   @override
   void initState() {
     super.initState();
-    _authCodeController.addListener(
-      () => setState(() {}),
-    );
-    _spaceViewModel.getUsageSpace();
+    final flow = ref.read(flowProvider.notifier).state;
+    switch (flow) {
+      case FlowType.REGISTER_USED_SPACE_FLOW:
+        break;
+      default:
+        _spaceViewModel.getUsageSpace();
+    }
   }
 
   @override
@@ -53,14 +55,20 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   Future<void> _authCodeLogin() async {
     final phoneNumber = ref.read(phoneNumberProvider.notifier).state;
     await _userAuthViewModel.authCodeLogin(
-      phoneNumber: phoneNumber,
+      phoneNumber: phoneNumber!,
       authCode: _authCodeController.text,
     );
   }
 
   Future<void> _itemRental() async {
     final itemId = ref.read(itemIdProvider.notifier).state;
-    await _itemViewModel.itemRental(context: context, itemId: itemId, quantity: 1, usageId: _spaceViewModel.usageId!).then(
+    await _itemViewModel
+        .itemRental(
+            context: context,
+            itemId: itemId!,
+            quantity: 1,
+            usageId: _spaceViewModel.usageId!)
+        .then(
       (_) {
         if (!mounted) {
           return;
@@ -96,7 +104,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
   Future<void> _registerUsedSpace() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
-    await _spaceViewModel.registerUsedSpace(context: context, spaceId: spaceId).then(
+    await _spaceViewModel
+        .registerUsedSpace(context: context, spaceId: spaceId!)
+        .then(
       (_) {
         if (!mounted) {
           return;
@@ -119,7 +129,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
           padding: EdgeInsets.fromLTRB(60.w, 85.h, 61.w, 58.h),
           child: Column(
             children: [
-              CustomTopBar(
+              const CustomTopBar(
                 title: '입력하신 번호로 인증번호를 보냈어요 ',
                 subTitle: '숫자로 구성된 6자리 번호를 입력해주세요',
                 needCallBackButton: true,
@@ -134,6 +144,11 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                   maxLength: 6,
                   onTapOutside: (event) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
+                  onChanged: (value) {
+                    if (value.length == 6) {
+                      setState(() {});
+                    }
+                  },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     counterText: '',
@@ -144,14 +159,14 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         width: 1,
                         color: DanuriColor.line2,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         width: 2,
                         color: DanuriColor.primary1,
                       ),
@@ -175,9 +190,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                               context.push('/failure');
                               _userAuthViewModel.reset();
                             } else {
-                              
                               final flow =
                                   ref.read(flowProvider.notifier).state;
+                              log('flow = $flow, usageId = ${_spaceViewModel.usageId}');
                               if (flow != null) {
                                 switch (flow) {
                                   case FlowType.LEAVING_SPACE_FLOW:
@@ -190,7 +205,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                     await _registerUsedSpace();
                                     break;
                                 }
-                                ref.read(flowProvider.notifier).update((state) => null,);
+                                ref.read(flowProvider.notifier).update(
+                                      (state) => null,
+                                    );
                               }
                             }
                           },

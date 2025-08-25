@@ -15,7 +15,7 @@ class FailureScreen extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(60.w, 85.h, 61.w, 58.h),
         child: Column(
           children: [
-            CustomTopBar(
+            const CustomTopBar(
               title: '처리가 실패 하였습니다.',
               subTitle: '공간을 이용하고 있지 않습니다.',
               needCallBackButton: true,

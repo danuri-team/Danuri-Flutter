@@ -8,7 +8,7 @@ import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
-import 'package:danuri_flutter/presentation/sign_up/widget/rounded_rectangle_box.dart';
+import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,14 +57,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   };
 
   @override
-  void initState() {
-    super.initState();
-    _userNameController.addListener(
-      () => setState(() {}),
-    );
-  }
-
-  @override
   void dispose() {
     super.dispose();
     _userNameController.dispose();
@@ -75,7 +67,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     await _viewModel.signUp(
       companyId: '52515fd2-43e5-440b-9cc5-8630bc75954e',
       userName: _userNameController.text,
-      phoneNumber: phoneNumber,
+      phoneNumber: phoneNumber!,
       sex: userInfo['sex'] as SexType,
       age: userInfo['grade'] as AgeType,
     );
@@ -91,7 +83,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomTopBar(
+              const CustomTopBar(
                 title: '처음 이용하면 정보 기입이 필요해요',
                 subTitle: '간단하게 입력해볼까요?',
                 needCallBackButton: true,
@@ -117,20 +109,21 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         controller: _userNameController,
                         onTapOutside: (event) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
+                        onChanged: (value) => setState(() {}),
                         decoration: InputDecoration(
                           hintText: '이름을 입력해주세요.',
                           hintStyle: DanuriText.body1Normal
                               .copyWith(color: DanuriColor.label2),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               width: 1,
                               color: DanuriColor.line2,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               width: 2,
                               color: DanuriColor.primary1,
                             ),
@@ -149,28 +142,24 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     SizedBox(
                       width: 180.w,
                       height: 48.h,
-                      child: ListView.builder(
+                      child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: exampleOptions['sex']!.length,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(width: 12.w),
                         itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              RoundedRectangleBox(
-                                width: 84.w,
-                                text: exampleOptions['sex']![index],
-                                selected:
-                                    userInfo['sex'] == options['sex']![index],
-                                onTap: () {
-                                  setState(
-                                    () {
-                                      userInfo['sex'] = options['sex']![index];
-                                    },
-                                  );
+                          return SelectionBox(
+                            isSelected:
+                                userInfo['sex'] == options['sex']![index],
+                            name: exampleOptions['sex']![index],
+                            onTap: () {
+                              setState(
+                                () {
+                                  userInfo['sex'] = options['sex']![index];
                                 },
-                              ),
-                              if (options['sex']!.length != index + 1)
-                                SizedBox(width: 12.w),
-                            ],
+                              );
+                            },
+                            available: true,
                           );
                         },
                       ),
@@ -186,27 +175,24 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     SizedBox(
                       width: 608.w,
                       height: 48.h,
-                      child: ListView.builder(
+                      child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: options['grade']!.length,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(width: 12.w),
                         itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              RoundedRectangleBox(
-                                width: 112.w,
-                                text: exampleOptions['grade']![index],
-                                selected: userInfo['grade'] ==
-                                    options['grade']![index],
-                                onTap: () {
-                                  setState(() {
-                                    userInfo['grade'] =
-                                        options['grade']![index];
-                                  });
+                          return SelectionBox(
+                            isSelected:
+                                userInfo['grade'] == options['grade']![index],
+                            name: exampleOptions['grade']![index],
+                            onTap: () {
+                              setState(
+                                () {
+                                  userInfo['grade'] = options['grade']![index];
                                 },
-                              ),
-                              if (options['grade']!.length != index + 1)
-                                SizedBox(width: 12.w),
-                            ],
+                              );
+                            },
+                            available: true,
                           );
                         },
                       ),
@@ -229,8 +215,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             await _signUp().then(
                               (_) async {
                                 if (_viewModel.error == false) {
-                                  final phoneNumber = ref.read(phoneNumberProvider.notifier).state;
-                                  await _viewModel.userLogin(phoneNumber: phoneNumber);
+                                  final phoneNumber = ref
+                                      .read(phoneNumberProvider.notifier)
+                                      .state;
+                                  await _viewModel.userLogin(
+                                      phoneNumber: phoneNumber!);
                                   if (context.mounted) {
                                     context.push('/auth-code-login');
                                   }
