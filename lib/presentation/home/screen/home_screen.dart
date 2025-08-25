@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   subTitle:
                       '송정다누리청소년센터 - $period ${time.hour > 13 ? time.hour - 12 : time.hour}시 ${time.minute}분',
                   needCallBackButton: false,
-                  rightWidget: LeavingSpaceButton(),
+                  rightWidget: const LeavingSpaceButton(),
                 );
               },
             ),

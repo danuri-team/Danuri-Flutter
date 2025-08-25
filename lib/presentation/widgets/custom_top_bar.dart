@@ -42,7 +42,7 @@ class CustomTopBar extends StatelessWidget {
                       SizedBox(height: 50.h),
                     ],
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
             Padding(
               padding: EdgeInsets.only(left: 10.w),
               child: Column(
