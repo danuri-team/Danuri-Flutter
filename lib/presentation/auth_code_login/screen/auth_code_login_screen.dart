@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
@@ -76,9 +75,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
         if (_itemViewModel.error == true) {
           _itemViewModel.reset();
-          context.push('/failure');
+            AppNavigation.pushFailure(context);
         } else {
-          context.push('/completion');
+            AppNavigation.pushCompletion(context);
         }
       },
     );
@@ -94,9 +93,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
         if (_spaceViewModel.error == true) {
           _spaceViewModel.reset();
-          context.push('/failure');
+          AppNavigation.pushFailure(context);
         } else {
-          context.push('/completion');
+          AppNavigation.pushCompletion(context);
         }
       },
     );
@@ -113,9 +112,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
         }
         if (_spaceViewModel.error == true) {
           _spaceViewModel.reset();
-          context.push('/failure');
+          AppNavigation.pushFailure(context);
         } else {
-          context.push('/completion');
+          AppNavigation.pushCompletion(context);
         }
       },
     );
@@ -192,7 +191,6 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                             } else {
                               final flow =
                                   ref.read(flowProvider.notifier).state;
-                              log('flow = $flow, usageId = ${_spaceViewModel.usageId}');
                               if (flow != null) {
                                 switch (flow) {
                                   case FlowType.LEAVING_SPACE_FLOW:
@@ -205,6 +203,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                     await _registerUsedSpace();
                                     break;
                                 }
+
                                 ref.read(flowProvider.notifier).update(
                                       (state) => null,
                                     );
