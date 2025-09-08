@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
@@ -8,7 +9,6 @@ import 'package:danuri_flutter/presentation/widgets/available_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class RegisterUsedSpace extends ConsumerWidget {
   const RegisterUsedSpace({super.key});
@@ -42,7 +42,7 @@ class RegisterUsedSpace extends ConsumerWidget {
                   ref.read(flowProvider.notifier).update(
                         (state) => FlowType.REGISTER_USED_SPACE_FLOW,
                       );
-                  context.push('/login');
+                      AppNavigation.pushLogin(context);
                 }
               },
               isActivate: spaceId != null,

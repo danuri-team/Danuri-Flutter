@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
@@ -9,7 +10,6 @@ import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -54,11 +54,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           (_) {
                             if (_viewModel.error == true) {
                               if (context.mounted) {
-                                context.push('/sign-up');
+                                AppNavigation.pushSignUp(context);
                               }
                             } else {
                               if (context.mounted) {
-                                context.push('/auth-code-login');
+                                AppNavigation.pushAuthCodeLogin(context);
                               }
                             }
                           },

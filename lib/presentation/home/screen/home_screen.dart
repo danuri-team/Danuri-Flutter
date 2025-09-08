@@ -1,10 +1,10 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/home/widget/leaving_space_button.dart';
 import 'package:danuri_flutter/presentation/home/widget/select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Throttle.run(
                       () {
                         if (mounted) {
-                          context.push('/register-used-space');
+                          AppNavigation.pushRegisterUsedSpace(context);
                         }
                       },
                     );
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Throttle.run(
                       () {
                         if (mounted) {
-                          context.push('/item-rental');
+                          AppNavigation.pushItemRental(context);
                         }
                       },
                     );

@@ -34,11 +34,6 @@ class ItemViewModel {
       required int quantity,
       required String usageId}) async {
     try {
-      // await SpaceDataSource().getUsageSpace().then(
-      //   (usageSpace) async {
-      //     if (usageSpace.spaceUsageInfo == null) {
-      //       _error = true;
-      //     } else {
       await _dataSource.itemRental(
         RentalItemRequest(
           itemId: itemId,
@@ -47,9 +42,6 @@ class ItemViewModel {
         ),
       );
       _error = false;
-      //     }
-      //   },
-      // );
     } on DioException catch (_) {
       _error = true;
     }

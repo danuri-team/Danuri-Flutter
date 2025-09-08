@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/config/router.dart';
 import 'package:danuri_flutter/core/storage/token_storage.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'Pretendard',
               ),
               routerConfig: router(
-                firstRun ? '/organ-auth' : '/',
+                firstRun ? AppRoutes.organAuth : AppRoutes.home,
               ),
           );
         },

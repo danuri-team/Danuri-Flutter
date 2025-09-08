@@ -1,9 +1,9 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomTopBar extends StatelessWidget {
   const CustomTopBar({
@@ -34,7 +34,7 @@ class CustomTopBar extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {
-                          context.pop();
+                          AppNavigation.pop(context);
                           callBackButtonOnTap?.call();
                         },
                         icon: SvgPicture.asset('assets/icons/arrow-left.svg'),

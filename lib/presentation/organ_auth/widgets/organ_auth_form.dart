@@ -1,10 +1,10 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class OrganAuthForm extends StatefulWidget {
   const OrganAuthForm({super.key});
@@ -77,7 +77,7 @@ class _OrganAuthFormState extends State<OrganAuthForm> {
             if (_deviceIdController.text.isNotEmpty) {
               await _viewModel.deviceAuth(deviceId: _deviceIdController.text);
               if (context.mounted) {
-                context.go('/');
+                AppNavigation.goHome(context);
               }
             }
           },
