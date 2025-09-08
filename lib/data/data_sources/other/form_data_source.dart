@@ -12,7 +12,7 @@ class FormDataSource extends DataSource{
     return FormResponse.fromJson(response.data);
   }
 
-  Future<void> getUsageSpace(FormRequest request) async {
+  Future<void> inputForm({required FormRequest request}) async {
     await dio.post(
       '/form',
       data: request.toJson(),

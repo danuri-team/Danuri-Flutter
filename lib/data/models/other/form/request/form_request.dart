@@ -4,10 +4,10 @@ part 'form_request.g.dart';
 
 @JsonSerializable()
 class FormRequest {
-  final Map<String, dynamic> result;
+  final Map<String, dynamic> schema;
 
   FormRequest({
-    required this.result,
+    required this.schema,
   });
 
   factory FormRequest.fromJson(Map<String, dynamic> json) =>

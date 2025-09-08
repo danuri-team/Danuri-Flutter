@@ -6,7 +6,7 @@ part 'form_response.g.dart';
 class FormResponse {
   final String id;
   final String title;
-  final Map<String, dynamic> schema;
+  final String schema;
 
   FormResponse({
     required this.id,

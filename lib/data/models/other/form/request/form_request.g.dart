@@ -7,10 +7,10 @@ part of 'form_request.dart';
 // **************************************************************************
 
 FormRequest _$FormRequestFromJson(Map<String, dynamic> json) => FormRequest(
-      result: json['result'] as Map<String, dynamic>,
+      schema: json['schema'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$FormRequestToJson(FormRequest instance) =>
     <String, dynamic>{
-      'result': instance.result,
+      'schema': instance.schema,
     };
