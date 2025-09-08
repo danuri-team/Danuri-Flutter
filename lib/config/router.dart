@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/presentation/failure/screen/failure_screen.dart';
 import 'package:danuri_flutter/presentation/completion/screen/completion_screen.dart';
 import 'package:danuri_flutter/presentation/item_rental/screen/item_rental_screen.dart';
@@ -19,46 +20,47 @@ GoRouter router(String initialLocation) {
     routes: [
       GoRoute(
         name: 'organ-auth',
-        path: '/organ-auth',
+        path: AppRoutes.organAuth,
         builder: (context, state) => const OrganAuthScreen(),
       ),
       GoRoute(
-        path: '/',
+        name: 'home',
+        path: AppRoutes.home,
         builder: (context, state) => HomeScreen(),
       ),
       GoRoute(
         name: 'register-used-space',
-        path: '/register-used-space',
+        path: AppRoutes.registerUsedSpace,
         builder: (context, state) => const RegisterUsedSpace(),
       ),
       GoRoute(
         name: 'item-rental',
-        path: '/item-rental',
+        path: AppRoutes.itemRental,
         builder: (context, state) => const ItemRentalScreen(),
       ),
       GoRoute(
         name: 'login',
-        path: '/login',
+        path: AppRoutes.login,
         builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         name: 'sign-up',
-        path: '/sign-up',
+        path: AppRoutes.signUp,
         builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
         name: 'auth-code-login',
-        path: '/auth-code-login',
+        path: AppRoutes.authCodeLogin,
         builder: (context, state) => const AuthCodeLoginScreen(),
       ),
       GoRoute(
         name: 'completion',
-        path: '/completion',
+        path: AppRoutes.completion,
         builder: (context, state) => const CompletionScreen(),
       ),
       GoRoute(
         name: 'failure',
-        path: '/failure',
+        path: AppRoutes.failure,
         builder: (context, state) => const FailureScreen(),
       ),
     ],
