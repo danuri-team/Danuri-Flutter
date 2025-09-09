@@ -10,7 +10,7 @@ class FormViewModel {
   FormResponse? get form => _form;
 
   bool? _error;
-  bool? get errror => _error;
+  bool? get error => _error;
 
   void reset() {
     _error = false;

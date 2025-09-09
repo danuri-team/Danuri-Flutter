@@ -18,16 +18,36 @@ class SignUpForm extends ConsumerStatefulWidget {
   final List<Map<String, dynamic>>? schema;
 
   @override
-  ConsumerState<SignUpForm> createState() => _SignUpFormState();
+  ConsumerState<SignUpForm> createState() => SignUpFormState();
 }
 
-class _SignUpFormState extends ConsumerState<SignUpForm> {
-  final TextEditingController _controller = TextEditingController();
+class SignUpFormState extends ConsumerState<SignUpForm> {
+  late List<TextEditingController> controllers;
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    for (final controller in controllers) {
+      controller.dispose();
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant SignUpForm oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.schema?.length != oldWidget.schema?.length) {
+      controllers = List.generate(
+        widget.schema!.length,
+        (index) => TextEditingController(),
+      );
+    }
+  }
+
+  void resetSchema() {
+    for (final controller in controllers) {
+      controller.clear();
+      ref.read(signUpSchemaProvider.notifier).resetSchema();
+    }
   }
 
   @override
@@ -44,10 +64,10 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                 itemCount: schema!.length,
                 separatorBuilder: (context, index) => SizedBox(height: 34.h),
                 itemBuilder: (context, schemaIndex) {
+                  final controller = controllers[schemaIndex];
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('$state'),
                       Text(schema[schemaIndex]['label']),
                       SizedBox(height: 14.h),
                       schema[schemaIndex]['options'] == null
@@ -59,16 +79,19 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                                     .read(signUpSchemaProvider.notifier)
                                     .addSchema(
                                       key: schema[schemaIndex]['label'],
-                                      value: _controller.text,
+                                      value: controller.text.isEmpty
+                                          ? null
+                                          : controller.text,
                                     ),
-                                controller: _controller,
+                                controller: controller,
                                 onTapOutside: (event) {
                                   FocusManager.instance.primaryFocus?.unfocus();
                                   ref
                                       .read(signUpSchemaProvider.notifier)
                                       .addSchema(
                                         key: schema[schemaIndex]['label'],
-                                        value: _controller.text,
+                                        value:
+                                            controller.text.isEmpty ? null : controller.text,
                                       );
                                 },
                                 decoration: InputDecoration(
@@ -112,16 +135,12 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                                       if (state.containsValue(
                                               name[optionsIndex]) ==
                                           false) {
-                                        setState(() {
-                                          ref
-                                              .read(
-                                                  signUpSchemaProvider.notifier)
-                                              .addSchema(
-                                                key: schema[schemaIndex]
-                                                    ['label'],
-                                                value: name[optionsIndex],
-                                              );
-                                        });
+                                        ref
+                                            .read(signUpSchemaProvider.notifier)
+                                            .addSchema(
+                                              key: schema[schemaIndex]['label'],
+                                              value: '${name[optionsIndex]}',
+                                            );
                                       }
                                     },
                                   );

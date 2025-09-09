@@ -28,6 +28,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final FormViewModel _formViewModel = FormViewModel();
   FormResponse? form;
   List<Map<String, dynamic>>? schema;
+  final GlobalKey<SignUpFormState> signUpKey = GlobalKey<SignUpFormState>();
 
   @override
   void initState() {
@@ -56,13 +57,29 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   }
 
   Future<void> inputForm() async {
-    final schema = ref.read(signUpSchemaProvider);
-    await _formViewModel.inputForm(FormRequest(schema: schema));
+    final schema = ref.watch(signUpSchemaProvider);
+    await _formViewModel.inputForm(
+      FormRequest(result: schema.toString()),
+    );
+  }
+
+  bool isAllRequiredSelected(
+      List<Map<String, dynamic>>? schema, Map<String, dynamic> state) {
+    if (schema != null) {
+      final requiredFields = schema.where((item) => item['isRequired'] == true);
+
+      return requiredFields.every((item) {
+        final key = item['label'];
+        return state.containsKey(key) && state[key] != null;
+      });
+    }
+
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.read(signUpSchemaProvider);
+    final state = ref.watch(signUpSchemaProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -88,27 +105,39 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 children: [
                   NextButton(
                     centerText: '완료',
-                    onTap: () {
-                      if (schema?.length == state.length) {
-                        final String phone =
-                            ref.read(phoneNumberProvider.notifier).state!;
-                        Throttle.run(
-                          () async {
-                            await Future.wait([
-                              signUp(phone: phone),
-                              inputForm(),
-                            ]);
-                            await userLogin(phone: phone);
-                            
-                            if (context.mounted) {
-                              context.push('/auth-code-login');
-                            }
-                          },
-                        );
-                      }
-                    },
-                    isActivate:
-                        schema == null ? false : schema!.length == state.length,
+                    onTap: isAllRequiredSelected(schema, state)
+                        ? () {
+                            Throttle.run(
+                              () async {
+                                final String phone =
+                                    ref.read(phoneNumberProvider.notifier).state!;
+
+                                await Future.wait([
+                                  signUp(phone: phone),
+                                  inputForm(),
+                                ]);
+                                await userLogin(phone: phone);
+
+                                if (!context.mounted) {
+                                  return;
+                                }
+
+                                if (_userViewModel.error! == true) {
+                                  context.push('/failure');
+                                } else if (_formViewModel.error! == true) {
+                                  context.push('/failure');
+                                } else {
+                                  context.push('/auth-code-login');
+                                }
+
+                                signUpKey.currentState?.resetSchema();
+                              },
+                            );
+                          }
+                        : () {},
+                    isActivate: schema != null
+                        ? isAllRequiredSelected(schema, state)
+                        : false,
                   ),
                 ],
               ),
