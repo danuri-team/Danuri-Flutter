@@ -201,40 +201,34 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 ),
               ),
               SizedBox(height: 56.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  NextButton(
-                    centerText: '완료',
-                    onTap: () {
-                      if (_userNameController.text.isNotEmpty &&
-                          userInfo['sex'] != null &&
-                          userInfo['grade'] != null) {
-                        Throttle.run(
-                          () async {
-                            await _signUp().then(
-                              (_) async {
-                                if (_viewModel.error == false) {
-                                  final phoneNumber = ref
-                                      .read(phoneNumberProvider.notifier)
-                                      .state;
-                                  await _viewModel.userLogin(
-                                      phoneNumber: phoneNumber!);
-                                  if (context.mounted) {
-                                    context.push('/auth-code-login');
-                                  }
-                                }
-                              },
-                            );
+              NextButton(
+                centerText: '완료',
+                onTap: () {
+                  if (_userNameController.text.isNotEmpty &&
+                      userInfo['sex'] != null &&
+                      userInfo['grade'] != null) {
+                    Throttle.run(
+                      () async {
+                        await _signUp().then(
+                          (_) async {
+                            if (_viewModel.error == false) {
+                              final phoneNumber =
+                                  ref.read(phoneNumberProvider.notifier).state;
+                              await _viewModel.userLogin(
+                                  phoneNumber: phoneNumber!);
+                              if (context.mounted) {
+                                context.push('/auth-code-login');
+                              }
+                            }
                           },
                         );
-                      }
-                    },
-                    isActivate: _userNameController.text.isNotEmpty &&
-                        userInfo['sex'] != null &&
-                        userInfo['grade'] != null,
-                  ),
-                ],
+                      },
+                    );
+                  }
+                },
+                isActivate: _userNameController.text.isNotEmpty &&
+                    userInfo['sex'] != null &&
+                    userInfo['grade'] != null,
               ),
             ],
           ),

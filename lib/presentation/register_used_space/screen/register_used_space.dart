@@ -20,6 +20,7 @@ class RegisterUsedSpace extends ConsumerWidget {
       body: Padding(
         padding: EdgeInsets.fromLTRB(60.w, 85.h, 61.w, 58.h),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTopBar(
               title: '이용할 공간을 선택해주세요',
@@ -42,7 +43,7 @@ class RegisterUsedSpace extends ConsumerWidget {
                   ref.read(flowProvider.notifier).update(
                         (state) => FlowType.REGISTER_USED_SPACE_FLOW,
                       );
-                      AppNavigation.pushLogin(context);
+                  AppNavigation.pushLogin(context);
                 }
               },
               isActivate: spaceId != null,

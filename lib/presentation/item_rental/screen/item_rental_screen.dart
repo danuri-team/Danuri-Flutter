@@ -20,6 +20,7 @@ class ItemRentalScreen extends ConsumerWidget {
       body: Padding(
         padding: EdgeInsets.fromLTRB(60.w, 85.h, 61.w, 58.h),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTopBar(
               title: '이용할 물품을 선택해주세요',

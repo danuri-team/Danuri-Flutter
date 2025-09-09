@@ -19,25 +19,31 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: organAuthVersion ? 400.w : 500.w,
-        height: organAuthVersion ? 48.h : 54.h,
-        decoration: ShapeDecoration(
-          color: isActivate ? DanuriColor.primary1 : DanuriColor.interaction1,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(organAuthVersion ? 12 : 8),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            width: organAuthVersion ? 400.w : 500.w,
+            height: organAuthVersion ? 48.h : 54.h,
+            decoration: ShapeDecoration(
+              color:
+                  isActivate ? DanuriColor.primary1 : DanuriColor.interaction1,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(organAuthVersion ? 12 : 8),
+              ),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              centerText,
+              style: DanuriText.body1Normal.copyWith(
+                color: isActivate ? DanuriColor.static1 : DanuriColor.label2,
+              ),
+            ),
           ),
         ),
-        alignment: Alignment.center,
-        child: Text(
-          centerText,
-          style: DanuriText.body1Normal.copyWith(
-            color: isActivate ? DanuriColor.static1 : DanuriColor.label2,
-          ),
-        ),
-      ),
+      ],
     );
   }
 }
