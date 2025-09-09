@@ -47,10 +47,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               NextButton(
                 centerText: '다음',
                 onTap: () {
-                  if (phone != null) {
+                  if (phone?.length == 13) {
                     Throttle.run(
-                      () async{
-                        await _viewModel.userLogin(phone: phone).then(
+                      () async {
+                        await _viewModel.userLogin(phone: phone!).then(
                           (_) {
                             if (_viewModel.error == true) {
                               if (context.mounted) {
@@ -67,7 +67,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     );
                   }
                 },
-                isActivate: phone != null,
+                isActivate: phone?.length == 13,
               ),
             ],
           ),

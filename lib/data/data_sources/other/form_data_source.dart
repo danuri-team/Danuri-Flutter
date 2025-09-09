@@ -3,11 +3,12 @@ import 'package:danuri_flutter/data/models/other/form/request/form_request.dart'
 import 'package:danuri_flutter/data/models/other/form/response/form_response.dart';
 import 'package:dio/dio.dart';
 
-class FormDataSource extends DataSource{
+class FormDataSource extends DataSource {
   Future<FormResponse> getForm() async {
     final response = await dio.get(
       '/form',
-      options: Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
+      options:
+          Options(headers: {'Authorization': 'Bearer ${await deviceToken}'}),
     );
     return FormResponse.fromJson(response.data);
   }
