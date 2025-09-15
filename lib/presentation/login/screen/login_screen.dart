@@ -4,7 +4,6 @@ import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/login/widgets/phone_text_field.dart';
-import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 title: '번호를 입력해주세요',
                 subTitle: '인증을 통해 공간을 이용할 수 있어요',
                 needCallBackButton: true,
-                rightWidget: const HelpMeButton(),
+                rightWidget: SizedBox.shrink(),
               ),
               SizedBox(height: 131.h),
               PhoneTextField(),
