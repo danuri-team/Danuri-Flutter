@@ -29,12 +29,10 @@ class _PhoneTextFieldState extends ConsumerState<PhoneTextField> {
       width: 500.w,
       height: 64.h,
       child: TextFormField(
-        onChanged: (value) {
-          if (value.length == 13) {
-            ref.read(phoneNumberProvider.notifier).update(
-                  (state) => _phoneNumberController.text,
-                );
-          }
+        onFieldSubmitted: (value) {
+          ref.read(phoneNumberProvider.notifier).update(
+                (state) => _phoneNumberController.text,
+              );
         },
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
@@ -43,7 +41,12 @@ class _PhoneTextFieldState extends ConsumerState<PhoneTextField> {
         controller: _phoneNumberController,
         maxLength: 13,
         keyboardType: TextInputType.phone,
-        onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+        onTapOutside: (event) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          ref.read(phoneNumberProvider.notifier).update(
+                (state) => _phoneNumberController.text,
+              );
+        },
         decoration: InputDecoration(
           hintText: '010-0000-0000',
           hintStyle: DanuriText.headLine1.copyWith(

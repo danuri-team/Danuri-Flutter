@@ -35,6 +35,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ref.read(flowProvider.notifier).update(
                         (state) => null,
                       );
+                  ref.read(phoneNumberProvider.notifier).update(
+                        (state) => null,
+                      );
                 },
                 title: '번호를 입력해주세요',
                 subTitle: '인증을 통해 공간을 이용할 수 있어요',
@@ -47,10 +50,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               NextButton(
                 centerText: '다음',
                 onTap: () {
-                  if (phone != null) {
+                  if (phone?.length == 13) {
                     Throttle.run(
-                      () async{
-                        await _viewModel.userLogin(phoneNumber: phone).then(
+                      () async {
+                        await _viewModel.userLogin(phoneNumber: phone!).then(
                           (_) {
                             if (_viewModel.error == true) {
                               if (context.mounted) {
@@ -67,7 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     );
                   }
                 },
-                isActivate: phone != null,
+                isActivate: phone?.length == 13,
               ),
             ],
           ),

@@ -26,6 +26,10 @@ class RegisterUsedSpace extends ConsumerWidget {
               title: '이용할 공간을 선택해주세요',
               subTitle: '공간을 선택해주세요',
               needCallBackButton: true,
+              callBackButtonOnTap: () =>
+                  ref.read(spaceIdProvider.notifier).update(
+                        (state) => null,
+                      ),
               rightWidget: Column(
                 children: [
                   SizedBox(height: 160.sp),
