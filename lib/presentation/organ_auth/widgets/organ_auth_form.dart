@@ -75,7 +75,7 @@ class _OrganAuthFormState extends State<OrganAuthForm> {
           centerText: '연결하기',
           onTap: () async {
             if (_deviceIdController.text.isNotEmpty) {
-              await _viewModel.deviceAuth(deviceId: _deviceIdController.text);
+              await _viewModel.deviceAuth(code: _deviceIdController.text);
               if (context.mounted) {
                 AppNavigation.goHome(context);
               }

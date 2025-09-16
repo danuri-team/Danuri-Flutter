@@ -12,10 +12,10 @@ class DeviceAuthViewModel {
     _error = false;
   }
 
-  Future<void> deviceAuth({required String deviceId}) async {
+  Future<void> deviceAuth({required String code}) async {
     try {
       await _dataSource.deviceAuth(
-        DeviceAuthRequest(deviceId: deviceId),
+        DeviceAuthRequest(code: code),
       );
       _error = false;
     } on DioException catch (_) {
