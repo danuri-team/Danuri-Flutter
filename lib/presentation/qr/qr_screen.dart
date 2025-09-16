@@ -1,22 +1,21 @@
-import 'dart:convert';
 import 'package:danuri_flutter/config/app_routes.dart';
+import 'package:danuri_flutter/core/provider/on_detect_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrScreen extends ConsumerWidget {
-  QrScreen({super.key});
-
-  final viewModel = DeviceAuthViewModel();
+  const QrScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final onDetect = ref.watch(onDetectProvider);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -26,13 +25,8 @@ class QrScreen extends ConsumerWidget {
                 onDetect: (capture) {
                   Throttle.run(
                     () async {
-                      final value = capture.barcodes[0].displayValue;
-                      final Map<String, dynamic> decoded = jsonDecode(value!);
-                      await viewModel.deviceAuth(code: decoded['code']);
-
-                      if (viewModel.error == false) {
-                        AppNavigation.goHome(context);
-                      }
+                      context.pop(capture);
+                      onDetect();
                     },
                   );
                 },

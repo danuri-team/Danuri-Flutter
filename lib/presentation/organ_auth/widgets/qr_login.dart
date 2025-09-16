@@ -1,19 +1,41 @@
+import 'dart:convert';
 import 'package:danuri_flutter/config/app_routes.dart';
+import 'package:danuri_flutter/core/provider/on_detect_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
+import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class QrLogin extends ConsumerWidget {
-  const QrLogin({super.key});
+  QrLogin({super.key});
+
+  final viewModel = DeviceAuthViewModel();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        AppNavigation.pushQR(context);
+        Throttle.run(
+          () async {
+            final capture = await AppNavigation.pushQR(context);
+            ref.read(onDetectProvider.notifier).update(
+              (state) {
+                return () async {
+                  final value = capture?.barcodes[0].displayValue;
+                  final Map<String, dynamic> decoded = jsonDecode(value!);
+                  await viewModel.deviceAuth(code: decoded['code']);
+                  if (viewModel.error == false) {
+                    AppNavigation.goHome(context);
+                  }
+                };
+              },
+            );
+          },
+        );
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

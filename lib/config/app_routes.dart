@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 abstract class AppRoutes {
   AppRoutes._();
@@ -36,7 +37,7 @@ abstract class AppNavigation{
   static void pushCompletion(BuildContext context) => context.push(AppRoutes.completion);
   static void pushFailure(BuildContext context) => context.push(AppRoutes.failure);
 
-  static void pushQR(BuildContext context) => context.push(AppRoutes.qr);
+  static pushQR(BuildContext context) => context.push<BarcodeCapture>(AppRoutes.qr);
 
   static void pop(BuildContext context) => context.pop();
 }

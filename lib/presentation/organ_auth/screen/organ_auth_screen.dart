@@ -34,7 +34,7 @@ class OrganAuthScreen extends StatelessWidget {
                       indent: 29.h,
                       endIndent: 29.h,
                     ),
-                    const QrLogin(),
+                    QrLogin(),
                   ],
                 ),
               ),
