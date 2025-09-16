@@ -16,6 +16,8 @@ abstract class AppRoutes {
 
   static const String completion = '/completion';
   static const String failure= '/failure';
+
+  static const String qr = '/qr';
 }
 
 abstract class AppNavigation{
@@ -34,5 +36,13 @@ abstract class AppNavigation{
   static void pushCompletion(BuildContext context) => context.push(AppRoutes.completion);
   static void pushFailure(BuildContext context) => context.push(AppRoutes.failure);
 
+  static void pushQR(BuildContext context) => context.push(AppRoutes.qr);
+
   static void pop(BuildContext context) => context.pop();
+}
+
+abstract class RouteParams{
+  RouteParams._();
+
+  
 }
