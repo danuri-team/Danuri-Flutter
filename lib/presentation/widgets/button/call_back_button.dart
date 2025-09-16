@@ -3,13 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CallBackButton extends StatelessWidget {
-  const CallBackButton({super.key});
+  const CallBackButton({
+    super.key,
+    this.callBackButtonOnTap,
+  });
+
+  final void Function()? callBackButtonOnTap;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => AppNavigation.pop(context),
-      icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+      onPressed: () {
+        AppNavigation.pop(context);
+        callBackButtonOnTap?.call();
+      },
+      icon: SvgPicture.asset('assets/icons/chevron-left.svg'),
     );
   }
 }

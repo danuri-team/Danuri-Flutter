@@ -1,9 +1,8 @@
-import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
+import 'package:danuri_flutter/presentation/widgets/button/call_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTopBar extends StatelessWidget {
   const CustomTopBar({
@@ -32,13 +31,7 @@ class CustomTopBar extends StatelessWidget {
             needCallBackButton
                 ? Column(
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          AppNavigation.pop(context);
-                          callBackButtonOnTap?.call();
-                        },
-                        icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-                      ),
+                      CallBackButton(callBackButtonOnTap: callBackButtonOnTap),
                       SizedBox(height: 50.h),
                     ],
                   )
