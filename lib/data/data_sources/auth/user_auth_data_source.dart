@@ -4,6 +4,7 @@ import 'package:danuri_flutter/data/models/auth/common/response/tokens_response.
 import 'package:danuri_flutter/data/models/auth/common/request/auth_code_login_request.dart';
 import 'package:danuri_flutter/data/models/auth/common/request/phone_request.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
+import 'package:danuri_flutter/data/models/enum/token_type.dart';
 import 'package:dio/dio.dart';
 
 class UserAuthDataSource extends DataSource {
@@ -35,7 +36,7 @@ class UserAuthDataSource extends DataSource {
         headers: {'Authorization': 'Bearer ${await deviceToken}'},
       ),
     );
-    await TokenStorage().setToken(response.data, 'user');
+    await TokenStorage().setToken(response.data, TokenType.user);
     return TokensResponse.fromJson(response.data);
   }
 }
