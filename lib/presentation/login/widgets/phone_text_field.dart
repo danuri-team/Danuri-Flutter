@@ -33,6 +33,7 @@ class _PhoneTextFieldState extends ConsumerState<PhoneTextField> {
             ref.read(phoneNumberProvider.notifier).update(
                   (state) => _phoneNumberController.text,
                 );
+        },
         onFieldSubmitted: (value) {
           ref.read(phoneNumberProvider.notifier).update(
                 (state) => _phoneNumberController.text,
