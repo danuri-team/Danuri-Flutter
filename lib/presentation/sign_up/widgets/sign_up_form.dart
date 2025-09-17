@@ -1,6 +1,7 @@
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
+import 'package:danuri_flutter/data/models/enum/sign_up_schema_type.dart';
 import 'package:danuri_flutter/data/models/other/form/response/form_response.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class SignUpFormState extends ConsumerState<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(signUpSchemaProvider);
+    final signUpSchema = ref.watch(signUpSchemaProvider);
     final schema = widget.schema;
     return widget.form == null
         ? const CircularProgressIndicator()
@@ -70,83 +71,87 @@ class SignUpFormState extends ConsumerState<SignUpForm> {
                     children: [
                       Text(schema[schemaIndex]['label']),
                       SizedBox(height: 14.h),
-                      schema[schemaIndex]['options'] == null
-                          ? SizedBox(
-                              width: 335.w,
-                              height: 48.h,
-                              child: TextFormField(
-                                onFieldSubmitted: (value) => ref
-                                    .read(signUpSchemaProvider.notifier)
-                                    .addSchema(
-                                      key: schema[schemaIndex]['label'],
-                                      value: controller.text.isEmpty
-                                          ? null
-                                          : controller.text,
-                                    ),
-                                controller: controller,
-                                onTapOutside: (event) {
-                                  FocusManager.instance.primaryFocus?.unfocus();
-                                  ref
-                                      .read(signUpSchemaProvider.notifier)
-                                      .addSchema(
-                                        key: schema[schemaIndex]['label'],
-                                        value:
-                                            controller.text.isEmpty ? null : controller.text,
-                                      );
-                                },
-                                decoration: InputDecoration(
-                                  hintText: schema[schemaIndex]['placeHolder'],
-                                  hintStyle: DanuriText.body1Normal
-                                      .copyWith(color: DanuriColor.label2),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: const BorderSide(
-                                      width: 1,
-                                      color: DanuriColor.line2,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: const BorderSide(
-                                      width: 2,
-                                      color: DanuriColor.primary1,
-                                    ),
-                                  ),
+                      if (schema[schemaIndex]['type'] ==
+                          SignUpSchemaType.INPUT.name)
+                        SizedBox(
+                          width: 335.w,
+                          height: 48.h,
+                          child: TextFormField(
+                            onFieldSubmitted: (value) => ref
+                                .read(signUpSchemaProvider.notifier)
+                                .addSchema(
+                                  key: schema[schemaIndex]['label'],
+                                  value: controller.text.isEmpty
+                                      ? null
+                                      : controller.text,
+                                ),
+                            controller: controller,
+                            onTapOutside: (event) {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              ref.read(signUpSchemaProvider.notifier).addSchema(
+                                    key: schema[schemaIndex]['label'],
+                                    value: controller.text.isEmpty
+                                        ? null
+                                        : controller.text,
+                                  );
+                            },
+                            decoration: InputDecoration(
+                              hintText: schema[schemaIndex]['placeHolder'],
+                              hintStyle: DanuriText.body1Normal
+                                  .copyWith(color: DanuriColor.label2),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: DanuriColor.line2,
                                 ),
                               ),
-                            )
-                          : SizedBox(
-                              height: 48.h,
-                              child: ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: List.castFrom(
-                                        schema[schemaIndex]['options'])
-                                    .length,
-                                separatorBuilder: (context, index) =>
-                                    SizedBox(width: 12.w),
-                                itemBuilder: (context, optionsIndex) {
-                                  final name = List.castFrom(
-                                      schema[schemaIndex]['options']);
-                                  return SelectionBox(
-                                    isSelected:
-                                        state.containsValue(name[optionsIndex]),
-                                    name: name[optionsIndex],
-                                    onTap: () {
-                                      if (state.containsValue(
-                                              name[optionsIndex]) ==
-                                          false) {
-                                        ref
-                                            .read(signUpSchemaProvider.notifier)
-                                            .addSchema(
-                                              key: schema[schemaIndex]['label'],
-                                              value: '${name[optionsIndex]}',
-                                            );
-                                      }
-                                    },
-                                  );
-                                },
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                  width: 2,
+                                  color: DanuriColor.primary1,
+                                ),
                               ),
                             ),
+                          ),
+                        )
+                      else if (schema[schemaIndex]['type'] ==
+                          SignUpSchemaType.SELECT.name)
+                        SizedBox(
+                          height: 48.h,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount:
+                                List.castFrom(schema[schemaIndex]['options'])
+                                    .length,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(width: 12.w),
+                            itemBuilder: (context, optionsIndex) {
+                              return SelectionBox(
+                                isSelected: signUpSchema.containsValue(
+                                    schema[schemaIndex]['options'][optionsIndex]
+                                        ['option']),
+                                name: schema[schemaIndex]['options']
+                                    [optionsIndex]['option'],
+                                onTap: () {
+                                  if (signUpSchema.containsValue(
+                                          schema[schemaIndex]['options']
+                                              [optionsIndex]['option']) ==
+                                      false) {
+                                    ref
+                                        .read(signUpSchemaProvider.notifier)
+                                        .addSchema(
+                                          key: schema[schemaIndex]['label'],
+                                          value:
+                                              '${schema[schemaIndex]['options'][optionsIndex]['option']}',
+                                        );
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                        ),
                     ],
                   );
                 },

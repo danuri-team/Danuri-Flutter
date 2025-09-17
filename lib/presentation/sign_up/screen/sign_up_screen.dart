@@ -34,7 +34,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   void initState() {
     super.initState();
     getForm();
-    setState(() {});
   }
 
   Future<void> getForm() async {
@@ -109,8 +108,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         ? () {
                             Throttle.run(
                               () async {
-                                final String phone =
-                                    ref.read(phoneNumberProvider.notifier).state!;
+                                final String phone = ref
+                                    .read(phoneNumberProvider.notifier)
+                                    .state!;
 
                                 await Future.wait([
                                   signUp(phone: phone),

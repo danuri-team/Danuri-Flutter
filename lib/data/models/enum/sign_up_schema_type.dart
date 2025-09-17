@@ -1,0 +1,4 @@
+enum SignUpSchemaType {
+  INPUT,
+  SELECT,
+}
