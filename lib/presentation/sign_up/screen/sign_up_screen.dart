@@ -7,7 +7,6 @@ import 'package:danuri_flutter/data/models/other/form/response/form_response.dar
 import 'package:danuri_flutter/data/view_models/form_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/sign_up/widgets/sign_up_form.dart';
-import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +90,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 title: '처음 이용하면 정보 기입이 필요해요',
                 subTitle: '간단하게 입력해볼까요?',
                 needCallBackButton: true,
-                rightWidget: HelpMeButton(),
+                rightWidget: SizedBox.shrink(),
               ),
               SizedBox(height: 44.h),
               Padding(

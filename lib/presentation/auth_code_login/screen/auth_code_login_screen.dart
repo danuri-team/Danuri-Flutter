@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
@@ -9,7 +10,6 @@ import 'package:danuri_flutter/data/models/enum/flow_type.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
-import 'package:danuri_flutter/presentation/widgets/button/help_me_button.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
@@ -71,9 +71,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
         if (_itemViewModel.error == true) {
           _itemViewModel.reset();
-          context.push('/failure');
+            AppNavigation.pushFailure(context);
         } else {
-          context.push('/completion');
+            AppNavigation.pushCompletion(context);
         }
       },
     );
@@ -89,9 +89,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
         if (_spaceViewModel.error == true) {
           _spaceViewModel.reset();
-          context.push('/failure');
+          AppNavigation.pushFailure(context);
         } else {
-          context.push('/completion');
+          AppNavigation.pushCompletion(context);
         }
       },
     );
@@ -108,9 +108,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
         }
         if (_spaceViewModel.error == true) {
           _spaceViewModel.reset();
-          context.push('/failure');
+          AppNavigation.pushFailure(context);
         } else {
-          context.push('/completion');
+          AppNavigation.pushCompletion(context);
         }
       },
     );
@@ -128,7 +128,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                 title: '입력하신 번호로 인증번호를 보냈어요 ',
                 subTitle: '숫자로 구성된 6자리 번호를 입력해주세요',
                 needCallBackButton: true,
-                rightWidget: HelpMeButton(),
+                rightWidget: SizedBox.shrink(),
               ),
               SizedBox(height: 131.h),
               SizedBox(
@@ -199,6 +199,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                     await _registerUsedSpace();
                                     break;
                                 }
+
                                 ref.read(flowProvider.notifier).update(
                                       (state) => null,
                                     );
