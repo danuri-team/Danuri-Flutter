@@ -36,10 +36,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   void initState() {
     super.initState();
     final flow = ref.read(flowProvider.notifier).state;
-    switch (flow) {
-      case FlowType.REGISTER_USED_SPACE_FLOW:
-        break;
-      default:
+    if(flow == FlowType.ITEM_RENTAL_FLOW || flow == FlowType.ITEM_RENTAL_FLOW){
         _spaceViewModel.getUsageSpace();
     }
   }
@@ -51,9 +48,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   }
 
   Future<void> _authCodeLogin() async {
-    final phoneNumber = ref.read(phoneNumberProvider.notifier).state;
+    final phone = ref.read(phoneNumberProvider.notifier).state;
     await _userAuthViewModel.authCodeLogin(
-      phoneNumber: phoneNumber!,
+      phone: phone!,
       authCode: _authCodeController.text,
     );
   }

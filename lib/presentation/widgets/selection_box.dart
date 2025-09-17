@@ -9,7 +9,7 @@ class SelectionBox extends StatelessWidget {
     required this.isSelected,
     required this.name,
     required this.onTap,
-    required this.available,
+    this.available = true,
   });
 
   final bool isSelected;

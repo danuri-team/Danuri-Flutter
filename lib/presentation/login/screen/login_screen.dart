@@ -52,7 +52,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   if (phone?.length == 13) {
                     Throttle.run(
                       () async {
-                        await _viewModel.userLogin(phoneNumber: phone!).then(
+                        await _viewModel.userLogin(phone: phone!).then(
                           (_) {
                             if (_viewModel.error == true) {
                               if (context.mounted) {

@@ -2,8 +2,6 @@ import 'package:danuri_flutter/data/data_sources/auth/user_auth_data_source.dart
 import 'package:danuri_flutter/data/models/auth/common/request/auth_code_login_request.dart';
 import 'package:danuri_flutter/data/models/auth/common/request/phone_request.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
-import 'package:danuri_flutter/data/models/enum/age_type.dart';
-import 'package:danuri_flutter/data/models/enum/sex_type.dart';
 import 'package:dio/dio.dart';
 
 class UserAuthViewModel {
@@ -18,19 +16,13 @@ class UserAuthViewModel {
 
   Future<void> signUp({
     required String companyId,
-    required String userName,
-    required String phoneNumber,
-    required SexType sex,
-    required AgeType age,
+    required String phone,
   }) async {
     try {
       await _dataSource.signUp(
         SignUpRequest(
           companyId: companyId,
-          name: userName,
-          phone: phoneNumber,
-          sex: sex.name,
-          age: age.name,
+          phone: phone,
         ),
       );
       _error = false;
@@ -39,10 +31,10 @@ class UserAuthViewModel {
     }
   }
 
-  Future<void> userLogin({required String phoneNumber}) async {
+  Future<void> userLogin({required String phone}) async {
     try {
       await _dataSource.login(
-        PhoneRequest(phone: phoneNumber),
+        PhoneRequest(phone: phone),
       );
       _error = false;
     } on DioException catch (_) {
@@ -51,11 +43,11 @@ class UserAuthViewModel {
   }
 
   Future<void> authCodeLogin(
-      {required String phoneNumber, required String authCode}) async {
+      {required String phone, required String authCode}) async {
     try {
       await _dataSource.authCodeLogin(
         AuthCodeLoginRequest(
-          phone: phoneNumber,
+          phone: phone,
           authCode: authCode,
         ),
       );

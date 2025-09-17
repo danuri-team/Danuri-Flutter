@@ -29,6 +29,10 @@ class _PhoneTextFieldState extends ConsumerState<PhoneTextField> {
       width: 500.w,
       height: 64.h,
       child: TextFormField(
+        onChanged: (value) {
+            ref.read(phoneNumberProvider.notifier).update(
+                  (state) => _phoneNumberController.text,
+                );
         onFieldSubmitted: (value) {
           ref.read(phoneNumberProvider.notifier).update(
                 (state) => _phoneNumberController.text,
