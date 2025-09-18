@@ -62,4 +62,8 @@ class TokenStorage {
 
   Future<String?> getUserRefreshTokenExpiredAt() =>
       storage.read(key: '${TokenType.user}RefreshTokenExpiredAt');
+
+  Future<void> resetStorage() async{
+    await storage.deleteAll();
+  }
 }
