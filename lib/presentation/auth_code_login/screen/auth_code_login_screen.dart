@@ -35,7 +35,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   void initState() {
     super.initState();
     final flow = ref.read(flowProvider.notifier).state;
-    if(flow == FlowType.ITEM_RENTAL_FLOW || flow == FlowType.ITEM_RENTAL_FLOW){
+    if(flow == FlowType.LEAVING_SPACE_FLOW){
         _spaceViewModel.getUsageSpace();
     }
   }
