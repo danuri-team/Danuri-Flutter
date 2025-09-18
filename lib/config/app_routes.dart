@@ -18,7 +18,7 @@ abstract class AppRoutes {
   static const String completion = '/completion';
   static const String failure= '/failure';
 
-  static const String qr = '/qr';
+  static String qr(CameraFacing cameraFacing) => '/qr/${cameraFacing.name}';
 }
 
 abstract class AppNavigation{
@@ -37,13 +37,11 @@ abstract class AppNavigation{
   static void pushCompletion(BuildContext context) => context.push(AppRoutes.completion);
   static void pushFailure(BuildContext context) => context.push(AppRoutes.failure);
 
-  static pushQR(BuildContext context) => context.push<BarcodeCapture>(AppRoutes.qr);
-
   static void pop(BuildContext context) => context.pop();
 }
 
 abstract class RouteParams{
   RouteParams._();
 
-  
+  static const String cameraFacing = 'cameraFacing';
 }

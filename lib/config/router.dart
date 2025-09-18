@@ -37,7 +37,7 @@ GoRouter router(String initialLocation) {
       GoRoute(
         name: 'item-rental',
         path: AppRoutes.itemRental,
-        builder: (context, state) => const ItemRentalScreen(),
+        builder: (context, state) => ItemRentalScreen(),
       ),
       GoRoute(
         name: 'login',
@@ -66,8 +66,8 @@ GoRouter router(String initialLocation) {
       ),
       GoRoute(
         name: 'qr',
-        path: AppRoutes.qr,
-        builder: (context, state) => QrScreen(),
+        path: '/qr/:${RouteParams.cameraFacing}',
+        builder: (context, state) => QrScreen(cameraFacing: state.pathParameters[RouteParams.cameraFacing]!),
       ),
     ],
   );
