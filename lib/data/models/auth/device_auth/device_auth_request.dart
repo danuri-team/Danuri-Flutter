@@ -4,11 +4,10 @@ part 'device_auth_request.g.dart';
 
 @JsonSerializable()
 class DeviceAuthRequest {
-  @JsonKey(name: 'device_id')
-  final String deviceId;
+  final String code;
 
   DeviceAuthRequest({
-    required this.deviceId,
+    required this.code,
   });
 
   factory DeviceAuthRequest.fromJson(Map<String, dynamic> json) =>

@@ -1,6 +1,5 @@
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
-import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
@@ -52,30 +51,6 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     await _userAuthViewModel.authCodeLogin(
       phone: phone!,
       authCode: _authCodeController.text,
-    );
-  }
-
-  Future<void> _itemRental() async {
-    final itemId = ref.read(itemIdProvider.notifier).state;
-    await _itemViewModel
-        .itemRental(
-            context: context,
-            itemId: itemId!,
-            quantity: 1,
-            usageId: _spaceViewModel.usageId!)
-        .then(
-      (_) {
-        if (!mounted) {
-          return;
-        }
-
-        if (_itemViewModel.error == true) {
-          _itemViewModel.reset();
-            AppNavigation.pushFailure(context);
-        } else {
-            AppNavigation.pushCompletion(context);
-        }
-      },
     );
   }
 
@@ -140,7 +115,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                   onTapOutside: (event) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
                   onChanged: (value) {
-                    if (value.length == 6) {
+                    if (value.length == 6 || value.length == 5) {
                       setState(() {});
                     }
                   },
@@ -181,6 +156,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                             if (!context.mounted) {
                               return;
                             }
+
                             if (_userAuthViewModel.error == true) {
                               context.push('/failure');
                               _userAuthViewModel.reset();
@@ -191,9 +167,6 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                 switch (flow) {
                                   case FlowType.LEAVING_SPACE_FLOW:
                                     await _leavingSpace();
-                                    break;
-                                  case FlowType.ITEM_RENTAL_FLOW:
-                                    await _itemRental();
                                     break;
                                   case FlowType.REGISTER_USED_SPACE_FLOW:
                                     await _registerUsedSpace();

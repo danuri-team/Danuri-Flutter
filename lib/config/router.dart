@@ -2,6 +2,7 @@ import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/presentation/failure/screen/failure_screen.dart';
 import 'package:danuri_flutter/presentation/completion/screen/completion_screen.dart';
 import 'package:danuri_flutter/presentation/item_rental/screen/item_rental_screen.dart';
+import 'package:danuri_flutter/presentation/qr/qr_screen.dart';
 import 'package:danuri_flutter/presentation/register_used_space/screen/register_used_space.dart';
 import 'package:danuri_flutter/presentation/auth_code_login/screen/auth_code_login_screen.dart';
 import 'package:danuri_flutter/presentation/sign_up/screen/sign_up_screen.dart';
@@ -36,7 +37,7 @@ GoRouter router(String initialLocation) {
       GoRoute(
         name: 'item-rental',
         path: AppRoutes.itemRental,
-        builder: (context, state) => const ItemRentalScreen(),
+        builder: (context, state) => ItemRentalScreen(),
       ),
       GoRoute(
         name: 'login',
@@ -62,6 +63,11 @@ GoRouter router(String initialLocation) {
         name: 'failure',
         path: AppRoutes.failure,
         builder: (context, state) => const FailureScreen(),
+      ),
+      GoRoute(
+        name: 'qr',
+        path: '/qr/:${RouteParams.cameraFacing}',
+        builder: (context, state) => QrScreen(cameraFacing: state.pathParameters[RouteParams.cameraFacing]!),
       ),
     ],
   );

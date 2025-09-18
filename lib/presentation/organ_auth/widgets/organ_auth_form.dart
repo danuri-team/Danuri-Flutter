@@ -4,6 +4,7 @@ import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrganAuthForm extends StatefulWidget {
@@ -21,7 +22,12 @@ class _OrganAuthFormState extends State<OrganAuthForm> {
   void initState() {
     super.initState();
     _deviceIdController.addListener(
-      () => setState(() {}),
+      () {
+        if (_deviceIdController.text.length == 5 ||
+            _deviceIdController.text.length == 6) {
+          setState(() {});
+        }
+      },
     );
   }
 
@@ -49,8 +55,11 @@ class _OrganAuthFormState extends State<OrganAuthForm> {
             controller: _deviceIdController,
             onTapOutside: (event) =>
                 FocusManager.instance.primaryFocus?.unfocus(),
+            maxLength: 6,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintText: '8e04a571-4956-444b-9845-8a923a47c495',
+              hintText: '000000',
+              counterText: '',
               hintStyle:
                   DanuriText.body1Normal.copyWith(color: DanuriColor.label6),
               enabledBorder: OutlineInputBorder(
@@ -74,14 +83,14 @@ class _OrganAuthFormState extends State<OrganAuthForm> {
         NextButton(
           centerText: '연결하기',
           onTap: () async {
-            if (_deviceIdController.text.isNotEmpty) {
-              await _viewModel.deviceAuth(deviceId: _deviceIdController.text);
+            if (_deviceIdController.text.length == 6) {
+              await _viewModel.deviceAuth(code: _deviceIdController.text);
               if (context.mounted) {
                 AppNavigation.goHome(context);
               }
             }
           },
-          isActivate: _deviceIdController.text.isNotEmpty,
+          isActivate: _deviceIdController.text.length == 6,
           organAuthVersion: true,
         ),
       ],

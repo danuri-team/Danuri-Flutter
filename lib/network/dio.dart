@@ -1,6 +1,7 @@
 import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/data_sources/auth/common_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/common/request/refresh_token_request.dart';
+import 'package:danuri_flutter/data/models/enum/token_type.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -46,14 +47,14 @@ class _AppDio with DioMixin implements AppDio {
                       await tokenStorage.getAdminRefreshToken().then(
                             (refreshToken) => CommonDataSource().refreshToken(
                               RefreshTokenRequest(refreshToken: refreshToken!),
-                              'admin'
+                              TokenType.admin,
                             ),
                           );
                     } else if (nowTime > int.parse(value[1]!)) {
                       await tokenStorage.getDeviceRefreshToken().then(
                             (refreshToken) => CommonDataSource().refreshToken(
                               RefreshTokenRequest(refreshToken: refreshToken!),
-                              'device'
+                              TokenType.device,
                             ),
                           );
                     }

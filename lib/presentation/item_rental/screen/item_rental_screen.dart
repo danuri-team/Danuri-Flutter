@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:danuri_flutter/config/app_routes.dart';
-import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
-import 'package:danuri_flutter/data/models/enum/flow_type.dart';
+import 'package:danuri_flutter/core/provider/on_detect_provider.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
+import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/presentation/item_rental/widgets/select_item.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
@@ -9,9 +12,13 @@ import 'package:danuri_flutter/presentation/widgets/available_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ItemRentalScreen extends ConsumerWidget {
-  const ItemRentalScreen({super.key});
+  ItemRentalScreen({super.key});
+
+  final ItemViewModel viewModel = ItemViewModel();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,16 +41,41 @@ class ItemRentalScreen extends ConsumerWidget {
               ),
             ),
             SizedBox(height: 103.h),
-            SelectItem(),
+            const SelectItem(),
             const Spacer(),
             NextButton(
               centerText: '다음',
               onTap: () {
                 if (state != null) {
-                  ref.read(flowProvider.notifier).update(
-                        (state) => FlowType.ITEM_RENTAL_FLOW,
-                      );
-                      AppNavigation.pushLogin(context);
+                  Throttle.run(
+                    () async {
+                      final capture = await context.push<BarcodeCapture>(AppRoutes.qr(CameraFacing.front));
+                      ref.read(onDetectProvider.notifier).update((state) {
+                        return () async {
+                          final value = capture?.barcodes[0].displayValue;
+                          final Map<String, dynamic> decoded =
+                              jsonDecode(value!);
+
+                          final itemId = ref.read(itemIdProvider);
+
+                          await viewModel.itemRental(
+                            context: context,
+                            itemId: itemId!,
+                            quantity: 1,
+                            usageId: decoded['usageId'],
+                          );
+                          if (viewModel.error == false) {
+                            ref
+                                .read(onDetectProvider.notifier)
+                                .update((state) => null);
+                            AppNavigation.pushCompletion(context);
+                          } else {
+                            AppNavigation.pushFailure(context);
+                          }
+                        };
+                      });
+                    },
+                  );
                 }
               },
               isActivate: state != null,

@@ -8,10 +8,10 @@ part of 'device_auth_request.dart';
 
 DeviceAuthRequest _$DeviceAuthRequestFromJson(Map<String, dynamic> json) =>
     DeviceAuthRequest(
-      deviceId: json['device_id'] as String,
+      code: json['code'] as String,
     );
 
 Map<String, dynamic> _$DeviceAuthRequestToJson(DeviceAuthRequest instance) =>
     <String, dynamic>{
-      'device_id': instance.deviceId,
+      'code': instance.code,
     };
