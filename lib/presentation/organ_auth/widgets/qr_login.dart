@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrLogin extends ConsumerWidget {
   QrLogin({super.key});
@@ -21,7 +23,7 @@ class QrLogin extends ConsumerWidget {
       onTap: () {
         Throttle.run(
           () async {
-            final capture = await AppNavigation.pushQR(context);
+            final capture = await context.push<BarcodeCapture>(AppRoutes.qr(CameraFacing.back));
             ref.read(onDetectProvider.notifier).update(
               (state) {
                 return () async {
@@ -29,6 +31,7 @@ class QrLogin extends ConsumerWidget {
                   final Map<String, dynamic> decoded = jsonDecode(value!);
                   await viewModel.deviceAuth(code: decoded['code']);
                   if (viewModel.error == false) {
+                    ref.read(onDetectProvider.notifier).update((state) => null);
                     AppNavigation.goHome(context);
                   }
                 };

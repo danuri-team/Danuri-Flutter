@@ -11,11 +11,28 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrScreen extends ConsumerWidget {
-  const QrScreen({super.key});
+  const QrScreen({
+    super.key,
+    required this.cameraFacing,
+  });
+
+  final String cameraFacing;
+
+  checkFacing(String cameraFacing) {
+    switch (cameraFacing) {
+      case 'back':
+        return CameraFacing.back;
+      case 'front':
+        return CameraFacing.front;
+      default:
+        return CameraFacing.front;
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final onDetect = ref.watch(onDetectProvider);
+    final facing = checkFacing(cameraFacing);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -26,12 +43,12 @@ class QrScreen extends ConsumerWidget {
                   Throttle.run(
                     () async {
                       context.pop(capture);
-                      onDetect();
+                      onDetect!();
                     },
                   );
                 },
                 controller: MobileScannerController(
-                  facing: CameraFacing.back,
+                  facing: facing,
                   formats: [BarcodeFormat.qrCode],
                 ),
               ),

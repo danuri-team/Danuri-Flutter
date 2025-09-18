@@ -2,8 +2,7 @@ import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/config/router.dart';
 import 'package:danuri_flutter/core/storage/token_storage.dart';
-import 'package:danuri_flutter/data/data_sources/auth/admin_auth_data_source.dart';
-import 'package:danuri_flutter/data/models/auth/admin_auth/request/admin_login_request.dart';
+import 'package:danuri_flutter/data/view_models/admin_auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -15,17 +14,25 @@ void main() async {
   await dotenv.load(fileName: '.env');
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   bool firstRun = false;
-  final deviceToken = await TokenStorage().getDeviceAccessToken();
+  String? adminToken;
+  String? deviceToken;
+  await Future.wait([
+    TokenStorage().getAdminAccessToken(),
+    TokenStorage().getDeviceAccessToken()
+  ]).then(
+    (value) {
+      adminToken = value[0];
+      deviceToken = value[1];
+    },
+  );
 
-  if (deviceToken == null) {
-    await AdminAuthDataSource().adminLogin(
-      AdminLoginRequest(
-        email: 'admin@example.com',
-        password: dotenv.env['ADMIN_PASSWORD']!,
-      ),
-    );
-    firstRun = true;
+  if (adminToken == null) {
+    final viewModel = AdminAuthViewModel();
+    await viewModel.adminLogin();
   }
+
+  if (deviceToken == null) firstRun = true;
+
   runApp(MyApp(firstRun: firstRun));
 }
 
@@ -44,14 +51,14 @@ class MyApp extends StatelessWidget {
         designSize: const Size(1280, 800),
         builder: (context, child) {
           return MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                scaffoldBackgroundColor: DanuriColor.background1,
-                fontFamily: 'Pretendard',
-              ),
-              routerConfig: router(
-                firstRun ? AppRoutes.organAuth : AppRoutes.home,
-              ),
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: DanuriColor.background1,
+              fontFamily: 'Pretendard',
+            ),
+            routerConfig: router(
+              firstRun ? AppRoutes.organAuth : AppRoutes.home,
+            ),
           );
         },
       ),
