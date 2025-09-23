@@ -14,24 +14,13 @@ void main() async {
   await dotenv.load(fileName: '.env');
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   bool firstRun = false;
-  String? adminToken;
-  String? deviceToken;
-  await Future.wait([
-    TokenStorage().getAdminAccessToken(),
-    TokenStorage().getDeviceAccessToken()
-  ]).then(
-    (value) {
-      adminToken = value[0];
-      deviceToken = value[1];
-    },
-  );
 
-  if (adminToken == null) {
-    final viewModel = AdminAuthViewModel();
-    await viewModel.adminLogin();
-  }
+  // if (adminToken == null) {
+  final viewModel = AdminAuthViewModel();
+  await viewModel.adminLogin();
+  // }
 
-  if (deviceToken == null) firstRun = true;
+  // if (deviceToken == null) firstRun = true;
 
   runApp(MyApp(firstRun: firstRun));
 }
@@ -57,7 +46,9 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Pretendard',
             ),
             routerConfig: router(
-              firstRun ? AppRoutes.organAuth : AppRoutes.home,
+              // firstRun ? AppRoutes.organAuth : AppRoutes.home,
+              AppRoutes.organAuth
+              // AppRoutes.home,
             ),
           );
         },
