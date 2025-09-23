@@ -30,14 +30,18 @@ class _PhoneTextFieldState extends ConsumerState<PhoneTextField> {
       height: 64.h,
       child: TextFormField(
         onChanged: (value) {
+          if (value.length == 12 || value.length == 13) {
             ref.read(phoneNumberProvider.notifier).update(
                   (state) => _phoneNumberController.text,
                 );
+          }
         },
         onFieldSubmitted: (value) {
-          ref.read(phoneNumberProvider.notifier).update(
-                (state) => _phoneNumberController.text,
-              );
+          if (value.length == 12 || value.length == 13) {
+            ref.read(phoneNumberProvider.notifier).update(
+                  (state) => _phoneNumberController.text,
+                );
+          }
         },
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,

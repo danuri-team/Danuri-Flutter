@@ -48,6 +48,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
   Future<void> _authCodeLogin() async {
     final phone = ref.read(phoneNumberProvider.notifier).state;
+
     await _userAuthViewModel.authCodeLogin(
       phone: phone!,
       authCode: _authCodeController.text,
@@ -89,6 +90,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
         }
       },
     );
+    ref.read(spaceIdProvider.notifier).update((state) => null);
   }
 
   @override
@@ -172,7 +174,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                     await _registerUsedSpace();
                                     break;
                                 }
-
+                                ref
+                                    .read(phoneNumberProvider.notifier)
+                                    .update((state) => null);
                                 ref.read(flowProvider.notifier).update(
                                       (state) => null,
                                     );

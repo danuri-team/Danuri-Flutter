@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/on_detect_provider.dart';
@@ -39,6 +38,8 @@ class ItemRentalScreen extends ConsumerWidget {
                   const AvailableCategory(),
                 ],
               ),
+              callBackButtonOnTap: () =>
+                  ref.read(itemIdProvider.notifier).update((state) => null),
             ),
             SizedBox(height: 103.h),
             const SelectItem(),
@@ -49,14 +50,16 @@ class ItemRentalScreen extends ConsumerWidget {
                 if (state != null) {
                   Throttle.run(
                     () async {
-                      final capture = await context.push<BarcodeCapture>(AppRoutes.qr(CameraFacing.front));
+                      final capture = await context.push<BarcodeCapture>(
+                          AppRoutes.qr(CameraFacing.front));
                       ref.read(onDetectProvider.notifier).update((state) {
                         return () async {
                           final value = capture?.barcodes[0].displayValue;
                           final Map<String, dynamic> decoded =
                               jsonDecode(value!);
 
-                          final itemId = ref.read(itemIdProvider);
+                          final itemId =
+                              ref.read(itemIdProvider.notifier).state;
 
                           await viewModel.itemRental(
                             context: context,
@@ -64,6 +67,10 @@ class ItemRentalScreen extends ConsumerWidget {
                             quantity: 1,
                             usageId: decoded['usageId'],
                           );
+
+                          ref.read(itemIdProvider.notifier).update(
+                                (state) => null,
+                              );
                           if (viewModel.error == false) {
                             ref
                                 .read(onDetectProvider.notifier)
@@ -74,6 +81,7 @@ class ItemRentalScreen extends ConsumerWidget {
                           }
                         };
                       });
+                      ref.read(itemIdProvider.notifier).update((state) => null);
                     },
                   );
                 }
