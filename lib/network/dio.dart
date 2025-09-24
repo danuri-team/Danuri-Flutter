@@ -5,6 +5,7 @@ import 'package:danuri_flutter/data/models/enum/token_type.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 abstract class AppDio {
   AppDio._internal();
@@ -32,6 +33,7 @@ class _AppDio with DioMixin implements AppDio {
       [
         InterceptorsWrapper(
           onError: (error, handler) async {
+            Sentry.captureException(error);
               if (error.response?.statusCode == 403) {
                 final tokenStorage = TokenStorage();
 
