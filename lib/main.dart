@@ -17,7 +17,6 @@ void main() async {
   final viewModel = AdminAuthViewModel();
   await viewModel.adminLogin();
 
-  // SentryWidgetsFlutterBinding.ensureInitialized();
   await SentryFlutter.init(
     
     (options) {
