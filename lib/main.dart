@@ -17,11 +17,11 @@ void main() async {
   final viewModel = AdminAuthViewModel();
   await viewModel.adminLogin();
 
+  // SentryWidgetsFlutterBinding.ensureInitialized();
   await SentryFlutter.init(
     
     (options) {
-      options.dsn =
-          'https://9b8dc65a4e46ca2f692708c053b096a4@o4508238543060992.ingest.us.sentry.io/4510067909787648';
+      options.dsn = dotenv.env['DSN_URL'];
 
       options.sendDefaultPii = true;
 
