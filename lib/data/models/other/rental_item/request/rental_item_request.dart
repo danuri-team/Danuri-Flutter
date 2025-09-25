@@ -7,10 +7,13 @@ class RentalItemRequest {
   @JsonKey(name: 'item_id')
   final String itemId;
   final int quantity;
+  @JsonKey(name: 'usage_id')
+  final String usageId;
 
   RentalItemRequest({
     required this.itemId,
     required this.quantity,
+    required this.usageId,
   });
 
   factory RentalItemRequest.fromJson(Map<String, dynamic> json) =>

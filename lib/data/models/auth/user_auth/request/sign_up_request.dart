@@ -6,17 +6,11 @@ part 'sign_up_request.g.dart';
 class SignUpRequest {
   @JsonKey(name: 'company_id')
   final String companyId;
-  final String name;
   final String phone;
-  final String sex;
-  final String age;
 
   SignUpRequest({
     required this.companyId,
-    required this.name,
     required this.phone,
-    required this.sex,
-    required this.age,
   });
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) =>

@@ -3,7 +3,7 @@ import 'package:danuri_flutter/data/models/other/health_check/status_response.da
 
 class HealthCheckDataSource extends DataSource{
   Future<StatusResponse> getStatus() async {
-    final response = await dio.get('$baseUrl/health');
+    final response = await dio.get('/health');
     return StatusResponse.fromJson(response.data);
   }
 }

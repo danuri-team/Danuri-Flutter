@@ -1,0 +1,4 @@
+enum FlowType {
+  LEAVING_SPACE_FLOW,
+  REGISTER_USED_SPACE_FLOW,
+}

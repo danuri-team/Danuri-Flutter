@@ -2,20 +2,17 @@ import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/data_sources/data_source.dart';
 import 'package:danuri_flutter/data/models/auth/common/response/tokens_response.dart';
 import 'package:danuri_flutter/data/models/auth/device_auth/device_auth_request.dart';
-import 'package:dio/dio.dart';
+import 'package:danuri_flutter/data/models/enum/token_type.dart';
 
 class DeviceAuthDataSource extends DataSource {
   final storage = TokenStorage();
 
   Future<TokensResponse> deviceAuth(DeviceAuthRequest request) async {
     final response = await dio.post(
-      '$baseUrl/auth/device/token',
+      '/auth/device/token',
       data: request.toJson(),
-      options: Options(headers: {
-        'Authorization': 'Bearer ${await adminToken}'
-      }),
     );
-    await TokenStorage().setToken(response.data, 'device');
+    await TokenStorage().setToken(response.data, TokenType.device);
     return TokensResponse.fromJson(response.data);
   }
 }

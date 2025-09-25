@@ -1,32 +1,45 @@
 import 'package:danuri_flutter/data/data_sources/other/item_rental_data_source.dart';
-import 'package:danuri_flutter/data/data_sources/other/space_data_source.dart';
+import 'package:danuri_flutter/data/models/other/common/request/usage_id_request.dart';
 import 'package:danuri_flutter/data/models/other/rental_item/request/rental_item_request.dart';
 import 'package:danuri_flutter/data/models/other/rental_item/response/available_items_response.dart';
-import 'package:danuri_flutter/data/models/other/rental_item/response/rented_item_response.dart';
-import 'package:danuri_flutter/data/models/other/space/response/space_usage_response.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
-class ItemRentalViewModel {
-  final ItemRentalDataSource _itemDataSource = ItemRentalDataSource();
-  final SpaceDataSource _spaceDataSource = SpaceDataSource();
+class ItemViewModel {
+  final _dataSource = ItemRentalDataSource();
 
-  RentedItemResponse? _rentedItem;
-  RentedItemResponse? get rentedItem => _rentedItem;
-
-  List<ItemAvailableRental>? _itemAvailableRental;
-  List<ItemAvailableRental>? get itemAvailableRental => _itemAvailableRental;
-
-  SpaceUsageResponse? _spaceUsage;
-  SpaceUsageResponse? get spaceUsage => _spaceUsage;
+  List<ItemAvailableRental>? _itemAvailableRentalList;
+  List<ItemAvailableRental>? get itemAvailableRentalList =>
+      _itemAvailableRentalList;
 
   bool? _error;
   bool? get error => _error;
 
-  Future<void> itemRental(String usageId, String itemId, int quantity) async {
+  void reset() {
+    _error = false;
+  }
+
+  Future<void> getItemAvailableRental() async {
     try {
-      _rentedItem = await _itemDataSource.itemRental(
-        usageId,
-        RentalItemRequest(itemId: itemId, quantity: quantity),
+      _itemAvailableRentalList = await _dataSource.getItemAvailableRental();
+      _error = false;
+    } on DioException catch (_) {
+      _error = true;
+    }
+  }
+
+  Future<void> itemRental(
+      {required BuildContext context,
+      required String itemId,
+      required int quantity,
+      required String usageId}) async {
+    try {
+      await _dataSource.itemRental(
+        RentalItemRequest(
+          itemId: itemId,
+          quantity: quantity,
+          usageId: usageId,
+        ),
       );
       _error = false;
     } on DioException catch (_) {
@@ -34,18 +47,9 @@ class ItemRentalViewModel {
     }
   }
 
-  Future<void> getItemAvailableRent() async {
+  Future<void> returnItem({required String usageId}) async {
     try {
-      _itemAvailableRental = await _itemDataSource.getItemAvailableRental();
-      _error = false;
-    } on DioException catch (_) {
-      _error = true;
-    }
-  }
-
-  Future<void> getUsageSpace() async {
-    try {
-      _spaceUsage = await _spaceDataSource.getUsageSpace();
+      await _dataSource.returnItem(UsageIdRequest(usageId: usageId));
       _error = false;
     } on DioException catch (_) {
       _error = true;
