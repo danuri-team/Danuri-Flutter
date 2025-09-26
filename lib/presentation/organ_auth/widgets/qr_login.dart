@@ -1,9 +1,9 @@
-import 'dart:convert';
 import 'package:danuri_flutter/config/app_routes.dart';
-import 'package:danuri_flutter/core/provider/on_detect_provider.dart';
+import 'package:danuri_flutter/core/provider/qr_action_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
+import 'package:danuri_flutter/data/models/enum/qr_action_type.dart';
 import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,21 +22,11 @@ class QrLogin extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         Throttle.run(
-          () async {
-            final capture = await context.push<BarcodeCapture>(AppRoutes.qr(CameraFacing.back));
-            ref.read(onDetectProvider.notifier).update(
-              (state) {
-                return () async {
-                  final value = capture?.barcodes[0].displayValue;
-                  final Map<String, dynamic> decoded = jsonDecode(value!);
-                  await viewModel.deviceAuth(code: decoded['code']);
-                  if (viewModel.error == false) {
-                    ref.read(onDetectProvider.notifier).update((state) => null);
-                    AppNavigation.goHome(context);
-                  }
-                };
-              },
-            );
+          () {
+            ref
+                .read(qrActionProvider.notifier)
+                .update((state) => QrActionType.organAuth);
+            context.push<BarcodeCapture>(AppRoutes.qr(CameraFacing.back));
           },
         );
       },

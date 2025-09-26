@@ -3,7 +3,6 @@ import 'package:danuri_flutter/data/models/other/common/request/usage_id_request
 import 'package:danuri_flutter/data/models/other/rental_item/request/rental_item_request.dart';
 import 'package:danuri_flutter/data/models/other/rental_item/response/available_items_response.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class ItemViewModel {
   final _dataSource = ItemRentalDataSource();
@@ -28,11 +27,11 @@ class ItemViewModel {
     }
   }
 
-  Future<void> itemRental(
-      {required BuildContext context,
-      required String itemId,
-      required int quantity,
-      required String usageId}) async {
+  Future<void> itemRental({
+    required String itemId,
+    required int quantity,
+    required String usageId,
+  }) async {
     try {
       await _dataSource.itemRental(
         RentalItemRequest(
