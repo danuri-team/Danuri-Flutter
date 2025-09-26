@@ -6,14 +6,10 @@ part 'sign_up_request.g.dart';
 class SignUpRequest {
   @JsonKey(name: 'company_id')
   final String companyId;
-  final String email;
-  final String password;
   final String phone;
 
   SignUpRequest({
     required this.companyId,
-    required this.email,
-    required this.password,
     required this.phone,
   });
 
