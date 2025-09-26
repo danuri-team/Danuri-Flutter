@@ -15,13 +15,11 @@ class UserAuthViewModel {
   }
 
   Future<void> signUp({
-    required String companyId,
     required String phone,
   }) async {
     try {
       await _dataSource.signUp(
         SignUpRequest(
-          companyId: companyId,
           phone: phone,
         ),
       );
