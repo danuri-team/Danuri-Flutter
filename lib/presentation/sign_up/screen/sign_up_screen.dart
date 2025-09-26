@@ -45,7 +45,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   Future<void> signUp({required String phone}) async {
     await _userViewModel.signUp(
-      companyId: '52515fd2-43e5-440b-9cc5-8630bc75954e',
+      companyId: 'c3854ac6-d214-4092-81c5-897ae2e5089b',
       phone: phone,
     );
   }
