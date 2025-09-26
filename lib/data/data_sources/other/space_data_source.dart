@@ -29,7 +29,6 @@ class SpaceDataSource extends DataSource {
   Future<void> registerUsedSpace(RegisterUsedSpaceRequest request) async {
     await dio.post(
       '/usage?spaceId=${request.spaceId}',
-      data: request.toJson(),
       options: Options(headers: {'Authorization': 'Bearer ${await userToken}'}),
     );
   }
