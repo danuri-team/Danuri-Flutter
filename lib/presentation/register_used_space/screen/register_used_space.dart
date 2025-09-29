@@ -45,7 +45,7 @@ class RegisterUsedSpace extends ConsumerWidget {
               onTap: () async {
                 if (spaceId != null) {
                   ref.read(flowProvider.notifier).update(
-                        (state) => FlowType.REGISTER_USED_SPACE_FLOW,
+                        (state) => FlowType.REGISTER_USED_SPACE,
                       );
                   AppNavigation.pushLogin(context);
                 }

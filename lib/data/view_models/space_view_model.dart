@@ -50,9 +50,9 @@ class SpaceViewModel {
     }
   }
   
-  Future<void> leavingSpace({required String usageId}) async {
+  Future<void> checkOut({required String usageId}) async {
     try {
-      await dataSource.leavingSpace(UsageIdRequest(usageId: usageId));
+      await dataSource.checkOut(UsageIdRequest(usageId: usageId));
       _error = false;
     } on DioException catch (_) {
       _error = true;

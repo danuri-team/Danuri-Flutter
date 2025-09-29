@@ -37,7 +37,7 @@ class SpaceDataSource {
     );
   }
 
-  Future leavingSpace(UsageIdRequest request) async {
+  Future checkOut(UsageIdRequest request) async {
     await dio.delete(
       '/usage',
       data: request.toJson(),
