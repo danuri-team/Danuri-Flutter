@@ -1,4 +1,5 @@
 enum QrActionType {
-  itemRental,
-  organAuth,
+  ITEM_RENTAL,
+  ORGAN_AUTH,
+  CHECK_OUT,
 }

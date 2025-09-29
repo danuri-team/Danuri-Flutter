@@ -11,7 +11,6 @@ import 'package:danuri_flutter/presentation/widgets/available_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ItemRentalScreen extends ConsumerWidget {
@@ -50,10 +49,12 @@ class ItemRentalScreen extends ConsumerWidget {
                 if (state != null) {
                   Throttle.run(
                     () {
-                      ref.read(qrActionProvider.notifier).update((state) => QrActionType.itemRental);
-                      context.push<BarcodeCapture>(
-                          AppRoutes.qr(CameraFacing.front));
-                      });
+                      ref
+                          .read(qrActionProvider.notifier)
+                          .update((state) => QrActionType.ITEM_RENTAL);
+                      AppNavigation.pushQr(context, CameraFacing.front);
+                    },
+                  );
                 }
               },
               isActivate: state != null,
