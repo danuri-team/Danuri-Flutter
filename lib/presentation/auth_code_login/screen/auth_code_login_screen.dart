@@ -16,7 +16,6 @@ import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class AuthCodeLoginScreen extends ConsumerStatefulWidget {
   const AuthCodeLoginScreen({super.key});
@@ -38,7 +37,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   void initState() {
     super.initState();
     final flow = ref.read(flowProvider.notifier).state;
-    if (flow == FlowType.LEAVING_SPACE_FLOW) {
+    if (flow == FlowType.CHECK_OUT) {
       _spaceViewModel.getUsageSpace();
     }
   }
@@ -58,9 +57,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> _leavingSpace() async {
+  Future<void> _checkOut() async {
     await _itemViewModel.returnItem(usageId: _spaceViewModel.usageId!);
-    await _spaceViewModel.leavingSpace(usageId: _spaceViewModel.usageId!).then(
+    await _spaceViewModel.checkOut(usageId: _spaceViewModel.usageId!).then(
       (_) {
         if (!mounted) {
           return;
@@ -171,17 +170,17 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                             }
 
                             if (_userAuthViewModel.error == true) {
-                              context.push('/failure');
+                              AppNavigation.pushFailure(context);
                               _userAuthViewModel.reset();
                             } else {
                               final flow =
                                   ref.read(flowProvider.notifier).state;
                               if (flow != null) {
                                 switch (flow) {
-                                  case FlowType.LEAVING_SPACE_FLOW:
-                                    await _leavingSpace();
+                                  case FlowType.CHECK_OUT:
+                                    await _checkOut();
                                     break;
-                                  case FlowType.REGISTER_USED_SPACE_FLOW:
+                                  case FlowType.REGISTER_USED_SPACE:
                                     await _registerUsedSpace();
                                     break;
                                   case FlowType.SIGN_UP:

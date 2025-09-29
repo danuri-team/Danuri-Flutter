@@ -13,7 +13,7 @@ class DeviceAuthDataSource{
       '/auth/device/token',
       data: request.toJson(),
     );
-    await tokenStorage.setToken(response.data, TokenType.device);
+    await tokenStorage.setToken(response.data, TokenType.DEVICE);
     return TokensResponse.fromJson(response.data);
   }
 }

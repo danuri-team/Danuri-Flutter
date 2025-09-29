@@ -1,3 +1,4 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
@@ -13,7 +14,6 @@ import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
@@ -113,9 +113,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                 }
 
                                 if (_userViewModel.error! == true) {
-                                  context.push('/failure');
+                                  AppNavigation.pushFailure(context);
                                 } else {
-                                  context.push('/auth-code-login');
+                                  AppNavigation.pushAuthCodeLogin(context);
                                   ref
                                       .read(flowProvider.notifier)
                                       .update((state) => FlowType.SIGN_UP);

@@ -36,6 +36,7 @@ abstract class AppNavigation{
 
   static void pushCompletion(BuildContext context) => context.push(AppRoutes.completion);
   static void pushFailure(BuildContext context) => context.push(AppRoutes.failure);
+  static void pushQr(BuildContext context, CameraFacing cameraFacing) => context.push(AppRoutes.qr(cameraFacing));
 
   static void pop(BuildContext context) => context.pop();
 }

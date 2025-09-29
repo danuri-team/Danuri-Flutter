@@ -1,7 +1,6 @@
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/config/router.dart';
-import 'package:danuri_flutter/data/view_models/admin_auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,9 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-
-  final viewModel = AdminAuthViewModel();
-  await viewModel.adminLogin();
 
   await SentryFlutter.init(
     (options) {

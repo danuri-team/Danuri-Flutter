@@ -8,6 +8,7 @@ import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/qr_action_type.dart';
 import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
+import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,43 +34,67 @@ class QrScreen extends ConsumerWidget {
     }
   }
 
-  void itemRental(
+  Future<void> itemRental(
       {required BuildContext context,
       required WidgetRef ref,
       required BarcodeCapture capture}) async {
     final value = capture.barcodes[0].displayValue;
-    final Map<String, dynamic> decoded = jsonDecode(value!);
-    final itemId = ref.read(itemIdProvider.notifier).state;
 
-    final viewModel = ItemViewModel();
+    if (value != null) {
+      final Map<String, dynamic> decoded = jsonDecode(value);
+      final itemId = ref.read(itemIdProvider.notifier).state;
 
-    await viewModel.itemRental(
-      itemId: itemId!,
-      quantity: 1,
-      usageId: decoded['usageId'],
-    );
+      final viewModel = ItemViewModel();
 
-    ref.read(itemIdProvider.notifier).update((state) => null);
+      await viewModel.itemRental(
+        itemId: itemId!,
+        quantity: 1,
+        usageId: decoded['usageId'],
+      );
 
-    if (viewModel.error == false) {
-      AppNavigation.pushCompletion(context);
-    } else {
-      AppNavigation.pushFailure(context);
+      ref.read(itemIdProvider.notifier).update((state) => null);
+
+      if (viewModel.error == false) {
+        AppNavigation.pushCompletion(context);
+      } else {
+        AppNavigation.pushFailure(context);
+      }
     }
   }
 
-  void organAuth(
+  Future<void> organAuth(
       {required BuildContext context,
       required WidgetRef ref,
       required BarcodeCapture capture}) async {
     final value = capture.barcodes[0].displayValue;
-    final Map<String, dynamic> decoded = jsonDecode(value!);
 
-    final viewModel = DeviceAuthViewModel();
-    await viewModel.deviceAuth(code: decoded['code']);
+    if (value != null) {
+      final Map<String, dynamic> decoded = jsonDecode(value);
 
-    if (viewModel.error == false) {
-      AppNavigation.goHome(context);
+      final viewModel = DeviceAuthViewModel();
+      await viewModel.deviceAuth(code: decoded['code']);
+
+      if (viewModel.error == false) {
+        AppNavigation.goHome(context);
+      }
+    }
+  }
+
+  Future<void> checkOut(
+      {required BuildContext context, required BarcodeCapture capture}) async {
+    final value = capture.barcodes[0].displayValue;
+    if (value != null) {
+      final Map<String, dynamic> decoded = jsonDecode(value);
+
+      final viewModel = SpaceViewModel();
+
+      await viewModel.checkOut(usageId: decoded['usageId']);
+
+      if (viewModel.error == false) {
+        AppNavigation.pushCompletion(context);
+      } else {
+        AppNavigation.pushFailure(context);
+      }
     }
   }
 
@@ -85,17 +110,22 @@ class QrScreen extends ConsumerWidget {
                 onDetect: (capture) {
                   Throttle.run(
                     () async {
-                      final qrActionType = ref.read(qrActionProvider.notifier).state;
+                      final qrActionType =
+                          ref.read(qrActionProvider.notifier).state;
                       switch (qrActionType!) {
-                        case QrActionType.itemRental:
-                          itemRental(
+                        case QrActionType.ITEM_RENTAL:
+                          await itemRental(
                               context: context, ref: ref, capture: capture);
                           break;
-                        case QrActionType.organAuth:
-                          organAuth(
+                        case QrActionType.ORGAN_AUTH:
+                          await organAuth(
                               context: context, ref: ref, capture: capture);
+                        case QrActionType.CHECK_OUT:
+                          await checkOut(context: context, capture: capture);
                       }
-                      ref.read(qrActionProvider.notifier).update((state) => null);
+                      ref
+                          .read(qrActionProvider.notifier)
+                          .update((state) => null);
                     },
                   );
                 },
