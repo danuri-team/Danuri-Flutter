@@ -18,7 +18,6 @@ void main() async {
   await viewModel.adminLogin();
 
   await SentryFlutter.init(
-    
     (options) {
       options.dsn = dotenv.env['DSN_URL'];
 
