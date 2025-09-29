@@ -5,7 +5,7 @@ import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_reques
 import 'package:dio/dio.dart';
 
 class UserAuthViewModel {
-  final _dataSource = UserAuthDataSource();
+  final UserAuthDataSource dataSource = UserAuthDataSource();
 
   bool? _error;
   bool? get error => _error;
@@ -18,7 +18,7 @@ class UserAuthViewModel {
     required String phone,
   }) async {
     try {
-      await _dataSource.signUp(
+      await dataSource.signUp(
         SignUpRequest(
           phone: phone,
         ),
@@ -31,7 +31,7 @@ class UserAuthViewModel {
 
   Future<void> userLogin({required String phone}) async {
     try {
-      await _dataSource.login(
+      await dataSource.login(
         PhoneRequest(phone: phone),
       );
       _error = false;
@@ -43,7 +43,7 @@ class UserAuthViewModel {
   Future<void> authCodeLogin(
       {required String phone, required String authCode}) async {
     try {
-      await _dataSource.authCodeLogin(
+      await dataSource.authCodeLogin(
         AuthCodeLoginRequest(
           phone: phone,
           authCode: authCode,

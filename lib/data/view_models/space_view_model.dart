@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class SpaceViewModel {
-  final SpaceDataSource _dataSource = SpaceDataSource();
+  final SpaceDataSource dataSource = SpaceDataSource();
 
   List<SpaceUsageStatusResponse>? _spaceUsageStatus;
   List<SpaceUsageStatusResponse>? get spaceUsageStatus => _spaceUsageStatus;
@@ -23,7 +23,7 @@ class SpaceViewModel {
 
   Future<void> getUsageSpace() async {
     try {
-      final usageSpace = await _dataSource.getUsageSpace();
+      final usageSpace = await dataSource.getUsageSpace();
       _usageId = usageSpace.spaceUsageInfo?.usageId;
       _error = false;
     } on DioException catch (_) {
@@ -33,7 +33,7 @@ class SpaceViewModel {
 
   Future<void> getSpaceUsageStatus() async {
     try {
-      _spaceUsageStatus = await _dataSource.getSpaceUsageStatus();
+      _spaceUsageStatus = await dataSource.getSpaceUsageStatus();
       _error = false;
     } on DioException catch (_) {
       _error = true;
@@ -42,7 +42,7 @@ class SpaceViewModel {
 
   Future<void> registerUsedSpace({required BuildContext context, required String spaceId}) async {
     try {
-      await _dataSource
+      await dataSource
           .registerUsedSpace(RegisterUsedSpaceRequest(spaceId: spaceId));
       _error = false;
     } on DioException catch (_) {
@@ -52,7 +52,7 @@ class SpaceViewModel {
   
   Future<void> leavingSpace({required String usageId}) async {
     try {
-      await _dataSource.leavingSpace(UsageIdRequest(usageId: usageId));
+      await dataSource.leavingSpace(UsageIdRequest(usageId: usageId));
       _error = false;
     } on DioException catch (_) {
       _error = true;
