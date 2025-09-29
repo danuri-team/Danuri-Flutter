@@ -1,11 +1,13 @@
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
+import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
+import 'package:danuri_flutter/data/view_models/form_view_model.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
@@ -30,13 +32,14 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   final UserAuthViewModel _userAuthViewModel = UserAuthViewModel();
   final SpaceViewModel _spaceViewModel = SpaceViewModel();
   final ItemViewModel _itemViewModel = ItemViewModel();
+  final FormViewModel _formViewModel = FormViewModel();
 
   @override
   void initState() {
     super.initState();
     final flow = ref.read(flowProvider.notifier).state;
-    if(flow == FlowType.LEAVING_SPACE_FLOW){
-        _spaceViewModel.getUsageSpace();
+    if (flow == FlowType.LEAVING_SPACE_FLOW) {
+      _spaceViewModel.getUsageSpace();
     }
   }
 
@@ -91,6 +94,14 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
       },
     );
     ref.read(spaceIdProvider.notifier).update((state) => null);
+  }
+
+  Future<void> _inputForm() async {
+    final schema = ref.watch(signUpSchemaProvider);
+    await _formViewModel.inputForm(
+      schema: schema.toString(),
+    );
+    ref.read(signUpSchemaProvider.notifier).resetSchema();
   }
 
   @override
@@ -173,6 +184,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                   case FlowType.REGISTER_USED_SPACE_FLOW:
                                     await _registerUsedSpace();
                                     break;
+                                  case FlowType.SIGN_UP:
+                                      await _inputForm();
+                                      await _registerUsedSpace();
                                 }
                                 ref
                                     .read(phoneNumberProvider.notifier)

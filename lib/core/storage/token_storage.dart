@@ -26,8 +26,7 @@ class TokenStorage {
   }
 
   // Get Admin
-  Future<String?> getAdminAccessToken() =>
-      storage.read(key: '${TokenType.admin}AccessToken');
+  Future<String?> getAdminAccessToken() => storage.read(key: '${TokenType.admin}AccessToken');
 
   Future<String?> getAdminAccessTokenExpiredAt() =>
       storage.read(key: '${TokenType.admin}AccessTokenExpiredAt');
@@ -39,8 +38,7 @@ class TokenStorage {
       storage.read(key: '${TokenType.admin}RefreshTokenExpiredAt');
 
   // Get Device
-  Future<String?> getDeviceAccessToken() =>
-      storage.read(key: '${TokenType.device}AccessToken');
+  Future<String?> getDeviceAccessToken() => storage.read(key: '${TokenType.device}AccessToken');
 
   Future<String?> getDeviceAccessTokenExpiredAt() =>
       storage.read(key: '${TokenType.device}AccessTokenExpiredAt');
@@ -63,7 +61,7 @@ class TokenStorage {
   Future<String?> getUserRefreshTokenExpiredAt() =>
       storage.read(key: '${TokenType.user}RefreshTokenExpiredAt');
 
-  Future<void> resetStorage() async{
+  Future<void> resetStorage() async {
     await storage.deleteAll();
   }
 }

@@ -3,7 +3,7 @@ import 'package:danuri_flutter/data/models/auth/device_auth/device_auth_request.
 import 'package:dio/dio.dart';
 
 class DeviceAuthViewModel {
-  final _dataSource = DeviceAuthDataSource();
+  final DeviceAuthDataSource dataSource = DeviceAuthDataSource();
 
   bool? _error;
   bool? get error => _error;
@@ -14,7 +14,7 @@ class DeviceAuthViewModel {
 
   Future<void> deviceAuth({required String code}) async {
     try {
-      await _dataSource.deviceAuth(
+      await dataSource.deviceAuth(
         DeviceAuthRequest(code: code),
       );
       _error = false;

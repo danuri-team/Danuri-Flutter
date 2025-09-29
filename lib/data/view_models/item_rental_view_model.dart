@@ -5,7 +5,7 @@ import 'package:danuri_flutter/data/models/other/rental_item/response/available_
 import 'package:dio/dio.dart';
 
 class ItemViewModel {
-  final _dataSource = ItemRentalDataSource();
+  final ItemRentalDataSource dataSource = ItemRentalDataSource();
 
   List<ItemAvailableRental>? _itemAvailableRentalList;
   List<ItemAvailableRental>? get itemAvailableRentalList =>
@@ -20,7 +20,7 @@ class ItemViewModel {
 
   Future<void> getItemAvailableRental() async {
     try {
-      _itemAvailableRentalList = await _dataSource.getItemAvailableRental();
+      _itemAvailableRentalList = await dataSource.getItemAvailableRental();
       _error = false;
     } on DioException catch (_) {
       _error = true;
@@ -33,7 +33,7 @@ class ItemViewModel {
     required String usageId,
   }) async {
     try {
-      await _dataSource.itemRental(
+      await dataSource.itemRental(
         RentalItemRequest(
           itemId: itemId,
           quantity: quantity,
@@ -48,7 +48,7 @@ class ItemViewModel {
 
   Future<void> returnItem({required String usageId}) async {
     try {
-      await _dataSource.returnItem(UsageIdRequest(usageId: usageId));
+      await dataSource.returnItem(UsageIdRequest(usageId: usageId));
       _error = false;
     } on DioException catch (_) {
       _error = true;
