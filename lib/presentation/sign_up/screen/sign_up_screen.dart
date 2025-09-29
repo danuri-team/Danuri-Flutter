@@ -1,8 +1,9 @@
+import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/util/form_schema_to_json.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/models/other/form/request/form_request.dart';
+import 'package:danuri_flutter/data/models/enum/flow_type.dart';
 import 'package:danuri_flutter/data/models/other/form/response/form_response.dart';
 import 'package:danuri_flutter/data/view_models/form_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
@@ -41,6 +42,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       schema = FormSchemaToJson().schemaToJson(_formViewModel.form!.schema);
       form = _formViewModel.form;
     });
+    ref.read(signUpSchemaProvider.notifier).addSchema(key: 'id', value: schema![0]['id']);
   }
 
   Future<void> signUp({required String phone}) async {
@@ -51,13 +53,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   Future<void> userLogin({required String phone}) async {
     await _userViewModel.userLogin(phone: phone);
-  }
-
-  Future<void> inputForm() async {
-    final schema = ref.watch(signUpSchemaProvider);
-    await _formViewModel.inputForm(
-      FormRequest(result: schema.toString()),
-    );
   }
 
   bool isAllRequiredSelected(
@@ -110,10 +105,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                     .read(phoneNumberProvider.notifier)
                                     .state!;
 
-                                await Future.wait([
-                                  signUp(phone: phone),
-                                  inputForm(),
-                                ]);
+                                await signUp(phone: phone);
                                 await userLogin(phone: phone);
 
                                 if (!context.mounted) {
@@ -122,10 +114,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
                                 if (_userViewModel.error! == true) {
                                   context.push('/failure');
-                                } else if (_formViewModel.error! == true) {
-                                  context.push('/failure');
                                 } else {
                                   context.push('/auth-code-login');
+                                  ref
+                                      .read(flowProvider.notifier)
+                                      .update((state) => FlowType.SIGN_UP);
                                 }
 
                                 signUpKey.currentState?.resetSchema();

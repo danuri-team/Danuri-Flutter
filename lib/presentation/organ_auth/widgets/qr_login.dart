@@ -4,7 +4,6 @@ import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/qr_action_type.dart';
-import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,9 +12,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrLogin extends ConsumerWidget {
-  QrLogin({super.key});
-
-  final viewModel = DeviceAuthViewModel();
+  const QrLogin({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
