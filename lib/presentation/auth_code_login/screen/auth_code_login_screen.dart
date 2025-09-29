@@ -16,7 +16,6 @@ import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class AuthCodeLoginScreen extends ConsumerStatefulWidget {
   const AuthCodeLoginScreen({super.key});
@@ -171,7 +170,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                             }
 
                             if (_userAuthViewModel.error == true) {
-                              context.push('/failure');
+                              AppNavigation.pushFailure(context);
                               _userAuthViewModel.reset();
                             } else {
                               final flow =
