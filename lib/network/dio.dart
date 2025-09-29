@@ -49,14 +49,14 @@ class _AppDio with DioMixin implements AppDio {
                       await tokenStorage.getAdminRefreshToken().then(
                             (refreshToken) => CommonDataSource().refreshToken(
                               RefreshTokenRequest(refreshToken: refreshToken!),
-                              TokenType.admin,
+                              TokenType.ADMIN,
                             ),
                           );
                     } else if (nowTime > int.parse(value[1]!)) {
                       await tokenStorage.getDeviceRefreshToken().then(
                             (refreshToken) => CommonDataSource().refreshToken(
                               RefreshTokenRequest(refreshToken: refreshToken!),
-                              TokenType.device,
+                              TokenType.DEVICE,
                             ),
                           );
                     }

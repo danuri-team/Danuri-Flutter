@@ -16,7 +16,7 @@ class AdminAuthDataSource {
       '/auth/admin/sign-in',
       data: request.toJson(),
     );
-    await tokenStorage.setToken(response.data, TokenType.admin);
+    await tokenStorage.setToken(response.data, TokenType.ADMIN);
     return TokensResponse.fromJson(response.data);
   }
 

@@ -39,7 +39,7 @@ class UserAuthDataSource{
         headers: {'Authorization': 'Bearer ${await tokenStorage.getDeviceAccessToken()}'},
       ),
     );
-    await tokenStorage.setToken(response.data, TokenType.user);
+    await tokenStorage.setToken(response.data, TokenType.USER);
     return TokensResponse.fromJson(response.data);
   }
 }
