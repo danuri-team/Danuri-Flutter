@@ -3,15 +3,19 @@ import 'package:danuri_flutter/data/models/auth/common/request/refresh_token_req
 import 'package:danuri_flutter/data/models/auth/common/response/tokens_response.dart';
 import 'package:danuri_flutter/data/models/enum/token_type.dart';
 import 'package:danuri_flutter/network/dio.dart';
+import 'package:dio/dio.dart';
 
-class CommonDataSource{
+class CommonDataSource {
   final dio = AppDio.getInstance();
-  final tokenStorage = TokenStorage();  
-  
-  Future<TokensResponse> refreshToken(RefreshTokenRequest request, TokenType tokenType) async{
-    final response = await dio.post(
+  final tokenStorage = TokenStorage();
+
+  Future<TokensResponse> refreshToken(
+      RefreshTokenRequest request, TokenType tokenType) async {
+    final response = await dio.get(
       '/auth/common/refresh',
-      data: request.toJson(),
+      options: Options(
+        headers: {'Refresh-Token': request.refreshToken},
+      ),
     );
     await tokenStorage.setToken(response.data, tokenType);
     return TokensResponse.fromJson(response.data);

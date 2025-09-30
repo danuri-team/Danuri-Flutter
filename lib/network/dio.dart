@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:danuri_flutter/core/storage/token_storage.dart';
-import 'package:danuri_flutter/data/data_sources/auth/common_data_source.dart';
-import 'package:danuri_flutter/data/models/auth/common/request/refresh_token_request.dart';
 import 'package:danuri_flutter/data/models/enum/token_type.dart';
+import 'package:danuri_flutter/data/view_models/common_view_model.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -34,35 +35,31 @@ class _AppDio with DioMixin implements AppDio {
         InterceptorsWrapper(
           onError: (error, handler) async {
             Sentry.captureException(error);
-              if (error.response?.statusCode == 403) {
-                final tokenStorage = TokenStorage();
+            if (error.response?.statusCode == 500) {
+              final tokenStorage = TokenStorage();
+              final viewModel = CommonViewModel();
 
-                int nowTime = DateTime.now().millisecondsSinceEpoch;
+              int nowTime = DateTime.now().millisecondsSinceEpoch;
 
-                Future.wait([
-                  tokenStorage.getAdminAccessTokenExpiredAt(),
-                  tokenStorage.getDeviceAccessTokenExpiredAt(),
-                ]).then(
-                  (value) async {
-                    //현재시간과 만료시간 대조
-                    if (nowTime > int.parse(value[0]!)) {
-                      await tokenStorage.getAdminRefreshToken().then(
-                            (refreshToken) => CommonDataSource().refreshToken(
-                              RefreshTokenRequest(refreshToken: refreshToken!),
-                              TokenType.ADMIN,
-                            ),
-                          );
-                    } else if (nowTime > int.parse(value[1]!)) {
-                      await tokenStorage.getDeviceRefreshToken().then(
-                            (refreshToken) => CommonDataSource().refreshToken(
-                              RefreshTokenRequest(refreshToken: refreshToken!),
-                              TokenType.DEVICE,
-                            ),
-                          );
-                    }
-                  },
+              final deviceAccessTokenExpiredAt =
+                  await tokenStorage.getDeviceAccessTokenExpiredAt();
+
+              if (nowTime > int.parse(deviceAccessTokenExpiredAt!)) {
+                final refreshToken = await tokenStorage.getDeviceRefreshToken();
+                await viewModel.refreshToken(
+                  refreshToken: refreshToken!,
+                  tokenType: TokenType.DEVICE,
                 );
+                final dio = AppDio.getInstance();
+                final deviceToken = await TokenStorage().getDeviceAccessToken();
+                final options = error.requestOptions;
+                options.headers
+                    .addAll({'Authorization': 'Bearer $deviceToken'});
+                final response = await dio.fetch(options);
+                return handler.resolve(response);
               }
+            }
+
             return handler.reject(error);
           },
           onRequest: (options, handler) async {
