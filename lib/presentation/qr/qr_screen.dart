@@ -104,35 +104,31 @@ class QrScreen extends ConsumerWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Expanded(
-              child: MobileScanner(
-                onDetectError: (error, stackTrace) => throw Exception(error),
-                onDetect: (capture) {
-                  Throttle.run(
-                    () async {
-                      final qrActionType =
-                          ref.read(qrActionProvider.notifier).state;
-                      switch (qrActionType!) {
-                        case QrActionType.ITEM_RENTAL:
-                          await itemRental(
-                              context: context, ref: ref, capture: capture);
-                          break;
-                        case QrActionType.ORGAN_AUTH:
-                          await organAuth(
-                              context: context, ref: ref, capture: capture);
-                        case QrActionType.CHECK_OUT:
-                          await checkOut(context: context, capture: capture);
-                      }
-                      ref
-                          .read(qrActionProvider.notifier)
-                          .update((state) => null);
-                    },
-                  );
-                },
-                controller: MobileScannerController(
-                  facing: checkFacing(cameraFacing),
-                  formats: [BarcodeFormat.qrCode],
-                ),
+            MobileScanner(
+              onDetectError: (error, stackTrace) => throw Exception(error),
+              onDetect: (capture) {
+                Throttle.run(
+                  () async {
+                    final qrActionType =
+                        ref.read(qrActionProvider.notifier).state;
+                    switch (qrActionType!) {
+                      case QrActionType.ITEM_RENTAL:
+                        await itemRental(
+                            context: context, ref: ref, capture: capture);
+                        break;
+                      case QrActionType.ORGAN_AUTH:
+                        await organAuth(
+                            context: context, ref: ref, capture: capture);
+                      case QrActionType.CHECK_OUT:
+                        await checkOut(context: context, capture: capture);
+                    }
+                    ref.read(qrActionProvider.notifier).update((state) => null);
+                  },
+                );
+              },
+              controller: MobileScannerController(
+                facing: checkFacing(cameraFacing),
+                formats: [BarcodeFormat.qrCode],
               ),
             ),
             Padding(
