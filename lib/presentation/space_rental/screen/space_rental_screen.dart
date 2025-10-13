@@ -2,7 +2,7 @@ import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_id_provider.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
-import 'package:danuri_flutter/presentation/register_used_space/widgets/select_space.dart';
+import 'package:danuri_flutter/presentation/space_rental/widgets/select_space.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:danuri_flutter/presentation/widgets/available_category.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisterUsedSpace extends ConsumerWidget {
-  const RegisterUsedSpace({super.key});
+class SpaceRentalScreen extends ConsumerWidget {
+  const SpaceRentalScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
