@@ -45,7 +45,7 @@ class SpaceRentalScreen extends ConsumerWidget {
               onTap: () async {
                 if (spaceId != null) {
                   ref.read(flowProvider.notifier).update(
-                        (state) => FlowType.REGISTER_USED_SPACE,
+                        (state) => FlowType.SPACE_RENTAL,
                       );
                   AppNavigation.pushLogin(context);
                 }

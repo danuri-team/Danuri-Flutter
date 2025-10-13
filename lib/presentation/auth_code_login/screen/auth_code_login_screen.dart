@@ -75,10 +75,10 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> _registerUsedSpace() async {
+  Future<void> _spaceRental() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
     await _spaceViewModel
-        .registerUsedSpace(context: context, spaceId: spaceId!)
+        .spaceRental(context: context, spaceId: spaceId!)
         .then(
       (_) {
         if (!mounted) {
@@ -180,12 +180,12 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                   case FlowType.CHECK_OUT:
                                     await _checkOut();
                                     break;
-                                  case FlowType.REGISTER_USED_SPACE:
-                                    await _registerUsedSpace();
+                                  case FlowType.SPACE_RENTAL:
+                                    await _spaceRental();
                                     break;
                                   case FlowType.SIGN_UP:
                                       await _inputForm();
-                                      await _registerUsedSpace();
+                                      await _spaceRental();
                                 }
                                 ref
                                     .read(phoneNumberProvider.notifier)
