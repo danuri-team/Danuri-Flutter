@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
@@ -7,6 +9,7 @@ import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUpForm extends ConsumerStatefulWidget {
   const SignUpForm({
@@ -69,7 +72,19 @@ class SignUpFormState extends ConsumerState<SignUpForm> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(schema[schemaIndex]['label']),
+                      if (schema[schemaIndex]['labelUrl'] != null)
+                        GestureDetector(
+                          onTap: () => launchUrl(
+                            Uri.parse(schema[schemaIndex]['labelUrl']),
+                          ),
+                          child: Text(schema[schemaIndex]['label'],
+                              style: DanuriText.body1Normal),
+                        )
+                      else
+                        Text(
+                          schema[schemaIndex]['label'],
+                          style: DanuriText.body1Normal,
+                        ),
                       SizedBox(height: 14.h),
                       if (schema[schemaIndex]['type'] ==
                           SignUpSchemaType.INPUT.name)
