@@ -26,44 +26,42 @@ class TokenStorage {
   }
 
   // Get Admin
-  Future<String?> getAdminAccessToken() =>
-      storage.read(key: '${TokenType.admin}AccessToken');
+  Future<String?> getAdminAccessToken() => storage.read(key: '${TokenType.ADMIN}AccessToken');
 
   Future<String?> getAdminAccessTokenExpiredAt() =>
-      storage.read(key: '${TokenType.admin}AccessTokenExpiredAt');
+      storage.read(key: '${TokenType.ADMIN}AccessTokenExpiredAt');
 
   Future<String?> getAdminRefreshToken() =>
-      storage.read(key: '${TokenType.admin}RefreshToken');
+      storage.read(key: '${TokenType.ADMIN}RefreshToken');
 
   Future<String?> getAdminRefreshTokenExpiredAt() =>
-      storage.read(key: '${TokenType.admin}RefreshTokenExpiredAt');
+      storage.read(key: '${TokenType.ADMIN}RefreshTokenExpiredAt');
 
   // Get Device
-  Future<String?> getDeviceAccessToken() =>
-      storage.read(key: '${TokenType.device}AccessToken');
+  Future<String?> getDeviceAccessToken() => storage.read(key: '${TokenType.DEVICE}AccessToken');
 
   Future<String?> getDeviceAccessTokenExpiredAt() =>
-      storage.read(key: '${TokenType.device}AccessTokenExpiredAt');
+      storage.read(key: '${TokenType.DEVICE}AccessTokenExpiredAt');
 
   Future<String?> getDeviceRefreshToken() =>
-      storage.read(key: '${TokenType.device}RefreshToken');
+      storage.read(key: '${TokenType.DEVICE}RefreshToken');
 
   Future<String?> getDeviceRefreshTokenExpiredAt() =>
-      storage.read(key: '${TokenType.device}RefreshTokenExpiredAt');
+      storage.read(key: '${TokenType.DEVICE}RefreshTokenExpiredAt');
 
   // Get User
-  Future<String?> getUserAccessToken() => storage.read(key: '${TokenType.user}AccessToken');
+  Future<String?> getUserAccessToken() => storage.read(key: '${TokenType.USER}AccessToken');
 
   Future<String?> getUserAccessTokenExpiredAt() =>
-      storage.read(key: '${TokenType.user}AccessTokenExpiredAt');
+      storage.read(key: '${TokenType.USER}AccessTokenExpiredAt');
 
   Future<String?> getUserRefreshToken() =>
-      storage.read(key: '${TokenType.user}RefreshToken');
+      storage.read(key: '${TokenType.USER}RefreshToken');
 
   Future<String?> getUserRefreshTokenExpiredAt() =>
-      storage.read(key: '${TokenType.user}RefreshTokenExpiredAt');
+      storage.read(key: '${TokenType.USER}RefreshTokenExpiredAt');
 
-  Future<void> resetStorage() async{
+  Future<void> resetStorage() async {
     await storage.deleteAll();
   }
 }

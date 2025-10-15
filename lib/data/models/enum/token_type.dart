@@ -1,5 +1,5 @@
 enum TokenType {
-  admin,
-  device,
-  user
+  ADMIN,
+  DEVICE,
+  USER,
 }

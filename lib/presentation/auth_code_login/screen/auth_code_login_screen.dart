@@ -1,11 +1,14 @@
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
-import 'package:danuri_flutter/core/provider/space_id_provider.dart';
+import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
+import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
+import 'package:danuri_flutter/core/provider/time_slot_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
+import 'package:danuri_flutter/data/view_models/form_view_model.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
@@ -14,7 +17,6 @@ import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class AuthCodeLoginScreen extends ConsumerStatefulWidget {
   const AuthCodeLoginScreen({super.key});
@@ -30,13 +32,14 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   final UserAuthViewModel _userAuthViewModel = UserAuthViewModel();
   final SpaceViewModel _spaceViewModel = SpaceViewModel();
   final ItemViewModel _itemViewModel = ItemViewModel();
+  final FormViewModel _formViewModel = FormViewModel();
 
   @override
   void initState() {
     super.initState();
     final flow = ref.read(flowProvider.notifier).state;
-    if(flow == FlowType.LEAVING_SPACE_FLOW){
-        _spaceViewModel.getUsageSpace();
+    if (flow == FlowType.CHECK_OUT) {
+      _spaceViewModel.getUsageSpace();
     }
   }
 
@@ -55,9 +58,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> _leavingSpace() async {
+  Future<void> _checkOut() async {
     await _itemViewModel.returnItem(usageId: _spaceViewModel.usageId!);
-    await _spaceViewModel.leavingSpace(usageId: _spaceViewModel.usageId!).then(
+    await _spaceViewModel.checkOut(usageId: _spaceViewModel.usageId!).then(
       (_) {
         if (!mounted) {
           return;
@@ -73,10 +76,11 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> _registerUsedSpace() async {
+  Future<void> _spaceRental() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
+    final startAt = ref.read(startAtProvider.notifier).state;
     await _spaceViewModel
-        .registerUsedSpace(context: context, spaceId: spaceId!)
+        .spaceRental(context: context, spaceId: spaceId!, startAt: startAt!)
         .then(
       (_) {
         if (!mounted) {
@@ -91,6 +95,16 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
       },
     );
     ref.read(spaceIdProvider.notifier).update((state) => null);
+    ref.read(startAtProvider.notifier).update((state) => null);
+    ref.read(timeSlotProvider.notifier).reset();
+  }
+
+  Future<void> _inputForm() async {
+    final schema = ref.watch(signUpSchemaProvider);
+    await _formViewModel.inputForm(
+      schema: schema.toString(),
+    );
+    ref.read(signUpSchemaProvider.notifier).resetSchema();
   }
 
   @override
@@ -160,19 +174,22 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                             }
 
                             if (_userAuthViewModel.error == true) {
-                              context.push('/failure');
+                              AppNavigation.pushFailure(context);
                               _userAuthViewModel.reset();
                             } else {
                               final flow =
                                   ref.read(flowProvider.notifier).state;
                               if (flow != null) {
                                 switch (flow) {
-                                  case FlowType.LEAVING_SPACE_FLOW:
-                                    await _leavingSpace();
+                                  case FlowType.CHECK_OUT:
+                                    await _checkOut();
                                     break;
-                                  case FlowType.REGISTER_USED_SPACE_FLOW:
-                                    await _registerUsedSpace();
+                                  case FlowType.SPACE_RENTAL:
+                                    await _spaceRental();
                                     break;
+                                  case FlowType.SIGN_UP:
+                                      await _inputForm();
+                                      await _spaceRental();
                                 }
                                 ref
                                     .read(phoneNumberProvider.notifier)

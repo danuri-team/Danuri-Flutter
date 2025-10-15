@@ -7,7 +7,7 @@ abstract class AppRoutes {
 
   static const String home = '/';
 
-  static const String registerUsedSpace = '/register-used-space';
+  static const String spaceRental = '/space-rental';
   static const String itemRental= '/item-rental';
 
   static const String organAuth = '/orga-auth';
@@ -26,7 +26,7 @@ abstract class AppNavigation{
 
   static void goHome(BuildContext context) => context.go(AppRoutes.home);
 
-  static void pushRegisterUsedSpace(BuildContext context) => context.push(AppRoutes.registerUsedSpace);
+  static void pushSpaceRental(BuildContext context) => context.push(AppRoutes.spaceRental);
   static void pushItemRental(BuildContext context) => context.push(AppRoutes.itemRental);
 
   static void goOranAuth(BuildContext context) => context.go(AppRoutes.organAuth);
@@ -36,6 +36,7 @@ abstract class AppNavigation{
 
   static void pushCompletion(BuildContext context) => context.push(AppRoutes.completion);
   static void pushFailure(BuildContext context) => context.push(AppRoutes.failure);
+  static void pushQr(BuildContext context, CameraFacing cameraFacing) => context.push(AppRoutes.qr(cameraFacing));
 
   static void pop(BuildContext context) => context.pop();
 }

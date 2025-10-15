@@ -4,7 +4,7 @@ import 'package:danuri_flutter/data/models/other/form/response/form_response.dar
 import 'package:dio/dio.dart';
 
 class FormViewModel {
-  final _dataSource = FormDataSource();
+  final FormDataSource dataSource = FormDataSource();
 
   FormResponse? _form;
   FormResponse? get form => _form;
@@ -18,16 +18,16 @@ class FormViewModel {
 
   Future<void> getForm() async {
     try {
-      _form = await _dataSource.getForm();
+      _form = await dataSource.getForm();
       _error = false;
     } on DioException catch (_) {
       _error = true;
     }
   }
 
-  Future<void> inputForm(FormRequest request) async {
+  Future<void> inputForm({required String schema}) async {
     try {
-      await _dataSource.inputForm(request: request);
+      await dataSource.inputForm(request: FormRequest(result: schema));
       _error = false;
     } on DioException catch (_) {
       _error = true;

@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
-import 'package:danuri_flutter/core/provider/on_detect_provider.dart';
+import 'package:danuri_flutter/core/provider/qr_action_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
+import 'package:danuri_flutter/data/models/enum/qr_action_type.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/presentation/item_rental/widgets/select_item.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
@@ -11,7 +11,6 @@ import 'package:danuri_flutter/presentation/widgets/available_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ItemRentalScreen extends ConsumerWidget {
@@ -49,39 +48,11 @@ class ItemRentalScreen extends ConsumerWidget {
               onTap: () {
                 if (state != null) {
                   Throttle.run(
-                    () async {
-                      final capture = await context.push<BarcodeCapture>(
-                          AppRoutes.qr(CameraFacing.front));
-                      ref.read(onDetectProvider.notifier).update((state) {
-                        return () async {
-                          final value = capture?.barcodes[0].displayValue;
-                          final Map<String, dynamic> decoded =
-                              jsonDecode(value!);
-
-                          final itemId =
-                              ref.read(itemIdProvider.notifier).state;
-
-                          await viewModel.itemRental(
-                            context: context,
-                            itemId: itemId!,
-                            quantity: 1,
-                            usageId: decoded['usageId'],
-                          );
-
-                          ref.read(itemIdProvider.notifier).update(
-                                (state) => null,
-                              );
-                          if (viewModel.error == false) {
-                            ref
-                                .read(onDetectProvider.notifier)
-                                .update((state) => null);
-                            AppNavigation.pushCompletion(context);
-                          } else {
-                            AppNavigation.pushFailure(context);
-                          }
-                        };
-                      });
-                      ref.read(itemIdProvider.notifier).update((state) => null);
+                    () {
+                      ref
+                          .read(qrActionProvider.notifier)
+                          .update((state) => QrActionType.ITEM_RENTAL);
+                      AppNavigation.pushQr(context, CameraFacing.front);
                     },
                   );
                 }

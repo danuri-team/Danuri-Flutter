@@ -3,10 +3,9 @@ import 'package:danuri_flutter/data/models/other/common/request/usage_id_request
 import 'package:danuri_flutter/data/models/other/rental_item/request/rental_item_request.dart';
 import 'package:danuri_flutter/data/models/other/rental_item/response/available_items_response.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class ItemViewModel {
-  final _dataSource = ItemRentalDataSource();
+  final ItemRentalDataSource dataSource = ItemRentalDataSource();
 
   List<ItemAvailableRental>? _itemAvailableRentalList;
   List<ItemAvailableRental>? get itemAvailableRentalList =>
@@ -21,20 +20,20 @@ class ItemViewModel {
 
   Future<void> getItemAvailableRental() async {
     try {
-      _itemAvailableRentalList = await _dataSource.getItemAvailableRental();
+      _itemAvailableRentalList = await dataSource.getItemAvailableRental();
       _error = false;
     } on DioException catch (_) {
       _error = true;
     }
   }
 
-  Future<void> itemRental(
-      {required BuildContext context,
-      required String itemId,
-      required int quantity,
-      required String usageId}) async {
+  Future<void> itemRental({
+    required String itemId,
+    required int quantity,
+    required String usageId,
+  }) async {
     try {
-      await _dataSource.itemRental(
+      await dataSource.itemRental(
         RentalItemRequest(
           itemId: itemId,
           quantity: quantity,
@@ -49,7 +48,7 @@ class ItemViewModel {
 
   Future<void> returnItem({required String usageId}) async {
     try {
-      await _dataSource.returnItem(UsageIdRequest(usageId: usageId));
+      await dataSource.returnItem(UsageIdRequest(usageId: usageId));
       _error = false;
     } on DioException catch (_) {
       _error = true;

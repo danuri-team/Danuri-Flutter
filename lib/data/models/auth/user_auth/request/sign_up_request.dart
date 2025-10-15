@@ -4,12 +4,9 @@ part 'sign_up_request.g.dart';
 
 @JsonSerializable()
 class SignUpRequest {
-  @JsonKey(name: 'company_id')
-  final String companyId;
   final String phone;
 
   SignUpRequest({
-    required this.companyId,
     required this.phone,
   });
 
