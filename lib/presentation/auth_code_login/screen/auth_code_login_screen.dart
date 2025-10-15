@@ -1,7 +1,8 @@
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
-import 'package:danuri_flutter/core/provider/space_id_provider.dart';
+import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
+import 'package:danuri_flutter/core/provider/time_slot_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
@@ -75,10 +76,11 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     );
   }
 
-  Future<void> _registerUsedSpace() async {
+  Future<void> _spaceRental() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
+    final startAt = ref.read(startAtProvider.notifier).state;
     await _spaceViewModel
-        .registerUsedSpace(context: context, spaceId: spaceId!)
+        .spaceRental(context: context, spaceId: spaceId!, startAt: startAt!)
         .then(
       (_) {
         if (!mounted) {
@@ -93,6 +95,8 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
       },
     );
     ref.read(spaceIdProvider.notifier).update((state) => null);
+    ref.read(startAtProvider.notifier).update((state) => null);
+    ref.read(timeSlotProvider.notifier).reset();
   }
 
   Future<void> _inputForm() async {
@@ -180,12 +184,12 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                   case FlowType.CHECK_OUT:
                                     await _checkOut();
                                     break;
-                                  case FlowType.REGISTER_USED_SPACE:
-                                    await _registerUsedSpace();
+                                  case FlowType.SPACE_RENTAL:
+                                    await _spaceRental();
                                     break;
                                   case FlowType.SIGN_UP:
                                       await _inputForm();
-                                      await _registerUsedSpace();
+                                      await _spaceRental();
                                 }
                                 ref
                                     .read(phoneNumberProvider.notifier)

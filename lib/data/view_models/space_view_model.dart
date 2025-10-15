@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/data/data_sources/other/space_data_source.dart';
 import 'package:danuri_flutter/data/models/other/common/request/usage_id_request.dart';
-import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
+import 'package:danuri_flutter/data/models/other/space/reqeust/space_rental_request.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -40,16 +40,20 @@ class SpaceViewModel {
     }
   }
 
-  Future<void> registerUsedSpace({required BuildContext context, required String spaceId}) async {
+  Future<void> spaceRental({
+    required BuildContext context,
+    required String spaceId,
+    required String startAt,
+  }) async {
     try {
       await dataSource
-          .registerUsedSpace(RegisterUsedSpaceRequest(spaceId: spaceId));
+          .spaceRental(SpaceRentalRequest(spaceId: spaceId, startAt: startAt));
       _error = false;
     } on DioException catch (_) {
       _error = true;
     }
   }
-  
+
   Future<void> checkOut({required String usageId}) async {
     try {
       await dataSource.checkOut(UsageIdRequest(usageId: usageId));
@@ -58,5 +62,4 @@ class SpaceViewModel {
       _error = true;
     }
   }
-
 }
