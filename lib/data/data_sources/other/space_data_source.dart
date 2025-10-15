@@ -30,9 +30,9 @@ class SpaceDataSource {
         .toList();
   }
 
-  Future<void> spaceRental(SpaceRentalRequest request) async {  
+  Future<void> spaceRental(SpaceRentalRequest request) async {
     await dio.post(
-      '/usage?spaceId=${request.spaceId}',
+      '/usage?spaceId=${request.spaceId}&startAt=${request.startAt}',
       options: Options(headers: {'Authorization': 'Bearer ${await tokenStorage.getUserAccessToken()}'}),
     );
   }
