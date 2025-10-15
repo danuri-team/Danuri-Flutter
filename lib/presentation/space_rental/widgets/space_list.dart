@@ -1,4 +1,5 @@
-import 'package:danuri_flutter/core/provider/space_id_provider.dart';
+import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
+import 'package:danuri_flutter/core/provider/time_slot_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
@@ -7,19 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SelectSpace extends ConsumerStatefulWidget {
-  const SelectSpace({super.key});
+class SpaceList extends ConsumerStatefulWidget {
+  const SpaceList({super.key});
 
   @override
-  ConsumerState<SelectSpace> createState() => _SelectSpaceState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SpaceListState();
 }
 
-class _SelectSpaceState extends ConsumerState<SelectSpace> {
-  final SpaceViewModel _viewModel = SpaceViewModel();
+class _SpaceListState extends ConsumerState<SpaceList> {
+  final SpaceViewModel viewModel = SpaceViewModel();
 
   Future<void> fetchSpaceUsageStatus() async {
-    await _viewModel.getSpaceUsageStatus().then(
-          (value) => setState(() {}),
+    await viewModel.getSpaceUsageStatus().then(
+          (_) => setState(() {}),
         );
   }
 
@@ -43,7 +45,7 @@ class _SelectSpaceState extends ConsumerState<SelectSpace> {
           ),
         ),
         SizedBox(height: 14.h),
-        if (_viewModel.spaceUsageStatus == null)
+        if (viewModel.spaceUsageStatus == null)
           SizedBox(height: 48.h)
         else
           SizedBox(
@@ -51,24 +53,29 @@ class _SelectSpaceState extends ConsumerState<SelectSpace> {
             height: 48.h,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: _viewModel.spaceUsageStatus?.length,
+              itemCount: viewModel.spaceUsageStatus?.length,
               itemBuilder: (context, index) {
                 return Row(
                   children: [
                     SelectionBox(
-                      available:
-                          _viewModel.spaceUsageStatus![index].isAvailable,
-                      isSelected: spaceId ==
-                          _viewModel.spaceUsageStatus![index].spaceId,
-                      name: _viewModel.spaceUsageStatus![index].name,
+                      available: viewModel.spaceUsageStatus![index].isAvailable,
+                      isSelected:
+                          spaceId == viewModel.spaceUsageStatus![index].spaceId,
+                      name: viewModel.spaceUsageStatus![index].name,
                       onTap: () {
-                        if (_viewModel.spaceUsageStatus![index].isAvailable ==
+                        if (viewModel.spaceUsageStatus![index].isAvailable ==
                             true) {
-                              ref.read(spaceIdProvider.notifier).update((state) => _viewModel.spaceUsageStatus![index].spaceId,);
+                          ref.read(spaceIdProvider.notifier).update(
+                                (state) =>
+                                    viewModel.spaceUsageStatus![index].spaceId,
+                              );
+                          ref.read(timeSlotProvider.notifier).reset();
+                          ref.read(timeSlotProvider.notifier).addTimeSlot(
+                              viewModel.spaceUsageStatus![index].timeSlots);
                         }
                       },
                     ),
-                    if (_viewModel.spaceUsageStatus!.length != index + 1)
+                    if (viewModel.spaceUsageStatus!.length != index + 1)
                       SizedBox(width: 12.w),
                   ],
                 );

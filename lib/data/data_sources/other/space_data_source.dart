@@ -1,6 +1,6 @@
 import 'package:danuri_flutter/core/storage/token_storage.dart';
 import 'package:danuri_flutter/data/models/other/common/request/usage_id_request.dart';
-import 'package:danuri_flutter/data/models/other/space/reqeust/register_used_space_request.dart';
+import 'package:danuri_flutter/data/models/other/space/reqeust/space_rental_request.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_response.dart';
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
 import 'package:danuri_flutter/network/dio.dart';
@@ -30,9 +30,9 @@ class SpaceDataSource {
         .toList();
   }
 
-  Future<void> registerUsedSpace(RegisterUsedSpaceRequest request) async {  
+  Future<void> spaceRental(SpaceRentalRequest request) async {
     await dio.post(
-      '/usage?spaceId=${request.spaceId}',
+      '/usage?spaceId=${request.spaceId}&startAt=${request.startAt}',
       options: Options(headers: {'Authorization': 'Bearer ${await tokenStorage.getUserAccessToken()}'}),
     );
   }

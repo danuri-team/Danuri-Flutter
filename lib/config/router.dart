@@ -3,7 +3,7 @@ import 'package:danuri_flutter/presentation/failure/screen/failure_screen.dart';
 import 'package:danuri_flutter/presentation/completion/screen/completion_screen.dart';
 import 'package:danuri_flutter/presentation/item_rental/screen/item_rental_screen.dart';
 import 'package:danuri_flutter/presentation/qr/qr_screen.dart';
-import 'package:danuri_flutter/presentation/register_used_space/screen/register_used_space.dart';
+import 'package:danuri_flutter/presentation/space_rental/screen/space_rental_screen.dart';
 import 'package:danuri_flutter/presentation/auth_code_login/screen/auth_code_login_screen.dart';
 import 'package:danuri_flutter/presentation/sign_up/screen/sign_up_screen.dart';
 import 'package:danuri_flutter/presentation/login/screen/login_screen.dart';
@@ -30,9 +30,9 @@ GoRouter router(String initialLocation) {
         builder: (context, state) => HomeScreen(),
       ),
       GoRoute(
-        name: 'register-used-space',
-        path: AppRoutes.registerUsedSpace,
-        builder: (context, state) => const RegisterUsedSpace(),
+        name: 'space-retnal',
+        path: AppRoutes.spaceRental,
+        builder: (context, state) => const SpaceRentalScreen(),
       ),
       GoRoute(
         name: 'item-rental',

@@ -1,5 +1,5 @@
 enum FlowType {
   CHECK_OUT,
-  REGISTER_USED_SPACE,
+  SPACE_RENTAL,
   SIGN_UP,
 }
