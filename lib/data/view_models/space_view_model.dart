@@ -40,16 +40,20 @@ class SpaceViewModel {
     }
   }
 
-  Future<void> spaceRental({required BuildContext context, required String spaceId}) async {
+  Future<void> spaceRental({
+    required BuildContext context,
+    required String spaceId,
+    required String startAt,
+  }) async {
     try {
       await dataSource
-          .spaceRental(SpaceRentalRequest(spaceId: spaceId));
+          .spaceRental(SpaceRentalRequest(spaceId: spaceId, startAt: startAt));
       _error = false;
     } on DioException catch (_) {
       _error = true;
     }
   }
-  
+
   Future<void> checkOut({required String usageId}) async {
     try {
       await dataSource.checkOut(UsageIdRequest(usageId: usageId));
@@ -58,5 +62,4 @@ class SpaceViewModel {
       _error = true;
     }
   }
-
 }
