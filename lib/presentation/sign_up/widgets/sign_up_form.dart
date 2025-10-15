@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
@@ -78,7 +76,8 @@ class SignUpFormState extends ConsumerState<SignUpForm> {
                             Uri.parse(schema[schemaIndex]['labelUrl']),
                           ),
                           child: Text(schema[schemaIndex]['label'],
-                              style: DanuriText.body1Normal),
+                              style: DanuriText.body1Normal
+                                  .copyWith(color: DanuriColor.primary1)),
                         )
                       else
                         Text(
