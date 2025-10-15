@@ -17,12 +17,17 @@ class SelectionBox extends StatelessWidget {
   final GestureTapCallback onTap;
   final bool available;
 
+
   @override
   Widget build(BuildContext context) {
-    double width = 84;
-    for (int i = 2; i < name.length; i++) {
-      width += 14;
+    double width = 84.w;
+    final result = name.replaceAll(RegExp('\\s'), "");
+    if (RegExp(r'[ㄱ-ㅎㅏ-ㅣ가-힣]').hasMatch(name)) {
+      width += 14.w * (result.length - 1);
+    } else {
+      width += 8.w * (result.length - 1);
     }
+
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: onTap,
