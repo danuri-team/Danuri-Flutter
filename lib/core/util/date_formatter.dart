@@ -1,9 +1,9 @@
 import 'package:intl/intl.dart';
 
 class DateFormatter {
-  final now = DateTime.now();
+  static final now = DateTime.now();
 
-  String HHmmss({required int hour, required int minute}) {
+  static String HHmmss({required int hour, required int minute}) {
     return DateFormat('HH:mm:ss').format(
       DateTime(
         now.year,
@@ -15,7 +15,7 @@ class DateFormatter {
     );
   }
 
-  String Hmm({required int hour, required int minute}) {
+  static String Hmm({required int hour, required int minute}) {
     return DateFormat('H:mm').format(
       DateTime(
         now.year,
