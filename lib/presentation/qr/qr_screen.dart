@@ -98,8 +98,20 @@ class QrScreen extends ConsumerWidget {
     }
   }
 
+  String qrNotice(QrActionType qrActionType) {
+    switch (qrActionType) {
+      case QrActionType.ITEM_RENTAL:
+        return '※ 공간 이용 등록시 제공받은 QR을 이용하세요';
+      case QrActionType.ORGAN_AUTH:
+        return '※ 관리자 웹에서 QR을 발급받아 사용하세요';
+      case QrActionType.CHECK_OUT:
+        return '※ 공간 이용 등록시 제공받은 QR을 이용하세요';
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final qrActionType = ref.read(qrActionProvider.notifier).state;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -109,8 +121,6 @@ class QrScreen extends ConsumerWidget {
               onDetect: (capture) {
                 Throttle.run(
                   () async {
-                    final qrActionType =
-                        ref.read(qrActionProvider.notifier).state;
                     switch (qrActionType!) {
                       case QrActionType.ITEM_RENTAL:
                         await itemRental(
@@ -151,7 +161,7 @@ class QrScreen extends ConsumerWidget {
                       ],
                     ),
                     Text(
-                      '※ 공간 이용 등록시 제공받은 QR을 이용하세요',
+                      qrNotice(qrActionType!),
                       style: DanuriText.title2
                           .copyWith(color: DanuriColor.static1),
                     )
