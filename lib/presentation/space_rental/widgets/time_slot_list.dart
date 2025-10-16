@@ -8,15 +8,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TimeSlotList extends ConsumerWidget {
-  const TimeSlotList({
-    super.key,
-  });
+  const TimeSlotList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timeSlot = ref.watch(timeSlotProvider);
     final startAt = ref.watch(startAtProvider);
-    if (timeSlot == null) {
+    if (timeSlot.isEmpty) {
       return SizedBox(height: 48.h);
     } else {
       return Column(
@@ -38,15 +36,16 @@ class TimeSlotList extends ConsumerWidget {
                 final DateTime startTime = timeSlot[index]['startTime'];
                 final DateTime endTime = timeSlot[index]['endTime'];
                 final bool isAvailable = timeSlot[index]['isAvailable'];
-                final DateFormatter dateFormatter = DateFormatter();
-                final startTimeFormat = dateFormatter.Hmm(hour: startTime.hour, minute: startTime.minute);
-                final endTimeFormat = dateFormatter.Hmm(hour: endTime.hour, minute: endTime.minute);
-                final selectedStartAt = dateFormatter.HHmmss(hour: startTime.hour, minute: startTime.minute);
+                final startTimeFormat = DateFormatter.Hmm(
+                    hour: startTime.hour, minute: startTime.minute);
+                final endTimeFormat = DateFormatter.Hmm(
+                    hour: endTime.hour, minute: endTime.minute);
+                final selectedStartAt = DateFormatter.HHmmss(
+                    hour: startTime.hour, minute: startTime.minute);
                 return SelectionBox(
                   available: isAvailable,
                   isSelected: startAt == selectedStartAt,
-                  name:
-                      '$startTimeFormat ~ $endTimeFormat',
+                  name: '$startTimeFormat ~ $endTimeFormat',
                   onTap: () {
                     if (isAvailable == true) {
                       ref.read(startAtProvider.notifier).update(
