@@ -42,7 +42,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       schema = FormSchemaToJson().schemaToJson(_formViewModel.form!.schema);
       form = _formViewModel.form;
     });
-    ref.read(signUpSchemaProvider.notifier).addSchema(key: 'id', value: schema![0]['id']);
+    ref
+        .read(signUpSchemaProvider.notifier)
+        .addSchema(key: 'id', value: schema![0]['id']);
   }
 
   Future<void> signUp({required String phone}) async {

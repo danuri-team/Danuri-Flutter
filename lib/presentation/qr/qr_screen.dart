@@ -132,19 +132,29 @@ class QrScreen extends ConsumerWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 85.h, left: 60.w),
+              padding: EdgeInsets.only(top: 85.h, left: 60.w, bottom: 20.h),
               child: GestureDetector(
                 onTap: () => AppNavigation.pop(context),
                 behavior: HitTestBehavior.opaque,
-                child: Row(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset('assets/icons/white-chevron-left.svg'),
-                    SizedBox(width: 24.w),
+                    Row(
+                      children: [
+                        SvgPicture.asset('assets/icons/white-chevron-left.svg'),
+                        SizedBox(width: 24.w),
+                        Text(
+                          'QR 인식',
+                          style: DanuriText.title2
+                              .copyWith(color: DanuriColor.static1),
+                        ),
+                      ],
+                    ),
                     Text(
-                      'QR 인식',
+                      '※ 공간 이용 등록시 제공받은 QR을 이용하세요',
                       style: DanuriText.title2
                           .copyWith(color: DanuriColor.static1),
-                    ),
+                    )
                   ],
                 ),
               ),
