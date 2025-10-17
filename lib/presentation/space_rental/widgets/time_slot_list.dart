@@ -15,7 +15,7 @@ class TimeSlotList extends ConsumerWidget {
     final timeSlot = ref.watch(timeSlotProvider);
     final startAt = ref.watch(startAtProvider);
     if (timeSlot.isEmpty) {
-      return SizedBox(height: 48.h);
+      return SizedBox.shrink();
     } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -12,8 +12,7 @@ class SpaceList extends ConsumerStatefulWidget {
   const SpaceList({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SpaceListState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SpaceListState();
 }
 
 class _SpaceListState extends ConsumerState<SpaceList> {
@@ -46,38 +45,32 @@ class _SpaceListState extends ConsumerState<SpaceList> {
         ),
         SizedBox(height: 14.h),
         if (viewModel.spaceUsageStatus == null)
-          SizedBox(height: 48.h)
+          SizedBox.shrink()
         else
           SizedBox(
             width: double.infinity,
             height: 48.h,
-            child: ListView.builder(
+            child: ListView.separated(
+              itemCount: viewModel.spaceUsageStatus!.length,
               scrollDirection: Axis.horizontal,
-              itemCount: viewModel.spaceUsageStatus?.length,
+              separatorBuilder: (context, index) => SizedBox(width: 12.w),
               itemBuilder: (context, index) {
-                return Row(
-                  children: [
-                    SelectionBox(
-                      available: viewModel.spaceUsageStatus![index].isAvailable,
-                      isSelected:
-                          spaceId == viewModel.spaceUsageStatus![index].spaceId,
-                      name: viewModel.spaceUsageStatus![index].name,
-                      onTap: () {
-                        if (viewModel.spaceUsageStatus![index].isAvailable ==
-                            true) {
-                          ref.read(spaceIdProvider.notifier).update(
-                                (state) =>
-                                    viewModel.spaceUsageStatus![index].spaceId,
-                              );
-                          ref.read(timeSlotProvider.notifier).reset();
-                          ref.read(timeSlotProvider.notifier).addTimeSlot(
-                              viewModel.spaceUsageStatus![index].timeSlots);
-                        }
-                      },
-                    ),
-                    if (viewModel.spaceUsageStatus!.length != index + 1)
-                      SizedBox(width: 12.w),
-                  ],
+                final spaceUsageStatus = viewModel.spaceUsageStatus;
+                return SelectionBox(
+                  available: spaceUsageStatus![index].isAvailable,
+                  isSelected: spaceId == spaceUsageStatus[index].spaceId,
+                  name: spaceUsageStatus[index].name,
+                  onTap: () {
+                    if (spaceUsageStatus[index].isAvailable == true) {
+                      ref.read(spaceIdProvider.notifier).update(
+                            (state) => spaceUsageStatus[index].spaceId,
+                          );
+                      ref.read(timeSlotProvider.notifier).reset();
+                      ref
+                          .read(timeSlotProvider.notifier)
+                          .addTimeSlot(spaceUsageStatus[index].timeSlots);
+                    }
+                  },
                 );
               },
             ),

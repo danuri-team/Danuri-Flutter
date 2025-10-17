@@ -51,9 +51,9 @@ class _SpaceRentalScreenState extends ConsumerState<SpaceRentalScreen> {
               ),
             ),
             SizedBox(height: 103.h),
-            SpaceList(),
+            const SpaceList(),
             SizedBox(height: 46.h),
-            TimeSlotList(),
+            const TimeSlotList(),
             const Spacer(),
             NextButton(
               centerText: '다음',
