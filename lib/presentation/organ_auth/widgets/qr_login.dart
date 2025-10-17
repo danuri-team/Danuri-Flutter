@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrLogin extends ConsumerWidget {
   const QrLogin({super.key});
@@ -21,8 +20,8 @@ class QrLogin extends ConsumerWidget {
           () {
             ref
                 .read(qrActionProvider.notifier)
-                .update((state) => QrActionType.ORGAN_AUTH);
-            AppNavigation.pushQr(context, CameraFacing.back);
+                .setExecuteAction(QrActionType.ORGAN_AUTH);
+            AppNavigation.pushQr(context);
           },
         );
       },

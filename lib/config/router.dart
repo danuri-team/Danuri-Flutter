@@ -66,8 +66,8 @@ GoRouter router(String initialLocation) {
       ),
       GoRoute(
         name: 'qr',
-        path: '/qr/:${RouteParams.cameraFacing}',
-        builder: (context, state) => QrScreen(cameraFacing: state.pathParameters[RouteParams.cameraFacing]!),
+        path: '/qr',
+        builder: (context, state) => QrScreen(),
       ),
     ],
   );

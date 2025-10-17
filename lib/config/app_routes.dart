@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 abstract class AppRoutes {
   AppRoutes._();
@@ -18,7 +17,7 @@ abstract class AppRoutes {
   static const String completion = '/completion';
   static const String failure= '/failure';
 
-  static String qr(CameraFacing cameraFacing) => '/qr/${cameraFacing.name}';
+  static const String qr = '/qr';
 }
 
 abstract class AppNavigation{
@@ -36,13 +35,7 @@ abstract class AppNavigation{
 
   static void pushCompletion(BuildContext context) => context.push(AppRoutes.completion);
   static void pushFailure(BuildContext context) => context.push(AppRoutes.failure);
-  static void pushQr(BuildContext context, CameraFacing cameraFacing) => context.push(AppRoutes.qr(cameraFacing));
+  static void pushQr(BuildContext context) => context.push(AppRoutes.qr);
 
   static void pop(BuildContext context) => context.pop();
-}
-
-abstract class RouteParams{
-  RouteParams._();
-
-  static const String cameraFacing = 'cameraFacing';
 }
