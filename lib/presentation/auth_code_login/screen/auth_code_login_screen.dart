@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
@@ -74,7 +76,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   Future<void> _inputForm() async {
     final schema = ref.watch(signUpSchemaProvider);
     await _formViewModel.inputForm(
-      schema: schema.toString(),
+      schema: jsonEncode(schema),
     );
     ref.read(signUpSchemaProvider.notifier).resetSchema();
   }
