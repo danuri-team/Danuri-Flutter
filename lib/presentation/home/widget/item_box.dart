@@ -1,25 +1,24 @@
+import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
-class SelectButton extends StatelessWidget {
-  const SelectButton({
-    super.key,
-    required this.svgName,
-    required this.text,
-    required this.onTap,
-  });
-
-  final String svgName;
-  final String text;
-  final GestureTapCallback onTap;
+class ItemBox extends StatelessWidget {
+  const ItemBox({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Throttle.run(
+          () {
+            AppNavigation.pushItemRental(context);
+          },
+        );
+      },
       child: Container(
         width: 400.w,
         height: 408.h,
@@ -32,10 +31,10 @@ class SelectButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset('assets/icons/$svgName'),
+            SvgPicture.asset('assets/icons/item.svg'),
             SizedBox(height: 10.h),
             Text(
-              text,
+              '물품 대여하기',
               style: DanuriText.title2.copyWith(color: DanuriColor.label6),
             ),
           ],
