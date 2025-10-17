@@ -6,12 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await initializeDateFormatting('ko_KR'); 
 
   await SentryFlutter.init(
     (options) {
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: DanuriColor.background1,
               fontFamily: 'Pretendard',
             ),
-            routerConfig: router(AppRoutes.organAuth),
+            routerConfig: router(AppRoutes.home),
           );
         },
       ),

@@ -5,6 +5,7 @@ import 'package:danuri_flutter/presentation/home/widget/check_out_button.dart';
 import 'package:danuri_flutter/presentation/home/widget/select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,12 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
             TimerBuilder.periodic(
               const Duration(seconds: 1),
               builder: (context) {
-                DateTime time = DateTime.now();
-                String period = time.hour < 12 ? '오전' : '오후';
                 return CustomTopBar(
                   title: '반가워요, 공간을 이용 해볼까요?',
                   subTitle:
-                      '송정다누리청소년센터 - $period ${time.hour > 13 ? time.hour - 12 : time.hour}시 ${time.minute}분',
+                      '송정다누리청소년센터 - ${DateFormat('a h시 m분', 'ko').format(DateTime.now())}',
                   needCallBackButton: false,
                   rightWidget: const CheckOutButton(),
                 );
