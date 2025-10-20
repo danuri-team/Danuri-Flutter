@@ -25,18 +25,6 @@ class TokenStorage {
     }
   }
 
-  // Get Admin
-  Future<String?> getAdminAccessToken() => storage.read(key: '${TokenType.ADMIN}AccessToken');
-
-  Future<String?> getAdminAccessTokenExpiredAt() =>
-      storage.read(key: '${TokenType.ADMIN}AccessTokenExpiredAt');
-
-  Future<String?> getAdminRefreshToken() =>
-      storage.read(key: '${TokenType.ADMIN}RefreshToken');
-
-  Future<String?> getAdminRefreshTokenExpiredAt() =>
-      storage.read(key: '${TokenType.ADMIN}RefreshTokenExpiredAt');
-
   // Get Device
   Future<String?> getDeviceAccessToken() => storage.read(key: '${TokenType.DEVICE}AccessToken');
 
