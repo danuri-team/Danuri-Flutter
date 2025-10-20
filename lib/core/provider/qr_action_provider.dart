@@ -127,13 +127,17 @@ class QrActionNotifier extends StateNotifier<QrActionState?> {
     if (value != null) {
       final Map<String, dynamic> decoded = jsonDecode(value);
 
-      final viewModel = SpaceViewModel();
+      final spaceViewModel = SpaceViewModel();
+      final itemViewModel = ItemViewModel();
 
-      await viewModel.getUsageSpace();
+      await spaceViewModel.getUsageSpace();
 
-      await viewModel.checkOut(usageId: decoded['usageId']);
+      await Future.wait([
+        itemViewModel.returnItem(usageId: decoded['usageId']),
+        spaceViewModel.checkOut(usageId: decoded['usageId']),
+      ]);
 
-      if (viewModel.error == false) {
+      if (spaceViewModel.error == false && itemViewModel.error == false) {
         AppNavigation.pushCompletion(context);
       } else {
         AppNavigation.pushFailure(context);
