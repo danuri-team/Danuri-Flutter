@@ -3,14 +3,13 @@ import 'package:danuri_flutter/data/models/auth/common/request/auth_code_login_r
 import 'package:danuri_flutter/data/models/auth/common/request/phone_request.dart';
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final userAuthViewModelProvider = ChangeNotifierProvider(
+final userAuthViewModelProvider = Provider(
   (_) => UserAuthViewModel(),
 );
 
-class UserAuthViewModel extends ChangeNotifier {
+class UserAuthViewModel{
   final UserAuthDataSource dataSource = UserAuthDataSource();
 
   bool? _error;
@@ -32,7 +31,6 @@ class UserAuthViewModel extends ChangeNotifier {
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 
   Future<void> signUp({required String phone}) async {
@@ -44,7 +42,6 @@ class UserAuthViewModel extends ChangeNotifier {
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 
   Future<void> userLogin({required String phone}) async {
@@ -56,7 +53,6 @@ class UserAuthViewModel extends ChangeNotifier {
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 
   Future<void> authCodeLogin(
@@ -72,6 +68,5 @@ class UserAuthViewModel extends ChangeNotifier {
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 }

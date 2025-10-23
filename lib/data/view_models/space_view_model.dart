@@ -59,7 +59,6 @@ class SpaceViewModel extends ChangeNotifier{
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 
   Future<void> checkOut({required String usageId}) async {
@@ -69,6 +68,5 @@ class SpaceViewModel extends ChangeNotifier{
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 }

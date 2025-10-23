@@ -39,6 +39,5 @@ class FormViewModel extends ChangeNotifier{
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 }

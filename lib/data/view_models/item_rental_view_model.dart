@@ -51,7 +51,6 @@ class ItemViewModel extends ChangeNotifier{
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 
   Future<void> returnItem({required String usageId}) async {
@@ -61,6 +60,5 @@ class ItemViewModel extends ChangeNotifier{
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();
   }
 }
