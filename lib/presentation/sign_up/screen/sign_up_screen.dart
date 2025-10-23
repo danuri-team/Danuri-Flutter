@@ -42,7 +42,7 @@ final signUpAndLoginProvider = FutureProvider(
 class SignUpScreen extends ConsumerWidget {
   SignUpScreen({super.key});
 
-  bool isAllRequiredSelected(WidgetRef ref) {
+  bool _isAllRequiredSelected(WidgetRef ref) {
     final requestForm = ref.watch(requestSignUpFormProvider);
     final formAsync = ref.watch(responseSignUpFormProvider);
 
@@ -62,7 +62,7 @@ class SignUpScreen extends ConsumerWidget {
     );
   }
 
-  void submit(WidgetRef ref, BuildContext context) {
+  void _submit(WidgetRef ref, BuildContext context) async {
     ref.read(signUpAndLoginProvider);
     final userViewModel = ref.read(userViewModelProvider.notifier);
 
@@ -96,8 +96,7 @@ class SignUpScreen extends ConsumerWidget {
                 subTitle: '간단하게 입력해볼까요?',
                 needCallBackButton: true,
                 rightWidget: SizedBox.shrink(),
-                callBackButtonOnTap: () =>
-                    signUpKey.currentState?.resetForm(),
+                callBackButtonOnTap: () => signUpKey.currentState?.resetForm(),
               ),
               SizedBox(height: 44.h),
               Padding(
@@ -120,11 +119,11 @@ class SignUpScreen extends ConsumerWidget {
                   NextButton(
                     centerText: '완료',
                     onTap: () {
-                      if (isAllRequiredSelected(ref)) {
-                        Throttle.run(() => submit(ref, context));
+                      if (_isAllRequiredSelected(ref)) {
+                        Throttle.run(() => _submit(ref, context));
                       }
                     },
-                    isActivate: isAllRequiredSelected(ref),
+                    isActivate: _isAllRequiredSelected(ref),
                   ),
                 ],
               ),
