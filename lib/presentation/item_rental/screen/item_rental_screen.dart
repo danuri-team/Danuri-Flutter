@@ -3,7 +3,6 @@ import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/qr_action_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/qr_action_type.dart';
-import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/presentation/item_rental/widgets/item_list.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
 import 'package:danuri_flutter/presentation/widgets/custom_top_bar.dart';
@@ -13,13 +12,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ItemRentalScreen extends ConsumerWidget {
-  ItemRentalScreen({super.key});
+  const ItemRentalScreen({super.key});
 
-  final ItemViewModel viewModel = ItemViewModel();
+  void _submit(WidgetRef ref, BuildContext context) {
+    ref
+        .read(qrActionProvider.notifier)
+        .setExecuteAction(QrActionType.ITEM_RENTAL);
+    AppNavigation.pushQr(context);
+  }
+
+  void _callBack(WidgetRef ref){
+    ref.read(itemIdProvider.notifier).update((state) => null);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(itemIdProvider);
+    final itemId = ref.watch(itemIdProvider);
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.fromLTRB(60.w, 85.h, 61.w, 58.h),
@@ -36,8 +44,7 @@ class ItemRentalScreen extends ConsumerWidget {
                   const AvailableCategory(),
                 ],
               ),
-              callBackButtonOnTap: () =>
-                  ref.read(itemIdProvider.notifier).update((state) => null),
+              callBackButtonOnTap: () => _callBack(ref),
             ),
             SizedBox(height: 103.h),
             const ItemList(),
@@ -45,18 +52,13 @@ class ItemRentalScreen extends ConsumerWidget {
             NextButton(
               centerText: '다음',
               onTap: () {
-                if (state != null) {
+                if (itemId != null) {
                   Throttle.run(
-                    () {
-                      ref
-                          .read(qrActionProvider.notifier)
-                          .setExecuteAction(QrActionType.ITEM_RENTAL);
-                      AppNavigation.pushQr(context);
-                    },
+                    () => _submit,
                   );
                 }
               },
-              isActivate: state != null,
+              isActivate: itemId != null,
             ),
           ],
         ),
