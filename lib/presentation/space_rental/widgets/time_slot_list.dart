@@ -10,6 +10,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TimeSlotList extends ConsumerWidget {
   const TimeSlotList({super.key});
 
+  void _selectTimeSlot(WidgetRef ref, String selectedStartAt) {
+    ref.read(startAtProvider.notifier).update(
+          (state) => selectedStartAt,
+        );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timeSlot = ref.watch(timeSlotProvider);
@@ -33,24 +39,24 @@ class TimeSlotList extends ConsumerWidget {
               itemCount: timeSlot.length,
               separatorBuilder: (context, index) => SizedBox(width: 12.w),
               itemBuilder: (context, index) {
-                final DateTime startTime = timeSlot[index]['startTime'];
-                final DateTime endTime = timeSlot[index]['endTime'];
-                final bool isAvailable = timeSlot[index]['isAvailable'];
+                final startTime = timeSlot[index]['startTime'] as DateTime;
+                final endTime = timeSlot[index]['endTime'] as DateTime;
+                final isAvailable = timeSlot[index]['isAvailable'] as bool;
+
                 final startTimeFormat = DateFormatter.Hmm(
                     hour: startTime.hour, minute: startTime.minute);
                 final endTimeFormat = DateFormatter.Hmm(
                     hour: endTime.hour, minute: endTime.minute);
                 final selectedStartAt = DateFormatter.HHmmss(
                     hour: startTime.hour, minute: startTime.minute);
+
                 return SelectionBox(
                   available: isAvailable,
                   isSelected: startAt == selectedStartAt,
                   name: '$startTimeFormat ~ $endTimeFormat',
                   onTap: () {
                     if (isAvailable == true) {
-                      ref.read(startAtProvider.notifier).update(
-                            (state) => selectedStartAt,
-                          );
+                      _selectTimeSlot(ref, selectedStartAt);
                     }
                   },
                 );

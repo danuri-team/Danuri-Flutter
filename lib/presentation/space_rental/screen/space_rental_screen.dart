@@ -3,7 +3,6 @@ import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
 import 'package:danuri_flutter/core/provider/time_slot_provider.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
-import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/presentation/space_rental/widgets/space_list.dart';
 import 'package:danuri_flutter/presentation/space_rental/widgets/time_slot_list.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
@@ -13,19 +12,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SpaceRentalScreen extends ConsumerStatefulWidget {
+class SpaceRentalScreen extends ConsumerWidget {
   const SpaceRentalScreen({super.key});
 
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SpaceRentalScreenState();
-}
+  void _callBack(WidgetRef ref) {
+    ref.read(spaceIdProvider.notifier).update((state) => null);
+    ref.read(startAtProvider.notifier).update((state) => null);
+    ref.read(timeSlotProvider.notifier).reset();
+  }
 
-class _SpaceRentalScreenState extends ConsumerState<SpaceRentalScreen> {
-  final SpaceViewModel viewModel = SpaceViewModel();
+  void _submit(WidgetRef ref, BuildContext context) {
+    ref.read(flowProvider.notifier).update(
+          (state) => FlowType.SPACE_RENTAL,
+        );
+    AppNavigation.pushLogin(context);
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final spaceId = ref.watch(spaceIdProvider);
     final startAt = ref.watch(startAtProvider);
     return Scaffold(
@@ -38,11 +42,7 @@ class _SpaceRentalScreenState extends ConsumerState<SpaceRentalScreen> {
               title: '이용할 공간을 선택해주세요',
               subTitle: '공간을 선택해주세요',
               needCallBackButton: true,
-              callBackButtonOnTap: () {
-                ref.read(spaceIdProvider.notifier).update((state) => null);
-                ref.read(startAtProvider.notifier).update((state) => null);
-                ref.read(timeSlotProvider.notifier).reset();
-              },
+              callBackButtonOnTap: () => _callBack(ref),
               rightWidget: Column(
                 children: [
                   SizedBox(height: 160.sp),
@@ -58,12 +58,7 @@ class _SpaceRentalScreenState extends ConsumerState<SpaceRentalScreen> {
             NextButton(
               centerText: '다음',
               onTap: () async {
-                if (spaceId != null && startAt != null) {
-                  ref.read(flowProvider.notifier).update(
-                        (state) => FlowType.SPACE_RENTAL,
-                      );
-                  AppNavigation.pushLogin(context);
-                }
+                if (spaceId != null && startAt != null) () => _submit(ref, context);
               },
               isActivate: spaceId != null && startAt != null,
             ),
