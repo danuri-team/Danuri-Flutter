@@ -3,8 +3,14 @@ import 'package:danuri_flutter/data/models/other/common/request/usage_id_request
 import 'package:danuri_flutter/data/models/other/rental_item/request/rental_item_request.dart';
 import 'package:danuri_flutter/data/models/other/rental_item/response/available_items_response.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; 
 
-class ItemViewModel {
+final itemViewModelProvider = ChangeNotifierProvider<ItemViewModel>(
+  (ref) => ItemViewModel(),
+);
+
+class ItemViewModel extends ChangeNotifier{
   final ItemRentalDataSource dataSource = ItemRentalDataSource();
 
   List<ItemAvailableRental>? _itemAvailableRentalList;
@@ -25,6 +31,7 @@ class ItemViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 
   Future<void> itemRental({
@@ -44,6 +51,7 @@ class ItemViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 
   Future<void> returnItem({required String usageId}) async {
@@ -53,5 +61,6 @@ class ItemViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 }

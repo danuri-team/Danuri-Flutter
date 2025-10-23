@@ -4,8 +4,13 @@ import 'package:danuri_flutter/data/models/other/space/reqeust/space_rental_requ
 import 'package:danuri_flutter/data/models/other/space/response/space_usage_status_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; 
 
-class SpaceViewModel {
+final spaceViewModelProvider = ChangeNotifierProvider<SpaceViewModel>(
+  (_) => SpaceViewModel(),
+);
+
+class SpaceViewModel extends ChangeNotifier{
   final SpaceDataSource dataSource = SpaceDataSource();
 
   List<SpaceUsageStatusResponse>? _spaceUsageStatus;
@@ -29,6 +34,7 @@ class SpaceViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 
   Future<void> getSpaceUsageStatus() async {
@@ -38,6 +44,7 @@ class SpaceViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 
   Future<void> spaceRental({
@@ -52,6 +59,7 @@ class SpaceViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 
   Future<void> checkOut({required String usageId}) async {
@@ -61,5 +69,6 @@ class SpaceViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 }

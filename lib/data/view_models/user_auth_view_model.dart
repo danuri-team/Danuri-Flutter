@@ -4,6 +4,11 @@ import 'package:danuri_flutter/data/models/auth/common/request/phone_request.dar
 import 'package:danuri_flutter/data/models/auth/user_auth/request/sign_up_request.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final userAuthViewModelProvider = ChangeNotifierProvider(
+  (_) => UserAuthViewModel(),
+);
 
 class UserAuthViewModel extends ChangeNotifier {
   final UserAuthDataSource dataSource = UserAuthDataSource();
@@ -67,6 +72,6 @@ class UserAuthViewModel extends ChangeNotifier {
     } on DioException catch (_) {
       _error = true;
     }
-    notifyListeners();  
+    notifyListeners();
   }
 }
