@@ -1,8 +1,9 @@
 import 'package:danuri_flutter/data/data_sources/auth/device_auth_data_source.dart';
 import 'package:danuri_flutter/data/models/auth/device_auth/device_auth_request.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
-class DeviceAuthViewModel {
+class DeviceAuthViewModel extends ChangeNotifier {
   final DeviceAuthDataSource dataSource = DeviceAuthDataSource();
 
   bool? _error;
@@ -21,5 +22,6 @@ class DeviceAuthViewModel {
     } on DioException catch (_) {
       _error = true;
     }
+    notifyListeners();
   }
 }
