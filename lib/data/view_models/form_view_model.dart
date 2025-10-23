@@ -25,9 +25,9 @@ class FormViewModel {
     }
   }
 
-  Future<void> inputForm({required String schema}) async {
+  Future<void> inputForm({required String form}) async {
     try {
-      await dataSource.inputForm(request: FormRequest(result: schema));
+      await dataSource.inputForm(request: FormRequest(result: form));
       _error = false;
     } on DioException catch (_) {
       _error = true;

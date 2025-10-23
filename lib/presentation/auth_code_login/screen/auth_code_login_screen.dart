@@ -74,11 +74,11 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   }
 
   Future<void> _inputForm() async {
-    final schema = ref.watch(signUpSchemaProvider);
+    final form = ref.watch(requestSignUpFormProvider);
     await _formViewModel.inputForm(
-      schema: jsonEncode(schema),
+      form: jsonEncode(form),
     );
-    ref.read(signUpSchemaProvider.notifier).resetSchema();
+    ref.read(requestSignUpFormProvider.notifier).resetSchema();
   }
 
   @override

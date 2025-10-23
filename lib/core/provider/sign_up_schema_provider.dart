@@ -1,14 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final signUpSchemaProvider =
-    StateNotifierProvider<SignUpSchemaNotifier, Map<String, dynamic>>(
-  (ref) => SignUpSchemaNotifier(),
+final requestSignUpFormProvider =
+    StateNotifierProvider<RequestSignUpFormNotifier, Map<String, dynamic>>(
+  (ref) => RequestSignUpFormNotifier(),
 );
 
-class SignUpSchemaNotifier extends StateNotifier<Map<String, dynamic>> {
-  SignUpSchemaNotifier() : super({});
+class RequestSignUpFormNotifier extends StateNotifier<Map<String, dynamic>> {
+  RequestSignUpFormNotifier() : super({});
 
-  void addSchema({required String key, required dynamic value}) {
+  void addField({required String key, required dynamic value}) {
     if (value == null) {
       state = {
         ...state,
