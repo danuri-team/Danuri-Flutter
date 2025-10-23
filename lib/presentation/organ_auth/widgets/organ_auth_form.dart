@@ -8,14 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final deviceAuthViewModelProvider =
-    ChangeNotifierProvider((_) => DeviceAuthViewModel());
-
 final deviceAuthCodeProvider = StateProvider<String>((ref) => '');
 
 final deviceAuthProvider = FutureProvider<void>(
   (ref) async {
-    final deviceAuthViewModel = ref.watch(deviceAuthViewModelProvider);
+    final deviceAuthViewModel = ref.read(deviceAuthViewModelProvider);
     final code = ref.read(deviceAuthCodeProvider);
     await deviceAuthViewModel.deviceAuth(code: code);
   },
@@ -55,7 +52,7 @@ class _OrganAuthFormState extends ConsumerState<OrganAuthForm> {
         .read(deviceAuthCodeProvider.notifier)
         .update((state) => _deviceIdController.text);
     ref.read(deviceAuthProvider);
-    final deviceAuthViewModel = ref.read(deviceAuthViewModelProvider.notifier);
+    final deviceAuthViewModel = ref.read(deviceAuthViewModelProvider);
     if (deviceAuthViewModel.error == false) {
       AppNavigation.goHome(context);
       deviceAuthViewModel.reset();

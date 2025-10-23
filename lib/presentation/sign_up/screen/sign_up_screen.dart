@@ -15,13 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final userViewModelProvider =
-    ChangeNotifierProvider((_) => UserAuthViewModel());
-final formViewModelProvider = Provider((_) => FormViewModel());
-
 final responseSignUpFormProvider = FutureProvider(
   (ref) async {
-    final formViewModel = ref.watch(formViewModelProvider);
+    final formViewModel = ref.read(formViewModelProvider.notifier);
     await formViewModel.getForm();
     final schema = FormSchemaToJson().schemaToJson(formViewModel.form!.schema);
     ref
@@ -33,7 +29,7 @@ final responseSignUpFormProvider = FutureProvider(
 
 final signUpAndLoginProvider = FutureProvider(
   (ref) async {
-    final userViewModel = ref.watch(userViewModelProvider);
+    final userViewModel = ref.watch(userAuthViewModelProvider);
     final String phone = ref.read(phoneNumberProvider.notifier).state!;
     await userViewModel.signUpAndLogin(phone: phone);
   },
@@ -64,7 +60,7 @@ class SignUpScreen extends ConsumerWidget {
 
   void _submit(WidgetRef ref, BuildContext context) async {
     ref.read(signUpAndLoginProvider);
-    final userViewModel = ref.read(userViewModelProvider.notifier);
+    final userViewModel = ref.read(userAuthViewModelProvider);
 
     if (userViewModel.error == true) {
       AppNavigation.pushFailure(context);
