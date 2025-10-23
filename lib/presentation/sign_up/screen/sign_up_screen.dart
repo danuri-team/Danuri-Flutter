@@ -2,10 +2,10 @@ import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
+import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/util/form_schema_to_json.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/models/enum/flow_type.dart';
-import 'package:danuri_flutter/data/models/other/form/response/form_response.dart';
 import 'package:danuri_flutter/data/view_models/form_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/sign_up/widgets/sign_up_form.dart';
@@ -15,65 +15,74 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SignUpScreen extends ConsumerStatefulWidget {
-  const SignUpScreen({super.key});
+final userViewModelProvider =
+    ChangeNotifierProvider((_) => UserAuthViewModel());
+final formViewModelProvider = Provider((_) => FormViewModel());
 
-  @override
-  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends ConsumerState<SignUpScreen> {
-  final UserAuthViewModel _userViewModel = UserAuthViewModel();
-
-  final FormViewModel _formViewModel = FormViewModel();
-  FormResponse? form;
-  List<Map<String, dynamic>>? schema;
-  final GlobalKey<SignUpFormState> signUpKey = GlobalKey<SignUpFormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    getForm();
-  }
-
-  Future<void> getForm() async {
-    await _formViewModel.getForm();
-    setState(() {
-      schema = FormSchemaToJson().schemaToJson(_formViewModel.form!.schema);
-      form = _formViewModel.form;
-    });
+final responseSignUpFormProvider = FutureProvider(
+  (ref) async {
+    final formViewModel = ref.watch(formViewModelProvider);
+    await formViewModel.getForm();
+    final schema = FormSchemaToJson().schemaToJson(formViewModel.form!.schema);
     ref
-        .read(signUpSchemaProvider.notifier)
-        .addSchema(key: 'id', value: schema![0]['id']);
-  }
+        .read(requestSignUpFormProvider.notifier)
+        .addField(key: 'id', value: schema[0]['id']);
+    return formViewModel.form;
+  },
+);
 
-  Future<void> signUp({required String phone}) async {
-    await _userViewModel.signUp(
-      phone: phone,
+final signUpAndLoginProvider = FutureProvider(
+  (ref) async {
+    final userViewModel = ref.watch(userViewModelProvider);
+    final String phone = ref.read(phoneNumberProvider.notifier).state!;
+    await userViewModel.signUpAndLogin(phone: phone);
+  },
+);
+
+class SignUpScreen extends ConsumerWidget {
+  SignUpScreen({super.key});
+
+  bool isAllRequiredSelected(WidgetRef ref) {
+    final requestForm = ref.watch(requestSignUpFormProvider);
+    final formAsync = ref.watch(responseSignUpFormProvider);
+
+    return formAsync.when(
+      data: (form) {
+        final schema = FormSchemaToJson().schemaToJson(form!.schema);
+        final requiredFields =
+            schema.where((item) => item['isRequired'] == true);
+
+        return requiredFields.every((item) {
+          final key = item['label'];
+          return requestForm.containsKey(key) && requestForm[key] != null;
+        });
+      },
+      error: (_, __) => false,
+      loading: () => false,
     );
   }
 
-  Future<void> userLogin({required String phone}) async {
-    await _userViewModel.userLogin(phone: phone);
-  }
+  void submit(WidgetRef ref, BuildContext context) {
+    ref.read(signUpAndLoginProvider);
+    final userViewModel = ref.read(userViewModelProvider.notifier);
 
-  bool isAllRequiredSelected(
-      List<Map<String, dynamic>>? schema, Map<String, dynamic> state) {
-    if (schema != null) {
-      final requiredFields = schema.where((item) => item['isRequired'] == true);
-
-      return requiredFields.every((item) {
-        final key = item['label'];
-        return state.containsKey(key) && state[key] != null;
-      });
+    if (userViewModel.error == true) {
+      AppNavigation.pushFailure(context);
+    } else {
+      AppNavigation.pushAuthCodeLogin(context);
+      ref.read(flowProvider.notifier).update((state) => FlowType.SIGN_UP);
+      userViewModel.reset();
     }
 
-    return false;
+    signUpKey.currentState?.resetForm();
   }
 
+  final GlobalKey<SignUpFormState> signUpKey = GlobalKey<SignUpFormState>();
+
   @override
-  Widget build(BuildContext context) {
-    final state = ref.watch(signUpSchemaProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final formAsync = ref.watch(responseSignUpFormProvider);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -82,16 +91,27 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const CustomTopBar(
+              CustomTopBar(
                 title: '처음 이용하면 정보 기입이 필요해요',
                 subTitle: '간단하게 입력해볼까요?',
                 needCallBackButton: true,
                 rightWidget: SizedBox.shrink(),
+                callBackButtonOnTap: () =>
+                    signUpKey.currentState?.resetForm(),
               ),
               SizedBox(height: 44.h),
               Padding(
                 padding: EdgeInsets.only(left: 10.w),
-                child: SignUpForm(form: form, schema: schema),
+                child: formAsync.when(
+                  data: (data) {
+                    final schema =
+                        FormSchemaToJson().schemaToJson(data!.schema);
+                    return SignUpForm(key: signUpKey, schema: schema);
+                  },
+                  error: (error, stackTrace) => Text(error.toString()),
+                  loading: () =>
+                      CircularProgressIndicator(color: DanuriColor.static2),
+                ),
               ),
               SizedBox(height: 56.h),
               Row(
@@ -99,38 +119,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 children: [
                   NextButton(
                     centerText: '완료',
-                    onTap: isAllRequiredSelected(schema, state)
-                        ? () {
-                            Throttle.run(
-                              () async {
-                                final String phone = ref
-                                    .read(phoneNumberProvider.notifier)
-                                    .state!;
-
-                                await signUp(phone: phone);
-                                await userLogin(phone: phone);
-
-                                if (!context.mounted) {
-                                  return;
-                                }
-
-                                if (_userViewModel.error! == true) {
-                                  AppNavigation.pushFailure(context);
-                                } else {
-                                  AppNavigation.pushAuthCodeLogin(context);
-                                  ref
-                                      .read(flowProvider.notifier)
-                                      .update((state) => FlowType.SIGN_UP);
-                                }
-
-                                signUpKey.currentState?.resetSchema();
-                              },
-                            );
-                          }
-                        : () {},
-                    isActivate: schema != null
-                        ? isAllRequiredSelected(schema, state)
-                        : false,
+                    onTap: () {
+                      if (isAllRequiredSelected(ref)) {
+                        Throttle.run(() => submit(ref, context));
+                      }
+                    },
+                    isActivate: isAllRequiredSelected(ref),
                   ),
                 ],
               ),

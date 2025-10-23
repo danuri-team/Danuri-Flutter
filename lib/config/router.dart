@@ -47,7 +47,7 @@ GoRouter router(String initialLocation) {
       GoRoute(
         name: 'sign-up',
         path: AppRoutes.signUp,
-        builder: (context, state) => const SignUpScreen(),
+        builder: (context, state) => SignUpScreen(),
       ),
       GoRoute(
         name: 'auth-code-login',
