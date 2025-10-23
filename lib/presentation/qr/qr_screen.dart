@@ -24,7 +24,7 @@ class QrScreen extends ConsumerWidget {
               onDetect: (capture) {
                 Throttle.run(
                   () {
-                    ref.read(qrActionProvider.notifier).excute(capture: capture, ref: ref, context: context);
+                    ref.read(qrActionProvider.notifier).excute(capture: capture, context: context);
                   },
                 );
               },

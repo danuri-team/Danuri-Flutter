@@ -12,7 +12,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 final qrActionProvider =
     StateNotifierProvider<QrActionNotifier, QrActionState?>(
-  (ref) => QrActionNotifier(),
+  (ref) => QrActionNotifier(ref),
 );
 
 class QrActionState {
@@ -28,7 +28,8 @@ class QrActionState {
 }
 
 class QrActionNotifier extends StateNotifier<QrActionState?> {
-  QrActionNotifier() : super(null);
+  final Ref ref;
+  QrActionNotifier(this.ref) : super(null);
 
   void setExecuteAction(QrActionType type) {
     switch (type) {
@@ -56,92 +57,85 @@ class QrActionNotifier extends StateNotifier<QrActionState?> {
     }
   }
 
-  void excute(
-      {required BarcodeCapture capture,
-      required WidgetRef ref,
-      required BuildContext context}) {
+  void excute({
+    required BarcodeCapture capture,
+    required BuildContext context,
+  }) {
     switch (state!.qrActionType) {
       case QrActionType.ORGAN_AUTH:
-        _organAuth(capture: capture, ref: ref, context: context);
+        _organAuth(capture: capture, context: context);
         break;
       case QrActionType.ITEM_RENTAL:
-        _itemRental(capture: capture, ref: ref, context: context);
+        _itemRental(capture: capture, context: context);
         break;
       case QrActionType.CHECK_OUT:
-        _checkOut(capture: capture, ref: ref, context: context);
+        _checkOut(capture: capture, context: context);
         break;
     }
   }
 
-  void _organAuth(
-      {required BarcodeCapture capture,
-      required WidgetRef ref,
-      required BuildContext context}) async {
-    final value = capture.barcodes[0].displayValue;
+  Map<String, dynamic> _decodeQrValue(BarcodeCapture capture) {
+    final value = capture.barcodes.first.displayValue;
+    return jsonDecode(value!) as Map<String, dynamic>;
+  }
 
-    if (value != null) {
-      final Map<String, dynamic> decoded = jsonDecode(value);
+  void _organAuth({
+    required BarcodeCapture capture,
+    required BuildContext context,
+  }) async {
+    final decoded = _decodeQrValue(capture);
 
-      final viewModel = DeviceAuthViewModel();
-      await viewModel.deviceAuth(code: decoded['code']);
+    final viewModel = ref.read(deviceAuthViewModelProvider);
+    await viewModel.deviceAuth(code: decoded['code']);
 
-      if (viewModel.error == false) {
-        AppNavigation.goHome(context);
-      }
+    if (viewModel.error == false) {
+      AppNavigation.goHome(context);
     }
   }
 
-  void _itemRental(
-      {required BarcodeCapture capture,
-      required WidgetRef ref,
-      required BuildContext context}) async {
-    final value = capture.barcodes[0].displayValue;
+  void _itemRental({
+    required BarcodeCapture capture,
+    required BuildContext context,
+  }) async {
+    final decoded = _decodeQrValue(capture);
 
-    if (value != null) {
-      final Map<String, dynamic> decoded = jsonDecode(value);
-      final itemId = ref.read(itemIdProvider.notifier).state;
+    final itemId = ref.read(itemIdProvider);
 
-      final viewModel = ItemViewModel();
+    final viewModel = ref.read(itemViewModelProvider);
 
-      await viewModel.itemRental(
-        itemId: itemId!,
-        quantity: 1,
-        usageId: decoded['usageId'],
-      );
+    await viewModel.itemRental(
+      itemId: itemId!,
+      quantity: 1,
+      usageId: decoded['usageId'],
+    );
 
-      ref.read(itemIdProvider.notifier).update((state) => null);
+    ref.read(itemIdProvider.notifier).update((state) => null);
 
-      if (viewModel.error == false) {
-        AppNavigation.pushCompletion(context);
-      } else {
-        AppNavigation.pushFailure(context);
-      }
+    if (viewModel.error == false) {
+      AppNavigation.pushCompletion(context);
+    } else {
+      AppNavigation.pushFailure(context);
     }
   }
 
-  void _checkOut(
-      {required BarcodeCapture capture,
-      required WidgetRef ref,
-      required BuildContext context}) async {
-    final value = capture.barcodes[0].displayValue;
-    if (value != null) {
-      final Map<String, dynamic> decoded = jsonDecode(value);
+  void _checkOut({
+    required BarcodeCapture capture,
+    required BuildContext context,
+  }) async {
+    final decoded = _decodeQrValue(capture);
 
-      final spaceViewModel = SpaceViewModel();
-      final itemViewModel = ItemViewModel();
+    final spaceViewModel = ref.read(spaceViewModelProvider);
+    final itemViewModel = ref.read(itemViewModelProvider);
 
-      await spaceViewModel.getUsageSpace();
+    await Future.wait([
+      itemViewModel.returnItem(usageId: decoded['usageId']),
+      spaceViewModel.checkOut(usageId: decoded['usageId']),
+    ]);
 
-      await Future.wait([
-        itemViewModel.returnItem(usageId: decoded['usageId']),
-        spaceViewModel.checkOut(usageId: decoded['usageId']),
-      ]);
-
-      if (spaceViewModel.error == false && itemViewModel.error == false) {
-        AppNavigation.pushCompletion(context);
-      } else {
-        AppNavigation.pushFailure(context);
-      }
+    if (spaceViewModel.error == false && itemViewModel.error == false) {
+      AppNavigation.pushCompletion(context);
+    } else {
+      AppNavigation.pushFailure(context);
     }
   }
 }
