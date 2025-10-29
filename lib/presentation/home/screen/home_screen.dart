@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return CustomTopBar(
                   title: '반가워요, 공간을 이용 해볼까요?',
                   subTitle:
-                      '송정다누리청소년센터 - $period ${time.hour > 13 ? time.hour - 12 : time.hour}시 ${time.minute}분',
+                      '송정다누리청소년문화의집 - $period ${time.hour > 13 ? time.hour - 12 : time.hour}시 ${time.minute}분',
                   needCallBackButton: false,
                   rightWidget: const CheckOutButton(),
                 );
