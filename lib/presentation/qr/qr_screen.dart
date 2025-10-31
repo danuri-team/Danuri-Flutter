@@ -132,7 +132,6 @@ class QrScreen extends ConsumerWidget {
                       case QrActionType.CHECK_OUT:
                         await checkOut(context: context, capture: capture);
                     }
-                    ref.read(qrActionProvider.notifier).update((state) => null);
                   },
                 );
               },
