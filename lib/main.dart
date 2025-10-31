@@ -11,6 +11,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
+  await Future.delayed(const Duration(milliseconds: 150));
+  await ScreenUtil.ensureScreenSize();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   await SentryFlutter.init(
