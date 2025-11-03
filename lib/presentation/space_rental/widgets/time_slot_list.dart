@@ -1,11 +1,11 @@
 import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
 import 'package:danuri_flutter/core/provider/time_slot_provider.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/core/util/date_formatter.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class TimeSlotList extends ConsumerWidget {
   const TimeSlotList({super.key});
@@ -36,20 +36,33 @@ class TimeSlotList extends ConsumerWidget {
                 final DateTime startTime = timeSlot[index]['startTime'];
                 final DateTime endTime = timeSlot[index]['endTime'];
                 final bool isAvailable = timeSlot[index]['isAvailable'];
-                final startTimeFormat = DateFormatter.Hmm(
-                    hour: startTime.hour, minute: startTime.minute);
-                final endTimeFormat = DateFormatter.Hmm(
-                    hour: endTime.hour, minute: endTime.minute);
-                final selectedStartAt = DateFormatter.HHmmss(
-                    hour: startTime.hour, minute: startTime.minute);
+                final startAtForamt = DateFormat.Hms().format(DateTime(
+                    startTime.year,
+                    startTime.month,
+                    startTime.day,
+                    startTime.hour,
+                    startTime.minute,
+                    startTime.second));
+                final startTimeFormat = DateFormat.Hm().format(DateTime(
+                    startTime.year,
+                    startTime.month,
+                    startTime.day,
+                    startTime.hour,
+                    startTime.minute));
+                final endTimeFormat = DateFormat.Hm().format(DateTime(
+                    endTime.year,
+                    endTime.month,
+                    endTime.day,
+                    endTime.hour,
+                    endTime.minute));
                 return SelectionBox(
                   available: isAvailable,
-                  isSelected: startAt == selectedStartAt,
+                  isSelected: startAt == startAtForamt,
                   name: '$startTimeFormat ~ $endTimeFormat',
                   onTap: () {
                     if (isAvailable == true) {
                       ref.read(startAtProvider.notifier).update(
-                            (state) => selectedStartAt,
+                            (state) => startAtForamt,
                           );
                     }
                   },

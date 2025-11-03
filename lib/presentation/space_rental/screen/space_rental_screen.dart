@@ -36,7 +36,7 @@ class _SpaceRentalScreenState extends ConsumerState<SpaceRentalScreen> {
           children: [
             CustomTopBar(
               title: '이용할 공간을 선택해주세요',
-              subTitle: '공간을 선택해주세요',
+              subTitle: '공간을 선택해주세요', 
               needCallBackButton: true,
               callBackButtonOnTap: () {
                 ref.read(spaceIdProvider.notifier).update((state) => null);

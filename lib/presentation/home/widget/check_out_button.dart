@@ -26,7 +26,7 @@ class CheckOutButton extends ConsumerWidget {
           () {
             ref.read(qrActionProvider.notifier).update(
                   (state) => QrActionType.CHECK_OUT,
-                );
+                ); 
             AppNavigation.pushQr(context, CameraFacing.front);
           },
         );

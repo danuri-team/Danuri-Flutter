@@ -12,8 +12,7 @@ class SpaceList extends ConsumerStatefulWidget {
   const SpaceList({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SpaceListState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SpaceListState();
 }
 
 class _SpaceListState extends ConsumerState<SpaceList> {
