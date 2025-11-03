@@ -88,6 +88,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
         if (!mounted) {
           return;
         }
+    ref.read(spaceIdProvider.notifier).update((state) => null);
+    ref.read(startAtProvider.notifier).update((state) => null);
+    ref.read(timeSlotProvider.notifier).reset();
         if (_spaceViewModel.error == true) {
           _spaceViewModel.reset();
           AppNavigation.pushFailure(context);
@@ -96,9 +99,6 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
         }
       },
     );
-    ref.read(spaceIdProvider.notifier).update((state) => null);
-    ref.read(startAtProvider.notifier).update((state) => null);
-    ref.read(timeSlotProvider.notifier).reset();
   }
 
   Future<void> _inputForm() async {
