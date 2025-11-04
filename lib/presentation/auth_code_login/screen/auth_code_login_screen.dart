@@ -88,9 +88,9 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
         if (!mounted) {
           return;
         }
-    ref.read(spaceIdProvider.notifier).update((state) => null);
-    ref.read(startAtProvider.notifier).update((state) => null);
-    ref.read(timeSlotProvider.notifier).reset();
+        ref.read(spaceIdProvider.notifier).update((state) => null);
+        ref.read(startAtProvider.notifier).update((state) => null);
+        ref.read(timeSlotProvider.notifier).reset();
         if (_spaceViewModel.error == true) {
           _spaceViewModel.reset();
           AppNavigation.pushFailure(context);
@@ -177,6 +177,22 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
                             if (_userAuthViewModel.error == true) {
                               AppNavigation.pushFailure(context);
+                              ref
+                                  .read(phoneNumberProvider.notifier)
+                                  .update((state) => null);
+                              ref.read(flowProvider.notifier).update(
+                                    (state) => null,
+                                  );
+                              ref
+                                  .read(spaceIdProvider.notifier)
+                                  .update((state) => null);
+                              ref
+                                  .read(startAtProvider.notifier)
+                                  .update((state) => null);
+                              ref.read(timeSlotProvider.notifier).reset();
+                              ref
+                                  .read(signUpSchemaProvider.notifier)
+                                  .resetSchema();
                               _userAuthViewModel.reset();
                             } else {
                               final flow =
