@@ -10,7 +10,8 @@ abstract class AppRoutes {
   static const String spaceRental = '/space-rental';
   static const String itemRental= '/item-rental';
 
-  static const String organAuth = '/orga-auth';
+  static const String organAuth = '/organ-auth';
+  static const String additionalPersonSelect = 'additional_person_select';
   static const String login = '/login';
   static const String signUp= '/sign-up';
   static const String authCodeLogin = '/auth-code-login';

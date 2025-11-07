@@ -1,4 +1,5 @@
 import 'package:danuri_flutter/config/app_routes.dart';
+import 'package:danuri_flutter/presentation/additional_person_select/screen/additional_person_select_screen.dart';
 import 'package:danuri_flutter/presentation/failure/screen/failure_screen.dart';
 import 'package:danuri_flutter/presentation/completion/screen/completion_screen.dart';
 import 'package:danuri_flutter/presentation/item_rental/screen/item_rental_screen.dart';
@@ -27,12 +28,17 @@ GoRouter router(String initialLocation) {
       GoRoute(
         name: 'home',
         path: AppRoutes.home,
-        builder: (context, state) => HomeScreen(),
+        builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
         name: 'space-retnal',
         path: AppRoutes.spaceRental,
         builder: (context, state) => const SpaceRentalScreen(),
+      ),
+      GoRoute(
+        name: 'additional_person_select',
+        path: AppRoutes.additionalPersonSelect,
+        builder: (context, state) => const AdditionalPersonSelectScreen(),
       ),
       GoRoute(
         name: 'item-rental',
