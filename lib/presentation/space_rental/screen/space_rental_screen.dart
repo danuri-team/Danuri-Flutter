@@ -2,7 +2,7 @@ import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
 import 'package:danuri_flutter/core/provider/time_slot_provider.dart';
-import 'package:danuri_flutter/data/models/enum/flow_type.dart';
+import 'package:danuri_flutter/core/enum/flow_type.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/presentation/space_rental/widgets/space_list.dart';
 import 'package:danuri_flutter/presentation/space_rental/widgets/time_slot_list.dart';

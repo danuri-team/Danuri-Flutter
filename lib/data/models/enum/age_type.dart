@@ -1,7 +1,0 @@
-enum AgeType {
-  ELEMENTARY,
-  MIDDLE,
-  HIGH,
-  OUT_OF_SCHOOL_YOUTH,
-  ADULT,
-}

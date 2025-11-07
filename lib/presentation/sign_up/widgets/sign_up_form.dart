@@ -1,7 +1,7 @@
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
-import 'package:danuri_flutter/data/models/enum/sign_up_schema_type.dart';
+import 'package:danuri_flutter/core/enum/sign_up_schema_type.dart';
 import 'package:danuri_flutter/data/models/other/form/response/form_response.dart';
 import 'package:danuri_flutter/presentation/widgets/selection_box.dart';
 import 'package:flutter/material.dart';

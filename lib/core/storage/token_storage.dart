@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/data/models/enum/token_type.dart';
+import 'package:danuri_flutter/core/enum/token_type.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class TokenStorage {

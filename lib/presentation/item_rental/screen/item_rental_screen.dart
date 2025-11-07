@@ -2,7 +2,7 @@ import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
 import 'package:danuri_flutter/core/provider/qr_action_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/models/enum/qr_action_type.dart';
+import 'package:danuri_flutter/core/enum/qr_action_type.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/presentation/item_rental/widgets/select_item.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
