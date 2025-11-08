@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/core/enum/age_type.dart';
+import 'package:danuri_flutter/core/enum/age_group_type.dart';
 import 'package:danuri_flutter/core/enum/gender_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -8,7 +8,7 @@ part 'space_rental_request.g.dart';
 class SpaceRentalRequest {
   @JsonKey(name: 'space_id')
   final String spaceId;
-  @JsonKey(name: 'start_At')
+  @JsonKey(name: 'start_at')
   final String startAt;
   @JsonKey(name: 'additional_participants')
   final List<AdditionalParticipants> additionalParticipants;
@@ -28,8 +28,8 @@ class SpaceRentalRequest {
 @JsonSerializable()
 class AdditionalParticipants {
   final GenderType sex;
-  @JsonValue('age_group')
-  final AgeType ageGroup;
+  @JsonKey(name: 'age_group')
+  final AgeGroupType ageGroup;
   final int count;
 
   const AdditionalParticipants({

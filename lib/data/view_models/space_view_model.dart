@@ -47,11 +47,13 @@ class SpaceViewModel {
     required List<AdditionalParticipants> additionalParticipants,
   }) async {
     try {
-      await dataSource.spaceRental(SpaceRentalRequest(
-        spaceId: spaceId,
-        startAt: startAt,
-        additionalParticipants: additionalParticipants,
-      ));
+      await dataSource.spaceRental(
+        SpaceRentalRequest(
+          spaceId: spaceId,
+          startAt: startAt,
+          additionalParticipants: additionalParticipants,
+        ),
+      );
       _error = false;
     } on DioException catch (_) {
       _error = true;
