@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:danuri_flutter/config/app_routes.dart';
+import 'package:danuri_flutter/core/enum/gender_type.dart';
+import 'package:danuri_flutter/core/provider/additional_people_select_provider.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
@@ -10,6 +12,7 @@ import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/core/enum/flow_type.dart';
+import 'package:danuri_flutter/data/models/other/space/reqeust/space_rental_request.dart';
 import 'package:danuri_flutter/data/view_models/form_view_model.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
@@ -81,24 +84,41 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
   Future<void> _spaceRental() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
     final startAt = ref.read(startAtProvider.notifier).state;
-    await _spaceViewModel
-        .spaceRental(context: context, spaceId: spaceId!, startAt: startAt!, additionalParticipants: )
-        .then(
-      (_) {
-        if (!mounted) {
-          return;
+
+    final additionalPeopleProvider = ref.read(additionalPeopleSelectProvider);
+    final List<AdditionalParticipants> additionalParticipants = [];
+
+    for (final genderEntry in additionalPeopleProvider.entries) {
+      for (final ageEntry in genderEntry.value.entries) {
+        if (ageEntry.value >= 1) {
+          additionalParticipants.add(AdditionalParticipants(
+            sex: genderEntry.key,
+            ageGroup: ageEntry.key,
+            count: ageEntry.value,
+          ));
         }
-        ref.read(spaceIdProvider.notifier).update((state) => null);
-        ref.read(startAtProvider.notifier).update((state) => null);
-        ref.read(timeSlotProvider.notifier).reset();
-        if (_spaceViewModel.error == true) {
-          _spaceViewModel.reset();
-          AppNavigation.pushFailure(context);
-        } else {
-          AppNavigation.pushCompletion(context);
-        }
-      },
+      }
+    }
+
+    await _spaceViewModel.spaceRental(
+      context: context,
+      spaceId: spaceId!,
+      startAt: startAt!,
+      additionalParticipants: additionalParticipants,
     );
+    ref.read(additionalPeopleSelectProvider.notifier).reset();
+    ref.read(genderTypeProvider.notifier).update(
+          (state) => GenderType.MALE,
+        );
+    ref.read(spaceIdProvider.notifier).update((state) => null);
+    ref.read(startAtProvider.notifier).update((state) => null);
+    ref.read(timeSlotProvider.notifier).reset();
+    if (_spaceViewModel.error == true) {
+      _spaceViewModel.reset();
+      AppNavigation.pushFailure(context);
+    } else {
+      AppNavigation.pushCompletion(context);
+    }
   }
 
   Future<void> _inputForm() async {
