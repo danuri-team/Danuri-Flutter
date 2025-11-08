@@ -11,7 +11,7 @@ abstract class AppRoutes {
   static const String itemRental= '/item-rental';
 
   static const String organAuth = '/organ-auth';
-  static const String additionalPersonSelect = 'additional_person_select';
+  static const String additionalPersonSelect = '/additional_person_select';
   static const String login = '/login';
   static const String signUp= '/sign-up';
   static const String authCodeLogin = '/auth-code-login';
@@ -31,6 +31,7 @@ abstract class AppNavigation{
   static void pushItemRental(BuildContext context) => context.push(AppRoutes.itemRental);
 
   static void goOranAuth(BuildContext context) => context.go(AppRoutes.organAuth);
+  static void pushAdditionalPersonSelect(BuildContext context) => context.push(AppRoutes.additionalPersonSelect);
   static void pushLogin(BuildContext context) => context.push(AppRoutes.login);
   static void pushSignUp(BuildContext context) => context.push(AppRoutes.signUp);
   static void pushAuthCodeLogin(BuildContext context) => context.push(AppRoutes.authCodeLogin);
