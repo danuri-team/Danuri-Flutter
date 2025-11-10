@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AdditionalPeopleSelectSCreen extends ConsumerWidget {
-  const AdditionalPeopleSelectSCreen({super.key});
+class AdditionalPeopleSelectScreen extends ConsumerWidget {
+  const AdditionalPeopleSelectScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

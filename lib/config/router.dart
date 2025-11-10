@@ -38,7 +38,7 @@ GoRouter router(String initialLocation) {
       GoRoute(
         name: 'additional_person_select',
         path: AppRoutes.additionalPersonSelect,
-        builder: (context, state) => const AdditionalPeopleSelectSCreen(),
+        builder: (context, state) => const AdditionalPeopleSelectScreen(),
       ),
       GoRoute(
         name: 'item-rental',
