@@ -14,7 +14,6 @@ import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/core/enum/flow_type.dart';
 import 'package:danuri_flutter/data/models/other/space/reqeust/space_rental_request.dart';
 import 'package:danuri_flutter/data/view_models/form_view_model.dart';
-import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
@@ -36,17 +35,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
   final UserAuthViewModel _userAuthViewModel = UserAuthViewModel();
   final SpaceViewModel _spaceViewModel = SpaceViewModel();
-  final ItemViewModel _itemViewModel = ItemViewModel();
   final FormViewModel _formViewModel = FormViewModel();
-
-  @override
-  void initState() {
-    super.initState();
-    final flow = ref.read(flowProvider.notifier).state;
-    if (flow == FlowType.CHECK_OUT) {
-      _spaceViewModel.getUsageSpace();
-    }
-  }
 
   @override
   void dispose() {
@@ -60,24 +49,6 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
     await _userAuthViewModel.authCodeLogin(
       phone: phone!,
       authCode: _authCodeController.text,
-    );
-  }
-
-  Future<void> _checkOut() async {
-    await _itemViewModel.returnItem(usageId: _spaceViewModel.usageId!);
-    await _spaceViewModel.checkOut(usageId: _spaceViewModel.usageId!).then(
-      (_) {
-        if (!mounted) {
-          return;
-        }
-
-        if (_spaceViewModel.error == true) {
-          _spaceViewModel.reset();
-          AppNavigation.pushFailure(context);
-        } else {
-          AppNavigation.pushCompletion(context);
-        }
-      },
     );
   }
 
@@ -219,9 +190,6 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                                   ref.read(flowProvider.notifier).state;
                               if (flow != null) {
                                 switch (flow) {
-                                  case FlowType.CHECK_OUT:
-                                    await _checkOut();
-                                    break;
                                   case FlowType.SPACE_RENTAL:
                                     await _spaceRental();
                                     break;

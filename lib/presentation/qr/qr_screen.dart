@@ -86,15 +86,21 @@ class QrScreen extends ConsumerWidget {
     if (value != null) {
       final Map<String, dynamic> decoded = jsonDecode(value);
 
-      final viewModel = SpaceViewModel();
-
-      await viewModel.checkOut(usageId: decoded['usageId']);
-
-      if (viewModel.error == false) {
-        AppNavigation.pushCompletion(context);
-      } else {
+      final itemViewModel = ItemViewModel();
+      await itemViewModel.returnItem(usageId: decoded['usageId']);
+      if (itemViewModel.error == true) {
         AppNavigation.pushFailure(context);
+        return;
       }
+      final spaceViewModel = SpaceViewModel();
+      await spaceViewModel.checkOut(usageId: decoded['usageId']);
+      if (spaceViewModel.error == true) {
+        AppNavigation.pushFailure(context);
+        return;
+      }
+
+
+      AppNavigation.pushCompletion(context);
     }
   }
 
