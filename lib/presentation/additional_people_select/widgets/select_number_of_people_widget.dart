@@ -51,11 +51,11 @@ class SelectPersonByAgeGroupWidget extends ConsumerWidget {
   String ageGroupDivision(AgeGroupType ageGroup) {
     switch (ageGroup) {
       case AgeGroupType.ELEMENTARY:
-        return '초등학생';
+        return '초등학교';
       case AgeGroupType.MIDDLE:
-        return '중학생';
+        return '중학교';
       case AgeGroupType.HIGH:
-        return '고등학생';
+        return '고등학교';
       case AgeGroupType.OUT_OF_SCHOOL_YOUTH:
         return '학교 밖 청소년';
       case AgeGroupType.ADULT:
