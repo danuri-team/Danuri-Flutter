@@ -11,7 +11,7 @@ class Throttle {
 
     // 2초 뒤 함수 호출 가능
     timer = Timer(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () => timer = null,
     );
   }
