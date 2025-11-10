@@ -50,6 +50,27 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
       phone: phone!,
       authCode: _authCodeController.text,
     );
+
+    if (_userAuthViewModel.error == true) {
+      AppNavigation.pushFailure(context);
+      ref.read(phoneNumberProvider.notifier).update((state) => null);
+      ref.read(flowProvider.notifier).update(
+            (state) => null,
+          );
+      ref.read(spaceIdProvider.notifier).update((state) => null);
+      ref.read(startAtProvider.notifier).update((state) => null);
+      ref.read(timeSlotProvider.notifier).reset();
+      ref.read(signUpSchemaProvider.notifier).resetSchema();
+      _userAuthViewModel.reset();
+      ref.read(phoneNumberProvider.notifier).update((state) => null);
+      ref.read(flowProvider.notifier).update(
+            (state) => null,
+          );
+      ref.read(additionalPeopleSelectProvider.notifier).reset();
+      ref.read(genderTypeProvider.notifier).update(
+            (state) => GenderType.MALE,
+          );
+    }
   }
 
   Future<void> _spaceRental() async {
@@ -77,13 +98,23 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
       startAt: startAt!,
       additionalParticipants: additionalParticipants,
     );
-    ref.read(additionalPeopleSelectProvider.notifier).reset();
-    ref.read(genderTypeProvider.notifier).update(
-          (state) => GenderType.MALE,
+    ref.read(phoneNumberProvider.notifier).update((state) => null);
+    ref.read(flowProvider.notifier).update(
+          (state) => null,
         );
     ref.read(spaceIdProvider.notifier).update((state) => null);
     ref.read(startAtProvider.notifier).update((state) => null);
     ref.read(timeSlotProvider.notifier).reset();
+    ref.read(signUpSchemaProvider.notifier).resetSchema();
+    _userAuthViewModel.reset();
+    ref.read(phoneNumberProvider.notifier).update((state) => null);
+    ref.read(flowProvider.notifier).update(
+          (state) => null,
+        );
+    ref.read(additionalPeopleSelectProvider.notifier).reset();
+    ref.read(genderTypeProvider.notifier).update(
+          (state) => GenderType.MALE,
+        );
     if (_spaceViewModel.error == true) {
       _spaceViewModel.reset();
       AppNavigation.pushFailure(context);
@@ -158,57 +189,23 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                 centerText: '다음',
                 onTap: () {
                   if (_authCodeController.text.length == 6) {
-                    Throttle.run(
-                      () {
-                        _authCodeLogin().then(
-                          (_) async {
-                            if (!context.mounted) {
-                              return;
-                            }
+                    Throttle.run(() async {
+                      await _authCodeLogin();
 
-                            if (_userAuthViewModel.error == true) {
-                              AppNavigation.pushFailure(context);
-                              ref
-                                  .read(phoneNumberProvider.notifier)
-                                  .update((state) => null);
-                              ref.read(flowProvider.notifier).update(
-                                    (state) => null,
-                                  );
-                              ref
-                                  .read(spaceIdProvider.notifier)
-                                  .update((state) => null);
-                              ref
-                                  .read(startAtProvider.notifier)
-                                  .update((state) => null);
-                              ref.read(timeSlotProvider.notifier).reset();
-                              ref
-                                  .read(signUpSchemaProvider.notifier)
-                                  .resetSchema();
-                              _userAuthViewModel.reset();
-                            } else {
-                              final flow =
-                                  ref.read(flowProvider.notifier).state;
-                              if (flow != null) {
-                                switch (flow) {
-                                  case FlowType.SPACE_RENTAL:
-                                    await _spaceRental();
-                                    break;
-                                  case FlowType.SIGN_UP:
-                                    await _inputForm();
-                                    await _spaceRental();
-                                }
-                                ref
-                                    .read(phoneNumberProvider.notifier)
-                                    .update((state) => null);
-                                ref.read(flowProvider.notifier).update(
-                                      (state) => null,
-                                    );
-                              }
-                            }
-                          },
-                        );
-                      },
-                    );
+                      if (_userAuthViewModel.error == false) {
+                        final flow = ref.read(flowProvider.notifier).state;
+                        if (flow != null) {
+                          switch (flow) {
+                            case FlowType.SPACE_RENTAL:
+                              await _spaceRental();
+                              break;
+                            case FlowType.SIGN_UP:
+                              await _inputForm();
+                              await _spaceRental();
+                          }
+                        }
+                      }
+                    });
                   }
                 },
                 isActivate: _authCodeController.text.length == 6,

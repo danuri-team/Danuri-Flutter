@@ -1,10 +1,8 @@
 import 'package:danuri_flutter/config/app_routes.dart';
-import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/qr_action_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/core/enum/flow_type.dart';
 import 'package:danuri_flutter/core/enum/qr_action_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,9 +17,6 @@ class CheckOutButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () async {
-        ref.read(flowProvider.notifier).update(
-              (state) => FlowType.CHECK_OUT,
-            );
         Throttle.run(
           () {
             ref.read(qrActionProvider.notifier).update(
