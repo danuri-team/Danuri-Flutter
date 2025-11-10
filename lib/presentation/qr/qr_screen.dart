@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/item_id_provider.dart';
+import 'package:danuri_flutter/core/provider/item_rental_provider.dart';
 import 'package:danuri_flutter/core/provider/qr_action_provider.dart';
 import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/models/enum/qr_action_type.dart';
+import 'package:danuri_flutter/core/enum/qr_action_type.dart';
 import 'package:danuri_flutter/data/view_models/device_auth_view_model.dart';
 import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
@@ -55,6 +56,9 @@ class QrScreen extends ConsumerWidget {
       ref.read(itemIdProvider.notifier).update((state) => null);
 
       if (viewModel.error == false) {
+        ref.read(itemRentalProvider.notifier).update(
+              (state) => true,
+            );
         AppNavigation.pushCompletion(context);
       } else {
         AppNavigation.pushFailure(context);
@@ -81,20 +85,33 @@ class QrScreen extends ConsumerWidget {
   }
 
   Future<void> checkOut(
-      {required BuildContext context, required BarcodeCapture capture}) async {
+      {required BuildContext context,
+      required BarcodeCapture capture,
+      required WidgetRef ref}) async {
     final value = capture.barcodes[0].displayValue;
     if (value != null) {
       final Map<String, dynamic> decoded = jsonDecode(value);
 
-      final viewModel = SpaceViewModel();
-
-      await viewModel.checkOut(usageId: decoded['usageId']);
-
-      if (viewModel.error == false) {
-        AppNavigation.pushCompletion(context);
-      } else {
-        AppNavigation.pushFailure(context);
+      final whetherToRentItems = ref.read(itemRentalProvider.notifier).state;
+      if (whetherToRentItems == true) {
+        final itemViewModel = ItemViewModel();
+        await itemViewModel.returnItem(usageId: decoded['usageId']);
+        if (itemViewModel.error == true) {
+          AppNavigation.pushFailure(context);
+          return;
+        }
       }
+
+      final spaceViewModel = SpaceViewModel();
+      await spaceViewModel.checkOut(usageId: decoded['usageId']);
+      if (spaceViewModel.error == true) {
+        AppNavigation.pushFailure(context);
+        return;
+      }
+      ref.read(itemRentalProvider.notifier).update(
+            (state) => false,
+          );
+      AppNavigation.pushCompletion(context);
     }
   }
 
@@ -130,9 +147,9 @@ class QrScreen extends ConsumerWidget {
                         await organAuth(
                             context: context, ref: ref, capture: capture);
                       case QrActionType.CHECK_OUT:
-                        await checkOut(context: context, capture: capture);
+                        await checkOut(
+                            context: context, capture: capture, ref: ref);
                     }
-                    ref.read(qrActionProvider.notifier).update((state) => null);
                   },
                 );
               },

@@ -2,7 +2,8 @@ import 'package:danuri_flutter/config/app_routes.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
 import 'package:danuri_flutter/core/provider/time_slot_provider.dart';
-import 'package:danuri_flutter/data/models/enum/flow_type.dart';
+import 'package:danuri_flutter/core/enum/flow_type.dart';
+import 'package:danuri_flutter/core/util/throttle.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/presentation/space_rental/widgets/space_list.dart';
 import 'package:danuri_flutter/presentation/space_rental/widgets/time_slot_list.dart';
@@ -58,12 +59,16 @@ class _SpaceRentalScreenState extends ConsumerState<SpaceRentalScreen> {
             NextButton(
               centerText: '다음',
               onTap: () async {
-                if (spaceId != null && startAt != null) {
-                  ref.read(flowProvider.notifier).update(
-                        (state) => FlowType.SPACE_RENTAL,
-                      );
-                  AppNavigation.pushLogin(context);
-                }
+                Throttle.run(
+                  () {
+                    if (spaceId != null && startAt != null) {
+                      ref.read(flowProvider.notifier).update(
+                            (state) => FlowType.SPACE_RENTAL,
+                          );
+                      AppNavigation.pushAdditionalPersonSelect(context);
+                    }
+                  },
+                );
               },
               isActivate: spaceId != null && startAt != null,
             ),

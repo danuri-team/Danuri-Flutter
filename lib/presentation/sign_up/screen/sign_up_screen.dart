@@ -4,7 +4,7 @@ import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/util/form_schema_to_json.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/models/enum/flow_type.dart';
+import 'package:danuri_flutter/core/enum/flow_type.dart';
 import 'package:danuri_flutter/data/models/other/form/response/form_response.dart';
 import 'package:danuri_flutter/data/view_models/form_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';

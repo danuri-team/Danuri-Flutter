@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:danuri_flutter/config/app_routes.dart';
+import 'package:danuri_flutter/core/enum/gender_type.dart';
+import 'package:danuri_flutter/core/provider/additional_people_select_provider.dart';
 import 'package:danuri_flutter/core/provider/flow_provider.dart';
 import 'package:danuri_flutter/core/provider/sign_up_schema_provider.dart';
 import 'package:danuri_flutter/core/provider/space_rental_provider.dart';
@@ -9,9 +11,9 @@ import 'package:danuri_flutter/core/theme/color.dart';
 import 'package:danuri_flutter/core/theme/text.dart';
 import 'package:danuri_flutter/core/provider/phone_number_provider.dart';
 import 'package:danuri_flutter/core/util/throttle.dart';
-import 'package:danuri_flutter/data/models/enum/flow_type.dart';
+import 'package:danuri_flutter/core/enum/flow_type.dart';
+import 'package:danuri_flutter/data/models/other/space/reqeust/space_rental_request.dart';
 import 'package:danuri_flutter/data/view_models/form_view_model.dart';
-import 'package:danuri_flutter/data/view_models/item_rental_view_model.dart';
 import 'package:danuri_flutter/data/view_models/space_view_model.dart';
 import 'package:danuri_flutter/data/view_models/user_auth_view_model.dart';
 import 'package:danuri_flutter/presentation/widgets/button/next_button.dart';
@@ -33,17 +35,7 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
 
   final UserAuthViewModel _userAuthViewModel = UserAuthViewModel();
   final SpaceViewModel _spaceViewModel = SpaceViewModel();
-  final ItemViewModel _itemViewModel = ItemViewModel();
   final FormViewModel _formViewModel = FormViewModel();
-
-  @override
-  void initState() {
-    super.initState();
-    final flow = ref.read(flowProvider.notifier).state;
-    if (flow == FlowType.CHECK_OUT) {
-      _spaceViewModel.getUsageSpace();
-    }
-  }
 
   @override
   void dispose() {
@@ -58,47 +50,77 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
       phone: phone!,
       authCode: _authCodeController.text,
     );
-  }
 
-  Future<void> _checkOut() async {
-    await _itemViewModel.returnItem(usageId: _spaceViewModel.usageId!);
-    await _spaceViewModel.checkOut(usageId: _spaceViewModel.usageId!).then(
-      (_) {
-        if (!mounted) {
-          return;
-        }
-
-        if (_spaceViewModel.error == true) {
-          _spaceViewModel.reset();
-          AppNavigation.pushFailure(context);
-        } else {
-          AppNavigation.pushCompletion(context);
-        }
-      },
-    );
+    if (_userAuthViewModel.error == true) {
+      AppNavigation.pushFailure(context);
+      ref.read(phoneNumberProvider.notifier).update((state) => null);
+      ref.read(flowProvider.notifier).update(
+            (state) => null,
+          );
+      ref.read(spaceIdProvider.notifier).update((state) => null);
+      ref.read(startAtProvider.notifier).update((state) => null);
+      ref.read(timeSlotProvider.notifier).reset();
+      ref.read(signUpSchemaProvider.notifier).resetSchema();
+      _userAuthViewModel.reset();
+      ref.read(phoneNumberProvider.notifier).update((state) => null);
+      ref.read(flowProvider.notifier).update(
+            (state) => null,
+          );
+      ref.read(additionalPeopleSelectProvider.notifier).reset();
+      ref.read(genderTypeProvider.notifier).update(
+            (state) => GenderType.MALE,
+          );
+    }
   }
 
   Future<void> _spaceRental() async {
     final spaceId = ref.read(spaceIdProvider.notifier).state;
     final startAt = ref.read(startAtProvider.notifier).state;
-    await _spaceViewModel
-        .spaceRental(context: context, spaceId: spaceId!, startAt: startAt!)
-        .then(
-      (_) {
-        if (!mounted) {
-          return;
+
+    final additionalPeopleProvider = ref.read(additionalPeopleSelectProvider);
+    final List<AdditionalParticipants> additionalParticipants = [];
+
+    for (final genderEntry in additionalPeopleProvider.entries) {
+      for (final ageEntry in genderEntry.value.entries) {
+        if (ageEntry.value >= 1) {
+          additionalParticipants.add(AdditionalParticipants(
+            sex: genderEntry.key,
+            ageGroup: ageEntry.key,
+            count: ageEntry.value,
+          ));
         }
-        if (_spaceViewModel.error == true) {
-          _spaceViewModel.reset();
-          AppNavigation.pushFailure(context);
-        } else {
-          AppNavigation.pushCompletion(context);
-        }
-      },
+      }
+    }
+
+    await _spaceViewModel.spaceRental(
+      context: context,
+      spaceId: spaceId!,
+      startAt: startAt!,
+      additionalParticipants: additionalParticipants,
     );
+    ref.read(phoneNumberProvider.notifier).update((state) => null);
+    ref.read(flowProvider.notifier).update(
+          (state) => null,
+        );
     ref.read(spaceIdProvider.notifier).update((state) => null);
     ref.read(startAtProvider.notifier).update((state) => null);
     ref.read(timeSlotProvider.notifier).reset();
+    ref.read(signUpSchemaProvider.notifier).resetSchema();
+    _userAuthViewModel.reset();
+    ref.read(phoneNumberProvider.notifier).update((state) => null);
+    ref.read(flowProvider.notifier).update(
+          (state) => null,
+        );
+    ref.read(additionalPeopleSelectProvider.notifier).reset();
+    ref.read(genderTypeProvider.notifier).update(
+          (state) => GenderType.MALE,
+        );
+    if (_spaceViewModel.error == true) {
+      _spaceViewModel.reset();
+      AppNavigation.pushFailure(context);
+    } else {
+      AppNavigation.pushCompletion(context);
+    }
   }
 
   Future<void> _inputForm() async {
@@ -167,44 +189,23 @@ class _AuthCodeLoginScreenState extends ConsumerState<AuthCodeLoginScreen> {
                 centerText: '다음',
                 onTap: () {
                   if (_authCodeController.text.length == 6) {
-                    Throttle.run(
-                      () {
-                        _authCodeLogin().then(
-                          (_) async {
-                            if (!context.mounted) {
-                              return;
-                            }
+                    Throttle.run(() async {
+                      await _authCodeLogin();
 
-                            if (_userAuthViewModel.error == true) {
-                              AppNavigation.pushFailure(context);
-                              _userAuthViewModel.reset();
-                            } else {
-                              final flow =
-                                  ref.read(flowProvider.notifier).state;
-                              if (flow != null) {
-                                switch (flow) {
-                                  case FlowType.CHECK_OUT:
-                                    await _checkOut();
-                                    break;
-                                  case FlowType.SPACE_RENTAL:
-                                    await _spaceRental();
-                                    break;
-                                  case FlowType.SIGN_UP:
-                                    await _inputForm();
-                                    await _spaceRental();
-                                }
-                                ref
-                                    .read(phoneNumberProvider.notifier)
-                                    .update((state) => null);
-                                ref.read(flowProvider.notifier).update(
-                                      (state) => null,
-                                    );
-                              }
-                            }
-                          },
-                        );
-                      },
-                    );
+                      if (_userAuthViewModel.error == false) {
+                        final flow = ref.read(flowProvider.notifier).state;
+                        if (flow != null) {
+                          switch (flow) {
+                            case FlowType.SPACE_RENTAL:
+                              await _spaceRental();
+                              break;
+                            case FlowType.SIGN_UP:
+                              await _inputForm();
+                              await _spaceRental();
+                          }
+                        }
+                      }
+                    });
                   }
                 },
                 isActivate: _authCodeController.text.length == 6,

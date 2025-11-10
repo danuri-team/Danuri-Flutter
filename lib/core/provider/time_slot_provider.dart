@@ -14,13 +14,32 @@ class TimeSlotNotifier extends StateNotifier<List<Map<String, dynamic>>> {
   void addTimeSlot(List<TimeSlots> timeSlots) {
     DateTime startTime;
     DateTime endTime;
+
     for (int index = 0; index < timeSlots.length; index++) {
-      startTime = DateTime(now.year, now.month, now.day, timeSlots[index].startTime[0], timeSlots[index].startTime[1]);
-      endTime = DateTime(now.year, now.month, now.day, timeSlots[index].endTime[0], timeSlots[index].endTime[1]);
+      startTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        timeSlots[index].startTime[0],
+        timeSlots[index].startTime[1],
+        timeSlots[index].startTime.elementAtOrNull(2) == null  ? 0 : timeSlots[index].startTime[2],
+      );
+      endTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        timeSlots[index].endTime[0],
+        timeSlots[index].endTime[1],
+        timeSlots[index].endTime.elementAtOrNull(2) == null  ? 0 : timeSlots[index].endTime[2],
+      );
 
       state = [
         ...state,
-        {'startTime':startTime, 'endTime':endTime, 'isAvailable': timeSlots[index].isAvailable}
+        {
+          'startTime': startTime,
+          'endTime': endTime,
+          'isAvailable': timeSlots[index].isAvailable
+        }
       ];
     }
   }

@@ -1,4 +1,4 @@
-import 'package:danuri_flutter/data/models/enum/status_type.dart';
+import 'package:danuri_flutter/core/enum/status_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'status_response.g.dart';

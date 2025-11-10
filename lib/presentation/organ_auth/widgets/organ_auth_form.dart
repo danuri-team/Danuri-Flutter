@@ -84,9 +84,9 @@ class _OrganAuthFormState extends State<OrganAuthForm> {
           onTap: () async {
             if (_deviceIdController.text.length == 6) {
               await _viewModel.deviceAuth(code: _deviceIdController.text);
-              if (context.mounted) {
-                AppNavigation.goHome(context);
-              }
+            }
+            if (_viewModel.error == false) {
+              AppNavigation.goHome(context);
             }
           },
           isActivate: _deviceIdController.text.length == 6,
