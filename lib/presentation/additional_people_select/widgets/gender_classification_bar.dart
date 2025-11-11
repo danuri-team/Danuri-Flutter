@@ -120,9 +120,9 @@ class _NumberOfMaleAndFemailWidgetState
           width: 24.r,
           height: 24.r,
           decoration: ShapeDecoration(
-            shape: OvalBorder(),
-            color: const Color(0xFF3385FF),
-          ),
+              shape: OvalBorder(),
+              color: Color.from(red: 0.41, green: 0.65, blue: 1, alpha: 1)
+              ),
         ),
         SizedBox(width: 8.w),
         Text(
@@ -146,7 +146,7 @@ class _NumberOfMaleAndFemailWidgetState
           height: 24.r,
           decoration: ShapeDecoration(
             shape: OvalBorder(),
-            color: const Color(0xFFFA73E3),
+            color: Color.from(red: 0.91, green: 0.73, blue: 1, alpha: 1),
           ),
         ),
         SizedBox(width: 8.w),
