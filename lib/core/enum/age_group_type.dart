@@ -7,6 +7,8 @@ enum AgeGroupType {
   MIDDLE,
   @JsonValue('HIGH')
   HIGH,
+  @JsonValue('COLLEGE')
+  COLLEGE,
   @JsonValue('OUT_OF_SCHOOL_YOUTH')
   OUT_OF_SCHOOL_YOUTH,
   @JsonValue('ADULT')

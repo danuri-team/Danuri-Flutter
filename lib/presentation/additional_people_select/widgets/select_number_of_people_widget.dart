@@ -29,6 +29,10 @@ class SelectNumberOfPeopleWidget extends StatelessWidget {
         ),
         SizedBox(width: 65.w),
         SelectPersonByAgeGroupWidget(
+          ageGroup: AgeGroupType.COLLEGE,
+        ),
+        SizedBox(width: 65.w),
+        SelectPersonByAgeGroupWidget(
           ageGroup: AgeGroupType.OUT_OF_SCHOOL_YOUTH,
         ),
         SizedBox(width: 65.w),
@@ -56,10 +60,12 @@ class SelectPersonByAgeGroupWidget extends ConsumerWidget {
         return '중학교';
       case AgeGroupType.HIGH:
         return '고등학교';
+        case AgeGroupType.COLLEGE:
+        return '대학교';
       case AgeGroupType.OUT_OF_SCHOOL_YOUTH:
         return '학교 밖 청소년';
       case AgeGroupType.ADULT:
-        return '일반';
+        return '성인/유아';
     }
   }
 

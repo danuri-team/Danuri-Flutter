@@ -17,24 +17,30 @@ class AdditionalPeopleSelectScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(60.w, 85.h, 61.w, 58.h),
+        padding: EdgeInsets.only(top: 85.h, bottom: 58.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomTopBar(
-              title: '추가 이용 인원을 선택해주세요',
-              subTitle: '본인을 제외한 추가 인원 수 / 학년을 정확하게 선택해요.',
-              needCallBackButton: true,
-              callBackButtonOnTap: () {
-                ref.read(additionalPeopleSelectProvider.notifier).reset();
-                ref.read(genderTypeProvider.notifier).update(
-                      (state) => GenderType.MALE,
-                    );
-              },
-              rightWidget: SizedBox.shrink(),
+            Padding(
+              padding: EdgeInsets.only(left: 60.w, right: 61.w),
+              child: CustomTopBar(
+                title: '추가 이용 인원을 선택해주세요',
+                subTitle: '본인을 제외한 추가 인원 수 / 학년을 정확하게 선택해요.',
+                needCallBackButton: true,
+                callBackButtonOnTap: () {
+                  ref.read(additionalPeopleSelectProvider.notifier).reset();
+                  ref.read(genderTypeProvider.notifier).update(
+                        (state) => GenderType.MALE,
+                      );
+                },
+                rightWidget: SizedBox.shrink(),
+              ),
             ),
             SizedBox(height: 57.h),
-            const GenderClassificationBar(),
+            Padding(
+              padding: EdgeInsets.only(left: 60.w, right: 61.w),
+              child: const GenderClassificationBar(),
+            ),
             SizedBox(height: 72.h),
             const SelectNumberOfPeopleWidget(),
             const Spacer(),

@@ -20,6 +20,7 @@ class AdditionalPeopleSelectNotifier
               AgeGroupType.ELEMENTARY: 0,
               AgeGroupType.MIDDLE: 0,
               AgeGroupType.HIGH: 0,
+              AgeGroupType.COLLEGE: 0,
               AgeGroupType.OUT_OF_SCHOOL_YOUTH: 0,
               AgeGroupType.ADULT: 0,
             },
@@ -27,6 +28,7 @@ class AdditionalPeopleSelectNotifier
               AgeGroupType.ELEMENTARY: 0,
               AgeGroupType.MIDDLE: 0,
               AgeGroupType.HIGH: 0,
+              AgeGroupType.COLLEGE: 0,
               AgeGroupType.OUT_OF_SCHOOL_YOUTH: 0,
               AgeGroupType.ADULT: 0,
             }
@@ -39,6 +41,7 @@ class AdditionalPeopleSelectNotifier
         AgeGroupType.ELEMENTARY: 0,
         AgeGroupType.MIDDLE: 0,
         AgeGroupType.HIGH: 0,
+        AgeGroupType.COLLEGE: 0,
         AgeGroupType.OUT_OF_SCHOOL_YOUTH: 0,
         AgeGroupType.ADULT: 0,
       },
@@ -46,6 +49,7 @@ class AdditionalPeopleSelectNotifier
         AgeGroupType.ELEMENTARY: 0,
         AgeGroupType.MIDDLE: 0,
         AgeGroupType.HIGH: 0,
+        AgeGroupType.COLLEGE: 0,
         AgeGroupType.OUT_OF_SCHOOL_YOUTH: 0,
         AgeGroupType.ADULT: 0,
       }
