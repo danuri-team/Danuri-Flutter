@@ -48,7 +48,7 @@ const _$AgeGroupTypeEnumMap = {
   AgeGroupType.ELEMENTARY: 'ELEMENTARY',
   AgeGroupType.MIDDLE: 'MIDDLE',
   AgeGroupType.HIGH: 'HIGH',
-  AgeGroupType.UNIVERCITY: 'UNIVERCITY',
+  AgeGroupType.COLLEGE: 'COLLEGE',
   AgeGroupType.OUT_OF_SCHOOL_YOUTH: 'OUT_OF_SCHOOL_YOUTH',
-  AgeGroupType.ADULTANDINFANT: 'ADULTANDINFANT',
+  AgeGroupType.ADULT: 'ADULT',
 };
