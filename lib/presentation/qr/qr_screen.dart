@@ -53,12 +53,14 @@ class QrScreen extends ConsumerWidget {
         usageId: decoded['usageId'],
       );
 
-      ref.read(itemIdProvider.notifier).update((state) => null);
+      ref.read(itemIdProvider.notifier).update(
+            (state) => null,
+          );
 
       if (viewModel.error == false) {
-        ref.read(itemRentalProvider.notifier).update(
-              (state) => true,
-            );
+        ref
+            .read(itemRentalProvider.notifier)
+            .itemRental(decoded['usageId'], true);
         AppNavigation.pushCompletion(context);
       } else {
         AppNavigation.pushFailure(context);
@@ -92,10 +94,15 @@ class QrScreen extends ConsumerWidget {
     if (value != null) {
       final Map<String, dynamic> decoded = jsonDecode(value);
 
-      final whetherToRentItems = ref.read(itemRentalProvider.notifier).state;
+      final whetherToRentItems = ref
+          .read(itemRentalProvider.notifier)
+          .getWhetherToRentItem(decoded['usageId']);
       if (whetherToRentItems == true) {
         final itemViewModel = ItemViewModel();
         await itemViewModel.returnItem(usageId: decoded['usageId']);
+        ref
+            .read(itemRentalProvider.notifier)
+            .deleteItemRentalHistory(decoded['usageId']);
         if (itemViewModel.error == true) {
           AppNavigation.pushFailure(context);
           return;
@@ -108,9 +115,6 @@ class QrScreen extends ConsumerWidget {
         AppNavigation.pushFailure(context);
         return;
       }
-      ref.read(itemRentalProvider.notifier).update(
-            (state) => false,
-          );
       AppNavigation.pushCompletion(context);
     }
   }
